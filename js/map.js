@@ -1,5 +1,5 @@
 
-const map = L.map('map').setView([10.03, 105.77], 13);
+const map = L.map('map').setView([10.03, 105.77], 13); //khu vực hiển thị theo vị trí hiện tại
 
 var marker = L.marker([10.03, 105.77]).addTo(map); //đặt vị trí hiện tại của khách hàng
 
