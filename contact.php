@@ -25,7 +25,7 @@ $activate = "contact";
 			          	<div class="icon mr-3">
 			          		<span class="icon-map-o"></span>
 			          	</div>
-			            <p><span>Địa chỉ:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+			            <p><span>Địa chỉ:</span>Ninh Kiều, TP Cần Thơ</p>
 			          </div>
 		          </div>
 		          <div class="col-md-12">
@@ -69,7 +69,7 @@ $activate = "contact";
         </div>
         <div class="row justify-content-center">
         	<div class="col-md-12">
-        		<div id="map" class="bg-white"></div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.841518442039!2d105.76804037487184!3d10.029933690077037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0895a51d60719%3A0x9d76b0035f6d53d0!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBD4bqnbiBUaMah!5e0!3m2!1svi!2s!4v1695885265785!5m2!1svi!2s" width="1110" height="800"  padding: 0px 15px style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         	</div>
         </div>
       </div>
