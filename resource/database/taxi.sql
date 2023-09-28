@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 26, 2023 lúc 03:32 PM
+-- Thời gian đã tạo: Th9 28, 2023 lúc 03:59 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -78,6 +78,42 @@ CREATE TABLE `gia` (
   `G_TIEN` float(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `gia`
+--
+
+INSERT INTO `gia` (`TD_DATE`, `GC_MA`, `LX_MA`, `G_TIEN`) VALUES
+('2023-09-28 00:00:00', '01', '01', 15000.00),
+('2023-09-28 00:00:00', '01', '02', 20000.00),
+('2023-09-28 00:00:00', '01', '03', 10000.00),
+('2023-09-28 00:00:00', '01', '04', 12000.00),
+('2023-09-28 00:00:00', '01', '05', 15000.00),
+('2023-09-28 00:00:00', '01', '06', 15000.00),
+('2023-09-28 00:00:00', '01', '07', 12000.00),
+('2023-09-28 00:00:00', '01', '08', 10000.00),
+('2023-09-28 00:00:00', '01', '09', 15000.00),
+('2023-09-28 00:00:00', '01', '10', 10000.00),
+('2023-09-28 00:00:00', '02', '01', 10000.00),
+('2023-09-28 00:00:00', '02', '02', 15000.00),
+('2023-09-28 00:00:00', '02', '03', 7000.00),
+('2023-09-28 00:00:00', '02', '04', 10000.00),
+('2023-09-28 00:00:00', '02', '05', 10000.00),
+('2023-09-28 00:00:00', '02', '06', 10000.00),
+('2023-09-28 00:00:00', '02', '07', 10000.00),
+('2023-09-28 00:00:00', '02', '08', 8000.00),
+('2023-09-28 00:00:00', '02', '09', 10000.00),
+('2023-09-28 00:00:00', '02', '10', 7000.00),
+('2023-09-28 00:00:00', '03', '01', 5000.00),
+('2023-09-28 00:00:00', '03', '02', 10000.00),
+('2023-09-28 00:00:00', '03', '03', 5000.00),
+('2023-09-28 00:00:00', '03', '04', 8000.00),
+('2023-09-28 00:00:00', '03', '05', 5000.00),
+('2023-09-28 00:00:00', '03', '06', 8000.00),
+('2023-09-28 00:00:00', '03', '07', 8000.00),
+('2023-09-28 00:00:00', '03', '08', 5000.00),
+('2023-09-28 00:00:00', '03', '09', 5000.00),
+('2023-09-28 00:00:00', '03', '10', 5000.00);
+
 -- --------------------------------------------------------
 
 --
@@ -89,6 +125,15 @@ CREATE TABLE `giacuoc` (
   `GC_CANTREN` float DEFAULT NULL,
   `GC_CANDUOI` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `giacuoc`
+--
+
+INSERT INTO `giacuoc` (`GC_MA`, `GC_CANTREN`, `GC_CANDUOI`) VALUES
+('01', 5, 0),
+('02', 10, 6),
+('03', 50, 11);
 
 -- --------------------------------------------------------
 
@@ -106,6 +151,17 @@ CREATE TABLE `khachhang` (
   `KH_PASSWORD` varchar(30) NOT NULL,
   `KH_GIOITINH` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `khachhang`
+--
+
+INSERT INTO `khachhang` (`KH_MA`, `QH_MA`, `KH_TEN`, `KH_SDT`, `KH_EMAIL`, `KH_USERNAME`, `KH_PASSWORD`, `KH_GIOITINH`) VALUES
+('01', 'CT03', 'Duy Chủ Tịch', '0939826024', 'duybii922002@gmail.com', 'duychutich', '123', 1),
+('02', 'CT01', 'Nguyễn Đỗ Phúc Vinh', '0123456789', 'vinhtop8@gmail.com', 'vinhtop8', '123', 1),
+('03', 'CT02', 'Nguyễn Thị Phương Thư', '0987654321', 'pthuxinhdep@gmail.com', 'phuongthu', '123', 0),
+('04', 'CT01', 'Nguyễn Ngọc Kiều Hân', '0246813579', 'kieuhan@gmail.com', 'kieuhan', '123', 0),
+('05', 'CT01', 'Trần Thanh Kiệp', '0135792468', 'kiep@gmail.com', 'kiep', '123', 1);
 
 -- --------------------------------------------------------
 
@@ -295,6 +351,13 @@ INSERT INTO `thanhpho` (`TP_MA`, `TP_TEN`) VALUES
 CREATE TABLE `thoidiem` (
   `TD_DATE` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thoidiem`
+--
+
+INSERT INTO `thoidiem` (`TD_DATE`) VALUES
+('2023-09-28 00:00:00');
 
 -- --------------------------------------------------------
 
