@@ -64,6 +64,7 @@ INSERT INTO `khachhang` (`KH_MA`, `QH_MA`, `KH_TEN`, `KH_SDT`, `KH_EMAIL`, `KH_U
 /*==============================================================*/
 /* Table: LOAIXE                                                */
 /*==============================================================*/
+
 INSERT INTO `loaixe` (`LX_MA`, `LX_MODEL`, `LX_SOCHO`) VALUES
 ('01', 'SUV', 4),
 ('02', 'HATCH BACK', 4),
@@ -75,6 +76,7 @@ INSERT INTO `loaixe` (`LX_MA`, `LX_MODEL`, `LX_SOCHO`) VALUES
 ('08', 'SEDAN', 7),
 ('09', 'PICK UP', 7),
 ('10', 'MPV', 7);
+
 /*==============================================================*/
 /* Table: NHANVIEN                                              */
 /*==============================================================*/
@@ -87,6 +89,66 @@ INSERT INTO `loaixe` (`LX_MA`, `LX_MODEL`, `LX_SOCHO`) VALUES
 /* Table: QUANHUYEN                                             */
 /*==============================================================*/
 
+INSERT INTO `quanhuyen` (`QH_MA`, `TP_MA`, `QH_TEN`) VALUES
+('CT01', '01', 'Quận Ninh Kiều'),
+('CT02', '01', 'Quận Cái Răng'),
+('CT03', '01', 'Quận Bình Thủy'),
+('CT04', '01', 'Quận Ô Môn'),
+('CT05', '01', 'Huyện Phong Điền'),
+('CT06', '01', 'Huyện Thốt Nốt'),
+('CT07', '01', 'Huyện Cờ Đỏ'),
+('CT08', '01', 'Huyện Vĩnh Thạnh'),
+('CT09', '01', 'Huyện Thới Lai'),
+('DT01', '10', 'Huyện Tân Hồng'),
+('DT02', '10', 'Huyện Hồng Ngự'),
+('DT03', '10', 'Huyện Tam Nông'),
+('DT04', '10', 'Huyện Thanh Bình'),
+('DT05', '10', 'Huyện Tháp Mười'),
+('DT06', '10', 'Huyện Cao Lãnh'),
+('DT07', '10', 'Huyện Lấp Vò'),
+('DT08', '10', 'Huyện Lai Vung'),
+('DT09', '10', 'Huyện Châu Thành'),
+('SG01', '02', 'Quận 1'),
+('SG02', '02', 'Quận 2'),
+('SG03', '02', 'Quận 3'),
+('SG04', '02', 'Quận 4'),
+('SG05', '02', 'Quận 5'),
+('SG06', '02', 'Quận 6'),
+('SG07', '02', 'Quận 7'),
+('SG08', '02', 'Quận 8'),
+('SG09', '02', 'Quận 10'),
+('SG10', '02', 'Quận 11'),
+('SG11', '02', 'Quận 12'),
+('SG12', '02', 'Quận Bình Tân'),
+('SG13', '02', 'Quận Bình Thạnh'),
+('SG14', '02', 'Quận Gò Vấp'),
+('SG15', '02', 'Quận Phú Nhuận'),
+('SG16', '02', 'Quận Tân Bình'),
+('SG17', '02', 'Quận Tân Phú'),
+('SG18', '02', 'Quận Thủ Đức'),
+('SG19', '02', 'Huyện Bình Chánh'),
+('SG20', '02', 'Huyện Cần Giờ'),
+('SG21', '02', 'Huyện Củ Chi'),
+('SG22', '02', 'Huyện Hóc Môn'),
+('SG23', '02', 'Huyện Nhà Bè'),
+('ST01', '09', 'Thị xã Vĩnh Châu'),
+('ST02', '09', 'Huyện Mỹ Xuyên'),
+('ST03', '09', 'Huyện Kế Sách'),
+('ST04', '09', 'Huyện Trần Đề'),
+('ST05', '09', 'Huyện Châu Thành'),
+('ST06', '09', 'Huyện Long Phú'),
+('ST07', '09', 'Huyện Mỹ Tú'),
+('ST08', '09', 'Thị xã Ngã Năm'),
+('ST09', '09', 'Huyện Thạch Trị'),
+('ST10', '09', 'Huyện Cù Lao Dung'),
+('VL01', '11', 'Huyện Bình Tân'),
+('VL02', '11', 'Huyện Long Hồ'),
+('VL03', '11', 'Huyện Mang Thít'),
+('VL04', '11', 'Huyện Tam Bình'),
+('VL05', '11', 'Huyện Trà Ôn'),
+('VL06', '11', 'Huyện Vũng Liêm'),
+('VL07', '11', 'Thị Xã Bình Minh');
+
 /*==============================================================*/
 /* Table: TAIXE                                                 */
 /*==============================================================*/
@@ -94,6 +156,22 @@ INSERT INTO `loaixe` (`LX_MA`, `LX_MODEL`, `LX_SOCHO`) VALUES
 /*==============================================================*/
 /* Table: THANHPHO                                              */
 /*==============================================================*/
+
+INSERT INTO `thanhpho` (`TP_MA`, `TP_TEN`) VALUES
+('01', 'Cần Thơ'),
+('02', 'Sài Gòn'),
+('03', 'An Giang'),
+('04', 'Tiền Giang'),
+('05', 'Kiên Giang'),
+('06', 'Hậu Giang'),
+('07', 'Long An'),
+('08', 'Trà Vinh'),
+('09', 'Sóc Trăng'),
+('10', 'Đồng Tháp'),
+('11', 'Vĩnh Long'),
+('12', 'Bạc Liêu'),
+('13', 'Cà Mau'),
+('14', 'Bến Tre');
 
 /*==============================================================*/
 /* Table: THOIDIEM                                              */
