@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 28, 2023 lúc 03:59 AM
+-- Thời gian đã tạo: Th9 28, 2023 lúc 10:09 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -64,6 +64,28 @@ CREATE TABLE `dgtieuchi` (
   `TX_MA` char(8) NOT NULL,
   `DGTC_DIEM` decimal(8,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `dgtieuchi`
+--
+
+INSERT INTO `dgtieuchi` (`TC_ID`, `TX_MA`, `DGTC_DIEM`) VALUES
+('TC01', 'TX01', 8),
+('TC01', 'TX02', 8),
+('TC01', 'TX03', 9),
+('TC01', 'TX04', 7),
+('TC01', 'TX05', 8),
+('TC01', 'TX06', 9),
+('TC01', 'TX07', 8),
+('TC01', 'TX08', 9),
+('TC01', 'TX09', 8),
+('TC01', 'TX10', 10),
+('TC02', 'TX08', 8),
+('TC03', 'TX01', 8),
+('TC03', 'TX02', 8),
+('TC03', 'TX03', 7),
+('TC03', 'TX04', 10),
+('TC04', 'TX07', 9);
 
 -- --------------------------------------------------------
 
@@ -198,15 +220,31 @@ INSERT INTO `loaixe` (`LX_MA`, `LX_MODEL`, `LX_SOCHO`) VALUES
 --
 
 CREATE TABLE `nhanvien` (
-  `KH_MA2` char(8) NOT NULL,
+  `NV_MA` char(8) NOT NULL,
   `QH_MA` char(8) NOT NULL,
   `VT_MA` char(8) NOT NULL,
-  `KH_TEN` varchar(50) NOT NULL,
-  `KH_SDT` varchar(10) NOT NULL,
-  `KH_EMAIL` varchar(30) NOT NULL,
-  `KH_USERNAME` varchar(30) NOT NULL,
-  `KH_PASSWORD` varchar(30) NOT NULL
+  `NV_TEN` varchar(50) NOT NULL,
+  `NV_SDT` varchar(10) NOT NULL,
+  `NV_EMAIL` varchar(30) NOT NULL,
+  `NV_USERNAME` varchar(30) NOT NULL,
+  `NV_PASSWORD` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `nhanvien`
+--
+
+INSERT INTO `nhanvien` (`NV_MA`, `QH_MA`, `VT_MA`, `NV_TEN`, `NV_SDT`, `NV_EMAIL`, `NV_USERNAME`, `NV_PASSWORD`) VALUES
+('NV01', 'CT01', 'VT1', 'Nguyễn Ngọc Bân', '0352743226', 'Ban@gmail.com', 'BanNguyen', '123'),
+('NV02', 'CT02', 'VT1', 'Trần Văn Tài', '0679832741', 'Tai@gamil.com', 'TaiTran', '124'),
+('NV03', 'CT02', 'VT1', 'Lê Minh Hùng', '0568945781', 'Hung@gamil.com', 'HungLe', '125'),
+('NV04', 'CT02', 'VT1', 'Đỗ Lan Hương', '0793456782', 'Tai@gamil.com', 'HuongDo', '126'),
+('NV05', 'CT02', 'VT1', 'Phạm Hoài Sơn', '0594566321', 'Son@gamil.com', 'SonPham', '127'),
+('NV06', 'CT02', 'VT1', 'Hà Thu Thủy', '0636789456', 'Thuy@gamil.com', 'ThuyHa', '128'),
+('NV07', 'CT02', 'VT1', 'Phạm An Nhiên', '0798463572', 'Nhien@gamil.com', 'NhienPham', '129'),
+('NV08', 'CT02', 'VT1', 'Lê Nhật Minh', '0809456732', 'Minh@gamil.com', 'MinhLe', '120'),
+('NV09', 'CT02', 'VT1', 'Lê Gia Nguyên', '0907845634', 'Nguyen@gamil.com', 'NguyenLe', '121'),
+('NV10', 'CT02', 'VT1', 'Trần Ngọc Sương', '0236784569', 'Suong@gamil.com', 'SuongTran', '122');
 
 -- --------------------------------------------------------
 
@@ -219,6 +257,22 @@ CREATE TABLE `phutrach` (
   `TD_DATE` datetime NOT NULL,
   `X_MA` char(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `phutrach`
+--
+
+INSERT INTO `phutrach` (`TX_MA`, `TD_DATE`, `X_MA`) VALUES
+('TX01', '2023-09-22 08:00:00', 'X01'),
+('TX02', '2023-09-27 08:00:00', 'X02'),
+('TX03', '2023-09-28 00:00:00', 'X03'),
+('TX04', '2023-09-22 08:00:00', 'X04'),
+('TX05', '2023-09-27 08:00:00', 'X05'),
+('TX06', '2023-09-27 08:00:00', 'X06'),
+('TX07', '2023-09-22 08:00:00', 'X07'),
+('TX08', '2023-09-28 00:00:00', 'X08'),
+('TX09', '2023-09-27 08:00:00', 'X09'),
+('TX10', '2023-09-27 08:00:00', 'X10');
 
 -- --------------------------------------------------------
 
@@ -311,6 +365,22 @@ CREATE TABLE `taixe` (
   `TX_GIOITINH` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `taixe`
+--
+
+INSERT INTO `taixe` (`TX_MA`, `TX_BANGLAI`, `TX_TEN`, `TX_USERNAME`, `TX_PASSWORD`, `TX_GIOITINH`) VALUES
+('TX01', 'B2', 'Nguyễn Ngọc Bân', 'BanNguyen', '123', 0),
+('TX02', 'B2', 'Trần Văn Tài', 'TaiTran', '124', 0),
+('TX03', 'B2', 'Lê Minh Hùng', 'HungLe', '125', 0),
+('TX04', 'B2', 'Đỗ Lan Hương', 'HuongDo', '126', 0),
+('TX05', 'B2', 'Phạm Hoài Sơn', 'SonPham', '127', 0),
+('TX06', 'B2', 'Hà Thu Thủy', 'ThuyHa', '128', 0),
+('TX07', 'B2', 'Phạm An Nhiên', 'NhienPham', '129', 0),
+('TX08', 'B2', 'Lê Nhật Minh', 'MinhLe', '120', 0),
+('TX09', 'B2', 'Lê Gia Nguyên', 'NguyenLe', '121', 0),
+('TX10', 'B2', 'Trần Ngọc Sương', 'SuongTran', '122', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -357,6 +427,8 @@ CREATE TABLE `thoidiem` (
 --
 
 INSERT INTO `thoidiem` (`TD_DATE`) VALUES
+('2023-09-22 08:00:00'),
+('2023-09-27 08:00:00'),
 ('2023-09-28 00:00:00');
 
 -- --------------------------------------------------------
@@ -369,6 +441,17 @@ CREATE TABLE `tieuchi` (
   `TC_ID` char(8) NOT NULL,
   `TC_TEN` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tieuchi`
+--
+
+INSERT INTO `tieuchi` (`TC_ID`, `TC_TEN`) VALUES
+('TC01', 'Dịch vụ chuyên nghiệp, đảm bảo quyền lợi cho khách'),
+('TC02', 'Đội ngũ tài xế giàu kinh nghiệm'),
+('TC03', 'Xe chất lượng, an toàn, hiện đại'),
+('TC04', 'Tổng đài hỗ trợ nhiệt tình, kịp thời'),
+('TC05', 'Giá cả cạnh tranh, công khai');
 
 -- --------------------------------------------------------
 
@@ -395,6 +478,13 @@ CREATE TABLE `vaitro` (
   `VT_TEN` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `vaitro`
+--
+
+INSERT INTO `vaitro` (`VT_MA`, `VT_TEN`) VALUES
+('VT1', 'Tài xế');
+
 -- --------------------------------------------------------
 
 --
@@ -406,6 +496,22 @@ CREATE TABLE `xe` (
   `LX_MA` char(8) NOT NULL,
   `X_BIENSO` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `xe`
+--
+
+INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`) VALUES
+('X01', '01', '65A-12345'),
+('X02', '02', '65A-12346'),
+('X03', '03', '65A-12347'),
+('X04', '04', '65A-12348'),
+('X05', '05', '65A-12349'),
+('X06', '06', '65A-12340'),
+('X07', '07', '65A-12344'),
+('X08', '08', '65A-12343'),
+('X09', '09', '65A-12342'),
+('X10', '10', '65A-12341');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -465,7 +571,7 @@ ALTER TABLE `loaixe`
 -- Chỉ mục cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  ADD PRIMARY KEY (`KH_MA2`),
+  ADD PRIMARY KEY (`NV_MA`),
   ADD KEY `FK_CO_VAI_TRO` (`VT_MA`),
   ADD KEY `FK_DIA_CHI` (`QH_MA`);
 
