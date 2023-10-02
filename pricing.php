@@ -21,7 +21,7 @@ $activate = "pricing";
     			<div class="col-md-12 ftco-animate">
     				<div class="car-list">
 	    				<table class="table">
-						    <thead class="thead-primary">
+						    <!-- <thead class="thead-primary">
 						      <tr class="text-center">
 						        <th>&nbsp;</th>
 						        <th>&nbsp;</th>
@@ -29,303 +29,29 @@ $activate = "pricing";
 						        <th class="bg-dark heading">Tỉ lệ mỗi ngày</th>
 						        <th class="bg-black heading">Cho thuê</th>
 						      </tr>
-						    </thead>
-						    <tbody>
-						      <tr class="">
-						      	<td class="car-image"><div class="img" style="background-image:url(images/car-1.jpg);"></div></td>
-						        <td class="product-name">
-						        	<h3>Cheverolet SUV Car</h3>
-						        	<p class="mb-0 rated">
-						        		<span>rated:</span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        	</p>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 10.99</span>
-							        		<span class="per">/Giờ</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-						        	</div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 60.99</span>
-							        		<span class="per">/Ngày</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-						        </div>
-						        </td>
-
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 995.99</span>
-							        		<span class="per">/Tháng</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						      </tr><!-- END TR-->
-
-						      <tr class="">
-						      	<td class="car-image"><div class="img" style="background-image:url(images/car-2.jpg);"></div></td>
-						        <td class="product-name">
-						        	<h3>Cheverolet SUV Car</h3>
-						        	<p class="mb-0 rated">
-						        		<span>rated:</span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        	</p>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 10.99</span>
-							        		<span class="per">/Giờ</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 60.99</span>
-							        		<span class="per">/Ngày</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 995.99</span>
-							        		<span class="per">/Tháng</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						      </tr><!-- END TR-->
-
-						      <tr class="">
-						      	<td class="car-image"><div class="img" style="background-image:url(images/car-3.jpg);"></div></td>
-						        <td class="product-name">
-						        	<h3>Cheverolet SUV Car</h3>
-						        	<p class="mb-0 rated">
-						        		<span>rated:</span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        	</p>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 10.99</span>
-							        		<span class="per">/Giờ</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 60.99</span>
-							        		<span class="per">/Ngày</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 995.99</span>
-							        		<span class="per">/Tháng</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						      </tr><!-- END TR-->
-
-						      <tr class="">
-						      	<td class="car-image"><div class="img" style="background-image:url(images/car-4.jpg);"></div></td>
-						        <td class="product-name">
-						        	<h3>Cheverolet SUV Car</h3>
-						        	<p class="mb-0 rated">
-						        		<span>rated:</span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        	</p>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 10.99</span>
-							        		<span class="per">/Giờ</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 60.99</span>
-							        		<span class="per">/Ngày</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 995.99</span>
-							        		<span class="per">/Tháng</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						      </tr><!-- END TR-->
-
-
-						      <tr class="">
-						      	<td class="car-image"><div class="img" style="background-image:url(images/car-5.jpg);"></div></td>
-						        <td class="product-name">
-						        	<h3>Cheverolet SUV Car</h3>
-						        	<p class="mb-0 rated">
-						        		<span>rated:</span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        	</p>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 10.99</span>
-							        		<span class="per">/Giờ</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 60.99</span>
-							        		<span class="per">/Ngày</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 995.99</span>
-							        		<span class="per">/Tháng</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						      </tr><!-- END TR-->
-
-
-						      <tr class="">
-						      	<td class="car-image"><div class="img" style="background-image:url(images/car-6.jpg);"></div></td>
-						        <td class="product-name">
-						        	<h3>Cheverolet SUV Car</h3>
-						        	<p class="mb-0 rated">
-						        		<span>rated:</span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        		<span class="ion-ios-star"></span>
-						        	</p>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 10.99</span>
-							        		<span class="per">/Giờ</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 60.99</span>
-							        		<span class="per">/Ngày</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<h3>
-							        		<span class="num"><small class="currency">$</small> 995.99</span>
-							        		<span class="per">/Tháng</span>
-							        	</h3>
-							        	<span class="subheading">Phụ phí nhiên liệu $3/Giờ </span>
-							        </div>
-						        </td>
-						      </tr><!-- END TR-->
-						    </tbody>
+						    </thead> -->
+							<h2>Đánh giá chuyến xe</h2>
+    						<form method="post" action="">
+        					<label for="rating">Đánh giá:</label>
+        					<select id="rating" name="rating" required>
+            					<option value="1">1 sao</option>
+            					<option value="2">2 sao</option>
+            					<option value="3">3 sao</option>
+            					<option value="4">4 sao</option>
+            					<option value="5">5 sao</option>
+       						</select><br><br>
+       				 		<label for="comments">Bình luận:</label>
+       					 	<textarea id="comments" name="comments" rows="4" cols="50"></textarea><br><br>
+							<input type="submit" value="Gửi đánh giá">
+   						 </form>
+						    
 						  </table>
 					  </div>
     			</div>
     		</div>
 			</div>
+		
+
 		</section>
 
 

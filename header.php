@@ -1,3 +1,11 @@
+<?php
+  @include('config/config.php');
+  @include('lib/session.php');
+?>
+<?php
+  @include_once('lib/database.php');
+  @include_once('helpers/format.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
