@@ -10,14 +10,14 @@ include("connect.php");
                         
                         $row = $result1->fetch_assoc();
                         
-                        $_SESSION["ma"] = $row["MA"];
-                        $_SESSION["QH_ma"] = $row["QH_MA"];
-                        $_SESSION["ten"]=$row["TEN"];
-                        $_SESSION["sdt"]=$row["SDT"];
-                        $_SESSION["email"]=$row["EMAIL"];
-                        $_SESSION["usesname"] = $row["USESNAME"];
-                        $_SESSION["password"]=$row["PASSWORD"];
-                        $_SESSION["gioitinh"] = $row["GIOITINH"];
+                        $_SESSION["kh_ma"] = $row["KH_MA"];
+                        $_SESSION["qh"] = $row["QH_MA"];
+                        $_SESSION["ten"]=$row["KH_TEN"];
+                        $_SESSION["sdt"]=$row["KH_SDT"];
+                        $_SESSION["email"]=$row["KH_EMAIL"];
+                        $_SESSION["usesname"] = $row["KH_USESNAME"];
+                        $_SESSION["psw"]=$row["KH_PASSWORD"];
+                        $_SESSION["gioitinh"] = $row["KH_GIOITINH"];
                    
                         header('Location: index.php');
                     }

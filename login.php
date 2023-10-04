@@ -43,7 +43,7 @@ include('header.php');
                             </div>
                             <div class="col-md-6">
                                 <label for="inputNumberl4" class="form-label">Tên đăng nhập<span class="error"></span></label>
-                                <input type="text" class="form-control" id="inputNumberl4" name="cccd">
+                                <input type="text" class="form-control" id="username" name="username">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword4" class="form-label">Mật
@@ -61,11 +61,6 @@ include('header.php');
                                 <input type="text" class="form-control" id="inputNumberl4" name="sdt">
                             </div>
                             <div class="col-md-6">
-                                <label for="inputtext4" class="form-label">Địa
-                                    chỉ<span class="error"></span></label>
-                                <input type="text" class="form-control" id="Nhập lại" name="diachi">
-                            </div>
-                            <div class="col-md-6">
                                 <label for="inputCity" class="form-label">Giới
                                     tính</label>
                                 <div class="form-check">
@@ -81,6 +76,11 @@ include('header.php');
                                         Nữ
                                     </label>
                                 </div>
+                               
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label">Quận Huyện<span class="error">*</span></label>
+                                <input type="text" class="form-control" id="qh" name="qh">
                             </div>
                             
                             <input type="submit" class="mt-2" name="sb" value="Đăng ký">
