@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 02, 2023 lúc 01:43 PM
+-- Thời gian đã tạo: Th10 04, 2023 lúc 04:28 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.0.28
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `car_reviews`
+-- Cơ sở dữ liệu: `taxi`
 --
 
 -- --------------------------------------------------------
@@ -485,6 +485,7 @@ CREATE TABLE `xe` (
   `X_MA` char(8) NOT NULL,
   `LX_MA` char(8) NOT NULL,
   `X_BIENSO` varchar(10) NOT NULL,
+  `X_MOTA` text NOT NULL,
   `X_HINHANH` char(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -492,11 +493,17 @@ CREATE TABLE `xe` (
 -- Đang đổ dữ liệu cho bảng `xe`
 --
 
-INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`, `X_HINHANH`) VALUES
-('01', '02', 'B123', NULL),
-('02', '04', 'A123', NULL),
-('03', '05', 'C123', NULL),
-('04', '02', 'D123', NULL);
+INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`, `X_MOTA`, `X_HINHANH`) VALUES
+('01', '02', 'B123', 'Đây là xe 4 chỗ', 'car-1.jpg'),
+('02', '04', 'A123', 'Đây là xe 4 chỗ ', 'car-2.jpg'),
+('03', '05', 'C123', 'Đây là xe 4 chỗ', 'car-3.jpg'),
+('04', '02', 'D123', 'Đây là xe 4 chỗ', 'car-4.jpg'),
+('05', '01', 'E123', 'Đây là xe 4 chỗ', 'car-5.jpg'),
+('06', '07', 'F123', 'Đây là xe 7 chỗ', 'car-6.jpg'),
+('07', '08', 'G123', 'Đây là xe 7 chỗ', 'car-7.jpg'),
+('08', '03', 'H123', 'Đây là xe 4 chỗ', 'car-8.jpg'),
+('09', '06', 'I123', 'Đây là xe 7 chỗ', 'car-9.jpg'),
+('10', '08', 'K123', 'Đây là xe 7 chỗ', 'car-10.jpg');
 
 --
 -- Chỉ mục cho các bảng đã đổ
