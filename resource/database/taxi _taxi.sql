@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 04, 2023 lúc 11:33 AM
+-- Thời gian đã tạo: Th10 04, 2023 lúc 12:14 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -183,7 +183,6 @@ INSERT INTO `khachhang` (`KH_MA`, `QH_MA`, `KH_TEN`, `KH_SDT`, `KH_EMAIL`, `KH_U
 (1, 0, 'Duy Chủ Tịch', '0939826024', 'duybii922002@gmail.com', 'duychutich', '123', 1),
 (2, 0, 'Nguyễn Đỗ Phúc Vinh', '0123456789', 'vinhtop8@gmail.com', 'vinhtop8', '123', 1),
 (3, 0, 'Nguyễn Thị Phương Thư', '0987654321', 'pthuxinhdep@gmail.com', 'phuongthu', '123', 0),
-(4, 0, 'Nguyễn Ngọc Kiều Hân', '0246813579', 'kieuhan@gmail.com', 'kieuhan', '123', 0),
 (5, 0, 'Trần Thanh Kiệp', '0135792468', 'kiep@gmail.com', 'kiep', '123', 1);
 
 -- --------------------------------------------------------
@@ -429,24 +428,26 @@ INSERT INTO `vaitro` (`VT_MA`, `VT_TEN`) VALUES
 CREATE TABLE `xe` (
   `X_MA` int(11) NOT NULL,
   `LX_MA` int(11) NOT NULL,
-  `X_BIENSO` varchar(10) DEFAULT NULL
+  `X_BIENSO` varchar(10) DEFAULT NULL,
+  `X_MOTA` text NOT NULL,
+  `X_HINHANH` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `xe`
 --
 
-INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`) VALUES
-(1, 1, '65A-12345'),
-(2, 2, '65A-12346'),
-(3, 3, '65A-12347'),
-(4, 4, '65A-12348'),
-(5, 5, '65A-12349'),
-(6, 6, '65A-12340'),
-(7, 7, '65A-13345'),
-(8, 8, '65A-13445'),
-(9, 9, '65A-13455'),
-(10, 10, '65A-12445');
+INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`, `X_MOTA`, `X_HINHANH`) VALUES
+(1, 1, '65A-12345', 'màu đỏ\r\n', ''),
+(2, 2, '65A-12346', 'màu xanh', ''),
+(3, 3, '65A-12347', 'màu vàng', ''),
+(4, 4, '65A-12348', 'màu cam', ''),
+(5, 5, '65A-12349', 'màu tím', ''),
+(6, 6, '65A-12340', 'màu bạc', ''),
+(7, 7, '65A-13345', 'màu lục', ''),
+(8, 8, '65A-13445', 'màu làm', ''),
+(9, 9, '65A-13455', 'màu nâu', ''),
+(10, 10, '65A-12445', 'màu hồng nhạt', '');
 
 --
 -- Chỉ mục cho các bảng đã đổ
