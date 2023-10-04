@@ -1,56 +1,45 @@
 <?php
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "taxi";
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                if ($conn->connect_error) {
-                  die("Connection failed: " . $conn->connect_error);
-                }
-                if(isset($_POST["taxi"])){
-                    //echo $_POST["sdt"]."<br>";
-                    $sql1="SELECT * FROM khachhang where email='".$_POST["email"]."' ";
-                    $result1= $conn->query($sql1);
-                    if(mysqli_num_rows($result1)>0){
-                        echo '<script language="javascript">
-                    alert("Email đã được đăng ký!");
-                    history.back();
-                     </script>';
-                    
-                    }
-                    else{
-                   
-                    $date = date_create($_POST["ngaysinh"]);
-                    $sql2="INSERT INTO khachhang(kh_ma,qh_ma,kh_ten,kh_sdt,kh_email,kh_username,kh_pasword,kh_gioitinh) 
-                    values('".$_POST["kh_ma"]."','".$_POST["qh"]."',  '".$_POST["ten"]."','".$_POST["sdt"]."','".$_POST["email"]."',
-                    '".$_POST["username"]."','".md5($_POST["psw"])."','".$_POST["gioitinh"]."') ";
-                    //echo $result2."<br>";
-                    $result2 = $conn->query($sql2);
+// Kết nối đến cơ sở dữ liệu
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "taxi";
 
-                    $sql="SELECT * FROM khachhang where email='".$_POST["email"]."' ";
-                    $result1 = $conn->query($sql);
-                    //echo $sql."<br>";
-                    if($result1->num_rows>0){
-                       
-                        
-                        $row = $result1->fetch_assoc();
-                        
-                        session_start();
-                        $_SESSION["kh_ma"] = $row["KH_MA"];
-                        $_SESSION["qh"]=$row["QH_MA"];
-                        $_SESSION["ten"]=$row["KH_TEN"];
-                        $_SESSION["sdt"]=$row["KH_SDT"];
-                        $_SESSION["email"]=$row["KH_USERNAME"];
-                        $_SESSION["psw"]=$row["KH_PASSWORD"];
-                        $_SESSION["gioitinh"]=$row["KH_GIOITINH"];
-                        header('Location: index.php');
-                   
-                      //  header('Location: index.php');
-                   }
-                   else{
-                       echo"Lỗi không thể đăng ký";
-                     
-                   }
-                    }
-                }
-                ?>
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Kết nối không thành công: " . $conn->connect_error);
+}
+
+// Kiểm tra nếu biểu mẫu đã được gửi
+if (isset($_POST["dangky"])) {
+    // Lấy dữ liệu từ biểu mẫu
+    $ten = $_POST["ten"];
+    $email = $_POST["email"];
+    $username = $_POST["username"];
+    $password = $_POST["psw"];
+    $sdt = $_POST["sdt"];
+    $gioitinh = $_POST["gioitinh"];
+    $qh_ma = $_POST["qh"]; // Lấy giá trị mã quận/huyện từ select
+
+    // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+    // Tạo câu lệnh SQL để chèn dữ liệu vào bảng khachhang (loại bỏ KH_MA)
+    $sql = "INSERT INTO khachhang (QH_MA, KH_TEN, KH_SDT, KH_EMAIL, KH_USERNAME, KH_PASSWORD, KH_GIOITINH)
+            VALUES ('$qh_ma', '$ten', '$sdt', '$email', '$username', '$hashed_password', '$gioitinh')";
+
+    // Thực hiện câu lệnh SQL và kiểm tra kết quả
+    if ($conn->query($sql) === TRUE) {
+        echo '<script language="javascript">
+            alert("Đăng ký thành công!");
+            window.location.href = "index.php"; // Chuyển hướng sau khi đăng ký thành công
+            </script>';
+    } else {
+        echo "Lỗi khi thực hiện đăng ký: " . $conn->error;
+    }
+
+    // Đóng kết nối đến cơ sở dữ liệu
+    $conn->close();
+}
+?>
