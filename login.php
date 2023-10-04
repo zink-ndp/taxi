@@ -20,12 +20,12 @@ include('header.php');
         <div class="row d-flex mb-5 contact-info">
 
           <div class="col-md-8 block-9 mb-md-5">
-            <form action="#" class="bg-light p-5 contact-form">
+            <form action="dangnhap.php" class="bg-light p-5 contact-form">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Họ tên">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="Email" class="form-control" placeholder="Email">
               </div>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Địa chỉ">
@@ -34,7 +34,7 @@ include('header.php');
                 <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Nội dung"></textarea>
               </div>
               <div class="form-group">
-                <input type="submit" value="Đăng nhập" class="btn btn-primary py-3 px-5">
+                <input type="submit" value="Đăng nhập" name="taxi" class="btn btn-primary py-3 px-5">
               </div>
             </form>
           </div>
