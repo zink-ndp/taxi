@@ -18,15 +18,32 @@ include('connect.php');
 
 <section class="ftco-section contact-section">
     <div class="container">
-        <div class="container-fluid pt-5">
+        <div class="container-fluid pt-1">
             <div class="text-center mb-4"></div>
 
             <div class="row px-xl-5">
                 <!-- dag ky-->
-                <div class="col-lg-12 mb-5">
+                <div class="col-lg-12 mb-5" style="margin-top: -40px;">
                     <section class="dangky">
                         <div class="row">
                             <div class="col-6">
+                                <h2>Đăng nhập</h2>
+                                <form class="row g-3 formdangky" action="dangnhap.php" method="POST">
+                                    <div class="col-md-12">
+                                        <label for="inputNumberl4" class="form-label">Tên đăng nhập<span class="error"></span></label>
+                                        <input type="text" class="form-control" id="username" name="username">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="inputPassword4" class="form-label">Mật khẩu<span class="error">*</span></label>
+                                        <input type="password" class="form-control" id="matkhau" name="psw">
+                                    </div>
+                                    <div class="col-md-12 mt-3" >
+                                        <button type="submit" class="mt-2 btn btn-success "  name="dangky">Đăng nhập </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-6" >
+                                <h2>Đăng ký</h2>
                                 <form class="row g-3 formdangky" action="dangky.php" method="POST">
 
                                     <div class="col-12">
@@ -90,8 +107,9 @@ include('connect.php');
                                             ?>
                                         </select>
                                     </div>
-
-                                    <input type="submit" class="mt-2" name="dangky" value="Đăng ký">
+                                    <div class="col-md-12">      
+                                        <button type="submit" class="mt-2 btn btn-success"  name="dangky">Đăng ký </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
