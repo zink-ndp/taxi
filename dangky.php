@@ -16,7 +16,7 @@ if (isset($_POST["dangky"])) {
 
     
     // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    $hashed_password = md5($password);
     
     $nextId = getMaxId($conn,'KH_MA','khachhang')+1;
 

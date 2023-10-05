@@ -10,7 +10,7 @@ include('connect.php');
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
             <div class="col-md-9 ftco-animate pb-5">
                 <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Trang chủ<i class="ion-ios-arrow-forward"></i></a></span> <span>Thông tin cá nhân<i class="ion-ios-arrow-forward"></i></span></p>
-                <h1 class="mb-3 bread">Đăng Ký</h1>
+                <h1 class="mb-3 bread">Đăng Nhập/ Đăng Ký</h1>
             </div>
         </div>
     </div>
@@ -35,10 +35,10 @@ include('connect.php');
                                     </div>
                                     <div class="col-md-12">
                                         <label for="inputPassword4" class="form-label">Mật khẩu<span class="error">*</span></label>
-                                        <input type="password" class="form-control" id="matkhau" name="psw">
+                                        <input type="password" class="form-control" id="password" name="psw">
                                     </div>
                                     <div class="col-md-12 mt-3" >
-                                        <button type="submit" class="mt-2 btn btn-success "  name="dangky">Đăng nhập </button>
+                                        <button type="submit" class="mt-2 btn btn-success "  name="dangnhap">Đăng nhập </button>
                                     </div>
                                 </form>
                             </div>

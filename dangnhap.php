@@ -1,9 +1,11 @@
 <?php
 
 include("connect.php");
-                if(isset($_POST["taxi"])){
+                if(isset($_POST["dangnhap"])){
+
+                    echo $_POST["username"].' '.md5($_POST["psw"]);
                     
-                    $sql="SELECT * FROM khachhang where user='".$_POST["user"]."' AND matkhau='".md5($_POST["password"])."'";
+                    $sql="SELECT * FROM khachhang where KH_USERNAME='".$_POST["username"]."' AND KH_PASSWORD='".md5($_POST["psw"])."'";
                     $result1 = $conn->query($sql);
                   // print_r($result1);
                     if($result1->num_rows>0){
@@ -15,7 +17,7 @@ include("connect.php");
                         $_SESSION["ten"]=$row["KH_TEN"];
                         $_SESSION["sdt"]=$row["KH_SDT"];
                         $_SESSION["email"]=$row["KH_EMAIL"];
-                        $_SESSION["usesname"] = $row["KH_USESNAME"];
+                        $_SESSION["username"] = $row["KH_USERNAME"];
                         $_SESSION["psw"]=$row["KH_PASSWORD"];
                         $_SESSION["gioitinh"] = $row["KH_GIOITINH"];
                    
@@ -23,10 +25,10 @@ include("connect.php");
                     }
                     else{
                  
-                        echo '<script language="javascript">
-                    alert("Nhập sai email hoặc mật khẩu.");
-                    history.back();
-                    </script>';
+                    //     echo '<script language="javascript">
+                    // alert("Nhập sai email hoặc mật khẩu.");
+                    // history.back();
+                    // </script>';
                       
                     }
                    
