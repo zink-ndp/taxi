@@ -1,5 +1,5 @@
 <?php
-$activate = "contact";
+$activate = "login";
 include('header.php');
 include('connect.php');
 ?>

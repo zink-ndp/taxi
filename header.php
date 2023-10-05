@@ -45,13 +45,14 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-              <li class="nav-item <?php echo ($activate == "index" ? "active" : "")?>"><a href="index.php" class="nav-link">Trang chủ</a></li>
+            <li class="nav-item <?php echo ($activate == "index" ? "active" : "")?>"><a href="index.php" class="nav-link">Trang chủ</a></li>
 	          <li class="nav-item <?php echo ($activate == "about" ? "active" : "")?>"><a href="about.php" class="nav-link">Về chúng tôi</a></li>
 	          <li class="nav-item <?php echo ($activate == "services" ? "active" : "")?>"><a href="services.php" class="nav-link">Dịch vụ</a></li>
 	          <li class="nav-item <?php echo ($activate == "pricing" ? "active" : "")?>"><a href="pricing.php" class="nav-link">Đánh giá</a></li>
 	          <li class="nav-item <?php echo ($activate == "car" ? "active" : "")?>"><a href="car.php" class="nav-link">Xe</a></li>
 	          <li class="nav-item <?php echo ($activate == "blog" ? "active" : "")?>"><a href="blog.php" class="nav-link">Tin tức</a></li>
 	          <li class="nav-item <?php echo ($activate == "contact" ? "active" : "")?>"><a href="contact.php" class="nav-link">Liên hệ</a></li>
+            <li class="nav-item <?php echo ($activate == "login" ? "active" : "")?>"><a href="login.php" class="nav-link">Login</a></li>
 	        </ul>
 	      </div>
 	    </div>
