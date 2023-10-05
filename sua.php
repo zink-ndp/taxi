@@ -4,15 +4,11 @@
     require 'functions.php';
 
 // Kiểm tra nếu biểu mẫu đã được gửi
-if (isset($_POST["dangky"])) {
+if (isset($_POST["suathongtin"])) {
     // Lấy dữ liệu từ biểu mẫu
     $ten = $_POST["ten"];
     $email = $_POST["email"];
-    $username = $_POST["username"];
     $password = $_POST["psw"];
-    $sdt = $_POST["sdt"];
-    $gioitinh = $_POST["gioitinh"];
-    $qh_ma = $_POST["qh"]; // Lấy giá trị mã quận/huyện từ select
 
     
     // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
@@ -21,13 +17,13 @@ if (isset($_POST["dangky"])) {
     $nextId = getMaxId($conn,'KH_MA','khachhang')+1;
 
     // Tạo câu lệnh SQL để chèn dữ liệu vào bảng khachhang (loại bỏ KH_MA)
-    $sql = "INSERT INTO khachhang VALUES ($nextId, $qh_ma, '$ten', '$sdt', '$email', '$username', '$hashed_password', $gioitinh)";
+    $sql = "INSERT INTO khachhang VALUES ($nextId, '$ten','$email','$hashed_password')";
 
     // Thực hiện câu lệnh SQL và kiểm tra kết quả
     if ($conn->query($sql) === TRUE) {
         echo '<script language="javascript">
-            alert("Đăng ký thành công! Vui lòng đăng nhập lại!");
-            window.location.href = "login.php"; // Chuyển hướng sau khi đăng ký thành công
+            alert("lưu thành công!");
+            window.location.href = "index.php"; // Chuyển hướng sau khi đăng ký thành công
             </script>';
     } else {
         echo "Lỗi khi thực hiện đăng ký: " . $conn->error;

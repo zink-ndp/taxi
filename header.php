@@ -52,7 +52,8 @@
 	          <li class="nav-item <?php echo ($activate == "car" ? "active" : "")?>"><a href="car.php" class="nav-link">Xe</a></li>
 	          <li class="nav-item <?php echo ($activate == "blog" ? "active" : "")?>"><a href="blog.php" class="nav-link">Tin tức</a></li>
 	          <li class="nav-item <?php echo ($activate == "contact" ? "active" : "")?>"><a href="contact.php" class="nav-link">Liên hệ</a></li>
-            <li class="nav-item <?php echo ($activate == "login" ? "active" : "")?>"><a href="login.php" class="nav-link">Login</a></li>
+            <li class="nav-item <?php echo ($activate == "login" ? "active" : "")?>"><a href="login.php" class="nav-link">Đăng nhập/ Đăng ký</a></li>
+            <li class="nav-item <?php echo ($activate == "suathongtin" ? "active" : "")?>"><a href="suathongtin.php" class="nav-link">Sửa thông tin</a></li>
 	        </ul>
 	      </div>
 	    </div>
