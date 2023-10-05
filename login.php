@@ -1,6 +1,7 @@
 <?php
 $activate = "contact";
 include('header.php');
+include('connect.php');
 ?>
 
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
@@ -55,13 +56,13 @@ include('header.php');
                                     <div class="col-md-6">
                                         <label for="inputCity" class="form-label">Giới tính</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gioitinh" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="gioitinh" id="flexRadioDefault1" value="1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Nam
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gioitinh" id="flexRadioDefault2" checked>
+                                            <input class="form-check-input" type="radio" name="gioitinh" id="flexRadioDefault2" value="0" checked>
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Nữ
                                             </label>
@@ -73,17 +74,7 @@ include('header.php');
                                         <select class="form-select" id="qh" name="qh">
                                             <option value="" selected>Chọn quận/huyện</option>
                                             <?php
-                                            // Kết nối đến cơ sở dữ liệu
-                                            $servername = "localhost";
-                                            $username = "root";
-                                            $password = "";
-                                            $dbname = "taxi";
-                                            $conn = new mysqli($servername, $username, $password, $dbname);
-
-                                            if ($conn->connect_error) {
-                                                die("Kết nối không thành công: " . $conn->connect_error);
-                                            }
-
+                                            
                                             // Truy vấn để lấy danh sách quận/huyện
                                             $sql = "SELECT QH_MA, QH_TEN FROM quanhuyen";
                                             $result = $conn->query($sql);

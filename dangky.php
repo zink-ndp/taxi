@@ -1,15 +1,7 @@
 <?php
-// Kết nối đến cơ sở dữ liệu
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "taxi";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Kết nối không thành công: " . $conn->connect_error);
-}
+    require 'connect.php';
+    require 'functions.php';
 
 // Kiểm tra nếu biểu mẫu đã được gửi
 if (isset($_POST["dangky"])) {
@@ -22,12 +14,14 @@ if (isset($_POST["dangky"])) {
     $gioitinh = $_POST["gioitinh"];
     $qh_ma = $_POST["qh"]; // Lấy giá trị mã quận/huyện từ select
 
+    
     // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    
+    $nextId = getMaxId($conn,'KH_MA','khachhang')+1;
 
     // Tạo câu lệnh SQL để chèn dữ liệu vào bảng khachhang (loại bỏ KH_MA)
-    $sql = "INSERT INTO khachhang (QH_MA, KH_TEN, KH_SDT, KH_EMAIL, KH_USERNAME, KH_PASSWORD, KH_GIOITINH)
-            VALUES ('$qh_ma', '$ten', '$sdt', '$email', '$username', '$hashed_password', '$gioitinh')";
+    $sql = "INSERT INTO khachhang VALUES ($nextId, $qh_ma, '$ten', '$sdt', '$email', '$username', '$hashed_password', $gioitinh)";
 
     // Thực hiện câu lệnh SQL và kiểm tra kết quả
     if ($conn->query($sql) === TRUE) {
