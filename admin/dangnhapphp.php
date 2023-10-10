@@ -5,13 +5,13 @@ include("connect.php");
     $username = $_POST["username"];
     $password = $_POST["psw"];
 
-    $sql = "SELECT * FROM khachhang WHERE KH_USERNAME = ?";
-
+    $sql = "SELECT * FROM nhanvien WHERE NV_USERNAME = '$username'";
+    $result = $conn->query($sql);
     // Sử dụng câu lệnh chuẩn bị để tránh SQL Injection
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // $stmt = $conn->prepare($sql);
+    // $stmt->bind_param("s", $username);
+    // $stmt->execute();
+    // $result = $stmt->get_result();
 
     echo $sql ;
     echo $username ;
@@ -21,17 +21,17 @@ include("connect.php");
         $row = $result->fetch_assoc();
         $hashed_password = md5($password); // Mã hóa mật khẩu đầu vào
 
-        if ($hashed_password === $row["KH_PASSWORD"]) {
-          echo $hashed_password.' '.$row["KH_PASSWORD"];
+        // echo $hashed_password.' '.$row["NV_PASSWORD"];
+        if ($hashed_password === $row["NV_PASSWORD"]) {
             // Đăng nhập thành công, thiết lập các biến session
-            $_SESSION["kh_ma"] = $row["KH_MA"];
+            $_SESSION["NV_ma"] = $row["NV_MA"];
             $_SESSION["qh"] = $row["QH_MA"];
-            $_SESSION["ten"] = $row["KH_TEN"];
-            $_SESSION["sdt"] = $row["KH_SDT"];
-            $_SESSION["email"] = $row["KH_EMAIL"];
-            $_SESSION["username"] = $row["KH_USERNAME"];
-            $_SESSION["psw"] = $row["KH_PASSWORD"];
-            $_SESSION["gioitinh"] = $row["KH_GIOITINH"];
+            $_SESSION["ten"] = $row["NV_TEN"];
+            $_SESSION["sdt"] = $row["NV_SDT"];
+            $_SESSION["email"] = $row["NV_EMAIL"];
+            $_SESSION["username"] = $row["NV_USERNAME"];
+            $_SESSION["psw"] = $row["NV_PASSWORD"];
+            $_SESSION["gioitinh"] = $row["NV_GIOITINH"];
 
             echo '<script language="javascript">
             alert("Đăng nhập thành công!");
@@ -47,7 +47,5 @@ include("connect.php");
     } else {
         echo "Tên đăng nhập không tồn tại.";
     }
-
-    $stmt->close();
 
 ?>

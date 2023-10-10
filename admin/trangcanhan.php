@@ -26,7 +26,7 @@
                       <img alt="image" src="assets/img/users/PhuongLy.jpg" class="rounded-circle author-box-picture">
                       <div class="clearfix"></div>
                       <div class="author-box-name">
-                        <a href="#"><?php echo $_SESSION["lname"]?></a>
+                        <a href="#"><?php echo $_SESSION["ten"]?></a>
                       </div>
                       <div class="author-box-job">Ca sĩ</div>
                     </div>
@@ -78,7 +78,7 @@
                           <div class="col-md-3 col-6 b-r">
                             <strong>Tên đầy đủ</strong>
                             <br>
-                            <p class="text-muted"><?php echo $_SESSION["lname"]?></p>
+                            <p class="text-muted"><?php echo $_SESSION["ten"]?></p>
                           </div>
                           <div class="col-md-3 col-6 b-r">
                             <strong>Số điện thoại</strong>
@@ -91,10 +91,48 @@
                             <p class="text-muted"><?php echo $_SESSION["email"]?></p>
                           </div>
                           <div class="col-md-3 col-6">
+                            <strong>Tên đăng nhập</strong>
+                            <br>
+                            <p class="text-muted"><?php echo $_SESSION["username"]?></p>
+                          </div>
+                          <div class="col-md-3 col-6">
+                            <strong>Giới tính</strong>
+                            <br>
+                            <p class="text-muted">
+                              <?php
+                                $gioiTinh = $_SESSION["gioitinh"];
+                                if ($gioiTinh == 1) {
+                                    echo "Nam";
+                                } elseif ($gioiTinh == 0) {
+                                    echo "Nữ";
+                                } else {
+                                    echo "Không xác định";
+                                }
+                            ?>
+                            </p>
+                          </div>
+                          <div class="col-md-3 col-6">
                             <strong>Địa chỉ</strong>
                             <br>
-                            <p class="text-muted"><?php echo $_SESSION["diachi"]?></p>
+                            <p class="text-muted"><?php
+
+                            // Truy vấn cơ sở dữ liệu để lấy tên thành phố và tên quận huyện
+                            $qh_ma = $_SESSION["qh"];
+                            $sql = "SELECT QH_TEN, TP_TEN FROM quanhuyen qh JOIN thanhpho tp ON qh.TP_MA = tp.TP_MA WHERE qh.QH_MA = '$qh_ma'";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                $row = $result->fetch_assoc();
+                                $tenQuanHuyen = $row["QH_TEN"];
+                                $tenThanhPho = $row["TP_TEN"];
+                            } else {
+                                $tenQuanHuyen = "Không xác định";
+                                $tenThanhPho = "Không xác định";
+                            }
+
+                            echo $tenQuanHuyen . ', ' . $tenThanhPho
+                            ?></p>
                           </div>
+                          
                         </div>
                       </div>
                       <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
@@ -104,25 +142,54 @@
                           </div>
                           <div class="card-body">
                             <div class="row">
+                            <div class="form-group col-md-6 col-12">
+                                <label>Tên đăng nhập</label>
+                                <input  type="text" disabled class="form-control" value="<?php echo $_SESSION["username"]?>">
+                              </div>
+                            </div>
+                            <div class="row">
                               <div class="form-group col-md-6 col-12">
                                 <label>Họ và tên</label>
-                                <input type="text" class="form-control" value="<?php echo $_SESSION["hoten"]?>" name="hoten">
+                                <input type="text" class="form-control" value="<?php echo $_SESSION["ten"]?>" name="ten">
                                 <div class="invalid-feedback">
                                   Vui lòng nhập họ và tên
                                 </div>
                               </div>
                               <div class="form-group col-md-6 col-12">
                                 <label>Địa chỉ</label>
-                                <input type="text" class="form-control" value="<?php echo $_SESSION["diachi"]?>" name="diachi">
+                              
+                                            <?php
+                                            
+                                            // Truy vấn để lấy danh sách quận/huyện
+                                            $sql = "SELECT QH_MA, QH_TEN FROM quanhuyen";
+                                            $result = $conn->query($sql);
+                                            while ($row = $result->fetch_assoc()) {
+                                              if ($row['QH_MA']==$_SESSION['qh']) {
+                                                $qh_ma=$row['QH_MA'];
+                                                $tenqh = $row['QH_TEN'];}
+                                            }
+                                            ?>
+                                <select class="form-select form-control" id="qh" name="qh">
+                                            <option value="" selected><?php echo $tenqh?></option>
+                                            <?php
+                                            $result = $conn->query($sql);
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo '<option value="' . $row["QH_MA"] . '">' . $row["QH_TEN"] . '</option>';
+                                            }
+                                            // Đóng kết nối đến cơ sở dữ liệu
+                                            $conn->close();
+                                            ?>
+                                        </select>
                                 <div class="invalid-feedback">
                                   Vui lòng nhập địa chỉ
                                 </div>
                               </div>
                             </div>
                             <div class="row">
-                            <div class="form-group col-md-7 col-12">
+
+                            <div class="form-group col-md-6 col-12">
                                 <label>Email</label>
-                                <input  type="email" disabled class="form-control" value="<?php echo $_SESSION["email"]?>">
+                                <input  type="email" name="email" class="form-control" value="<?php echo $_SESSION["email"]?>">
                                 <div class="invalid-feedback">
                                   Vui lòng nhập địa chỉ email
                                 </div>
@@ -134,7 +201,7 @@
                             </div>
                           </div>
                           <div class="card-footer text-right">
-                            <button class="btn btn-primary" name="mc">Lưu thay đổi</button>
+                            <button class="btn btn-primary" name="taxi">Lưu thay đổi</button>
                           </div>
                         </form>
                       </div>
