@@ -132,6 +132,17 @@
                             echo $tenQuanHuyen . ', ' . $tenThanhPho
                             ?></p>
                           </div>
+
+                          <div class="col-md-3 col-6">
+                            <strong>Vai trò</strong>
+                            <br>
+                            <p class="text-muted"><?php 
+                                    $sql = "select VT_TEN from vaitro where VT_MA = {$_SESSION["vaitro"]}";
+                                    $rs = $conn->query($sql);
+                                    $vt = $rs->fetch_assoc();
+                                    echo $vt['VT_TEN'];
+                                  ?></p>
+                          </div>
                           
                         </div>
                       </div>
@@ -145,6 +156,15 @@
                             <div class="form-group col-md-6 col-12">
                                 <label>Tên đăng nhập</label>
                                 <input  type="text" disabled class="form-control" value="<?php echo $_SESSION["username"]?>">
+                              </div>
+                              <div class="form-group col-md-6 col-12">
+                                <label>Vai trò</label>
+                                <input  type="text" disabled class="form-control" value="<?php 
+                                    $sql = "select VT_TEN from vaitro where VT_MA = {$_SESSION["vaitro"]}";
+                                    $rs = $conn->query($sql);
+                                    $vt = $rs->fetch_assoc();
+                                    echo $vt['VT_TEN'];
+                                  ?>">
                               </div>
                             </div>
                             <div class="row">

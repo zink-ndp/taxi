@@ -32,7 +32,7 @@ include("connect.php");
             $_SESSION["username"] = $row["NV_USERNAME"];
             $_SESSION["psw"] = $row["NV_PASSWORD"];
             $_SESSION["gioitinh"] = $row["NV_GIOITINH"];
-
+            $_SESSION["vaitro"] = $row["VT_MA"];
             echo '<script language="javascript">
             alert("Đăng nhập thành công!");
             window.location.href = "index.php"; // Chuyển hướng sau khi đăng ký thành công

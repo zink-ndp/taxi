@@ -2,12 +2,12 @@
                 include('connect.php');
                
 
-                  $sql1="select*from khachhang where KH_USERNAME='".$_SESSION["username"]."'";
+                  $sql1="select*from nhanvien where NV_USERNAME='".$_SESSION["username"]."'";
                   
                   $result1 = $conn->query($sql1);
                     if($result1->num_rows>0){
-                        $sql=" UPDATE khachhang SET 
-                        KH_TEN='".$_POST["ten"]."', KH_SDT='".$_POST["sdt"]."',KH_EMAIL='".$_POST["email"]."' WHERE KH_USERNAME='".$_SESSION["username"]."'
+                        $sql=" UPDATE nhanvien SET 
+                        NV_TEN='".$_POST["ten"]."', NV_SDT='".$_POST["sdt"]."', QH_MA='".$_POST["qh"]."',NV_EMAIL='".$_POST["email"]."' WHERE NV_USERNAME='".$_SESSION["username"]."'
                         ";
                         $result2 = $conn->query($sql);
                         //echo $sql."<br>";
