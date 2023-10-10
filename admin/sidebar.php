@@ -22,6 +22,7 @@
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Người dùng</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="thongtintaixe.php">Tài xế</a></li>
+                <li><a class="nav-link" href="thongtinquanly.php">Quản lý</a></li>
                 <li><a class="nav-link" href="thongtinkhachhang.php">Khách hàng</a></li>
               </ul>
             </li>

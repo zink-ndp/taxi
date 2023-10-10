@@ -9,7 +9,7 @@
 ?>
 
 <body>
-  <div class="loader"></div>
+  <!-- <div class="loader"></div> -->
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
@@ -176,71 +176,63 @@
             <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4>Danh sách khách hàng</h4>
+                <h4>Danh sách nhân viên</h4>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
-                        <tbody>
-                            <?php
-                            $servername = "localhost";
-                            $username = "root";
-                            $password = "";
-                            $dbname = "qlbanmicay";
+    <div class="table-responsive">
+        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+            <thead>
+                <tr><th>ID</th>
+                    <th>Tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Giới tính</th>
+                    <th>Địa chỉ</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                                            // Thực hiện truy vấn SQL để lấy thông tin từ bảng khachhang và thanhpho
+                                            $sql = "SELECT kh.kh_ma, kh.kh_ten, kh.kh_sdt, kh.kh_email, kh.kh_username, kh.kh_gioitinh, CONCAT(qh.qh_ten, ', ', tp.TP_TEN) AS dia_chi
+                                            FROM khachhang kh
+                                            LEFT JOIN quanhuyen qh ON kh.qh_ma = qh.qh_ma
+                                            LEFT JOIN thanhpho tp ON qh.TP_MA = tp.TP_MA";
+                                            $result = $conn->query($sql);
 
-                            // Tạo kết nối đến cơ sở dữ liệu
-                            $conn = new mysqli($servername, $username, $password, $dbname);
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            }
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . $row["kh_ma"] . "</td>";
+                                                    echo "<td>" . $row["kh_ten"] . "</td>";
+                                                    echo "<td>" . $row["kh_sdt"] . "</td>";
+                                                    echo "<td>" . $row["kh_email"] . "</td>";
+                                                    echo "<td>" . $row["kh_username"] . "</td>";
 
+                                                    // Hiển thị giới tính
+                                                    echo "<td>";
+                                                    if ($row["kh_gioitinh"] == 1) {
+                                                        echo "Nam";
+                                                    } elseif ($row["kh_gioitinh"] == 0) {
+                                                        echo "Nữ";
+                                                    } else {
+                                                        echo "Không xác định";
+                                                    }
+                                                    echo "</td>";
 
-                            // Truy vấn SQL để lấy danh sách người dùng bao gồm số lần mua hàng và lọc theo maquyen=2
-                            $sql = "SELECT nguoidung.email, nguoidung.ten, nguoidung.diachi, nguoidung.sdt, COUNT(hoadon.mahoadon) AS solanmuahang
-                                    FROM nguoidung 
-                                    LEFT JOIN hoadon ON nguoidung.email = hoadon.email
-                                    WHERE nguoidung.phanquyen = 3
-                                    GROUP BY nguoidung.email, nguoidung.ten, nguoidung.diachi, nguoidung.sdt";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
-                                echo '<thead>';
-                                echo '<tr>';
-                                echo '<th>Email</th>';
-                                echo '<th>Tên</th>';
-                                echo '<th>Địa chỉ</th>';
-                                echo '<th>Số điện thoại</th>';
-                                echo '<th>Số lần mua hàng</th>';
-                                echo '</tr>';
-                                echo '</thead>';
-                                echo '<tbody>';
-                                
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "<tr>
-                                            <td>" . $row["email"] . "</td>
-                                            <td>" . $row["ten"] . "</td>
-                                            <td>" . $row["diachi"] . "</td>
-                                            <td>" . $row["sdt"] . "</td>
-                                            <td>" . $row["solanmuahang"] . "</td>
-                                          </tr>";
-                                }
-
-                                echo '</tbody>';
-                                echo '</table>';
-                                
-                                $totalEmployees = $result->num_rows; // Đếm tổng số khách hàng
-                                echo "<h5>Tổng số khách hàng: $totalEmployees</h5>"; // Hiển thị tổng số khách hàng
-                            } else {
-                                echo "Không có dữ liệu người dùng.";
-                            }
-
-                            $conn->close();
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                                                    echo "<td>" . $row["dia_chi"] . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                $totalCustomers = $result->num_rows; // Đếm tổng số khách hàng
+                                                echo "<h5>Tổng số khách hàng: $totalCustomers</h5>"; // Hiển thị tổng số khách hàng
+                                            } else {
+                                                echo "Không có dữ liệu khách hàng.";
+                                            }
+                                            ?>
+            </tbody>
+        </table>
+    </div>
+</div>
         </div>
     </div>
             </div>
