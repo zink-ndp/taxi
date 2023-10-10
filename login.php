@@ -1,7 +1,7 @@
 <?php
 $activate = "login";
+// include('connect.php');
 include('header.php');
-include('connect.php');
 ?>
 
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
@@ -88,7 +88,7 @@ include('connect.php');
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label">Quận Huyện<span class="error">*</span></label>
-                                        <select class="form-select" id="qh" name="qh">
+                                        <select class="form-select form-control" id="qh" name="qh">
                                             <option value="" selected>Chọn quận/huyện</option>
                                             <?php
                                             

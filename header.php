@@ -1,8 +1,7 @@
 <?php
+  include 'connect.php';
   @include('config/config.php');
   @include('lib/session.php');
-?>
-<?php
   @include_once('lib/database.php');
   @include_once('helpers/format.php');
 ?>
@@ -33,7 +32,11 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=place&key=AIzaSyAX7l3jn4RwLMW6kFDJiytnwK1AGw0Lh3U"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
   </head>
   <body>
     
@@ -53,10 +56,78 @@
 	          <li class="nav-item <?php echo ($activate == "car" ? "active" : "")?>"><a href="car.php" class="nav-link">Xe</a></li>
 	          <li class="nav-item <?php echo ($activate == "blog" ? "active" : "")?>"><a href="blog.php" class="nav-link">Tin tức</a></li>
 	          <li class="nav-item <?php echo ($activate == "contact" ? "active" : "")?>"><a href="contact.php" class="nav-link">Liên hệ</a></li>
-            <li class="nav-item <?php echo ($activate == "login" ? "active" : "")?>"><a href="login.php" class="nav-link">Đăng nhập/ Đăng ký</a></li>
-            <li class="nav-item <?php echo ($activate == "suathongtin" ? "active" : "")?>"><a href="suathongtin.php" class="nav-link">Sửa thông tin</a></li>
 	        </ul>
 	      </div>
+
+        <ul class="navbar-nav ml-auto">
+        <?php
+              if (isset($_SESSION['ten'])){
+                ?>
+                    <li class="nav-item">
+                      <a href="suathongtin.php" class="nav-link">Hi, <?php echo $_SESSION['ten'] ?></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="suathongtin.php" class="dropdown-item">Thông tin cá nhân</a></li>
+                          <li><a href="?.php" class="dropdown-item">Đổi mật khẩu</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a href="dangxuat.php" class="dropdown-item">Đăng xuất</a></li>
+                      </ul>
+                  </li>
+                <?php
+              } else {
+                echo '<li class="nav-item user-dropdown"><a href="login.php" class="nav-link">Đăng nhập/ Đăng ký</a></li>'; 
+              }
+            ?>
+        </ul>
 	    </div>
 	  </nav>
+    
+    <style>
+      /* Điều chỉnh kiểu hiển thị của dropdown */
+      .menu {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+      }
+
+      .nav-item {
+          position: relative; /* Để làm cho dropdown-menu hiển thị tương đối */
+      }
+
+      .dropdown-menu {
+          display: none; /* Ẩn dropdown ban đầu */
+          position: absolute; /* Hiển thị tuyệt đối trong khoảng cách của nav-item */
+          top: 100%; /* Hiển thị bên dưới nav-item */
+          left: 0;
+          background-color: white;
+          border: 1px solid #ddd;
+          padding: 10px;
+          min-width: 200px;
+      }
+
+      /* Hiển thị dropdown khi nav-link được hover hoặc click */
+      .nav-item:hover .dropdown-menu {
+          display: block;
+      }
+
+    </style>
+
+    <script>
+        // Lấy phần tử li có class là "nav-link"
+        var navLink = document.querySelector('.nav-link');
+        
+        // Lấy phần tử ul có class là "dropdown-menu"
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+        
+        // Thêm sự kiện click vào phần tử li
+        navLink.addEventListener('click', function() {
+            // Kiểm tra xem dropdownMenu đã ẩn hay chưa
+            if (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') {
+                // Nếu chưa ẩn, thì hiển thị dropdownMenu
+                dropdownMenu.style.display = 'block';
+            } else {
+                // Nếu đã hiển thị, thì ẩn dropdownMenu
+                dropdownMenu.style.display = 'none';
+            }
+        });
+    </script>
     <!-- END nav -->
