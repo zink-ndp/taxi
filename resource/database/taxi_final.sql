@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 05, 2023 lúc 01:37 PM
+-- Thời gian đã tạo: Th10 10, 2023 lúc 01:21 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -186,7 +186,7 @@ INSERT INTO `khachhang` (`KH_MA`, `QH_MA`, `KH_TEN`, `KH_SDT`, `KH_EMAIL`, `KH_U
 (5, 1, 'Trần Thanh Kiệp', '0135792468', 'kiep@gmail.com', 'kiep', '123', 1),
 (6, 14, 'D', '0123456789', 'duybii922002@gmail.com', 'd', '202cb962ac59075b964b07152d234b', 1),
 (7, 1, 'V', '0123456789', 'vinhtop8@gmail.com', 'v', '202cb962ac59075b964b07152d234b', 1),
-(8, 3, 'Yii', '0939826024', 'duybii922002@gmail.comm', 'Duy', '202cb962ac59075b964b07152d234b70', 1),
+(8, 3, 'Yii', '0939826024', 'duybii922002@gmail.com', 'Duy', '202cb962ac59075b964b07152d234b70', 1),
 (9, 1, 'Kiệp Lặc', '0147258369', 'kiep123@gmail.com', 'kieplac', '202cb962ac59075b964b07152d234b70', 0);
 
 -- --------------------------------------------------------
@@ -225,7 +225,7 @@ CREATE TABLE `nhanvien` (
   `NV_SDT` varchar(10) NOT NULL,
   `NV_EMAIL` varchar(30) NOT NULL,
   `NV_USERNAME` varchar(30) NOT NULL,
-  `NV_PASSWORD` varchar(30) NOT NULL,
+  `NV_PASSWORD` varchar(100) NOT NULL,
   `NV_GIOITINH` tinyint(1) NOT NULL,
   `NV_HINHANH` char(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -238,8 +238,8 @@ INSERT INTO `nhanvien` (`NV_ID`, `QH_MA`, `VT_MA`, `NV_TEN`, `NV_SDT`, `NV_EMAIL
 (1, 3, 2, 'Nguyễn Thị Lan', '0123456789', 'lan@gmail.com', 'lan', '123', 0, NULL),
 (2, 5, 2, 'Nguyễn Thị Thắm', '0123456788', 'tham@gmail.com', 'tham', '123', 0, NULL),
 (3, 8, 2, 'Huỳnh Thạch Thảo', '0123456787', 'thao@gmail.com', 'thao', '123', 0, NULL),
-(4, 6, 2, 'Trần Minh Khéo', '0123456786', 'kheo@gmail.com', 'kheo', '123', 1, NULL),
-(5, 2, 1, 'Lý Thanh Hùng', '0123456783', 'hung@gmail.com', 'hung', '123', 1, NULL);
+(4, 6, 1, 'Trần Minh Khéo', '0123456786', 'kheo@gmail.com', 'kheo', '123', 1, NULL),
+(5, 3, 2, 'Yii Quản Lý', '0123456783', 'yii@gmail.com', 'yii', '202cb962ac59075b964b07152d234b70', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -423,7 +423,10 @@ CREATE TABLE `trangthai` (
 --
 
 INSERT INTO `trangthai` (`TX_MA`, `TD_DATE`, `TT_TRANGTHAI`, `TT_TOADOX`, `TT_TOADOY`) VALUES
-(3, '2023-10-02 00:00:00', 1, '10.02780', '105.77006');
+(1, '2023-10-02 00:00:00', 1, '10.028612', '105.771947'),
+(2, '2023-10-02 00:00:00', 1, '10.032729', '105.774329'),
+(3, '2023-10-02 00:00:00', 1, '10.02780', '105.77006'),
+(4, '2023-10-02 00:00:00', 1, '10.030492', '105.76904');
 
 -- --------------------------------------------------------
 
@@ -472,7 +475,11 @@ INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`, `X_MOTA`, `X_HINHANH`) VALUES
 (7, 3, '65A-13345', 'Toyota Corolla Cross màu đen', ''),
 (8, 3, '65A-13445', 'Honda CR-V màu xám', ''),
 (9, 4, '65A-13455', 'Mitsubishi Xpander màu đen', ''),
-(10, 4, '65A-12445', 'Toyota Avanza màu đen', '');
+(10, 4, '65A-12445', 'Toyota Avanza màu đen', ''),
+(11, 3, '65A-11111', 'Đây là xe của Vinh Top 8', 'my.jpg'),
+(12, 1, '65A-99999', 'Đây là xe của Yii Chủ Tịch', ''),
+(13, 1, '65A-99999', 'Đây là xe của Yii Chủ Tịch', ''),
+(14, 1, '65A-99999', 'Đây là xe của Yii Chủ Tịch', '');
 
 --
 -- Chỉ mục cho các bảng đã đổ
