@@ -34,10 +34,10 @@ include("connect.php");
               <div class="card-body">
                 <form method="POST" action="dangnhapphp.php" class="needs-validation" novalidate="">
                   <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                    <label for="username">Tên đăng nhập</label>
+                    <input id="username" type="text" class="form-control" name="username" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
-                      Vui lòng nhập email của bạn
+                      Vui lòng nhập tên đăng nhập của bạn
                     </div>
                   </div>
                   <div class="form-group">
@@ -49,7 +49,7 @@ include("connect.php");
                         </a>
                       </div>
                     </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+                    <input id="psw" type="password" class="form-control" name="psw" tabindex="2" required>
                     <div class="invalid-feedback">
                       Vui lòng điền mật khẩu của bạn
                     </div>
@@ -61,7 +61,7 @@ include("connect.php");
                     </div>
                   </div>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" name="mc1">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" name="taxi1">
                       Đăng nhập
                     </button>
                   </div>
