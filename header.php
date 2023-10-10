@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=place&key=AIzaSyAX7l3jn4RwLMW6kFDJiytnwK1AGw0Lh3U"></script>
   </head>
   <body>
     
