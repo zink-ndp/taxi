@@ -88,7 +88,28 @@ $activate = "index";
 					            </div>      
 					          </div>
 					        </div>
-					        <p><a href="#" class="btn btn-primary py-3 px-4">Đặt một chiếc xe hoàn hảo</a></p>
+					        <button onclick="getLocation()" class="btn btn-primary py-3 px-4">Đặt một chiếc xe hoàn hảo</button>
+							<script>
+								function getLocation() {
+									if (navigator.geolocation) {
+										navigator.geolocation.getCurrentPosition(showPosition);
+									} else {
+										document.getElementById("location").innerHTML = "Trình duyệt của bạn không hỗ trợ định vị.";
+									}
+								}		
+								function showPosition(position) {
+									var latitude = position.coords.latitude;
+									var longitude = position.coords.longitude;
+									// document.getElementById("location").innerHTML = "Vĩ độ: " + latitude + "<br> Kinh độ: " + longitude;
+									// alert("Vĩ độ: " + latitude + "<br> Kinh độ: " + longitude)
+									// Gửi vị trí đến máy chủ PHP
+									// var xhr = new XMLHttpRequest();
+									// xhr.open("POST", "chon_taixe.php", true);
+									// xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+									// xhr.send("latitude=" + latitude + "&longitude=" + longitude);
+								}
+
+							</script>
 	  						</div>
 	  					</div>
 	  				</div>
@@ -102,69 +123,39 @@ $activate = "index";
     		<div class="row justify-content-center">
           <div class="col-md-12 heading-section text-center ftco-animate mb-5">
           	<span class="subheading">Những gì chúng tôi cung cấp</span>
-            <h2 class="mb-2">XE NỔI BẬT</h2>
+            <h2 class="mb-2">XE GẦN BẠN</h2>
           </div>
         </div>
     		<div class="row">
-    			<div class="col-md-12">
-    				<div class="carousel-car owl-carousel">
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-1.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Đặt ngay</a> <a href="#" class="btn btn-secondary py-2 ml-1">Chi tiết</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-2.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Đặt ngay</a> <a href="#" class="btn btn-secondary py-2 ml-1">Chi tiết</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-3.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Đặt ngay</a> <a href="#" class="btn btn-secondary py-2 ml-1">Chi tiết</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-4.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Đặt ngay</a> <a href="#" class="btn btn-secondary py-2 ml-1">Chi tiết</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    				</div>
+    			<div class="col-12">
+					<div class="row">
+						<div class="col-6">
+							<div id="map" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+								<div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>					
+							</div>
+							<div class="leaflet-control-container">
+								<div class="leaflet-top leaflet-right"></div>
+								<div class="leaflet-bottom leaflet-left"></div>
+								<div class="leaflet-bottom leaflet-right">
+									<div class="leaflet-control-attribution leaflet-control">
+										<a href="https://leafletjs.com" title="A JavaScript library for interactive maps">
+											<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path>
+											</svg> Leaflet
+										</a> <span aria-hidden="true">|</span> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
+									</div>
+								</div>
+							</div>
+							<script src="js/map_index.js"></script>
+						</div>
+						<div class="col-6">
+							<div class="container p-3 py-4 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3)">
+								Test1
+							</div>
+							<div class="container p-3 py-4 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3)">
+								Test2
+							</div>
+						</div>
+					</div>
     			</div>
     		</div>
     	</div>

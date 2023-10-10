@@ -24,8 +24,9 @@ function onMapClick(e) {
         .openOn(map);
 }
 
-map.on('click', onMapClick);
 
+
+map.on('click', onMapClick);
 
 function getLocation() {
   if (navigator.geolocation) {

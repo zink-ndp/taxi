@@ -40,6 +40,21 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+li.dropdown > a:after{
+  font-family: 'Open Sans';
+  content: "\f105";
+  font-weight: 800;
+  position:absolute;
+  right:0px;
+  top:12px;
+  width:10px;
+  display:block;
+  line-height:20px;
+  font-size:14px;
+  text-align:center;
+  z-index:5;	
+}
+  
 html {
   font-family: sans-serif;
   line-height: 1.15;
