@@ -33,9 +33,11 @@
                     <div class="text-center">
                       <div class="author-box-description">
                         <p>
-                          <br>Anh sẽ thấy ngoài kia đấy bao cô gái như em
-                          <br>Cũng cần tình yêu, cần được hiểu, cần một chút nuông chiều
-                          
+                          <br>Cầm tay anh dựa vai anh
+                          <br>Kề bên anh nơi này có anh
+                          <br>Gió mang câu tình ca 
+                          <br>Ngàn ánh sao vụt qua nhẹ ôm lấy em
+                          <br>(Yêu em thương em con tim anh chân thành)
                         </p>
                       </div>
                       <div class="mb-2 mt-3">
