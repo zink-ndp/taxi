@@ -23,7 +23,7 @@
                 <div class="card author-box">
                   <div class="card-body">
                     <div class="author-box-center">
-                      <img alt="image" src="assets/img/users/PhuongLy.jpg" class="rounded-circle author-box-picture">
+                      <img alt="image" src="assets/img/users/sontung.jpg" class="rounded-circle author-box-picture">
                       <div class="clearfix"></div>
                       <div class="author-box-name">
                         <a href="#"><?php echo $_SESSION["ten"]?></a>
@@ -39,7 +39,7 @@
                         </p>
                       </div>
                       <div class="mb-2 mt-3">
-                        <div class="text-small font-weight-bold">Follow Phương Ly</div>
+                        <div class="text-small font-weight-bold">Follow <?php echo $_SESSION["ten"]?> </div>
                       </div>
                       <a href="#" class="btn btn-social-icon mr-1 btn-facebook">
                         <i class="fab fa-facebook-f"></i>
