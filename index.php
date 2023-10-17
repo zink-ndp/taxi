@@ -2,7 +2,14 @@
 $activate = "index";
 @include('header.php');
 ?>
-    
+  <?php 
+    if ( isset($_POST['TX_MA']) ) {
+      $form_action = "xulydatxe.php";
+    } 
+    else {
+      $form_action = "chon_taixe.php";
+    }
+  ?>  
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -31,32 +38,43 @@ $activate = "index";
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="#" class="request-form ftco-animate bg-primary">
+	  						<form action="<?php $form_action ?>" class="request-form ftco-animate bg-primary" method="post">
 		          		<h2>Chuyến đi của bạn</h2>
+
+                  <div class="form-group">
+			    					<input name="TX_MA
+                    " type="hidden" class="form-control" placeholder="">
+			    				</div>
+
 			    				<div class="form-group">
 			    					<label for="" class="label">Vị trí của bạn</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+			    					<input name="diemdi" type="text" class="form-control" placeholder="City, Airport, Station, etc">
 			    				</div>
+                  
 			    				<div class="form-group">
 			    					<label for="" class="label">Ví trí muốn đến</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+			    					<input type="text" name="diemden" class="form-control" placeholder="City, Airport, Station, etc">
 			    				</div>
 			    				<div class="d-flex">
-			    					<div class="form-group mr-2">
-			                <label for="" class="label">Ngày đi</label>
+			    					<!-- <div class="form-group mr-2">
+			                <label for="" class="label">Ngày xuất phát</label>
 			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-			              </div>
-			              <div class="form-group ml-2">
+			              </div> -->
+			              <!-- <div class="form-group ml-2">
 			                <label for="" class="label">Ngày về</label>
 			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-			              </div>
+			              </div> -->
 		              </div>
 		              <div class="form-group">THỜI GIAN ĐÓN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </label>
 		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
 		              </div>
 			            <div class="form-group">
-			              <input type="submit" value="Thuê xe ngay" class="btn btn-secondary py-3 px-4">
+			              <input type="submit" name ="datxe" value="Thuê xe ngay" class="btn btn-secondary py-3 px-4">
 			            </div>
+
+
+
+
 			    			</form>
 	  					</div>
 	  					<div class="col-md-8 d-flex align-items-center">
