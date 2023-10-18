@@ -33,10 +33,11 @@ include('head.php');
                                     <?php
 
                                         // Truy vấn SQL để lấy dữ liệu từ cơ sở dữ liệu
-                                        $query = "SELECT TX_MA, TT_toadoX, TT_toadoY
-                                        FROM trangthai
-                                        WHERE (TX_MA, TD_date) IN (
-                                            SELECT TX_MA, MAX(TD_date)
+                                        $query = "SELECT tx.TX_MA, tx.TX_TEN, tx.TX_BANGLAI, tx.TX_SDT, tx.TX_USERNAME, tx.TX_PASSWORD, tx.TX_GIOITINH, tx.TX_HINHANH, tt.TD_DATE, tt.TT_TOADOX, tt.TT_TOADOY
+                                        FROM taixe tx
+                                        JOIN trangthai tt ON tx.TX_MA = tt.TX_MA
+                                        WHERE (tt.TX_MA, tt.TD_DATE) IN (
+                                            SELECT TX_MA, MAX(TD_DATE)
                                             FROM trangthai
                                             GROUP BY TX_MA
                                         )";

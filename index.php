@@ -70,7 +70,7 @@ $activate = "index";
 		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
 		              </div>
 			            <div class="form-group">
-			              <button type="submit" name ="datxe" class="btn btn-secondary py-3 px-4">Thuê xe ngay</button>
+			              <input type="submit" name ="datxe" value="Thuê xe ngay" class="btn btn-secondary py-3 px-4">
 			            </div>
 
 
@@ -203,7 +203,7 @@ $activate = "index";
     			<div class="col-12">
 					<div class="row">
 						<div class="col-6">
-							<div id="map" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+							<div id="map" class="mt-4 map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
 								<div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>					
 							</div>
 							<div class="leaflet-control-container">
