@@ -40,6 +40,29 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+/* CUSTOM */
+.fit-image{
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-choose{
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.card-choose .card-choose-content{
+  width:60%;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+
 li.dropdown > a:after{
   font-family: 'Open Sans';
   content: "\f105";

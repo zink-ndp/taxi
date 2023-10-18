@@ -159,10 +159,26 @@ $activate = "index";
 							<script src="js/map_index.js"></script>
 						</div>
 						<div class="col-6">
-							<div class="container p-3 py-4 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3)">
-								Test1
+							<div class="container p-3 py-4 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3);">
+                <div class="card-choose">
+                  <div style="width: 5rem; height: 5rem;" >
+                    <img src="images/car-3.jpg" class="fit-image" alt="">
+                  </div>
+                  <div class="card-choose-content">
+                      <span>
+                        Tài xế: <span style="color: green; font-size: 18px;">Trần Ngọc Di</span>
+                      </span>
+                      <span>
+                        Đánh giá: 0 <i style="color: #f7d219;" class="fas fa-star"></i> 
+                      </span> 
+                  </div>
+                  <form action="#" method="post">
+                    <input type="hidden" name="tx_ma" value="1">
+                    <button class="btn btn-success">Đặt ngay</button>
+                  </form>
+                </div>
 							</div>
-							<div class="container p-3 py-4 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3)">
+							<div class="container p-3 py-4 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3);">
 								Test2
 							</div>
 						</div>
