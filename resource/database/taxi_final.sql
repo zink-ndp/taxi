@@ -37,15 +37,16 @@ CREATE TABLE `chuyenxe` (
   `CX_TDDIEMDI_X` text NOT NULL,
   `CX_TDDIEMDI_Y` text NOT NULL,
   `CX_TDDIEMDEN_X` text NOT NULL,
-  `CX_TDDIEMDEN_Y` text NOT NULL
+  `CX_TDDIEMDEN_Y` text NOT NULL,
+  `CX_TRANGTHAI` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `chuyenxe`
 --
 
-INSERT INTO `chuyenxe` (`CX_MA`, `KH_MA`, `TX_MA`, `TD_DATE`, `CX_SOKM`, `CX_THANHTIEN`, `CX_TDDIEMDI_X`, `CX_TDDIEMDI_Y`, `CX_TDDIEMDEN_X`, `CX_TDDIEMDEN_Y`) VALUES
-(1, 3, 2, '2023-09-28 00:00:00', 4, 150000.00, '10.03002', '105.77202', '10.02914', '105.77167');
+INSERT INTO `chuyenxe` (`CX_MA`, `KH_MA`, `TX_MA`, `TD_DATE`, `CX_SOKM`, `CX_THANHTIEN`, `CX_TDDIEMDI_X`, `CX_TDDIEMDI_Y`, `CX_TDDIEMDEN_X`, `CX_TDDIEMDEN_Y`, `CX_TRANGTHAI`) VALUES
+(1, 3, 2, '2023-09-28 00:00:00', 4, 150000.00, '10.03002', '105.77202', '10.02914', '105.77167',0);
 
 -- --------------------------------------------------------
 
