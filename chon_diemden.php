@@ -27,7 +27,7 @@ $activate = "index";
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5"></div>  
 
 
-<style>
+<style> 
     .showmap{
         padding: 10px;
         width: 80%;

@@ -14,7 +14,7 @@ if (isset($_POST["dangky"])) {
     $gioitinh = $_POST["gioitinh"];
     $qh_ma = $_POST["qh"]; // Lấy giá trị mã quận/huyện từ select
 
-    
+     
     // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
     $hashed_password = md5($password);
     

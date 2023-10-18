@@ -13,7 +13,7 @@ $activate = "index";
       $matx = '';
     }
   ?>  
-    <div class="showmap">
+    <div class="showmap"> 
         <div id="map" class=" map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
             <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>					
         </div>

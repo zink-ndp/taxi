@@ -12,7 +12,7 @@ $activate = "car";
             <h1 class="mb-3 bread">Chọn xe bạn muốn đi </h1>
           </div>
         </div>
-      </div>
+      </div> 
     </section>
 		
 
