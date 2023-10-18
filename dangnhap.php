@@ -18,8 +18,8 @@ if (isset($_POST["dangnhap"])) {
         $row = $result->fetch_assoc();
         $hashed_password = md5($password); // Mã hóa mật khẩu đầu vào
 
-        if ($hashed_password === $row["KH_PASSWORD"]) {
-          echo $hashed_password.' '.$row["KH_PASSWORD"];
+        if ($hashed_password === md5($row["KH_PASSWORD"])) {
+          echo $hashed_password.' '.md5($row["KH_PASSWORD"]);
             // Đăng nhập thành công, thiết lập các biến session
             $_SESSION["kh_ma"] = $row["KH_MA"];
             $_SESSION["qh"] = $row["QH_MA"];
