@@ -6,7 +6,7 @@
 ?>
 
 <body>
-  <div class="loader"></div>
+  <!-- <div class="loader"></div> -->
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
@@ -52,20 +52,7 @@
                         <div class="card-content">
                           <h5 class="font-15"> Khách Hàng</h5>
                           <h2 class="mb-3 font-18">
-                          <!-- <?php                                   
-                                  $servername = "localhost";
-                                  $username = "root";
-                                  $password = "";
-                                  $dbname = "qlbanmicay";
-                                  $conn = new mysqli($servername, $username, $password, $dbname);
-                                  if ($conn->connect_error) {
-                                  die("Connection failed: " . $conn->connect_error);
-                                  }
-                                  $tongkh= "SELECT COUNT(EMAIL) AS TONGKH FROM nguoidung";
-                                  $result = mysqli_query($conn, $tongkh);
-                                  $tong1= $result->fetch_assoc();
-                                  echo $tong1["TONGKH"] ;
-                          ?> -->
+                          
 </h2>
                           <p class="mb-0"><span class="col-orange">09%</span> Giảm</p>
                         </div>

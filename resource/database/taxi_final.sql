@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 18, 2023 lúc 05:05 AM
+-- Thời gian đã tạo: Th10 18, 2023 lúc 06:10 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.0.28
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,15 +37,16 @@ CREATE TABLE `chuyenxe` (
   `CX_TDDIEMDI_X` text NOT NULL,
   `CX_TDDIEMDI_Y` text NOT NULL,
   `CX_TDDIEMDEN_X` text NOT NULL,
-  `CX_TDDIEMDEN_Y` text NOT NULL
+  `CX_TDDIEMDEN_Y` text NOT NULL,
+  `CX_TRANGTHAI` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `chuyenxe`
 --
 
-INSERT INTO `chuyenxe` (`CX_MA`, `KH_MA`, `TX_MA`, `TD_DATE`, `CX_SOKM`, `CX_THANHTIEN`, `CX_TDDIEMDI_X`, `CX_TDDIEMDI_Y`, `CX_TDDIEMDEN_X`, `CX_TDDIEMDEN_Y`) VALUES
-(1, 3, 2, '2023-09-28 00:00:00', 4, 150000.00, '10.03002', '105.77202', '10.02914', '105.77167');
+INSERT INTO `chuyenxe` (`CX_MA`, `KH_MA`, `TX_MA`, `TD_DATE`, `CX_SOKM`, `CX_THANHTIEN`, `CX_TDDIEMDI_X`, `CX_TDDIEMDI_Y`, `CX_TDDIEMDEN_X`, `CX_TDDIEMDEN_Y`, `CX_TRANGTHAI`) VALUES
+(1, 3, 2, '2023-09-28 00:00:00', 4, 150000.00, '10.03002', '105.77202', '10.02914', '105.77167',0);
 
 -- --------------------------------------------------------
 
@@ -326,9 +327,9 @@ CREATE TABLE `taixe` (
   `TX_MA` int(11) NOT NULL,
   `TX_TEN` varchar(30) NOT NULL,
   `TX_BANGLAI` char(3) NOT NULL,
-  `TX_SDT` decimal(10,0) NOT NULL,
+  `TX_SDT` char(10) NOT NULL,
   `TX_USERNAME` varchar(30) NOT NULL,
-  `TX_PASSWORD` varchar(10) NOT NULL,
+  `TX_PASSWORD` varchar(100) NOT NULL,
   `TX_GIOITINH` tinyint(1) NOT NULL,
   `TX_HINHANH` char(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -338,10 +339,14 @@ CREATE TABLE `taixe` (
 --
 
 INSERT INTO `taixe` (`TX_MA`, `TX_TEN`, `TX_BANGLAI`, `TX_SDT`, `TX_USERNAME`, `TX_PASSWORD`, `TX_GIOITINH`, `TX_HINHANH`) VALUES
-(1, 'Nguyễn Thanh Hậu', 'C2', 0, 'hau', '123', 1, NULL),
-(2, 'Phước Vinh', 'C2', 0, 'vinh', '123', 1, NULL),
-(3, 'Trần Văn Hùng', 'C1', 0, 'hung', '123', 1, NULL),
-(4, 'Trần Thị Linh', 'D1', 0, 'linh', '123', 0, NULL);
+(1, 'Nguyễn Thanh Hậu', 'C2', '0', 'hau', '123', 1, NULL),
+(2, 'Phước Vinh', 'C2', '0', 'vinh', '123', 1, NULL),
+(3, 'Trần Văn Hùng', 'C1', '0', 'hung', '123', 1, NULL),
+(4, 'Trần Thị Linh', 'D1', '0', 'linh', '123', 0, NULL),
+(5, 'Lê Dương Bảo Lâm', 'C2', '0123456789', 'lam', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(6, 'Hiếu Thứ Hai', 'C1', '0939123456', 'hieuthuhai', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(7, 'Nguyễn Thanh Tùng', 'C2', '0939456789', 'sontungmtp', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(8, 'Trần Phương Ly', 'C1', '0939246357', 'phuongly', '202cb962ac59075b964b07152d234b70', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -426,7 +431,11 @@ INSERT INTO `trangthai` (`TX_MA`, `TD_DATE`, `TT_TRANGTHAI`, `TT_TOADOX`, `TT_TO
 (1, '2023-10-02 00:00:00', 1, '10.028612', '105.771947'),
 (2, '2023-10-02 00:00:00', 1, '10.032729', '105.774329'),
 (3, '2023-10-02 00:00:00', 1, '10.02780', '105.77006'),
-(4, '2023-10-02 00:00:00', 1, '10.030492', '105.76904');
+(4, '2023-10-02 00:00:00', 1, '10.030492', '105.76904'),
+(5, '2023-10-02 00:00:00', 0, '10.035384', '105.780897'),
+(6, '2023-10-02 00:00:00', 0, '10.056775', '105.778673'),
+(7, '2023-10-02 00:00:00', 1, '10.0314', '105.775036'),
+(8, '2023-10-02 00:00:00', 1, '10.024951', '105.768342');
 
 -- --------------------------------------------------------
 

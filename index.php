@@ -2,12 +2,15 @@
 $activate = "index";
 @include('header.php');
 ?>
+
   <?php 
-    if ( isset($_POST['TX_MA']) ) {
+    if ( isset($_POST['tx_ma']) ) {
       $form_action = "xulydatxe.php";
+      $matx =$_POST['tx_ma'] ;
     } 
     else {
       $form_action = "chon_taixe.php";
+      $matx = '';
     }
   ?>  
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
@@ -32,49 +35,114 @@ $activate = "index";
       </div>
     </div>
 
+    <div id="mapContainer" class="modal">
+      <a class="close" id="close">x</a>
+      <div style="height: 90%; width: 100%">
+        <div id="mapdx" style = "height: 100%; width: 100%" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+          <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>					
+        </div>
+        <div class="leaflet-control-container">
+          <div class="leaflet-top leaflet-right"></div>
+          <div class="leaflet-bottom leaflet-left"></div>
+          <div class="leaflet-bottom leaflet-right"></div>
+        </div>
+      </div>
+      <!-- <script src="js/mapdatxe.js"></script> -->
+    </div>
+
      <section class="ftco-section ftco-no-pt bg-light" >
     	<div class="container">
     		<div class="row no-gutters">
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="<?php echo $form_action ?>" class="request-form ftco-animate bg-primary" method="post">
+	  						<form id="myForm" action="xulydatxe.php" class="request-form ftco-animate bg-primary" method="post">
 		          		<h2>Chuyến đi của bạn</h2>
 
                   <div class="form-group">
-			    					<input name="TX_MA
-                    " type="hidden" class="form-control" placeholder="">
+			    					<input name="TX_MA" type="hidden" class="form-control" value="$" placeholder="">
 			    				</div>
-
 			    				<div class="form-group">
 			    					<label for="" class="label">Vị trí của bạn</label>
 			    					<input name="diemdi" type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
+                    <a id="showMapButton">Hiển thị Bản đồ</a>
+                    <style>
+                      /* Hiển thị modal khi cần */
+                            .modal {
+                                display: none;
+                                position: fixed;
+                                border-radius: 20px;
+                                z-index: 999;
+                                left: 50%;
+                                top: 50%;
+                                transform: translate(-50%, -50%);
+                                width: 70%;
+                                height: 80%;
+                                overflow: auto;
+                                background-color: #fff;
+                            }
+
+                            /* Nội dung modal */
+                            .modal-content {
+                                background-color: #fff;
+                                margin: 15% auto;
+                                padding: 20px;
+                                border: 1px solid #888;
+                                width: 80%;
+                            }
+
+                            /* Đóng modal nếu cần */
+                            .close {
+                                margin: 15px;
+                                float: right;
+                                cursor: pointer;
+                            }
+
+                    </style>
+                    <script>
+                      var modal = document.getElementById("mapContainer");
+                      document.getElementById("showMapButton").addEventListener("click", function() {
+                          modal.style.display = "block";
+                      });
+                      document.getElementById("close").addEventListener("click", function() {
+                        modal.style.display = "none";
+                      });
+                    </script>
+                  </div>
                   
+
+
 			    				<div class="form-group">
 			    					<label for="" class="label">Ví trí muốn đến</label>
 			    					<input type="text" name="diemden" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
-			    				<div class="d-flex">
-			    					<!-- <div class="form-group mr-2">
-			                <label for="" class="label">Ngày xuất phát</label>
-			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-			              </div> -->
-			              <!-- <div class="form-group ml-2">
-			                <label for="" class="label">Ngày về</label>
-			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-			              </div> -->
-		              </div>
-		              <div class="form-group">THỜI GIAN ĐÓN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </label>
+                    <button id="pinLocationButton">Ghim Địa Điểm</button>
+                    <!-- <script src="mapdatxe.js"></script>
+                    <div id="mapContainer" style="display: none; width: 200px; height: 200px;"></div> -->
+                  </div>
+                <script>
+                // Mã JavaScript hiển thị bản đồ
+                  //     pinLocationButton.addEventListener('click', function () {
+                  //     // Thay đổi action của biểu mẫu để đến trang index.php thay vì xulydatxe.php
+                  //     myForm.action = 'index.php';
+                  // });
+
+                // Mã JavaScript xử lý sự kiện click nút "Ghim Địa Điểm"
+                const pinLocationButton = document.getElementById('pinLocationButton');
+                const mapContainer = document.getElementById('myForm');
+
+                pinLocationButton.addEventListener('click', function () {
+                    // Thay đổi hiển thị của phần tử chứa bản đồ thành "block" khi nút được nhấp vào
+                   myForm.action = 'index.php';
+                });
+                </script>
+
+
+			    			   <div class="form-group">THỜI GIAN ĐÓN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </label>
 		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
 		              </div>
 			            <div class="form-group">
-			              <button type="submit" name ="datxe" class="btn btn-secondary py-3 px-4">Thuê xe ngay</button>
+			              <input type="submit" name ="datxe" value="Thuê xe ngay" class="btn btn-secondary py-3 px-4">
 			            </div>
-
-
-
-
 			    			</form>
 	  					</div>
               <?php
@@ -187,6 +255,7 @@ $activate = "index";
 	  				</div>
 				</div>
   		</div>
+      <script src="js/map_index.js"></script>
     </section>
 
 
@@ -202,7 +271,7 @@ $activate = "index";
     			<div class="col-12">
 					<div class="row">
 						<div class="col-6">
-							<div id="map" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+							<div id="map" class="mt-4 map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
 								<div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>					
 							</div>
 							<div class="leaflet-control-container">
@@ -210,7 +279,6 @@ $activate = "index";
 								<div class="leaflet-bottom leaflet-left"></div>
 								<div class="leaflet-bottom leaflet-right"></div>
 							</div>
-							<script src="js/map_index.js"></script>
 						</div>
 						<div class="col-6">
               <?php

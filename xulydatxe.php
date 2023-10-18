@@ -27,45 +27,58 @@ $activate = "xulydatxe";
         <div class="row">
             <div class="col-md-4 text-center">
                 <div class="services services-2 w-100">
-                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+                    <div class="icon d-flex align-items-center justify-content-center"><span class="far fa-check-circle fa-lg"></span></div>
                     <div class="text w-100">
                         <h3 class="heading mb-2">Đã đặt xe</h3>
                         <!-- Nội dung PHP của bạn -->
-                        <?php 
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "taxi";
+        <?php 
+        // $servername = "localhost";
+        // $username = "root";
+        // $password = "";
+        // $dbname = "taxi";
 
-        // Tạo kết nối
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        // // Tạo kết nối
+        // $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Kiểm tra kết nối
-        if ($conn->connect_error) {
-            die("Kết nối thất bại: " . $conn->connect_error);
-        }
-
-        $chuyenxeID = 1; // ID của chuyến đi bạn muốn xem thông tin chi tiết
-
-        $sql = "SELECT chuyenxe.*, taixe.* FROM chuyenxe
-                JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
-                WHERE chuyenxe.CX_MA = $chuyenxeID";
+        // // Kiểm tra kết nối
+        // if ($conn->connect_error) {
+        //     die("Kết nối thất bại: " . $conn->connect_error);
+        // }
+        $sql = "insert into chuyenxe value()";
+         // ID của chuyến đi bạn muốn xem thông tin chi tiết
+        $matx = $_POST['TX_MA'];
+        $sql = "SELECT chuyenxe.*, taixe.*, thoidiem.* FROM chuyenxe
+        JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
+        JOIN thoidiem ON thoidiem.TD_DATE = chuyenxe.TD_DATE
+        WHERE taixe.TX_MA = ?";
+                
 
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
 
+            $chuyenxeID = $_POST['CX_MA'];
             // Lấy thông tin chuyến đi
             $thongTinChuyenDi = $row['CX_MA'];
+              //So KM
+              $soKM =$row['CX_SOKM'];
             // Lấy thông tin tài xế
             $thongTinTaiXe = $row['TX_TEN'];
+            //Thoi điểm
+            $thoidiem = $row['TD_DATE'];
+          
 
             // In thông tin chuyến đi và tài xế
             echo "Thông tin chuyến đi: $thongTinChuyenDi<br>";
+            echo "Số KM chuyến đi: $soKM<br>";  
             echo "Thông tin tài xế: $thongTinTaiXe<br>";
-        } else {
-            echo "Không tìm thấy chuyến đi có ID $chuyenxeId";
+            echo "Thời điểm: $thoidiem<br>";
+         
+        } 
+        else 
+        {
+            echo "Không tìm thấy chuyến đi có ID $chuyenxeID";
         }
 
         $conn->close();
@@ -85,7 +98,7 @@ $activate = "xulydatxe";
 
             <div class="col-md-4 text-center">
                 <div class="services services-2 w-100">
-                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+                    <div class="icon d-flex align-items-center justify-content-center"><span class="fas fa-laugh-beam"></span></div>
                     <div class="text w-100">
                         <h3 class="heading mb-2">Đã hoàn thành <ion-icon name="checkmark-outline"></ion-icon></h3>
                     </div>
@@ -94,56 +107,6 @@ $activate = "xulydatxe";
         </div>
     </div>
 </section>
-
-
-
-<!-- <section class="ftco-section">
-    <div class="container">
-        <div class="row justify_content-center mb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <h2 class="mb-3">Theo dõi chuyến xe</h2>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4 text-center">
-                <div class="services services-2 w-100">
-                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-                    <div class="text w-100">
-                        <h3 class="heading mb-2">Đã đặt xe</h3> -->
-                        <!-- Nội dung PHP của bạn -->
-     
-                    <!-- </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 text-center">
-                <div class="services services-2 w-100">
-                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-                    <div class="text w-100">
-                        <h3 class="heading mb-2">Đang thực hiện</h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 text-center">
-                <div class="services services-2 w-100">
-                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-                    <div class="text w-100">
-                        <h3 class="heading mb-2">Đã hoàn thành chuyến xe</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        Đường đứt khúc 
-        <div class="row justify_content-center">
-            <div class="col-md-4 text-center">
-                <span style="border-top: 2px dashed cornsilk; display: block; margin-top: 20px;"></span>
-            </div>
-        </div> 
-    </div>
-</section> -->
 
 
  
