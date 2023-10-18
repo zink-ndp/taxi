@@ -3,11 +3,13 @@ $activate = "index";
 @include('header.php');
 ?>
   <?php 
-    if ( isset($_POST['TX_MA']) ) {
+    if ( isset($_POST['tx_ma']) ) {
       $form_action = "xulydatxe.php";
+      $matx =$_POST['tx_ma'] ;
     } 
     else {
       $form_action = "chon_taixe.php";
+      $matx = '';
     }
   ?>  
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
@@ -42,8 +44,7 @@ $activate = "index";
 		          		<h2>Chuyến đi của bạn</h2>
 
                   <div class="form-group">
-			    					<input name="TX_MA
-                    " type="hidden" class="form-control" placeholder="">
+			    					<input name="TX_MA" type="hidden" class="form-control" value="$" placeholder="">
 			    				</div>
 
 			    				<div class="form-group">
