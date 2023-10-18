@@ -13,9 +13,9 @@ include("connect.php");
     // $stmt->execute();
     // $result = $stmt->get_result();
 
-    echo $sql ;
-    echo $username ;
-    echo $password ;
+    // echo $sql ;
+    // echo $username ;
+    // echo $password ;
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -40,12 +40,18 @@ include("connect.php");
             
             exit();
         } else {
-          
-
-            echo "Nhập sai mật khẩu.";
+            echo '<script language="javascript">
+            alert("Nhập sai mật khẩu.");
+            window.location.href = "dangnhap.php"; // Chuyển hướng lại trang đăng nhập
+            </script>';
+            exit();
         }
     } else {
-        echo "Tên đăng nhập không tồn tại.";
+        echo '<script language="javascript">
+        alert("Tên đăng nhập không tồn tại.");
+        window.location.href = "dangnhap.php"; // Chuyển hướng lại trang đăng nhập
+        </script>';
+        exit();
     }
 
 ?>
