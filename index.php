@@ -38,7 +38,7 @@ $activate = "index";
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="<?php $form_action ?>" class="request-form ftco-animate bg-primary" method="post">
+	  						<form action="<?php echo $form_action ?>" class="request-form ftco-animate bg-primary" method="post">
 		          		<h2>Chuyến đi của bạn</h2>
 
                   <div class="form-group">
@@ -69,7 +69,7 @@ $activate = "index";
 		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
 		              </div>
 			            <div class="form-group">
-			              <input type="submit" name ="datxe" value="Thuê xe ngay" class="btn btn-secondary py-3 px-4">
+			              <button type="submit" name ="datxe" class="btn btn-secondary py-3 px-4">Thuê xe ngay</button>
 			            </div>
 
 
@@ -142,7 +142,7 @@ $activate = "index";
                   $sql = "SELECT * FROM taixe tx
                           join phutrach pt on pt.TX_MA = tx.TX_MA
                           join xe x on x.X_MA = pt.X_MA
-                          where tx.TX_MA = 1 and (pt.TD_DATE, tx.TX_MA) IN (
+                          where tx.TX_MA = $matx and (pt.TD_DATE, tx.TX_MA) IN (
                             select max(TD_DATE), TX_MA from phutrach GROUP BY TX_MA
                           )";
                   $rs = querySqlwithResult($conn, $sql);
@@ -157,13 +157,25 @@ $activate = "index";
                         <div style="width: 8rem; height: 8rem">
                           <img src="images/taixe/<?php echo $anhtx; ?>" alt="" class="fit-image">
                         </div>
-                        <?php echo $tt['TX_TEN'] ?>
+                        <span class="mt-4">
+                          <?php echo $tt['TX_TEN'] ?>
+                        </span>
                       </div>
-                      <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                      <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                          <span>
+                            0 <i style="color: #f7d219;" class="fas fa-star"></i> 
+                          </span>
+                          <span>
+                            Số chuyến: 23
+                          </span>
+                      </div>
+                      <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                         <div style="width: 8rem; height: 8rem">
                           <img src="images/xe/<?php echo $tt['X_HINHANH']; ?>" alt="" class="fit-image" style="border-radius: 100% !important;">
                         </div>
-                        <?php echo $tt['X_MOTA'] ?>
+                        <span class="mt-4">
+                          <?php echo $tt['X_MOTA'] ?>
+                        </span>
                       </div>
                     </div>
                   </div>
