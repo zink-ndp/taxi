@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-<!-- chat.html  21 Nov 2019 03:50:11 GMT -->
+<!-- email-inbox.html  21 Nov 2019 03:50:57 GMT -->
 <?php
   include("connect.php");
   include('head.php');
@@ -173,77 +173,127 @@
         <section class="section">
           <div class="section-body">
             <div class="row">
-            <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4>Danh sách tài xế</h4>
-            </div>
-            <div class="card-body">
-    <div class="table-responsive">
-        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
-            <thead>
-                <tr><th>ID</th>
-                    <th>Tên</th>
-                    <th>Bằng lái</th>
-                    <th>Số điện thoại</th>
-                    <th>Tên đăng nhập</th>
-                    <th>Thời điểm</th>
-                    <th>Mã xe</th>
-                    <th>Giới tính</th>
-                    <th>Hình ảnh</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Thực hiện truy vấn SQL để lấy thông tin từ bảng nhanvien
-                $sql = "SELECT taixe.TX_MA, taixe.TX_TEN, taixe.TX_BANGLAI, taixe.TX_SDT, taixe.TX_USERNAME, phutrach.TD_DATE, phutrach.X_MA, taixe.TX_GIOITINH, taixe.TX_HINHANH
-                FROM taixe
-                JOIN phutrach ON taixe.TX_MA = phutrach.TX_MA
-                ORDER BY taixe.TX_MA";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row["TX_MA"] . "</td>";
-                        echo "<td>" . $row["TX_TEN"] . "</td>";
-                        echo "<td>" . $row["TX_BANGLAI"] . "</td>";
-                        echo "<td>" . $row["TX_SDT"] . "</td>"; 
-                        echo "<td>" . $row["TX_USERNAME"] . "</td>";
-                        echo "<td>" . $row["TD_DATE"] . "</td>";                        
-                        echo "<td>" . $row["X_MA"] . "</td>";                                               
-                        // Hiển thị giới tính
-                        echo "<td>";
-                        if ($row["TX_GIOITINH"] == 1) {
-                            echo "Nam";
-                        } elseif ($row["TX_GIOITINH"] == 0) {
-                            echo "Nữ";
-                        } else {
-                            echo "Không xác định";
-                        }
-                        echo "</td>";
-                        echo '<td>';
-            if (!empty($row["TX_HINHANH"])) {
-                echo '<img src="' . $row["TX_HINHANH"] . '" alt="Hình ảnh tài xế" width="100">';
-            } else {
-                echo 'Chưa có hình bé ơi';
-            }
-            echo '</td>';
-            echo "</tr>";
-            
-        }
-        $totalEmployees = $result->num_rows; // Đếm tổng số khách hàng
-        echo "<h5>Tổng số tài xế: $totalEmployees</h5>"; // Hiển thị tổng số khách hàng
-    } else {
-        echo "Không có dữ liệu nhân viên.";
-    }
-                ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-        </div>
-    </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                  <form method="POST" action="themtaixe.php">
+                    <div class="card-header">
+                      <h4>Thêm người tài xế</h4>
+                    </div>
+                    <div class="card-body">
+                      
+                      <div class="form-group">
+                        <label>Họ và tên</label>
+                        <input type="text" class="form-control" id="ho_ten" name="ho_ten" pattern="[A-Za-z\s]+" required="">
+                      </div>
+                      <div class="form-group">
+                        <label>Bẳng lái</label>
+                        <input type="text" class="form-control" id="dia_chi" name="dia_chi" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="tel" class="form-control" id="so_dien_thoai" name="so_dien_thoai" pattern="\d+" required>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label>Giới tính</label>
+                        <select class="form-control selectric" name="TX_GIOITINH">
+                        <option value="1">Nam</option>
+                        <option value="0">Nữ</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Hình ảnh</label>
+                        <input type="file" class="form-control" id="so_dien_thoai" name="so_dien_thoai" pattern="\d+" required>
+                      </div>
+                    </div>
+                    <div class="card-footer text-right">
+                      <button class="btn btn-primary" class="mt-2">Thêm tài xế</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                  <form method="POST" action="capnhattaixe.php">
+                    <div class="card-header">
+                      <h4>Cập nhật tài xế</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Họ và tên</label>
+                        <input type="text" class="form-control" id="TX_TEN" name="TX_TEN" pattern="[A-Za-z\s]+" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Bẳng lái</label>
+                        <input type="text" class="form-control" id="TX_BANGLAI" name="TX_BANGLAI" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="tel" class="form-control" id="TX_SDT" name="TX_SDT" pattern="\d+" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Giới tính</label>
+                        <select class="form-control selectric" name="TX_GIOITINH">
+                        <option value="1">Nam</option>
+                        <option value="0">Nữ</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Hình ảnh</label>
+                        <input type="file" class="form-control" id="so_dien_thoai" name="so_dien_thoai" pattern="\d+" required>
+                      </div>
+                    </div>
+                    <div class="card-footer text-right">
+                      <button class="btn btn-success" class="mt-2">Lưu thay đổi</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                <form method="POST" action="xoataixe.php">
+                    <div class="card-header">
+                      <h4>Xóa tài xế</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="telephone" class="form-control" id="ID" name="TX_SDT" required="">
+                      </div>
+                    </div>
+                    <div class="card-footer text-right">
+                      <button class="btn btn-danger">Xóa tài xế</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                <form method="POST" action="xoataixe.php">
+                    <div class="card-header">
+                      <h4>Danh sách xe chưa có tài xế</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Danh sách</label>
+                        <?php
+                          $sql = "SELECT xe.* FROM xe 
+                          JOIN phutrach ON phutrach.X_MA = xe.X_MA 
+                          WHERE phutrach.X_MA = xe.X_MA";
+                          $result = $conn->query($sql);
+                          if ($result) {
+                            while ($row = $result->fetch_assoc()) {
+                        
+                            echo $row['X_MA'];
+                        
+                            }
+                          }
+                        ?>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -352,7 +402,6 @@
   <script src="assets/js/app.min.js"></script>
   <!-- JS Libraies -->
   <!-- Page Specific JS File -->
-  <script src="assets/js/page/chat.js"></script>
   <!-- Template JS File -->
   <script src="assets/js/scripts.js"></script>
   <!-- Custom JS File -->
@@ -360,5 +409,5 @@
 </body>
 
 
-<!-- chat.html  21 Nov 2019 03:50:12 GMT -->
+<!-- email-inbox.html  21 Nov 2019 03:50:58 GMT -->
 </html>
