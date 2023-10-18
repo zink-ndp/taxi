@@ -4,7 +4,7 @@ include("connect.php");
 
 if (isset($_POST["dangnhap"])) {
     $username = $_POST["username"];
-    $password = $_POST["psw"];
+    $password = md5($_POST["psw"]);
 
     $sql = "SELECT * FROM khachhang WHERE KH_USERNAME = ?";
 

@@ -1,7 +1,5 @@
 <?php
 
-    // require 'functions.php';
-
     function querySql($conn, $sql){
         $conn->query($sql);
     }

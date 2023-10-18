@@ -12,7 +12,7 @@ $activate = "index";
   ?>  
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
-      <div class="container">
+      <div class="container" id="datxe">
         <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
           <div class="col-lg-8 ftco-animate">
           	<div class="text w-100 text-center mb-md-5 pb-md-5">
@@ -32,7 +32,7 @@ $activate = "index";
       </div>
     </div>
 
-     <section class="ftco-section ftco-no-pt bg-light">
+     <section class="ftco-section ftco-no-pt bg-light" >
     	<div class="container">
     		<div class="row no-gutters">
     			<div class="col-md-12	featured-top">
@@ -77,59 +77,101 @@ $activate = "index";
 
 			    			</form>
 	  					</div>
-	  					<div class="col-md-8 d-flex align-items-center">
-	  						<div class="services-wrap rounded-right w-100">
-	  							<h3 class="heading-section mb-4">Cách để thuê một chiếc taxi tốt</h3>
-	  							<div class="row d-flex mb-4">
-					          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-					            <div class="services w-100 text-center">
-				              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-				              	<div class="text w-100">
-					                <h3 class="heading mb-2">Chọn địa điểm đón của bạn</h3>
-				                </div>
-					            </div>      
-					          </div>
-					          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-					            <div class="services w-100 text-center">
-				              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
-				              	<div class="text w-100">
-					                <h3 class="heading mb-2">Chọn giao dịch tốt nhất</h3>
-					              </div>
-					            </div>      
-					          </div>
-					          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-					            <div class="services w-100 text-center">
-				              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
-				              	<div class="text w-100">
-					                <h3 class="heading mb-2">Đặt thuê xe bạn chọn</h3>
-					              </div>
-					            </div>      
-					          </div>
-					        </div>
-					        <button onclick="getLocation()" class="btn btn-primary py-3 px-4">Đặt một chiếc xe hoàn hảo</button>
-							<script>
-								function getLocation() {
-									if (navigator.geolocation) {
-										navigator.geolocation.getCurrentPosition(showPosition);
-									} else {
-										document.getElementById("location").innerHTML = "Trình duyệt của bạn không hỗ trợ định vị.";
-									}
-								}		
-								function showPosition(position) {
-									var latitude = position.coords.latitude;
-									var longitude = position.coords.longitude;
-									// document.getElementById("location").innerHTML = "Vĩ độ: " + latitude + "<br> Kinh độ: " + longitude;
-									// alert("Vĩ độ: " + latitude + "<br> Kinh độ: " + longitude)
-									// Gửi vị trí đến máy chủ PHP
-									// var xhr = new XMLHttpRequest();
-									// xhr.open("POST", "chon_taixe.php", true);
-									// xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-									// xhr.send("latitude=" + latitude + "&longitude=" + longitude);
-								}
+              <?php
+              
+                if (!isset($_POST['tx_ma'])){
+              ?>
+              
+                <div class="col-md-8 d-flex align-items-center">
+                  <div class="services-wrap rounded-right w-100">
+                    <h3 class="heading-section mb-4">Cách để thuê một chiếc taxi tốt</h3>
+                    <div class="row d-flex mb-4">
+                      <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                        <div class="services w-100 text-center">
+                          <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+                          <div class="text w-100">
+                            <h3 class="heading mb-2">Chọn địa điểm đón của bạn</h3>
+                          </div>
+                        </div>      
+                      </div>
+                      <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                        <div class="services w-100 text-center">
+                          <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
+                          <div class="text w-100">
+                            <h3 class="heading mb-2">Chọn giao dịch tốt nhất</h3>
+                          </div>
+                        </div>      
+                      </div>
+                      <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                        <div class="services w-100 text-center">
+                          <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
+                          <div class="text w-100">
+                            <h3 class="heading mb-2">Đặt thuê xe bạn chọn</h3>
+                          </div>
+                        </div>      
+                      </div>
+                    </div>
+                    <button onclick="getLocation()" class="btn btn-primary py-3 px-4">Đặt một chiếc xe hoàn hảo</button>
+                <script>
+                  function getLocation() {
+                    if (navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition(showPosition);
+                    } else {
+                      document.getElementById("location").innerHTML = "Trình duyệt của bạn không hỗ trợ định vị.";
+                    }
+                  }		
+                  function showPosition(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    // document.getElementById("location").innerHTML = "Vĩ độ: " + latitude + "<br> Kinh độ: " + longitude;
+                    // alert("Vĩ độ: " + latitude + "<br> Kinh độ: " + longitude)
+                    // Gửi vị trí đến máy chủ PHP
+                    // var xhr = new XMLHttpRequest();
+                    // xhr.open("POST", "chon_taixe.php", true);
+                    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    // xhr.send("latitude=" + latitude + "&longitude=" + longitude);
+                  }
 
-							</script>
-	  						</div>
-	  					</div>
+                </script>
+                  </div>
+                </div>
+              
+              <?php
+                } else {
+                  $matx = $_POST['tx_ma'];
+                  $sql = "SELECT * FROM taixe tx
+                          join phutrach pt on pt.TX_MA = tx.TX_MA
+                          join xe x on x.X_MA = pt.X_MA
+                          where tx.TX_MA = 1 and (pt.TD_DATE, tx.TX_MA) IN (
+                            select max(TD_DATE), TX_MA from phutrach GROUP BY TX_MA
+                          )";
+                  $rs = querySqlwithResult($conn, $sql);
+                  $tt = $rs->fetch_assoc();
+                  if ($tt['TX_HINHANH']==NULL) $anhtx = "default.png"; else $anhtx = $tt['TX_HINHANH'];
+              ?>
+                <div class="col-md-8 d-flex align-items-center">
+                  <div class="services-wrap rounded-right w-100">
+                    <h3 class="heading-section mb-4">Thông tin tài xế đang chọn</h3>
+                    <div class="row d-flex mb-4">
+                      <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                        <div style="width: 8rem; height: 8rem">
+                          <img src="images/taixe/<?php echo $anhtx; ?>" alt="" class="fit-image">
+                        </div>
+                        <?php echo $tt['TX_TEN'] ?>
+                      </div>
+                      <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                        <div style="width: 8rem; height: 8rem">
+                          <img src="images/xe/<?php echo $tt['X_HINHANH']; ?>" alt="" class="fit-image" style="border-radius: 100% !important;">
+                        </div>
+                        <?php echo $tt['X_MOTA'] ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <?php
+                }
+              
+              ?>
 	  				</div>
 				</div>
   		</div>
@@ -159,28 +201,46 @@ $activate = "index";
 							<script src="js/map_index.js"></script>
 						</div>
 						<div class="col-6">
-							<div class="container p-3 py-4 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3);">
+              <?php
+                $sql = "SELECT tx.tx_ma, tx.tx_ten, x.x_ma, x.x_mota, x.x_hinhanh
+                        FROM trangthai t 
+                        JOIN phutrach pt on pt.TX_MA = t.TX_MA
+                        JOIN xe x on x.X_MA = pt.X_MA
+                        JOIN taixe tx on tx.TX_MA = pt.TX_MA
+                        WHERE t.TT_TRANGTHAI = 1 
+                              AND(t.TX_MA, t.TD_date) IN (
+                                  SELECT t.TX_MA, MAX(t.TD_date)
+                                  FROM trangthai t
+                                  GROUP BY t.TX_MA
+                              )
+                        LIMIT 4;";
+                $rs = querySqlwithResult($conn, $sql);
+                $xe = $rs->fetch_all(MYSQLI_ASSOC);
+                foreach ($xe as $x){
+              ?>
+							<div class="container p-3 py-3 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3);">
                 <div class="card-choose">
                   <div style="width: 5rem; height: 5rem;" >
-                    <img src="images/car-3.jpg" class="fit-image" alt="">
+                    <img src="images/xe/<?php echo $x['x_hinhanh'] ?>" class="fit-image" alt="">
                   </div>
                   <div class="card-choose-content">
                       <span>
-                        Tài xế: <span style="color: green; font-size: 18px;">Trần Ngọc Di</span>
+                        Tài xế: <span style="color: green; font-size: 18px;"><?php echo $x['tx_ten'] ?></span>
                       </span>
+                      <?php echo $x['x_mota'] ?>
                       <span>
                         Đánh giá: 0 <i style="color: #f7d219;" class="fas fa-star"></i> 
                       </span> 
                   </div>
-                  <form action="#" method="post">
-                    <input type="hidden" name="tx_ma" value="1">
-                    <button class="btn btn-success">Đặt ngay</button>
+                  <form action="#datxe" method="post">
+                    <input type="hidden" name="tx_ma" value="<?php echo $x['tx_ma'] ?>">
+                    <button type="submit" class="btn btn-success">Đặt ngay</button>
                   </form>
                 </div>
 							</div>
-							<div class="container p-3 py-4 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3);">
-								Test2
-							</div>
+              <?php
+                }
+              ?>
 						</div>
 					</div>
     			</div>

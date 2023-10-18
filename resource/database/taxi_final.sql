@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 10, 2023 lúc 01:21 PM
+-- Thời gian đã tạo: Th10 18, 2023 lúc 05:05 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.2.4
+-- Phiên bản PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -180,12 +180,12 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`KH_MA`, `QH_MA`, `KH_TEN`, `KH_SDT`, `KH_EMAIL`, `KH_USERNAME`, `KH_PASSWORD`, `KH_GIOITINH`) VALUES
-(1, 1, 'Duy Chủ Tịch', '0939826024', 'duybii922002@gmail.com', 'duylottop', '123', 1),
-(2, 1, 'Nguyễn Đỗ Phúc Vinh', '0123456789', 'vinhtop8@gmail.com', 'vinhtop1', '123', 1),
-(3, 1, 'Nguyễn Thị Phương Thư', '0987654321', 'pthuxinhdep@gmail.com', 'phuongthu', '123', 0),
-(5, 1, 'Trần Thanh Kiệp', '0135792468', 'kiep@gmail.com', 'kiep', '123', 1),
-(6, 14, 'D', '0123456789', 'duybii922002@gmail.com', 'd', '202cb962ac59075b964b07152d234b', 1),
-(7, 1, 'V', '0123456789', 'vinhtop8@gmail.com', 'v', '202cb962ac59075b964b07152d234b', 1),
+(1, 1, 'Duy Chủ Tịch', '0939826024', 'duybii922002@gmail.com', 'duylottop', '202cb962ac59075b964b07152d234b70\r\n', 1),
+(2, 1, 'Nguyễn Đỗ Phúc Vinh', '0123456789', 'vinhtop8@gmail.com', 'vinhtop1', '202cb962ac59075b964b07152d234b70\r\n', 1),
+(3, 1, 'Nguyễn Thị Phương Thư', '0987654321', 'pthuxinhdep@gmail.com', 'phuongthu', '202cb962ac59075b964b07152d234b70\r\n', 0),
+(5, 1, 'Trần Thanh Kiệp', '0135792468', 'kiep@gmail.com', 'kiep', '202cb962ac59075b964b07152d234b70\r\n', 1),
+(6, 14, 'D', '0123456789', 'duybii922002@gmail.com', 'd', '202cb962ac59075b964b07152d234b70\r\n', 1),
+(7, 1, 'V', '0123456789', 'vinhtop8@gmail.com', 'v', '202cb962ac59075b964b07152d234b70\r\n', 1),
 (8, 3, 'Yii', '0939826024', 'duybii922002@gmail.com', 'Duy', '202cb962ac59075b964b07152d234b70', 1),
 (9, 1, 'Kiệp Lặc', '0147258369', 'kiep123@gmail.com', 'kieplac', '202cb962ac59075b964b07152d234b70', 0);
 
@@ -466,20 +466,16 @@ CREATE TABLE `xe` (
 --
 
 INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`, `X_MOTA`, `X_HINHANH`) VALUES
-(1, 1, '65A-12345', 'Mitsubishi Mirage màu xám', ''),
-(2, 1, '65A-12346', 'Hyundai Grand i10 màu trắng', ''),
-(3, 1, '65A-12347', 'Ford Fiesta màu trắng', ''),
-(4, 2, '65A-12348', 'Toyota Vios màu đen', ''),
-(5, 2, '65A-12349', 'Honda City màu trắng', ''),
-(6, 2, '65A-12340', 'Hyundai Accent màu đỏ', ''),
-(7, 3, '65A-13345', 'Toyota Corolla Cross màu đen', ''),
-(8, 3, '65A-13445', 'Honda CR-V màu xám', ''),
-(9, 4, '65A-13455', 'Mitsubishi Xpander màu đen', ''),
-(10, 4, '65A-12445', 'Toyota Avanza màu đen', ''),
-(11, 3, '65A-11111', 'Đây là xe của Vinh Top 8', 'my.jpg'),
-(12, 1, '65A-99999', 'Đây là xe của Yii Chủ Tịch', ''),
-(13, 1, '65A-99999', 'Đây là xe của Yii Chủ Tịch', ''),
-(14, 1, '65A-99999', 'Đây là xe của Yii Chủ Tịch', '');
+(1, 1, '65A-12345', 'Mitsubishi Mirage màu xám', 'xe1.jpg'),
+(2, 1, '65A-12346', 'Hyundai Grand i10 màu trắng', 'xe2.jpg'),
+(3, 1, '65A-12347', 'Ford Fiesta màu trắng', 'xe3.jpg'),
+(4, 2, '65A-12348', 'Toyota Vios màu đen', 'xe4.jpg'),
+(5, 2, '65A-12349', 'Honda City màu trắng', 'xe5.jpg'),
+(6, 2, '65A-12340', 'Hyundai Accent màu đỏ', 'xe6.jpg'),
+(7, 3, '65A-13345', 'Toyota Corolla Cross màu đen', 'xe7.jpg'),
+(8, 3, '65A-13445', 'Honda CR-V màu xám', 'xe8.jpg'),
+(9, 4, '65A-13455', 'Mitsubishi Xpander màu đen', 'xe9.jpg'),
+(10, 4, '65A-12445', 'Toyota Avanza màu đen', 'xe10.jpg');
 
 --
 -- Chỉ mục cho các bảng đã đổ
