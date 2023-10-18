@@ -519,8 +519,8 @@ pre {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px; }
+  margin-right: -20px;
+  margin-left: 20px; }
 
 .no-gutters {
   margin-right: 0;
@@ -1740,7 +1740,7 @@ select.form-control[size], select.form-control[multiple] {
 
 textarea.form-control {
   height: auto; }
-
+ 
 .form-group {
   margin-bottom: 1rem; }
 
@@ -8179,6 +8179,7 @@ body {
   font-size: 16px;
   line-height: 1.8;
   font-weight: 400;
+  text-align: center;
   color: #999999; }
   body.menu-show {
     overflow: hidden;
