@@ -72,7 +72,7 @@
                       <a href="suathongtin.php" class="nav-link">Hi, <?php echo $_SESSION['ten'] ?></a>
                       <ul class="dropdown-menu">
                           <li><a href="suathongtin.php" class="dropdown-item">Thông tin cá nhân</a></li>
-                          <li><a href="?.php" class="dropdown-item">Đổi mật khẩu</a></li>
+                          <li><a href="doimatkhau.php" class="dropdown-item">Đổi mật khẩu</a></li>
                           <li><hr class="dropdown-divider"></li>
                           <li><a href="dangxuat.php" class="dropdown-item">Đăng xuất</a></li>
                       </ul>

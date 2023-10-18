@@ -1,7 +1,7 @@
 <?php
 
     require 'connect.php';
-    require 'functions.php';
+    // require 'functions.php';
 
 // Kiểm tra nếu biểu mẫu đã được gửi
 if (isset($_POST["dangky"])) {

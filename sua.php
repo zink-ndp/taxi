@@ -1,35 +1,49 @@
+
 <?php
+require 'connect.php'; // Bao gồm tệp kết nối CSDL
 
-    require 'connect.php';
-    require 'functions.php';
-
-// Kiểm tra nếu biểu mẫu đã được gửi
-if (isset($_POST["suathongtin"])) {
-    // Lấy dữ liệu từ biểu mẫu
+if (isset($_POST["luuthongtin"])) {
     $ten = $_POST["ten"];
     $email = $_POST["email"];
-    $password = $_POST["psw"];
+    $sdt = $_POST["sdt"];
 
+    // Đảm bảo biến phiên ("session") đã được thiết lập
+    if (isset($_SESSION["username"])) {
+        $username = $_SESSION["username"];
+
+    //     // Sử dụng câu lệnh chuẩn bị ("prepared statements") để cập nhật thông tin người dùng
+    //     $update_query = "UPDATE khachhang SET KH_TEN = ?, KH_SDT = ?, KH_EMAIL = ? WHERE KH_USERNAME = ?";
+    //     $stmt = $conn->prepare($update_query);
+    //     $stmt->bind_param("ssss", $ten, $sdt, $email, $username);
+
+    //     if ($stmt->execute()) {
+    //         echo '<script language="javascript">';
+    //         echo 'alert("Thông tin cá nhân đã được cập nhật thành công.")';
+    //         echo '</script>';
+    //     } else {
+    //         echo "Lỗi khi cập nhật thông tin cá nhân: " . $stmt->error;
+    //     }
+    // } else {
+    //     echo "Biến phiên 'username' chưa được thiết lập.";
+    // }
+
+    try {
+        // Thực hiện câu lệnh SQL
+        $update_query = "UPDATE khachhang SET KH_TEN = ?, KH_SDT = ?, KH_EMAIL = ? WHERE KH_USERNAME = ?";
+        $stmt = $conn->prepare($update_query);
+        $stmt->bind_param("ssss", $ten, $sdt, $email, $username);
     
-    // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-    $hashed_password = md5($password);
-    
-    $nextId = getMaxId($conn,'KH_MA','khachhang')+1;
-
-    // Tạo câu lệnh SQL để chèn dữ liệu vào bảng khachhang (loại bỏ KH_MA)
-    $sql = "INSERT INTO khachhang VALUES ($nextId, '$ten','$email','$hashed_password')";
-
-    // Thực hiện câu lệnh SQL và kiểm tra kết quả
-    if ($conn->query($sql) === TRUE) {
-        echo '<script language="javascript">
-            alert("lưu thành công!");
-            window.location.href = "index.php"; // Chuyển hướng sau khi đăng ký thành công
-            </script>';
-    } else {
-        echo "Lỗi khi thực hiện đăng ký: " . $conn->error;
+        if ($stmt->execute()) {
+            echo '<script language="javascript">';
+            echo 'alert("Thông tin cá nhân đã được cập nhật thành công.")';
+            echo '</script>';
+        } else {
+            echo "Lỗi khi cập nhật thông tin cá nhân: " . $stmt->error;
+        }
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
     }
-
-    // Đóng kết nối đến cơ sở dữ liệu
-    $conn->close();
+    
+}
 }
 ?>

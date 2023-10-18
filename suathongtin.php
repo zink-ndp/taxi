@@ -1,6 +1,6 @@
 <?php
 $activate = "contact";
-@include ('connect.php');
+// @include ('connect.php');
 @include('header.php');
 ?>
     
@@ -22,20 +22,19 @@ $activate = "contact";
 
           <div class="col-md-8 block-9 mb-md-5">
           <form class="row g-3 formdangky" action="suathongtin.php" method="POST">
-          <h1>Thông tin cá nhân</h1>
+          <h1 class="text-again: center;">Thông tin cá nhân</h1>
 
           <div class="col-md-12" >
-          <label for="inputAddress">Tên đăng nhập:<?php echo $_SESSION["username"]?>
-          </div></label>
-
-          <div class="col-md-12">
-              <label for="inputAddress" class="form-label">Họ và tên<span class="error">*</span> </label>
-              <input type="text" class="form-control"  value="<?php echo  $_SESSION["ten"] ?>" id="inputAddress" placeholder="Tên" name="ten">
-          </div>
+          <label for="inputAddress" class=" font-weight: bold"></label>Tên đăng nhập:<?php echo $_SESSION["username"]?>
+          </label></div>
 
           <div class="col-md-12">
               <label for="inputAddress" class="form-label">Email<span class="error">*</span> </label>
               <input type="email" class="form-control" id="email"  value="<?php echo $_SESSION["email"]?>" placeholder="Nhập địa chỉ email của bạn" name="email">
+          </div>
+          <div class="col-md-6">
+              <label for="inputAddress" class="form-label">Họ và tên<span class="error">*</span> </label>
+              <input type="text" class="form-control"  value="<?php echo  $_SESSION["ten"] ?>" id="inputAddress" placeholder="Tên" name="ten">
           </div>
 
           <div class="col-md-6">
