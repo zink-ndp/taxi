@@ -14,5 +14,5 @@ if ($conn->connect_error) {
 require 'functions.php';
 
 session_start();
-
+ 
 ?>

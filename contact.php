@@ -17,7 +17,7 @@ $activate = "contact";
 
     <section class="ftco-section contact-section">
       <div class="container">
-        <div class="row d-flex mb-5 contact-info">
+        <div class="row d-flex mb-5  contact-info">
         	<div class="col-md-4">
         		<div class="row mb-5">
 		          <div class="col-md-12">

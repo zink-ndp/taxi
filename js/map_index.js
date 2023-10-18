@@ -14,7 +14,7 @@ getLocation()
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         const map = L.map('map').setView([latitude, longitude], 13); //khu vực hiển thị theo vị trí hiện tại
-    
+     
         var marker = L.marker([latitude, longitude]).addTo(map); //đặt vị trí hiện tại của khách hàng
     
         var popup = L.popup()
@@ -25,18 +25,6 @@ getLocation()
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
         
-    
-        // MAP PHUONG THU
-
-        const mapdx = L.map('mapdx').setView([10.03, 105.77], 13); //khu vực hiển thị theo vị trí hiện tại
-        const tilesdx = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(mapdx)
-
-
-
-        // CHUNG
         
     }
 
