@@ -30,6 +30,31 @@ include('head.php');
                                         <a href="danhsachxe.php"><button class="btn btn-success">Hiện chi tiết danh sách
                                                 xe </button></a>
                                     </div>
+                                    <?php
+
+                                        // Truy vấn SQL để lấy dữ liệu từ cơ sở dữ liệu
+                                        $query = "SELECT TX_MA, TT_toadoX, TT_toadoY
+                                        FROM trangthai
+                                        WHERE (TX_MA, TD_date) IN (
+                                            SELECT TX_MA, MAX(TD_date)
+                                            FROM trangthai
+                                            GROUP BY TX_MA
+                                        )";
+                                        $result = mysqli_query($conn, $query);
+
+                                        // Khởi tạo một mảng PHP để chứa dữ liệu
+                                        $data = array();
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $data[] = $row;
+                                        }
+
+                                        // Chuyển đổi mảng PHP thành chuỗi JSON
+                                        $jsonData = json_encode($data);
+                                         ?>
+                                        <script>
+                                            var jsonData = <?php echo json_encode($data); ?>;
+                                        </script>
+
                                     <div class="card-body" >
                                             <div id="mapds"
                                             style="width: 100%; height: 80vh"

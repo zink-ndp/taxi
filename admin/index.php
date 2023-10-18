@@ -28,20 +28,7 @@
                         <div class="card-content">
                           <h5 class="font-15">Đơn hàng mới</h5>
                           <h2 class="mb-3 font-18">
-                          <?php                                   
-                                  $servername = "localhost";
-                                  $username = "root";
-                                  $password = "";
-                                  $dbname = "qlbanmicay";
-                                  $conn = new mysqli($servername, $username, $password, $dbname);
-                                  if ($conn->connect_error) {
-                                  die("Connection failed: " . $conn->connect_error);
-                                  }
-                                  $tongkh= "SELECT COUNT(MAHOADON) AS TONGKH FROM hoadon";
-                                  $result = mysqli_query($conn, $tongkh);
-                                  $tong1= $result->fetch_assoc();
-                                  echo $tong1["TONGKH"] ;
-                          ?>
+<!-- chưa code xong -->
                           </h2>
                           <p class="mb-0"><span class="col-green">10%</span> Tăng</p>
                         </div>
@@ -65,7 +52,7 @@
                         <div class="card-content">
                           <h5 class="font-15"> Khách Hàng</h5>
                           <h2 class="mb-3 font-18">
-                          <?php                                   
+                          <!-- <?php                                   
                                   $servername = "localhost";
                                   $username = "root";
                                   $password = "";
@@ -78,7 +65,7 @@
                                   $result = mysqli_query($conn, $tongkh);
                                   $tong1= $result->fetch_assoc();
                                   echo $tong1["TONGKH"] ;
-                          ?>
+                          ?> -->
 </h2>
                           <p class="mb-0"><span class="col-orange">09%</span> Giảm</p>
                         </div>
