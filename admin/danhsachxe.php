@@ -24,8 +24,9 @@
             <div class="row">
             <div class="col-12">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="display: flex; flex-direction: row; justify-content: space-between;">
                 <h4>Danh sách xe</h4>
+                <a href="hiendanhsachxetrenbando.php"><button class="btn btn-success" >Hiện danh sách xe trên bản đồ</button></a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
