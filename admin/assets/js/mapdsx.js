@@ -1,7 +1,5 @@
-
-const map = L.map('mapds').setView([10.03, 105.77], 15); //khu vực hiển thị theo vị trí hiện tại
-
-var marker = L.marker([10.03, 105.77]).addTo(map); //đặt vị trí hiện tại của khách hàng
+// mapdsx.js
+const map = L.map('mapds').setView([10.03, 105.77], 15);
 
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -9,10 +7,19 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 function onMapClick(e) {
-    popup
+    const popup = L.popup()
         .setLatLng(e.latlng)
         .setContent(`You clicked the map at ${e.latlng.toString()}`)
         .openOn(map);
 }
 
 map.on('click', onMapClick);
+
+// Truy cập dữ liệu JSON từ biến jsonData
+console.log(jsonData);
+
+// Ví dụ: Làm việc với dữ liệu JSON
+jsonData.forEach(function (item) {
+    const marker = L.marker([item.TT_toadoX, item.TT_toadoY]).addTo(map);
+    // Tùy chỉnh marker, thêm popup, v.v. ở đây
+});
