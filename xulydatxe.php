@@ -31,20 +31,20 @@ $activate = "xulydatxe";
                     <div class="text w-100">
                         <h3 class="heading mb-2">Đã đặt xe</h3>
                         <!-- Nội dung PHP của bạn -->
-                        <?php 
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "taxi";
+        <?php 
+        // $servername = "localhost";
+        // $username = "root";
+        // $password = "";
+        // $dbname = "taxi";
 
-        // Tạo kết nối
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        // // Tạo kết nối
+        // $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Kiểm tra kết nối
-        if ($conn->connect_error) {
-            die("Kết nối thất bại: " . $conn->connect_error);
-        }
-
+        // // Kiểm tra kết nối
+        // if ($conn->connect_error) {
+        //     die("Kết nối thất bại: " . $conn->connect_error);
+        // }
+        $sql = "insert into chuyenxe value()";
          // ID của chuyến đi bạn muốn xem thông tin chi tiết
         $matx = $_POST['TX_MA'];
         $sql = "SELECT chuyenxe.*, taixe.*, thoidiem.* FROM chuyenxe
@@ -57,8 +57,8 @@ $activate = "xulydatxe";
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            
-            $chuyenxeID = $_POST['CX_TRANGTHAI'];
+
+            $chuyenxeID = $_POST['CX_MA'];
             // Lấy thông tin chuyến đi
             $thongTinChuyenDi = $row['CX_MA'];
               //So KM
