@@ -25,7 +25,7 @@ jsonData.forEach(function (item) {
     // Tạo popup cho mỗi marker
     const popup = L.popup()
         .setLatLng([item.TT_TOADOX, item.TT_TOADOY])
-        .setContent(`<b>Tên tài xế:</b> ${item.TX_TEN}<br><b>Trạng thái:</b> ${item.TX_TRANGTHAI === '1' ? 'Bận' : 'Rảnh'}<br><b>TT_toadoX:</b> ${item.TT_TOADOX}<br><b>TT_toadoY:</b> ${item.TT_TOADOY}`);
+        .setContent(`<b>Tên tài xế:</b> ${item.TX_TEN}<br><b>Trạng thái:</b> ${item.TX_TRANGTHAI === '1' ? 'Bận' : 'Rảnh'}<br><b>Tọa độ:</b> ${item.TT_TOADOX},<b></b> ${item.TT_TOADOY}`);
     
     marker.on('click', function() {
         popup.openOn(map);
