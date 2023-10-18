@@ -242,7 +242,7 @@ $activate = "index";
 								<div class="leaflet-bottom leaflet-right"></div>
 							</div>
               <script src="js/map_index.js"></script>
-						</div>
+						</div> 
 						<div class="col-6">
               <?php
                 $sql = "SELECT tx.tx_ma, tx.tx_ten, x.x_ma, x.x_mota, x.x_hinhanh

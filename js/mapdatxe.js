@@ -12,7 +12,7 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    
+     
     // // Lắng nghe sự kiện click trên nút "Ghim Địa Điểm"
     // const pinLocationButton = document.getElementById('pinLocationButton');
     // pinLocationButton.addEventListener('click', function () {
