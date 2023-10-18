@@ -2,8 +2,6 @@
 $activate = "index";
 @include('header.php');
 ?>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
   <?php 
     if ( isset($_POST['tx_ma']) ) {
@@ -37,6 +35,21 @@ $activate = "index";
       </div>
     </div>
 
+    <div id="mapContainer" class="modal">
+      <a class="close" id="close">x</a>
+      <div style="height: 90%; width: 100%">
+        <div id="mapdx" style = "height: 100%; width: 100%" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+          <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>					
+        </div>
+        <div class="leaflet-control-container">
+          <div class="leaflet-top leaflet-right"></div>
+          <div class="leaflet-bottom leaflet-left"></div>
+          <div class="leaflet-bottom leaflet-right"></div>
+        </div>
+      </div>
+      <!-- <script src="js/mapdatxe.js"></script> -->
+    </div>
+
      <section class="ftco-section ftco-no-pt bg-light" >
     	<div class="container">
     		<div class="row no-gutters">
@@ -49,14 +62,52 @@ $activate = "index";
                   <div class="form-group">
 			    					<input name="TX_MA" type="hidden" class="form-control" value="$" placeholder="">
 			    				</div>
-
 			    				<div class="form-group">
 			    					<label for="" class="label">Vị trí của bạn</label>
 			    					<input name="diemdi" type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                    <a href="map.js"><button id="showMapButton">Hiển thị Bản đồ</button></a>
-                    <script src="mapdatxe.js"></script>
+                    <a id="showMapButton">Hiển thị Bản đồ</a>
+                    <style>
+                      /* Hiển thị modal khi cần */
+                            .modal {
+                                display: none;
+                                position: fixed;
+                                border-radius: 20px;
+                                z-index: 999;
+                                left: 50%;
+                                top: 50%;
+                                transform: translate(-50%, -50%);
+                                width: 70%;
+                                height: 80%;
+                                overflow: auto;
+                                background-color: #fff;
+                            }
 
-                    <div id="mapContainer" style="display: none; width: 200px; height: 200px;"></div>
+                            /* Nội dung modal */
+                            .modal-content {
+                                background-color: #fff;
+                                margin: 15% auto;
+                                padding: 20px;
+                                border: 1px solid #888;
+                                width: 80%;
+                            }
+
+                            /* Đóng modal nếu cần */
+                            .close {
+                                margin: 15px;
+                                float: right;
+                                cursor: pointer;
+                            }
+
+                    </style>
+                    <script>
+                      var modal = document.getElementById("mapContainer");
+                      document.getElementById("showMapButton").addEventListener("click", function() {
+                          modal.style.display = "block";
+                      });
+                      document.getElementById("close").addEventListener("click", function() {
+                        modal.style.display = "none";
+                      });
+                    </script>
                   </div>
                   
 
@@ -65,8 +116,8 @@ $activate = "index";
 			    					<label for="" class="label">Ví trí muốn đến</label>
 			    					<input type="text" name="diemden" class="form-control" placeholder="City, Airport, Station, etc">
                     <button id="pinLocationButton">Ghim Địa Điểm</button>
-                    <script src="mapdatxe.js"></script>
-                    <div id="mapContainer" style="display: none; width: 200px; height: 200px;"></div>
+                    <!-- <script src="mapdatxe.js"></script>
+                    <div id="mapContainer" style="display: none; width: 200px; height: 200px;"></div> -->
                   </div>
                 <script>
                 // Mã JavaScript hiển thị bản đồ
@@ -204,6 +255,7 @@ $activate = "index";
 	  				</div>
 				</div>
   		</div>
+      <script src="js/map_index.js"></script>
     </section>
 
 
@@ -227,7 +279,6 @@ $activate = "index";
 								<div class="leaflet-bottom leaflet-left"></div>
 								<div class="leaflet-bottom leaflet-right"></div>
 							</div>
-							<script src="js/map_index.js"></script>
 						</div>
 						<div class="col-6">
               <?php

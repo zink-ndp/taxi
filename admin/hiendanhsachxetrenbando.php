@@ -33,7 +33,7 @@ include('head.php');
                                     <?php
 
                                         // Truy vấn SQL để lấy dữ liệu từ cơ sở dữ liệu
-                                        $query = "SELECT tx.TX_MA, tx.TX_TEN, tx.TX_BANGLAI, tx.TX_SDT, tx.TX_USERNAME, tx.TX_PASSWORD, tx.TX_GIOITINH, tx.TX_HINHANH, tt.TD_DATE, tt.TT_TOADOX, tt.TT_TOADOY
+                                        $query = "SELECT tx.TX_MA, tx.TX_TEN, tx.TX_BANGLAI, tx.TX_SDT, tx.TX_USERNAME, tx.TX_PASSWORD, tx.TX_GIOITINH, tx.TX_HINHANH, tt.TD_DATE, tt.TT_TOADOX, tt.TT_TOADOY, TT_TRANGTHAI
                                         FROM taixe tx
                                         JOIN trangthai tt ON tx.TX_MA = tt.TX_MA
                                         WHERE (tt.TX_MA, tt.TD_DATE) IN (
