@@ -239,10 +239,13 @@ button,
 select,
 optgroup,
 textarea {
+  margin: center;
   margin: 0;
   font-family: inherit;
-  font-size: inherit;
-  line-height: inherit; }
+  background-color: #117a8b;
+  /* font-size: inherit;
+  line-height: inherit; */
+}
 
 button,
 input {
