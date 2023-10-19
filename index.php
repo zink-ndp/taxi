@@ -3,6 +3,8 @@ $activate = "index";
 @include('header.php');
 ?>
 
+
+
   <?php 
     if ( isset($_POST['tx_ma']) ) {
       $form_action = "xulydatxe.php";
@@ -62,27 +64,68 @@ $activate = "index";
                   <div class="form-group">
 			    					<input name="TX_MA" type="hidden" class="form-control" value="$" placeholder="">
 			    				</div>
-			    				<div class="form-group">
-			    					<label for="" class="label">Vị trí của bạn</label>
-                    <div class="d-flex flex-row justify-content-center align-items-center ">
-                      <input name="diemdi" type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                  <div class="form-group">
+                  <label for="" class="label">Vị trí của bạn</label>
+                  <div class="d-flex flex-row justify-content-center align-items-center">
+                      <input name="diemdi" type="text" class="form-control" placeholder="City, Airport, Station, etc" value="<?php echo isset($_GET['lat']) ? $_GET['lat'] . ', ' . $_GET['lng'] : ''; ?>">
                       <a href="chon_diemdi.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
-                    </div>
                   </div>
-                  
+                  </div>
+
+              <script>
+            // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ
+            const confirmLocationButton = document.getElementById('confirmLocationButton');
+            confirmLocationButton.addEventListener('click', function () {
+                // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemdi hay không
+                const lat = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
+                const lng = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
+                
+                // Nếu có tọa độ, hiển thị nó trong ô input
+                if (lat !== null && lng !== null) {
+                    document.querySelector('input[name="diemdi"]').value = `Lat: ${lat}, Lng: ${lng}`;
+                }
+            });
+        </script>
+
+                                  
 
 
-			    				<div class="form-group">
-			    					<label for="" class="label">Ví trí muốn đến</label>
-			    					<div class="d-flex flex-row justify-content-center align-items-center ">
-                      <input name="diemden" type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                      <a href="chon_diemden.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
-                    </div>
-                    <!-- <button id="pinLocationButton">Ghim Địa Điểm</button> -->
-                    <!-- <script src="mapdatxe.js"></script>
-                    <div id="mapContainer" style="display: none; width: 200px; height: 200px;"></div> -->
-                  </div>
-                <script>
+<div class="form-group">
+    <label for="" class="label">Vị trí muốn đến</label>
+    <div class="d-flex flex-row justify-content-center align-items-center">
+        <input name="diemden" type="text" class="form-control" placeholder="City, Airport, Station, etc">
+        <a href="chon_diemden.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
+    </div>
+</div>
+
+<script>
+    <?php
+    session_start();
+    $latDen = null;
+    $lngDen = null;
+    if (isset($_SESSION['pinned_location_den'])) {
+        $pinnedLocationDen = $_SESSION['pinned_location_den'];
+        $latDen = $pinnedLocationDen['lat'];
+        $lngDen = $pinnedLocationDen['lng'];
+    }
+    ?>
+
+    const lat = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
+    const lng = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
+    
+    // Kiểm tra nếu có tọa độ từ trang chon_diemden
+    if (lat !== null && lng !== null) {
+        // Gán giá trị tọa độ từ `GET` vào ô input
+        const inputDiemDen = document.querySelector('input[name="diemden"]');
+        inputDiemDen.value = `Lat: ${lat}, Lng: ${lng}`;
+    } else if (latDen !== null && lngDen !== null) {
+        // Gán giá trị tọa độ từ `session` vào ô input
+        const inputDiemDen = document.querySelector('input[name="diemden"]');
+        inputDiemDen.value = `Lat: ${latDen}, Lng: ${lngDen}`;
+    }
+</script>
+
+<!-- <script>
                 // Mã JavaScript hiển thị bản đồ
                   //     pinLocationButton.addEventListener('click', function () {
                   //     // Thay đổi action của biểu mẫu để đến trang index.php thay vì xulydatxe.php
@@ -97,7 +140,7 @@ $activate = "index";
                     // Thay đổi hiển thị của phần tử chứa bản đồ thành "block" khi nút được nhấp vào
                    myForm.action = 'index.php';
                 });
-                </script>
+                </script> -->
 
 
 			    			   <div class="form-group">THỜI GIAN ĐÓN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </label>

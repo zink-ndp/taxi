@@ -9991,41 +9991,45 @@ textarea.form-control {
     stroke-dashoffset: -136px; } }
 
 
-    /* Đường đứt khúc */
-/* .row::after {
-  content: "";
-  position: relative;
-  display: block;
-  height: 2px;
-  background-color: cornsilk;
-  width: 100%;
-  margin: 0 auto;
-  border-bottom: 1px dotted #000;
-  margin-top: 20px;
-} */
-/* Đường đứt khúc */
-/* Đường đứt khúc */
-/* .row::after {
-  content: "";
-  display: block;
-  height: 1px;
-  background-color:#b8daff;
-  width: 100%;
-  border-bottom: 1px dotted;
-} */
+    /* #confirmLocationButton {
+      position: fixed;
+      font-size: large;
+      font-family: 'Courier New', Courier, monospace;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color:#01d28e; 
+      color:#d6d8db;  
+      padding: 10px; 
+      text-align: center;
+      cursor: pointer;
+    } */
+    #confirmLocationButton {
+      position: fixed;
+      font-size: large;
+      font-family: 'Courier New', Courier, monospace;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #01d28e;
+      color: #FFFFFF; /* Thay đổi màu chữ thành màu trắng */
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+    
 
-
-/* Căn chỉnh đường đứt khúc */
-/* .row::after { */
-  
-
-
-    /* content: ""; */
-    /* display: block; */
-    /* height: 2px; */
-    /* background-color: cornsilk;
-    width: 100%;
-    position: relative;
-    top: 50%; */
-    /* left: 0*/
-/* } */
+    #confirmLocationButton2 {
+      position: fixed;
+      font-size: large;
+      font-family: 'Courier New', Courier, monospace;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #01d28e;
+      color: #FFFFFF; /* Thay đổi màu chữ thành màu trắng */
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+    
