@@ -24,7 +24,7 @@ include("connect.php");
         // echo $hashed_password.' '.$row["NV_PASSWORD"];
         if ($hashed_password === $row["NV_PASSWORD"]) {
             // Đăng nhập thành công, thiết lập các biến session
-            $_SESSION["NV_ma"] = $row["NV_MA"];
+            $_SESSION["NV_ma"] = $row["NV_ID"];
             $_SESSION["qh"] = $row["QH_MA"];
             $_SESSION["ten"] = $row["NV_TEN"];
             $_SESSION["sdt"] = $row["NV_SDT"];
@@ -35,7 +35,8 @@ include("connect.php");
             $_SESSION["vaitro"] = $row["VT_MA"];
             echo '<script language="javascript">
             alert("Đăng nhập thành công!");
-            window.location.href = "index.php"; // Chuyển hướng sau khi đăng ký thành công
+            window.location.href = "index.php"; 
+            // Chuyển hướng sau khi đăng ký thành công
             </script>';
             
             exit();

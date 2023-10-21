@@ -88,9 +88,9 @@
                             <p class="text-muted"><?php echo $_SESSION["sdt"]?></p>
                           </div>
                           <div class="col-md-3 col-6 b-r">
-                            <strong>Email</strong>
+                            <strong>Bằng lái</strong>
                             <br>
-                            <p class="text-muted"><?php echo $_SESSION["email"]?></p>
+                            <p class="text-muted"><?php echo $_SESSION["banglai"]?></p>
                           </div>
                           <div class="col-md-3 col-6">
                             <strong>Tên đăng nhập</strong>
@@ -113,43 +113,11 @@
                             ?>
                             </p>
                           </div>
-                          <div class="col-md-3 col-6">
-                            <strong>Địa chỉ</strong>
-                            <br>
-                            <p class="text-muted"><?php
-
-                            // Truy vấn cơ sở dữ liệu để lấy tên thành phố và tên quận huyện
-                            $qh_ma = $_SESSION["qh"];
-                            $sql = "SELECT QH_TEN, TP_TEN FROM quanhuyen qh JOIN thanhpho tp ON qh.TP_MA = tp.TP_MA WHERE qh.QH_MA = '$qh_ma'";
-                            $result = $conn->query($sql);
-                            if ($result->num_rows > 0) {
-                                $row = $result->fetch_assoc();
-                                $tenQuanHuyen = $row["QH_TEN"];
-                                $tenThanhPho = $row["TP_TEN"];
-                            } else {
-                                $tenQuanHuyen = "Không xác định";
-                                $tenThanhPho = "Không xác định";
-                            }
-
-                            echo $tenQuanHuyen . ', ' . $tenThanhPho
-                            ?></p>
-                          </div>
-
-                          <div class="col-md-3 col-6">
-                            <strong>Vai trò</strong>
-                            <br>
-                            <p class="text-muted"><?php 
-                                    $sql = "select VT_TEN from vaitro where VT_MA = {$_SESSION["vaitro"]}";
-                                    $rs = $conn->query($sql);
-                                    $vt = $rs->fetch_assoc();
-                                    echo $vt['VT_TEN'];
-                                  ?></p>
-                          </div>
                           
                         </div>
                       </div>
                       <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
-                        <form method="post" class="needs-validation" action="updateadmin.php">
+                        <form method="post" class="needs-validation" action="updatetaixe.php">
                           <div class="card-header">
                             <h4>Chỉnh sửa thông tin cá nhân</h4>
                           </div>
@@ -168,62 +136,40 @@
                                     echo $vt['VT_TEN'];
                                   ?>">
                               </div>
+                              <div class="form-group col-md-6 col-12">
+                                <label>Bằng lái</label>
+                                <input type="text" disabled class="form-control" value="<?php echo $_SESSION["banglai"]?>">
+                              </div>
+                              <div class="form-group col-md-6 col-12">
+                                <label>Giới tính</label>
+                                <input type="text" disabled class="form-control" value="<?php 
+                                    if ($_SESSION["gioitinh"] == 1) {
+                                      echo "Nam";
+                                  } elseif ($_SESSION["gioitinh"] == 0) {
+                                      echo "Nữ";
+                                  } else {
+                                      echo "Không xác định";
+                                  }?>">
+                              </div>
                             </div>
                             <div class="row">
                               <div class="form-group col-md-6 col-12">
                                 <label>Họ và tên</label>
-                                <input type="text" class="form-control" value="<?php echo $_SESSION["ten"]?>" name="ten">
+                                <input type="text" class="form-control" value="<?php echo $_SESSION["ten"]?>" name="TX_TEN">
                                 <div class="invalid-feedback">
                                   Vui lòng nhập họ và tên
                                 </div>
                               </div>
                               <div class="form-group col-md-6 col-12">
-                                <label>Địa chỉ</label>
-                              
-                                            <?php
-                                            
-                                            // Truy vấn để lấy danh sách quận/huyện
-                                            $sql = "SELECT QH_MA, QH_TEN FROM quanhuyen";
-                                            $result = $conn->query($sql);
-                                            while ($row = $result->fetch_assoc()) {
-                                              if ($row['QH_MA']==$_SESSION['qh']) {
-                                                $qh_ma=$row['QH_MA'];
-                                                $tenqh = $row['QH_TEN'];}
-                                            }
-                                            ?>
-                                <select class="form-select form-control" id="qh" name="qh">
-                                            <option value="" selected><?php echo $tenqh?></option>
-                                            <?php
-                                            $result = $conn->query($sql);
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo '<option value="' . $row["QH_MA"] . '">' . $row["QH_TEN"] . '</option>';
-                                            }
-                                            // Đóng kết nối đến cơ sở dữ liệu
-                                            $conn->close();
-                                            ?>
-                                        </select>
-                                <div class="invalid-feedback">
-                                  Vui lòng nhập địa chỉ
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-
-                            <div class="form-group col-md-6 col-12">
-                                <label>Email</label>
-                                <input  type="email" name="email" class="form-control" value="<?php echo $_SESSION["email"]?>">
-                                <div class="invalid-feedback">
-                                  Vui lòng nhập địa chỉ email
-                                </div>
-                              </div>
-                              <div class="form-group col-md-5 col-12">
                                 <label>Số điện thoại</label>
-                                <input type="tel" class="form-control" value="<?php echo $_SESSION["sdt"]?>" name="sdt">
+                                <input type="tel" class="form-control" value="<?php echo $_SESSION["sdt"]?>" name="TX_SDT">
                               </div>
                             </div>
+                              
+                            
                           </div>
                           <div class="card-footer text-right">
-                            <button class="btn btn-primary" name="taxi">Lưu thay đổi</button>
+                            <button class="btn btn-primary" name="chinhsuataixe">Lưu thay đổi</button>
                           </div>
                         </form>
                       </div>
