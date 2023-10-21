@@ -2,9 +2,9 @@
 
 include('connect.php');
 
-if(isset($_POST["mc"])){
-    $sql=" UPDATE nguoidung SET MATKHAU='".$_POST["matkhau"]."',DIACHI='".$_POST["diachi"]."',
-    TEN='".$_POST["ten"]."',SDT='".$_POST["sdt"]."',PHANQUYEN='".$_POST["phanquyen"]."' WHERE email='".$_SESSION["email"]."'
+if(isset($_POST["dangky"])){
+    $sql=" UPDATE taixe SET TX_PASSWORD='".$_POST["psw2"]."',TX_GIOITINH='".$_POST["gioitinh"]."',
+    TX_TEN='".$_POST["ten"]."',TX_SDT='".$_POST["sdt"]."', TX_EMAIL='".$_POST["email"]."' WHERE TX_USERNAME = '".$_SESSION["username"]."'
     ";
     $result = $conn->query($sql);
     if($result){
@@ -21,9 +21,9 @@ if(isset($_POST["mc"])){
 }
 
 if(isset($_POST["rsmk"])){
-    $sql1 = "select * from nguoidung
-    where email = '".$_SESSION["email"]."' 
-    and matkhau = '".md5($_POST["psw2"])."'";
+    $sql1 = "select * from taixe
+    where TX_USERNAME = '".$_SESSION["username"]."' 
+    and TX_PASSWORD= '".md5($_POST["psw2"])."'";
     $result = $conn->query($sql1);
     if($result->num_rows > 0){
         if($_POST["psw"]== $_POST["psw2"]){
@@ -37,8 +37,8 @@ if(isset($_POST["rsmk"])){
             history.back();
             </script>';
         } else {
-            $sql=" UPDATE nguoidung set matkhau ='".md5($_POST["psw"])." ' 
-            where email = '".$_SESSION["email"]." '";
+            $sql=" UPDATE taixe set TX_PASSWORD ='".md5($_POST["psw"])." ' 
+            where TX_USERNAME = '".$_SESSION["username"]." '";
             $result1 = $conn->query($sql);
             echo '<script language="javascript">
             alert("Đổi mật khẩu thành công!");
