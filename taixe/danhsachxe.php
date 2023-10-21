@@ -9,7 +9,6 @@
 ?>
 
 <body>
-  <div class="loader"></div>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
@@ -25,89 +24,81 @@
             <div class="col-12">
         <div class="card">
             <div class="card-header" style="display: flex; flex-direction: row; justify-content: space-between;">
-                <h4>Danh sách xe</h4>
-                <a href="hiendanhsachxetrenbando.php"><button class="btn btn-success" >Hiện danh sách xe trên bản đồ</button></a>
+                <h4>Thông tin xe</h4>
+                <a href="hiendanhsachxetrenbando.php"><button class="btn btn-success" >Hiện xe trên bản đồ</button></a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
                         <tbody>
                         <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "taxi"; // 
+                  // Truy vấn SQL để lấy danh sách xe với tên loại xe
+                  $sql = "SELECT xe.x_ma, loaixe.lx_model, xe.x_bienso, xe.x_mota, xe.x_hinhanh 
+                          FROM xe
+                          INNER JOIN loaixe ON xe.lx_ma = loaixe.lx_ma 
+                          INNER JOIN phutrach ON xe.X_MA = phutrach.X_MA
+                          INNER JOIN taixe ON taixe.TX_MA = phutrach.X_MA
+                          WHERE TX_USERNAME = '".$_SESSION["username"]."'";
+                  $result = $conn->query($sql);
 
-// Tạo kết nối đến cơ sở dữ liệu
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+            if ($result->num_rows > 0) {
+                echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
+                echo '<thead>';
+                echo '<tr>';
+                echo '<th>Mã xe</th>';
+                echo '<th>Loại xe</th>';
+                echo '<th>Biển số</th>';
+                echo '<th>Mô tả</th>';
+                echo '<th>Hình ảnh</th>';
+                echo '<th></th>';
+                echo '<th></th>';
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody>';
 
-// Truy vấn SQL để lấy danh sách xe với tên loại xe
-$sql = "SELECT xe.x_ma, loaixe.lx_model, xe.x_bienso, xe.x_mota, xe.x_hinhanh 
-        FROM xe 
-        INNER JOIN loaixe ON xe.lx_ma = loaixe.lx_ma order by xe.x_ma";
-$result = $conn->query($sql);
+                $totalXe = 0; // Khởi tạo biến tổng số xe
 
-if ($result->num_rows > 0) {
-    echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
-    echo '<thead>';
-    echo '<tr>';
-    echo '<th>Mã xe</th>';
-    echo '<th>Loại xe</th>';
-    echo '<th>Biển số</th>';
-    echo '<th>Mô tả</th>';
-    echo '<th>Hình ảnh</th>';
-    echo '<th></th>';
-    echo '<th></th>';
-    echo '</tr>';
-    echo '</thead>';
-    echo '<tbody>';
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . $row["x_ma"] . "</td>
+                            <td>" . $row["lx_model"] . "</td>
+                            <td>" . $row["x_bienso"] . "</td>
+                            <td>" . $row["x_mota"] . "</td>
+                            <td>" . $row["x_hinhanh"] . "</td>
+                            <td>";
+                    ?>
+                    <!-- <form action="xe_sua.php" method="get">
+                      <input type="hidden" name="xid" value="<?php echo $row["x_ma"] ?>">
+                      <button class="btn btn-link" href="xe_sua.php"><i class="fas fa-edit"></i></button>
+                    </form> -->
+                    <?php
+                    echo "</td>
+                          <td>";
+                    ?>
 
-    $totalXe = 0; // Khởi tạo biến tổng số xe
+                    <!-- <form action="xe_xoa.php" method="get">
+                      <input type="hidden" name="xid" value="<?php echo $row["x_ma"] ?>">
+                      <button class="btn btn-link"><i class="fas fa-trash-alt"></i></button>
+                    </form> -->
+                    <?php
+                    
+                    echo "</td>
+                          </td>
+                          </tr>";
 
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>" . $row["x_ma"] . "</td>
-                <td>" . $row["lx_model"] . "</td>
-                <td>" . $row["x_bienso"] . "</td>
-                <td>" . $row["x_mota"] . "</td>
-                <td>" . $row["x_hinhanh"] . "</td>
-                <td>";
-        ?>
-        <form action="xe_sua.php" method="get">
-          <input type="hidden" name="xid" value="<?php echo $row["x_ma"] ?>">
-          <button class="btn btn-link" href="xe_sua.php"><i class="fas fa-edit"></i></button>
-        </form>
-        <?php
-        echo "</td>
-              <td>";
-        ?>
+                    $totalXe++; // Tăng tổng số xe lên 1
+                }
 
-        <form action="xe_xoa.php" method="get">
-          <input type="hidden" name="xid" value="<?php echo $row["x_ma"] ?>">
-          <button class="btn btn-link"><i class="fas fa-trash-alt"></i></button>
-        </form>
-        <?php
-        
-        echo "</td>
-              </td>
-              </tr>";
+              echo '</tbody>';
+              echo '</table>';
 
-        $totalXe++; // Tăng tổng số xe lên 1
-    }
+              echo "<p>Tổng số xe: $totalXe</p>"; // Hiển thị tổng số xe
+          } else {
+              echo "Không có dữ liệu xe.";
+          }
 
-    echo '</tbody>';
-    echo '</table>';
-
-    echo "<p>Tổng số xe: $totalXe</p>"; // Hiển thị tổng số xe
-} else {
-    echo "Không có dữ liệu xe.";
-}
-
-$conn->close();
-?>
+          $conn->close();
+          ?>
 
 
                         

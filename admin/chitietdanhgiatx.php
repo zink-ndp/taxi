@@ -184,13 +184,11 @@
             <thead>
                 <tr><th>ID</th>
                     <th>Tên</th>
-                    <th>Bằng lái</th>
-                    <th>Số điện thoại</th>
-                    <th>Tên đăng nhập</th>
-                    <th>Thời điểm</th>
-                    <th>Mã xe</th>
-                    <th>Giới tính</th>
+                    <th>Chuyến xe</th>
+                    <th>Thời gian</th>
+                    <th>Tiêu chí</th>
                     <th>Hình ảnh</th>
+                    <th>Xem chi tiết đánh giá</th>
                 </tr>
             </thead>
             <tbody>
@@ -228,7 +226,14 @@
                         } else {
                             echo 'Chưa có hình bé ơi';
                         }
-                    echo '</td>';
+                        echo '</td>';
+                        echo '<td>
+                          <form action="chitietdanhgiatx.php" method="get">
+                              <input type="hidden" name="txid" value="' . $row["TX_MA"] . '">
+                              <button class="btn btn-link" type="submit"><i class="fa-solid fa-table-list"></i></button>
+                          </form>
+                      </td>';
+
                 echo "</tr>";
             
         }
