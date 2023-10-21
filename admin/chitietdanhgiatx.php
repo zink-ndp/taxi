@@ -194,36 +194,39 @@
             </thead>
             <tbody>
                 <?php
+                if(isset($_GET['txid'])){
+                    $mataixe = $_GET['txid'];
                 // Thực hiện truy vấn SQL để lấy thông tin từ 5 bảng 
-                    $sql = "SELECT taixe.TX_MA, taixe.TX_TEN, chuyenxe.CX_MA, chuyenxe.TD_DATE, tieuchi.TC_TEN, 
-                    danhgia.DG_SAO, danhgia.DG_NOIDUNG, dgtieuchi.DGTC_DIEM
+                    $sql = "SELECT taixe.TX_MA, taixe.TX_TEN, chuyenxe.CX_MA, chuyenxe.TD_DATE, tieuchi.TC_TEN, danhgia.DG_SAO, danhgia.DG_NOIDUNG, dgtieuchi.DGTC_DIEM
                     FROM taixe
                     JOIN chuyenxe ON taixe.TX_MA = chuyenxe.TX_MA
                     JOIN dgtieuchi ON taixe.TX_MA = dgtieuchi.TX_MA
                     JOIN tieuchi ON dgtieuchi.TC_MA = tieuchi.TC_MA
                     JOIN danhgia ON tieuchi.TC_MA = danhgia.TC_MA AND chuyenxe.CX_MA = danhgia.CX_MA
-                    WHERE taixe.TX_MA = '".$_GET['txid']."'";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row["TX_MA"] . "</td>";
-                        echo "<td>" . $row["TX_TEN"] . "</td>";
-                        echo "<td>" . $row["CX_MA"] . "</td>";
-                        echo "<td>" . $row["TD_DATE"] . "</td>"; 
-                        echo "<td>" . $row["TC_TEN"] . "</td>";
-                        echo "<td>" . $row["DG_SAO"] . "</td>";                        
-                        echo "<td>" . $row["DG_NOIDUNG"] . "</td>"; 
-                        echo "<td>" . $row["DGTC_DIEM"] . "</td>";                                                                                             
-                echo "</tr>";
-            
-        }
-        $totalEmployees = $result->num_rows; // Đếm tổng số khách hàng
-        echo "<h5>Tổng số tài xế: $totalEmployees</h5>"; // Hiển thị tổng số khách hàng
-    } else {
-        echo "Không có dữ liệu nhân viên.";
-    }
+                    WHERE dgtieuchi.TX_MA = '$mataixe'";
+                    $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $mataixe . "</td>";
+                                echo "<td>" . $row["TX_TEN"] . "</td>";
+                                echo "<td>" . $row["CX_MA"] . "</td>";
+                                echo "<td>" . $row["TD_DATE"] . "</td>"; 
+                                echo "<td>" . $row["TC_TEN"] . "</td>";
+                                echo "<td>" . $row["DG_SAO"] . "</td>";                        
+                                echo "<td>" . $row["DG_NOIDUNG"] . "</td>"; 
+                                echo "<td>" . $row["DGTC_DIEM"] . "</td>";                                                                                             
+                        echo "</tr>";
+                    
+                    }
+                    $totalEmployees = $result->num_rows; // Đếm tổng số khách hàng
+                    echo "<h5>Tổng số tài xế: $totalEmployees</h5>"; // Hiển thị tổng số khách hàng
+                } else {
+                    echo "Không có dữ liệu nhân viên.";
+                    }
+            }else{
+                echo "Chưa có đánh giá";
+            }
                 ?>
             </tbody>
         </table>
