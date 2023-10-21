@@ -4,12 +4,12 @@ class Track {
     public $pdo = null;
     public $stmt = null;
     public $error = "";
-    function __construct()
-    { try {
-        $this
-    }
+    // function __construct()
+    // { try {
         
-    }
+    // }
+        
+    // }
 }
 ?>
 <!DOCTYPE html>

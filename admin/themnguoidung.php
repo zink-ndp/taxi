@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "qlbanmicay";
+$dbname = "taxi";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 $email = $_POST["email"];
-$sql = "SELECT * FROM nguoidung WHERE email = '$email'";
+$sql = "SELECT * FROM nhanvien WHERE email = '$email'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -25,7 +25,7 @@ if ($result->num_rows > 0) {
     exit();
 }
 // Thêm khách hàng vào cơ sở dữ liệu
-    $sql = "INSERT INTO nguoidung (EMAIL,DIACHI,TEN,SDT,PHANQUYEN)
+    $sql = "INSERT INTO nhanvien (EMAIL,DIACHI,TEN,SDT,PHANQUYEN)
     VALUES ('".$_POST["email"] ."', '".$_POST["dia_chi"] ."', '".$_POST["ho_ten"] ."',
      '".$_POST["so_dien_thoai"] ."','".$_POST["phanquyen"] ."') ";
 
