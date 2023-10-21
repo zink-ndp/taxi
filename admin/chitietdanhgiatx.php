@@ -187,17 +187,22 @@
                     <th>Chuyến xe</th>
                     <th>Thời gian</th>
                     <th>Tiêu chí</th>
-                    <th>Hình ảnh</th>
-                    <th>Xem chi tiết đánh giá</th>
+                    <th>Số sao</th>
+                    <th>Nội dung đánh giá</th>
+                    <th>Điểm đánh giá</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                // Thực hiện truy vấn SQL để lấy thông tin từ bảng nhanvien
-                $sql = "SELECT taixe.TX_MA, taixe.TX_TEN, taixe.TX_BANGLAI, taixe.TX_SDT, taixe.TX_USERNAME, phutrach.TD_DATE, phutrach.X_MA, taixe.TX_GIOITINH, taixe.TX_HINHANH
-                FROM taixe
-                JOIN phutrach ON taixe.TX_MA = phutrach.TX_MA
-                ORDER BY taixe.TX_MA";
+                // Thực hiện truy vấn SQL để lấy thông tin từ 5 bảng 
+                    $sql = "SELECT taixe.TX_MA, taixe.TX_TEN, chuyenxe.CX_MA, chuyenxe.TD_DATE, tieuchi.TC_TEN, 
+                    danhgia.DG_SAO, danhgia.DG_NOIDUNG, dgtieuchi.DGTC_DIEM
+                    FROM taixe
+                    JOIN chuyenxe ON taixe.TX_MA = chuyenxe.TX_MA
+                    JOIN dgtieuchi ON taixe.TX_MA = dgtieuchi.TX_MA
+                    JOIN tieuchi ON dgtieuchi.TC_MA = tieuchi.TC_MA
+                    JOIN danhgia ON tieuchi.TC_MA = danhgia.TC_MA AND chuyenxe.CX_MA = danhgia.CX_MA
+                    WHERE taixe.TX_MA = '".$_GET['txid']."'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -205,35 +210,12 @@
                         echo "<tr>";
                         echo "<td>" . $row["TX_MA"] . "</td>";
                         echo "<td>" . $row["TX_TEN"] . "</td>";
-                        echo "<td>" . $row["TX_BANGLAI"] . "</td>";
-                        echo "<td>" . $row["TX_SDT"] . "</td>"; 
-                        echo "<td>" . $row["TX_USERNAME"] . "</td>";
-                        echo "<td>" . $row["TD_DATE"] . "</td>";                        
-                        echo "<td>" . $row["X_MA"] . "</td>";                                               
-                        // Hiển thị giới tính
-                        echo "<td>";
-                        if ($row["TX_GIOITINH"] == 1) {
-                            echo "Nam";
-                        } elseif ($row["TX_GIOITINH"] == 0) {
-                            echo "Nữ";
-                        } else {
-                            echo "Không xác định";
-                        }
-                        echo "</td>";
-                        echo '<td>';
-                        if (!empty($row["TX_HINHANH"])) {
-                            echo '<img src="' . $row["TX_HINHANH"] . '" alt="Hình ảnh tài xế" width="100">';
-                        } else {
-                            echo 'Chưa có hình bé ơi';
-                        }
-                        echo '</td>';
-                        echo '<td>
-                          <form action="chitietdanhgiatx.php" method="get">
-                              <input type="hidden" name="txid" value="' . $row["TX_MA"] . '">
-                              <button class="btn btn-link" type="submit"><i class="fa-solid fa-table-list"></i></button>
-                          </form>
-                      </td>';
-
+                        echo "<td>" . $row["CX_MA"] . "</td>";
+                        echo "<td>" . $row["TD_DATE"] . "</td>"; 
+                        echo "<td>" . $row["TC_TEN"] . "</td>";
+                        echo "<td>" . $row["DG_SAO"] . "</td>";                        
+                        echo "<td>" . $row["DG_NOIDUNG"] . "</td>"; 
+                        echo "<td>" . $row["DGTC_DIEM"] . "</td>";                                                                                             
                 echo "</tr>";
             
         }
