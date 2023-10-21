@@ -29,8 +29,8 @@ if ($result->num_rows > 0) {
         
         exit();
 
-    $sql = "SELECT * FROM taixe WHERE TX_USERNAME = '$username'";
-    $result = $conn->query($sql);
+    // $sql = "SELECT * FROM taixe WHERE TX_USERNAME = '$username'";
+    // $result = $conn->query($sql);
     // Sử dụng câu lệnh chuẩn bị để tránh SQL Injection
     // $stmt = $conn->prepare($sql);
     // $stmt->bind_param("s", $username);
