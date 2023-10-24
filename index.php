@@ -71,21 +71,27 @@ $activate = "index";
                       <a href="chon_diemdi.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
                   </div>
                   </div>
-
+                  <?php
+                    if (isset($_GET['lat'])) {
+                      $_SESSION['latdi'] = $_GET['lat'];
+                      $_SESSION['lngdi'] = $_GET['lng'];
+                    }
+                  ?>
               <script>
-            // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ
-            const confirmLocationButton = document.getElementById('confirmLocationButton');
-            confirmLocationButton.addEventListener('click', function () {
-                // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemdi hay không
-                const lat = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
-                const lng = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
-                
-                // Nếu có tọa độ, hiển thị nó trong ô input
-                if (lat !== null && lng !== null) {
-                    document.querySelector('input[name="diemdi"]').value = `Lat: ${lat}, Lng: ${lng}`;
-                }
-            });
-        </script>
+                // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ
+                const confirmLocationButtonDi = document.getElementById('confirmLocationButtonDi');
+                confirmLocationButtonDi.addEventListener('click', function () {
+                    // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemdi hay không
+
+                    const lat = <?php echo $_SESSION['latdi']?>;
+                    const lng = <?php echo $_SESSION['lngdi'] ?>;
+                    
+                    // Nếu có tọa độ, hiển thị nó trong ô input
+                    if (lat !== null && lng !== null) {
+                        document.querySelector('input[name="diemdi"]').value = `${lat}, ${lng}`;
+                    }
+                });
+              </script>
 
                                   
 
@@ -98,49 +104,22 @@ $activate = "index";
     </div>
 </div>
 
+<?php
+  if (isset($_GET['latden'])) {
+    $_SESSION['latden'] = $_GET['latden'];
+    $_SESSION['lngden'] = $_GET['lngden'];
+  }
+?>
 <script>
-    <?php
-    session_start();
-    $latDen = null;
-    $lngDen = null;
-    if (isset($_SESSION['pinned_location_den'])) {
-        $pinnedLocationDen = $_SESSION['pinned_location_den'];
-        $latDen = $pinnedLocationDen['lat'];
-        $lngDen = $pinnedLocationDen['lng'];
-    }
-    ?>
 
-    const lat = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
-    const lng = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
-    
-    // Kiểm tra nếu có tọa độ từ trang chon_diemden
-    if (lat !== null && lng !== null) {
-        // Gán giá trị tọa độ từ `GET` vào ô input
-        const inputDiemDen = document.querySelector('input[name="diemden"]');
-        inputDiemDen.value = `Lat: ${lat}, Lng: ${lng}`;
-    } else if (latDen !== null && lngDen !== null) {
-        // Gán giá trị tọa độ từ `session` vào ô input
-        const inputDiemDen = document.querySelector('input[name="diemden"]');
-        inputDiemDen.value = `Lat: ${latDen}, Lng: ${lngDen}`;
-    }
+  const lat = <?php echo $_SESSION['latden']?>;
+  const lng = <?php echo $_SESSION['lngden']?>;
+  // Nếu có tọa độ, hiển thị nó trong ô input
+  if (lat !== null && lng !== null) {
+      document.querySelector('input[name="diemden"]').value = `${lat}, ${lng}`;
+  }
+
 </script>
-
-<!-- <script>
-                // Mã JavaScript hiển thị bản đồ
-                  //     pinLocationButton.addEventListener('click', function () {
-                  //     // Thay đổi action của biểu mẫu để đến trang index.php thay vì xulydatxe.php
-                  //     myForm.action = 'index.php';
-                  // });
-
-                // Mã JavaScript xử lý sự kiện click nút "Ghim Địa Điểm"
-                const pinLocationButton = document.getElementById('pinLocationButton');
-                const mapContainer = document.getElementById('myForm');
-
-                pinLocationButton.addEventListener('click', function () {
-                    // Thay đổi hiển thị của phần tử chứa bản đồ thành "block" khi nút được nhấp vào
-                   myForm.action = 'index.php';
-                });
-                </script> -->
 
 
 			    			   <div class="form-group">THỜI GIAN ĐÓN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </label>

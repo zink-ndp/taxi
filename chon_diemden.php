@@ -1,6 +1,8 @@
   <?php
 $activate = "index";
 @include('header.php');
+unset($_SESSION['latden']);
+unset($_SESSION['lngden']);
 ?>
 
 
@@ -27,7 +29,17 @@ $activate = "index";
     </div>
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5"></div>  
 
-    <button id="confirmLocationButton2">CHẤP NHẬN</button>
+    <button
+    class="btn btn-success"
+    style="
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+        z-index: 999;
+    "
+    id="confirmLocationButtonDen">
+    CHẤP NHẬN
+</button>
     <script>
     // Tạo biến lưu trữ tọa độ đã pin
     let pinnedLocation2 = null;
@@ -40,21 +52,27 @@ $activate = "index";
     }).addTo(map);
 
     // Lắng nghe sự kiện click để pin tọa độ khi người dùng click chuột
+    var marker = null
     map.on('click', function (e) {
+
+        if (marker){
+            marker.remove()
+        }
         // Tạo một marker tại vị trí người dùng đã click
-        const marker2 = L.marker(e.latlng).addTo(map);
+        marker = L.marker(e.latlng).addTo(map);
         
-        // Lưu tọa độ vào biến pinnedLocation2
+        // Lưu tọa độ vào biến pinnedLocation
         pinnedLocation2 = e.latlng;
     });
 
+
     // Lắng nghe sự kiện click trên nút OK
-    const confirmLocationButton2 = document.getElementById('confirmLocationButton2');
-    confirmLocationButton2.addEventListener('click', function () {
+    const confirmLocationButtonDen = document.getElementById('confirmLocationButtonDen');
+    confirmLocationButtonDen.addEventListener('click', function () {
         // Kiểm tra xem đã có tọa độ đã pin
         if (pinnedLocation2) {
             // Chuyển hướng về trang index và truyền tọa độ làm tham số URL
-            window.location.href = `index.php?lat=${pinnedLocation2.lat}&lng=${pinnedLocation2.lng}`;
+            window.location.href = `index.php?latden=${pinnedLocation2.lat}&lngden=${pinnedLocation2.lng}`;
         }
     });
 </script>
@@ -67,12 +85,12 @@ $activate = "index";
     .showmap{
         padding: 10px;
         width: 80%;
-        height: 80%;
+        height: 40%;
         z-index: 999;
         background-color: white;
         position: fixed;
         left: 50%;
-        top: 60%;
+        top: 50%;
         transform: translate(-50%, -50%);
     }
 </style>
