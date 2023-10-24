@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2023 at 12:02 PM
+-- Generation Time: Oct 24, 2023 at 02:10 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -46,7 +46,8 @@ CREATE TABLE `chuyenxe` (
 --
 
 INSERT INTO `chuyenxe` (`CX_MA`, `KH_MA`, `TX_MA`, `TD_DATE`, `CX_SOKM`, `CX_THANHTIEN`, `CX_TDDIEMDI_X`, `CX_TDDIEMDI_Y`, `CX_TDDIEMDEN_X`, `CX_TDDIEMDEN_Y`, `CX_TRANGTHAI`) VALUES
-(1, 3, 2, '2023-09-28 00:00:00', 4, 150000.00, '10.03002', '105.77202', '10.02914', '105.77167', 0);
+(1, 3, 6, '2023-09-28 00:00:00', 4, 150000.00, '10.03002', '105.77202', '10.02914', '105.77167', 2),
+(2, 1, 6, '2023-09-22 08:00:00', 4, 160000.00, '10.1111111', '10.000000', '10.33333', '10.66666', 0);
 
 -- --------------------------------------------------------
 
@@ -55,6 +56,7 @@ INSERT INTO `chuyenxe` (`CX_MA`, `KH_MA`, `TX_MA`, `TD_DATE`, `CX_SOKM`, `CX_THA
 --
 
 CREATE TABLE `danhgia` (
+  `DG_MA` int(11) NOT NULL,
   `CX_MA` int(11) NOT NULL,
   `TC_MA` int(11) NOT NULL,
   `DG_SAO` decimal(5,0) NOT NULL,
@@ -65,8 +67,8 @@ CREATE TABLE `danhgia` (
 -- Dumping data for table `danhgia`
 --
 
-INSERT INTO `danhgia` (`CX_MA`, `TC_MA`, `DG_SAO`, `DG_NOIDUNG`) VALUES
-(1, 1, 4, 'Oke');
+INSERT INTO `danhgia` (`DG_MA`, `CX_MA`, `TC_MA`, `DG_SAO`, `DG_NOIDUNG`) VALUES
+(1, 1, 1, 4, 'Oke');
 
 -- --------------------------------------------------------
 
@@ -75,6 +77,7 @@ INSERT INTO `danhgia` (`CX_MA`, `TC_MA`, `DG_SAO`, `DG_NOIDUNG`) VALUES
 --
 
 CREATE TABLE `dgtieuchi` (
+  `DG_MA` int(11) NOT NULL,
   `TC_MA` int(11) NOT NULL,
   `TX_MA` int(11) NOT NULL,
   `DGTC_DIEM` decimal(8,0) NOT NULL
@@ -84,10 +87,11 @@ CREATE TABLE `dgtieuchi` (
 -- Dumping data for table `dgtieuchi`
 --
 
-INSERT INTO `dgtieuchi` (`TC_MA`, `TX_MA`, `DGTC_DIEM`) VALUES
-(2, 2, 6),
-(3, 3, 8),
-(4, 4, 10);
+INSERT INTO `dgtieuchi` (`DG_MA`, `TC_MA`, `TX_MA`, `DGTC_DIEM`) VALUES
+(1, 2, 2, 6),
+(3, 4, 2, 10),
+(2, 3, 3, 8),
+(4, 4, 4, 10);
 
 -- --------------------------------------------------------
 
@@ -325,6 +329,7 @@ INSERT INTO `quanhuyen` (`QH_MA`, `TP_MA`, `QH_TEN`) VALUES
 
 CREATE TABLE `taixe` (
   `TX_MA` int(11) NOT NULL,
+  `VT_MA` int(11) NOT NULL,
   `TX_TEN` varchar(30) NOT NULL,
   `TX_BANGLAI` char(3) NOT NULL,
   `TX_SDT` char(10) NOT NULL,
@@ -338,31 +343,31 @@ CREATE TABLE `taixe` (
 -- Dumping data for table `taixe`
 --
 
-INSERT INTO `taixe` (`TX_MA`, `TX_TEN`, `TX_BANGLAI`, `TX_SDT`, `TX_USERNAME`, `TX_PASSWORD`, `TX_GIOITINH`, `TX_HINHANH`) VALUES
-(2, 'Phước Vinh', 'C2', '01', 'vinh', '123', 1, NULL),
-(3, 'Trần Văn Hùng', 'C1', '02', 'hung', '123', 1, NULL),
-(4, 'Trần Thị Linh', 'D1', '03', 'linh', '123', 0, NULL),
-(5, 'Lê Dương Bảo Lâm', 'C2', '0123456789', 'lam', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(6, 'Hiếu Thứ Hai', 'C1', '0939123456', 'hieuthuhai', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(7, 'Nguyễn Thanh Tùng', 'C2', '0939456789', 'sontungmtp', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(8, 'Trần Phương Ly', 'C1', '0939246357', 'phuongly', '202cb962ac59075b964b07152d234b70', 0, NULL),
-(9, 'Ngô Kiến Huy', 'D1', '0939147289', 'ngokienhuy', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(10, 'Ninh Dương Lan Ngọc', 'C1', '0939258147', 'lanngoc', '202cb962ac59075b964b07152d234b70', 0, NULL),
-(11, 'Lâm Vĩ Dạ', 'C1', '0939369369', 'vida', '202cb962ac59075b964b07152d234b70', 0, NULL),
-(12, 'Bùi Thị Bích Phương', 'C2', '0939111111', 'bichphuong', '202cb962ac59075b964b07152d234b70', 0, NULL),
-(13, 'Huỳnh Trấn Thành', 'D1', '0939222222', 'tranthanh', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(14, 'Nguyễn Tiến Luật', 'D1', '0939258258', 'tienluat', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(15, 'Kiều Minh Tuấn', 'C1', '0939888888', 'minhtuan', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(16, 'Huỳnh Lập', 'D1', '0939999999', 'huynhlap', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(17, 'Nguyễn Việt Hoàng', 'C1', '0939147278', 'mono', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(18, 'Võ Hoài Linh', 'D1', '0939258166', 'hoailinh', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(19, 'Nguyễn Trúc Nhân', 'C2', '0939369399', 'trucnhan', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(20, 'Vinh Râu', 'D1', '0939111222', 'vinhrau', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(21, 'Lê Nguyễn Trung Đan', 'D1', '0939222333', 'binz', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(22, 'Phạm Hoàng Khoa', 'C1', '0939258999', 'karik', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(23, 'Nghiêm Vũ Hoàng Long', 'C1', '0939888999', 'mck', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(24, 'Thịnh Suy', 'D1', '0939999111', 'thinhsuy', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(25, 'John Cenna', 'C1', '0858801302', '', '', 1, 'NULL');
+INSERT INTO `taixe` (`TX_MA`, `VT_MA`, `TX_TEN`, `TX_BANGLAI`, `TX_SDT`, `TX_USERNAME`, `TX_PASSWORD`, `TX_GIOITINH`, `TX_HINHANH`) VALUES
+(2, 1, 'Phước Vinh', 'C2', '01', 'vinh', '123', 1, NULL),
+(3, 1, 'Trần Văn Hùng', 'C1', '02', 'hung', '123', 1, NULL),
+(4, 1, 'Trần Thị Linh', 'D1', '03', 'linh', '123', 0, NULL),
+(5, 1, 'Lê Dương Bảo Lâm', 'C2', '0123456789', 'lam', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(6, 1, 'Hiếu Thứ Hai', 'C1', '0939123456', 'hieuthuhai', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(7, 1, 'Nguyễn Thanh Tùng', 'C2', '0939456789', 'sontungmtp', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(8, 1, 'Trần Phương Ly', 'C1', '0939246357', 'phuongly', '202cb962ac59075b964b07152d234b70', 0, NULL),
+(9, 1, 'Ngô Kiến Huy', 'D1', '0939147289', 'ngokienhuy', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(10, 1, 'Ninh Dương Lan Ngọc', 'C1', '0939258147', 'lanngoc', '202cb962ac59075b964b07152d234b70', 0, NULL),
+(11, 1, 'Lâm Vĩ Dạ', 'C1', '0939369369', 'vida', '202cb962ac59075b964b07152d234b70', 0, NULL),
+(12, 1, 'Bùi Thị Bích Phương', 'C2', '0939111111', 'bichphuong', '202cb962ac59075b964b07152d234b70', 0, NULL),
+(13, 1, 'Huỳnh Trấn Thành', 'D1', '0939222222', 'tranthanh', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(14, 1, 'Nguyễn Tiến Luật', 'D1', '0939258258', 'tienluat', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(15, 1, 'Kiều Minh Tuấn', 'C1', '0939888888', 'minhtuan', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(16, 1, 'Huỳnh Lập', 'D1', '0939999999', 'huynhlap', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(17, 1, 'Nguyễn Việt Hoàng', 'C1', '0939147278', 'mono', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(18, 1, 'Võ Hoài Linh', 'D1', '0939258166', 'hoailinh', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(19, 1, 'Nguyễn Trúc Nhân', 'C2', '0939369399', 'trucnhan', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(20, 1, 'Vinh Râu', 'D1', '0939111222', 'vinhrau', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(21, 1, 'Lê Nguyễn Trung Đan', 'D1', '0939222333', 'binz', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(22, 1, 'Phạm Hoàng Khoa', 'C1', '0939258999', 'karik', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(23, 1, 'Nghiêm Vũ Hoàng Long', 'C1', '0939888999', 'mck', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(24, 1, 'Thịnh Suy', 'D1', '0939999111', 'thinhsuy', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(25, 1, 'John Cenna', 'C1', '0858801302', 'johncenna', '202cb962ac59075b964b07152d234b70', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -534,15 +539,14 @@ ALTER TABLE `chuyenxe`
 -- Indexes for table `danhgia`
 --
 ALTER TABLE `danhgia`
-  ADD PRIMARY KEY (`CX_MA`,`TC_MA`),
-  ADD KEY `FK_THEO_TIEU_CHI` (`TC_MA`);
+  ADD PRIMARY KEY (`DG_MA`),
+  ADD KEY `FK_THEO_TIEU_CHI` (`TC_MA`,`CX_MA`) USING BTREE;
 
 --
 -- Indexes for table `dgtieuchi`
 --
 ALTER TABLE `dgtieuchi`
-  ADD PRIMARY KEY (`TC_MA`,`TX_MA`),
-  ADD KEY `FK_CO_DG` (`TX_MA`);
+  ADD UNIQUE KEY `FK_CO_DG` (`TX_MA`,`TC_MA`,`DG_MA`) USING BTREE;
 
 --
 -- Indexes for table `gia`
@@ -598,7 +602,8 @@ ALTER TABLE `quanhuyen`
 -- Indexes for table `taixe`
 --
 ALTER TABLE `taixe`
-  ADD PRIMARY KEY (`TX_MA`);
+  ADD PRIMARY KEY (`TX_MA`),
+  ADD KEY `vitri` (`VT_MA`);
 
 --
 -- Indexes for table `thanhpho`
@@ -662,7 +667,8 @@ ALTER TABLE `danhgia`
 --
 ALTER TABLE `dgtieuchi`
   ADD CONSTRAINT `FK_CO_DG` FOREIGN KEY (`TX_MA`) REFERENCES `taixe` (`TX_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_DG_THEO` FOREIGN KEY (`TC_MA`) REFERENCES `tieuchi` (`TC_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_DG_THEO` FOREIGN KEY (`TC_MA`) REFERENCES `tieuchi` (`TC_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `co_tieu_chi` FOREIGN KEY (`TC_MA`) REFERENCES `tieuchi` (`TC_MA`);
 
 --
 -- Constraints for table `gia`
@@ -697,6 +703,12 @@ ALTER TABLE `phutrach`
 --
 ALTER TABLE `quanhuyen`
   ADD CONSTRAINT `FK_BAO_GOM` FOREIGN KEY (`TP_MA`) REFERENCES `thanhpho` (`TP_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `taixe`
+--
+ALTER TABLE `taixe`
+  ADD CONSTRAINT `vitri` FOREIGN KEY (`VT_MA`) REFERENCES `vaitro` (`VT_MA`);
 
 --
 -- Constraints for table `trangthai`

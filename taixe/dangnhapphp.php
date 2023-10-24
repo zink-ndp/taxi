@@ -21,6 +21,7 @@ if ($result->num_rows > 0) {
         $_SESSION["psw"] = $row["TX_PASSWORD"];
         $_SESSION["gioitinh"] = $row["TX_GIOITINH"];
         $_SESSION["hinhanh"] = $row["TX_HINHANH"];
+        $_SESSION["vaitro"] = $row["VT_MA"];
 
         echo '<script language="javascript">
         alert("Đăng nhập thành công!");
