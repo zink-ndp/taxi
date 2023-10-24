@@ -1,5 +1,10 @@
-const carMaker = 'images/car-maker.png'
-const userMaker = 'images/user-maker.png'
+const carMakerUrl = 'images/car-maker.png'
+const userMakerUrl = 'images/user-maker.png'
+const userMaker = L.icon({
+    iconUrl: userMakerUrl,
+    iconSize: [40,50],
+    iconAnchor: [15,15]
+})
 
 getLocation()
 
@@ -17,7 +22,7 @@ getLocation()
         var longitude = position.coords.longitude;
         const map = L.map('map').setView([latitude, longitude], 13); //khu vực hiển thị theo vị trí hiện tại
      
-        var marker = L.marker([latitude, longitude]).addTo(map); //đặt vị trí hiện tại của khách hàng
+        var marker = L.marker([latitude, longitude],{icon: userMaker}).addTo(map); //đặt vị trí hiện tại của khách hàng
 
         var popup = L.popup()
 
