@@ -275,20 +275,9 @@ $activate = "index";
     		<div class="row">
     			<div class="col-12">
 					<div class="row">
-						<div class="col-6">
-							<div id="map" class="mt-4 map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
-								<div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>					
-							</div>
-							<div class="leaflet-control-container">
-								<div class="leaflet-top leaflet-right"></div>
-								<div class="leaflet-bottom leaflet-left"></div>
-								<div class="leaflet-bottom leaflet-right"></div>
-							</div>
-              <script src="js/map_index.js"></script>
-						</div> 
-						<div class="col-6">
+          <div class="col-6">
               <?php
-                $sql = "SELECT tx.tx_ma, tx.tx_ten, x.x_ma, x.x_mota, x.x_hinhanh
+                $sql = "SELECT tx.tx_ma, tx.tx_ten, x.x_ma, x.x_mota, x.x_hinhanh, t.tt_toadox, t.tt_toadoy
                         FROM trangthai t 
                         JOIN phutrach pt on pt.TX_MA = t.TX_MA
                         JOIN xe x on x.X_MA = pt.X_MA
@@ -301,8 +290,12 @@ $activate = "index";
                               )
                         LIMIT 4;";
                 $rs = querySqlwithResult($conn, $sql);
+
+                $data = array();
+
                 $xe = $rs->fetch_all(MYSQLI_ASSOC);
                 foreach ($xe as $x){
+                  $data[] = $x
               ?>
 							<div class="container p-3 py-3 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3);">
                 <div class="card-choose">
@@ -326,8 +319,24 @@ $activate = "index";
 							</div>
               <?php
                 }
+                $jsonData = json_encode($data);
               ?>
+              <script>
+                var jsonData = <?php echo json_encode($data) ?>
+              </script>
 						</div>
+						<div class="col-6">
+							<div id="map" class="mt-4 map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+								<div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>					
+							</div>
+							<div class="leaflet-control-container">
+								<div class="leaflet-top leaflet-right"></div>
+								<div class="leaflet-bottom leaflet-left"></div>
+								<div class="leaflet-bottom leaflet-right"></div>
+							</div>
+              <script src="js/map_index.js"></script>
+						</div> 
+						
 					</div>
     			</div>
     		</div>

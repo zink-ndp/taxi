@@ -1,3 +1,5 @@
+const carMaker = 'images/car-maker.png'
+const userMaker = 'images/user-maker.png'
 
 getLocation()
 
@@ -16,8 +18,14 @@ getLocation()
         const map = L.map('map').setView([latitude, longitude], 13); //khu vực hiển thị theo vị trí hiện tại
      
         var marker = L.marker([latitude, longitude]).addTo(map); //đặt vị trí hiện tại của khách hàng
-    
+
         var popup = L.popup()
+
+        // jsonData.forEach(function(item) {
+        //     const carmarker = L.marker([item.tt_toadox, item.tt_toadoy], {
+        //         icon: carIcon // Sử dụng biểu tượng xe ô tô
+        //     }).addTo(map);
+        // });
     
         // L.circle([latitude, longitude], {radius: 6000}).addTo(map);
         const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
