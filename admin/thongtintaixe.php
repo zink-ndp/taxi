@@ -191,6 +191,7 @@
                     <th>Mã xe</th>
                     <th>Giới tính</th>
                     <th>Hình ảnh</th>
+                    <th>Xem chi tiết đánh giá</th>
                 </tr>
             </thead>
             <tbody>
@@ -223,13 +224,20 @@
                         }
                         echo "</td>";
                         echo '<td>';
-            if (!empty($row["TX_HINHANH"])) {
-                echo '<img src="' . $row["TX_HINHANH"] . '" alt="Hình ảnh tài xế" width="100">';
-            } else {
-                echo 'Chưa có hình bé ơi';
-            }
-            echo '</td>';
-            echo "</tr>";
+                        if (!empty($row["TX_HINHANH"])) {
+                            echo '<img src="' . $row["TX_HINHANH"] . '" alt="Hình ảnh tài xế" width="100">';
+                        } else {
+                            echo 'Chưa có hình bé ơi';
+                        }
+                        echo '</td>';
+                        echo '<td>
+                          <form action="chitietdanhgiatx.php" method="get">
+                              <input type="hidden" name="txid" value="' . $row["TX_MA"] . '">
+                              <button class="btn btn-link" type="submit"><i class="fa-solid fa-table-list"></i></button>
+                          </form>
+                      </td>';
+
+                echo "</tr>";
             
         }
         $totalEmployees = $result->num_rows; // Đếm tổng số khách hàng

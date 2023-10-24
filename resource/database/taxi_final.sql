@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 18, 2023 lúc 07:15 PM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Oct 21, 2023 at 12:02 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `taxi`
+-- Database: `taxi`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chuyenxe`
+-- Table structure for table `chuyenxe`
 --
 
 CREATE TABLE `chuyenxe` (
@@ -42,7 +42,7 @@ CREATE TABLE `chuyenxe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chuyenxe`
+-- Dumping data for table `chuyenxe`
 --
 
 INSERT INTO `chuyenxe` (`CX_MA`, `KH_MA`, `TX_MA`, `TD_DATE`, `CX_SOKM`, `CX_THANHTIEN`, `CX_TDDIEMDI_X`, `CX_TDDIEMDI_Y`, `CX_TDDIEMDEN_X`, `CX_TDDIEMDEN_Y`, `CX_TRANGTHAI`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `chuyenxe` (`CX_MA`, `KH_MA`, `TX_MA`, `TD_DATE`, `CX_SOKM`, `CX_THA
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `danhgia`
+-- Table structure for table `danhgia`
 --
 
 CREATE TABLE `danhgia` (
@@ -62,7 +62,7 @@ CREATE TABLE `danhgia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `danhgia`
+-- Dumping data for table `danhgia`
 --
 
 INSERT INTO `danhgia` (`CX_MA`, `TC_MA`, `DG_SAO`, `DG_NOIDUNG`) VALUES
@@ -71,7 +71,7 @@ INSERT INTO `danhgia` (`CX_MA`, `TC_MA`, `DG_SAO`, `DG_NOIDUNG`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `dgtieuchi`
+-- Table structure for table `dgtieuchi`
 --
 
 CREATE TABLE `dgtieuchi` (
@@ -81,7 +81,7 @@ CREATE TABLE `dgtieuchi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `dgtieuchi`
+-- Dumping data for table `dgtieuchi`
 --
 
 INSERT INTO `dgtieuchi` (`TC_MA`, `TX_MA`, `DGTC_DIEM`) VALUES
@@ -92,7 +92,7 @@ INSERT INTO `dgtieuchi` (`TC_MA`, `TX_MA`, `DGTC_DIEM`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `gia`
+-- Table structure for table `gia`
 --
 
 CREATE TABLE `gia` (
@@ -103,7 +103,7 @@ CREATE TABLE `gia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `gia`
+-- Dumping data for table `gia`
 --
 
 INSERT INTO `gia` (`TD_DATE`, `GC_MA`, `LX_MA`, `G_TIEN`) VALUES
@@ -141,7 +141,7 @@ INSERT INTO `gia` (`TD_DATE`, `GC_MA`, `LX_MA`, `G_TIEN`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `giacuoc`
+-- Table structure for table `giacuoc`
 --
 
 CREATE TABLE `giacuoc` (
@@ -151,7 +151,7 @@ CREATE TABLE `giacuoc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `giacuoc`
+-- Dumping data for table `giacuoc`
 --
 
 INSERT INTO `giacuoc` (`GC_MA`, `GC_CANTREN`, `GC_CANDUOI`) VALUES
@@ -162,7 +162,7 @@ INSERT INTO `giacuoc` (`GC_MA`, `GC_CANTREN`, `GC_CANDUOI`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `khachhang`
+-- Table structure for table `khachhang`
 --
 
 CREATE TABLE `khachhang` (
@@ -177,7 +177,7 @@ CREATE TABLE `khachhang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `khachhang`
+-- Dumping data for table `khachhang`
 --
 
 INSERT INTO `khachhang` (`KH_MA`, `QH_MA`, `KH_TEN`, `KH_SDT`, `KH_EMAIL`, `KH_USERNAME`, `KH_PASSWORD`, `KH_GIOITINH`) VALUES
@@ -193,7 +193,7 @@ INSERT INTO `khachhang` (`KH_MA`, `QH_MA`, `KH_TEN`, `KH_SDT`, `KH_EMAIL`, `KH_U
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `loaixe`
+-- Table structure for table `loaixe`
 --
 
 CREATE TABLE `loaixe` (
@@ -203,7 +203,7 @@ CREATE TABLE `loaixe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `loaixe`
+-- Dumping data for table `loaixe`
 --
 
 INSERT INTO `loaixe` (`LX_MA`, `LX_MODEL`, `LX_SOCHO`) VALUES
@@ -215,7 +215,7 @@ INSERT INTO `loaixe` (`LX_MA`, `LX_MODEL`, `LX_SOCHO`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nhanvien`
+-- Table structure for table `nhanvien`
 --
 
 CREATE TABLE `nhanvien` (
@@ -232,7 +232,7 @@ CREATE TABLE `nhanvien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `nhanvien`
+-- Dumping data for table `nhanvien`
 --
 
 INSERT INTO `nhanvien` (`NV_ID`, `QH_MA`, `VT_MA`, `NV_TEN`, `NV_SDT`, `NV_EMAIL`, `NV_USERNAME`, `NV_PASSWORD`, `NV_GIOITINH`, `NV_HINHANH`) VALUES
@@ -245,7 +245,7 @@ INSERT INTO `nhanvien` (`NV_ID`, `QH_MA`, `VT_MA`, `NV_TEN`, `NV_SDT`, `NV_EMAIL
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `phutrach`
+-- Table structure for table `phutrach`
 --
 
 CREATE TABLE `phutrach` (
@@ -255,11 +255,10 @@ CREATE TABLE `phutrach` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `phutrach`
+-- Dumping data for table `phutrach`
 --
 
 INSERT INTO `phutrach` (`TX_MA`, `TD_DATE`, `X_MA`) VALUES
-(1, '2023-09-22 08:00:00', 1),
 (2, '2023-09-22 08:00:00', 2),
 (3, '2023-09-22 00:00:00', 3),
 (4, '2023-09-22 08:00:00', 4),
@@ -268,12 +267,13 @@ INSERT INTO `phutrach` (`TX_MA`, `TD_DATE`, `X_MA`) VALUES
 (7, '2023-09-22 08:00:00', 7),
 (8, '2023-09-22 00:00:00', 8),
 (9, '2023-09-22 08:00:00', 9),
-(10, '2023-09-22 08:00:00', 10);
+(10, '2023-09-22 08:00:00', 10),
+(25, '2023-10-20 00:00:00', 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `quanhuyen`
+-- Table structure for table `quanhuyen`
 --
 
 CREATE TABLE `quanhuyen` (
@@ -283,7 +283,7 @@ CREATE TABLE `quanhuyen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `quanhuyen`
+-- Dumping data for table `quanhuyen`
 --
 
 INSERT INTO `quanhuyen` (`QH_MA`, `TP_MA`, `QH_TEN`) VALUES
@@ -320,7 +320,7 @@ INSERT INTO `quanhuyen` (`QH_MA`, `TP_MA`, `QH_TEN`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `taixe`
+-- Table structure for table `taixe`
 --
 
 CREATE TABLE `taixe` (
@@ -335,14 +335,13 @@ CREATE TABLE `taixe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `taixe`
+-- Dumping data for table `taixe`
 --
 
 INSERT INTO `taixe` (`TX_MA`, `TX_TEN`, `TX_BANGLAI`, `TX_SDT`, `TX_USERNAME`, `TX_PASSWORD`, `TX_GIOITINH`, `TX_HINHANH`) VALUES
-(1, 'Nguyễn Thanh Hậu', 'C2', '0', 'hau', '123', 1, NULL),
-(2, 'Phước Vinh', 'C2', '0', 'vinh', '123', 1, NULL),
-(3, 'Trần Văn Hùng', 'C1', '0', 'hung', '123', 1, NULL),
-(4, 'Trần Thị Linh', 'D1', '0', 'linh', '123', 0, NULL),
+(2, 'Phước Vinh', 'C2', '01', 'vinh', '123', 1, NULL),
+(3, 'Trần Văn Hùng', 'C1', '02', 'hung', '123', 1, NULL),
+(4, 'Trần Thị Linh', 'D1', '03', 'linh', '123', 0, NULL),
 (5, 'Lê Dương Bảo Lâm', 'C2', '0123456789', 'lam', '202cb962ac59075b964b07152d234b70', 1, NULL),
 (6, 'Hiếu Thứ Hai', 'C1', '0939123456', 'hieuthuhai', '202cb962ac59075b964b07152d234b70', 1, NULL),
 (7, 'Nguyễn Thanh Tùng', 'C2', '0939456789', 'sontungmtp', '202cb962ac59075b964b07152d234b70', 1, NULL),
@@ -362,12 +361,13 @@ INSERT INTO `taixe` (`TX_MA`, `TX_TEN`, `TX_BANGLAI`, `TX_SDT`, `TX_USERNAME`, `
 (21, 'Lê Nguyễn Trung Đan', 'D1', '0939222333', 'binz', '202cb962ac59075b964b07152d234b70', 1, NULL),
 (22, 'Phạm Hoàng Khoa', 'C1', '0939258999', 'karik', '202cb962ac59075b964b07152d234b70', 1, NULL),
 (23, 'Nghiêm Vũ Hoàng Long', 'C1', '0939888999', 'mck', '202cb962ac59075b964b07152d234b70', 1, NULL),
-(24, 'Thịnh Suy', 'D1', '0939999111', 'thinhsuy', '202cb962ac59075b964b07152d234b70', 1, NULL);
+(24, 'Thịnh Suy', 'D1', '0939999111', 'thinhsuy', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(25, 'John Cenna', 'C1', '0858801302', '', '', 1, 'NULL');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `thanhpho`
+-- Table structure for table `thanhpho`
 --
 
 CREATE TABLE `thanhpho` (
@@ -376,7 +376,7 @@ CREATE TABLE `thanhpho` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `thanhpho`
+-- Dumping data for table `thanhpho`
 --
 
 INSERT INTO `thanhpho` (`TP_MA`, `TP_TEN`) VALUES
@@ -388,7 +388,7 @@ INSERT INTO `thanhpho` (`TP_MA`, `TP_TEN`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `thoidiem`
+-- Table structure for table `thoidiem`
 --
 
 CREATE TABLE `thoidiem` (
@@ -396,7 +396,7 @@ CREATE TABLE `thoidiem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `thoidiem`
+-- Dumping data for table `thoidiem`
 --
 
 INSERT INTO `thoidiem` (`TD_DATE`) VALUES
@@ -407,7 +407,7 @@ INSERT INTO `thoidiem` (`TD_DATE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tieuchi`
+-- Table structure for table `tieuchi`
 --
 
 CREATE TABLE `tieuchi` (
@@ -416,7 +416,7 @@ CREATE TABLE `tieuchi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tieuchi`
+-- Dumping data for table `tieuchi`
 --
 
 INSERT INTO `tieuchi` (`TC_MA`, `TC_TEN`) VALUES
@@ -428,7 +428,7 @@ INSERT INTO `tieuchi` (`TC_MA`, `TC_TEN`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `trangthai`
+-- Table structure for table `trangthai`
 --
 
 CREATE TABLE `trangthai` (
@@ -440,11 +440,10 @@ CREATE TABLE `trangthai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `trangthai`
+-- Dumping data for table `trangthai`
 --
 
 INSERT INTO `trangthai` (`TX_MA`, `TD_DATE`, `TT_TRANGTHAI`, `TT_TOADOX`, `TT_TOADOY`) VALUES
-(1, '2023-10-02 00:00:00', 1, '10.028612', '105.771947'),
 (2, '2023-10-02 00:00:00', 1, '10.032729', '105.774329'),
 (3, '2023-10-02 00:00:00', 1, '10.02780', '105.77006'),
 (4, '2023-10-02 00:00:00', 1, '10.030492', '105.76904'),
@@ -472,7 +471,7 @@ INSERT INTO `trangthai` (`TX_MA`, `TD_DATE`, `TT_TRANGTHAI`, `TT_TOADOX`, `TT_TO
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `vaitro`
+-- Table structure for table `vaitro`
 --
 
 CREATE TABLE `vaitro` (
@@ -481,7 +480,7 @@ CREATE TABLE `vaitro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `vaitro`
+-- Dumping data for table `vaitro`
 --
 
 INSERT INTO `vaitro` (`VT_MA`, `VT_TEN`) VALUES
@@ -491,7 +490,7 @@ INSERT INTO `vaitro` (`VT_MA`, `VT_TEN`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `xe`
+-- Table structure for table `xe`
 --
 
 CREATE TABLE `xe` (
@@ -503,7 +502,7 @@ CREATE TABLE `xe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `xe`
+-- Dumping data for table `xe`
 --
 
 INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`, `X_MOTA`, `X_HINHANH`) VALUES
@@ -519,11 +518,11 @@ INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`, `X_MOTA`, `X_HINHANH`) VALUES
 (10, 4, '65A-12445', 'Toyota Avanza màu đen', 'xe10.jpg');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `chuyenxe`
+-- Indexes for table `chuyenxe`
 --
 ALTER TABLE `chuyenxe`
   ADD PRIMARY KEY (`CX_MA`),
@@ -532,21 +531,21 @@ ALTER TABLE `chuyenxe`
   ADD KEY `FK_THUC_HIEN_LUC` (`TD_DATE`);
 
 --
--- Chỉ mục cho bảng `danhgia`
+-- Indexes for table `danhgia`
 --
 ALTER TABLE `danhgia`
   ADD PRIMARY KEY (`CX_MA`,`TC_MA`),
   ADD KEY `FK_THEO_TIEU_CHI` (`TC_MA`);
 
 --
--- Chỉ mục cho bảng `dgtieuchi`
+-- Indexes for table `dgtieuchi`
 --
 ALTER TABLE `dgtieuchi`
   ADD PRIMARY KEY (`TC_MA`,`TX_MA`),
   ADD KEY `FK_CO_DG` (`TX_MA`);
 
 --
--- Chỉ mục cho bảng `gia`
+-- Indexes for table `gia`
 --
 ALTER TABLE `gia`
   ADD PRIMARY KEY (`TD_DATE`,`GC_MA`,`LX_MA`),
@@ -554,26 +553,26 @@ ALTER TABLE `gia`
   ADD KEY `FK_THEO` (`LX_MA`);
 
 --
--- Chỉ mục cho bảng `giacuoc`
+-- Indexes for table `giacuoc`
 --
 ALTER TABLE `giacuoc`
   ADD PRIMARY KEY (`GC_MA`);
 
 --
--- Chỉ mục cho bảng `khachhang`
+-- Indexes for table `khachhang`
 --
 ALTER TABLE `khachhang`
   ADD PRIMARY KEY (`KH_MA`),
   ADD KEY `FK_CO_DIA_CHI` (`QH_MA`);
 
 --
--- Chỉ mục cho bảng `loaixe`
+-- Indexes for table `loaixe`
 --
 ALTER TABLE `loaixe`
   ADD PRIMARY KEY (`LX_MA`);
 
 --
--- Chỉ mục cho bảng `nhanvien`
+-- Indexes for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
   ADD PRIMARY KEY (`NV_ID`),
@@ -581,70 +580,70 @@ ALTER TABLE `nhanvien`
   ADD KEY `FK_DIA_CHI_NV` (`QH_MA`);
 
 --
--- Chỉ mục cho bảng `phutrach`
+-- Indexes for table `phutrach`
 --
 ALTER TABLE `phutrach`
-  ADD PRIMARY KEY (`TX_MA`,`TD_DATE`,`X_MA`),
+  ADD PRIMARY KEY (`TX_MA`),
   ADD KEY `FK_DUOC_PHU_TRACH` (`X_MA`),
   ADD KEY `FK_PHU_TRACH_TAI_TD` (`TD_DATE`);
 
 --
--- Chỉ mục cho bảng `quanhuyen`
+-- Indexes for table `quanhuyen`
 --
 ALTER TABLE `quanhuyen`
   ADD PRIMARY KEY (`QH_MA`),
   ADD KEY `FK_BAO_GOM` (`TP_MA`);
 
 --
--- Chỉ mục cho bảng `taixe`
+-- Indexes for table `taixe`
 --
 ALTER TABLE `taixe`
   ADD PRIMARY KEY (`TX_MA`);
 
 --
--- Chỉ mục cho bảng `thanhpho`
+-- Indexes for table `thanhpho`
 --
 ALTER TABLE `thanhpho`
   ADD PRIMARY KEY (`TP_MA`);
 
 --
--- Chỉ mục cho bảng `thoidiem`
+-- Indexes for table `thoidiem`
 --
 ALTER TABLE `thoidiem`
   ADD PRIMARY KEY (`TD_DATE`);
 
 --
--- Chỉ mục cho bảng `tieuchi`
+-- Indexes for table `tieuchi`
 --
 ALTER TABLE `tieuchi`
   ADD PRIMARY KEY (`TC_MA`);
 
 --
--- Chỉ mục cho bảng `trangthai`
+-- Indexes for table `trangthai`
 --
 ALTER TABLE `trangthai`
   ADD PRIMARY KEY (`TX_MA`,`TD_DATE`),
   ADD KEY `FK_TRANG_THAI_TAI_TD` (`TD_DATE`);
 
 --
--- Chỉ mục cho bảng `vaitro`
+-- Indexes for table `vaitro`
 --
 ALTER TABLE `vaitro`
   ADD PRIMARY KEY (`VT_MA`);
 
 --
--- Chỉ mục cho bảng `xe`
+-- Indexes for table `xe`
 --
 ALTER TABLE `xe`
   ADD PRIMARY KEY (`X_MA`),
   ADD KEY `FK_THUOC_LOAI` (`LX_MA`);
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `chuyenxe`
+-- Constraints for table `chuyenxe`
 --
 ALTER TABLE `chuyenxe`
   ADD CONSTRAINT `FK_DAT_XE` FOREIGN KEY (`KH_MA`) REFERENCES `khachhang` (`KH_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -652,21 +651,21 @@ ALTER TABLE `chuyenxe`
   ADD CONSTRAINT `FK_THUC_HIEN_LUC` FOREIGN KEY (`TD_DATE`) REFERENCES `thoidiem` (`TD_DATE`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `danhgia`
+-- Constraints for table `danhgia`
 --
 ALTER TABLE `danhgia`
   ADD CONSTRAINT `FK_DANH_GIA_CHO` FOREIGN KEY (`CX_MA`) REFERENCES `chuyenxe` (`CX_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_THEO_TIEU_CHI` FOREIGN KEY (`TC_MA`) REFERENCES `tieuchi` (`TC_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `dgtieuchi`
+-- Constraints for table `dgtieuchi`
 --
 ALTER TABLE `dgtieuchi`
   ADD CONSTRAINT `FK_CO_DG` FOREIGN KEY (`TX_MA`) REFERENCES `taixe` (`TX_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_DG_THEO` FOREIGN KEY (`TC_MA`) REFERENCES `tieuchi` (`TC_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `gia`
+-- Constraints for table `gia`
 --
 ALTER TABLE `gia`
   ADD CONSTRAINT `FK_CO_CHI_TIET_GIA` FOREIGN KEY (`GC_MA`) REFERENCES `giacuoc` (`GC_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -674,41 +673,40 @@ ALTER TABLE `gia`
   ADD CONSTRAINT `FK_THEO` FOREIGN KEY (`LX_MA`) REFERENCES `loaixe` (`LX_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `khachhang`
+-- Constraints for table `khachhang`
 --
 ALTER TABLE `khachhang`
   ADD CONSTRAINT `FK_CO_DIA_CHI` FOREIGN KEY (`QH_MA`) REFERENCES `quanhuyen` (`QH_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `nhanvien`
+-- Constraints for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
   ADD CONSTRAINT `FK_CO_VAI_TRO` FOREIGN KEY (`VT_MA`) REFERENCES `vaitro` (`VT_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_DIA_CHI_NV` FOREIGN KEY (`QH_MA`) REFERENCES `quanhuyen` (`QH_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `phutrach`
+-- Constraints for table `phutrach`
 --
 ALTER TABLE `phutrach`
   ADD CONSTRAINT `FK_DUOC_PHU_TRACH` FOREIGN KEY (`X_MA`) REFERENCES `xe` (`X_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_PHU_TRACH` FOREIGN KEY (`TX_MA`) REFERENCES `taixe` (`TX_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_PHU_TRACH_TAI_TD` FOREIGN KEY (`TD_DATE`) REFERENCES `thoidiem` (`TD_DATE`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_PHU_TRACH` FOREIGN KEY (`TX_MA`) REFERENCES `taixe` (`TX_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `quanhuyen`
+-- Constraints for table `quanhuyen`
 --
 ALTER TABLE `quanhuyen`
   ADD CONSTRAINT `FK_BAO_GOM` FOREIGN KEY (`TP_MA`) REFERENCES `thanhpho` (`TP_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `trangthai`
+-- Constraints for table `trangthai`
 --
 ALTER TABLE `trangthai`
   ADD CONSTRAINT `FK_CO_TINH_TRANG` FOREIGN KEY (`TX_MA`) REFERENCES `taixe` (`TX_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_TRANG_THAI_TAI_TD` FOREIGN KEY (`TD_DATE`) REFERENCES `thoidiem` (`TD_DATE`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `xe`
+-- Constraints for table `xe`
 --
 ALTER TABLE `xe`
   ADD CONSTRAINT `FK_THUOC_LOAI` FOREIGN KEY (`LX_MA`) REFERENCES `loaixe` (`LX_MA`) ON DELETE NO ACTION ON UPDATE NO ACTION;

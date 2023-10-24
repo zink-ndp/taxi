@@ -1,27 +1,31 @@
 <?php
-session_start(); // Bắt đầu phiên
+// Kết nối đến CSDL
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "taxi";
 
-require 'connect.php'; // Bao gồm tệp kết nối CSDL
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if (isset($_POST["luuthongtin"])) {
-    $ten = $_POST["ten"];
-    $email = $_POST["email"];
-    $sdt = $_POST["sdt"];
-
-    // Đảm bảo biến phiên ("session") đã được thiết lập và người dùng đã đăng nhập
-    if (isset($_SESSION["username"])) {
-        $username = $_SESSION["username"];
-
-        try {
-            // Thực hiện câu lệnh SQL
-            $update_query = "UPDATE khachhang SET KH_TEN = ?, KH_SDT = ?, KH_EMAIL = ? WHERE KH_USERNAME = ?";
-            $stmt = $conn->prepare($update_query);
-            $stmt->execute([$ten, $email, $sdt, $username]);
-    
-            echo "Thông tin cá nhân đã được cập nhật thành công.";
-        } catch (PDOException $e) {
-            echo "Lỗi khi cập nhật thông tin cá nhân: " . $e->getMessage();
-        }
-    }
+// Kiểm tra kết nối
+if ($conn->connect_error) {
+    die("Kết nối không thành công: " . $conn->connect_error);
 }
+
+// Nhận dữ liệu từ biểu mẫu
+$username = $_POST['username'];
+$full_name = $_POST['full_name'];
+$phone = $_POST['phone'];
+$email = $_POST['email'];
+
+// Cập nhật thông tin người dùng trong CSDL
+$sql = "UPDATE khachhang SET KH_TEN='$full_name',KH_SDT='$phone', KH_EMAIL='$email' WHERE kH_USERNAME='$username'";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Thông tin người dùng đã được cập nhật thành công.";
+} else {
+    echo "Lỗi: " . $conn->error;
+}
+
+$conn->close();
 ?>
