@@ -5,16 +5,6 @@ unset($_SESSION['latdi']);
 unset($_SESSION['lngdi']);
 ?>
 
-<?php 
-if (isset($_POST['tx_ma'])) {
-  $form_action = "xulydatxe.php";
-  $matx = $_POST['tx_ma'];
-} else {
-  $form_action = "chon_taixe.php";
-  $matx = '';
-}
-?>  
-
 <div class="showmap"> 
     <div id="map" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
         <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>
@@ -80,7 +70,7 @@ let pinnedLocation = null;
     .showmap{
         padding: 10px;
         width: 80%;
-        height: 40%;
+        height: 55%;
         z-index: 99;
         background-color: white;
         position: fixed;
