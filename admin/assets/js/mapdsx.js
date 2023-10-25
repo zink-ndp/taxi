@@ -34,7 +34,6 @@ function mapTrangThai(trangThai) {
 }
 
 // ...
-
 // Ví dụ: Làm việc với dữ liệu JSON
 jsonData.forEach(function (item) {
     const marker = L.marker([item.TT_TOADOX, item.TT_TOADOY], {

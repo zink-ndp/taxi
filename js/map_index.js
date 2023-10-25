@@ -5,6 +5,11 @@ const userMaker = L.icon({
     iconSize: [40,50],
     iconAnchor: [15,15]
 })
+const carMaker = L.icon({
+    iconUrl: carMakerUrl,
+    iconSize: [40,50],
+    iconAnchor: [15,15]
+})
 
 getLocation()
 
@@ -26,11 +31,25 @@ getLocation()
 
         var popup = L.popup()
 
-        // jsonData.forEach(function(item) {
-        //     const carmarker = L.marker([item.tt_toadox, item.tt_toadoy], {
-        //         icon: carIcon // Sử dụng biểu tượng xe ô tô
-        //     }).addTo(map);
-        // });
+        console.log(jsonData)
+
+        var route = null;
+        jsonData.forEach(function(item) {
+            const marker = L.marker([item.tt_toadox, item.tt_toadoy],{icon: carMaker}).addTo(map);
+
+            marker.on('click', function(){
+                if (route) {
+                    route.remove()
+                }
+                route = L.Routing.control({
+                    waypoints: [
+                        L.latLng(latitude, longitude),
+                        L.latLng(item.tt_toadox, item.tt_toadoy)
+                    ]
+                }).addTo(map)
+            })
+        });
+
     
         // L.circle([latitude, longitude], {radius: 6000}).addTo(map);
         const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

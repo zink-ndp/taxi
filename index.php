@@ -266,10 +266,8 @@ $activate = "index";
                 $rs = querySqlwithResult($conn, $sql);
 
                 $data = array();
-
-                $xe = $rs->fetch_all(MYSQLI_ASSOC);
-                foreach ($xe as $x){
-                  $data[] = $x
+                while ($x = mysqli_fetch_assoc($rs)) {
+                  $data[] = $x;
               ?>
 							<div class="container p-3 py-3 mt-2" style="border-radius: 15px; background-color:white; box-shadow: 5px 5px 5px rgba(0,0,0,0.3);">
                 <div class="card-choose">
@@ -295,9 +293,8 @@ $activate = "index";
                 }
                 $jsonData = json_encode($data);
               ?>
-              <script>
-                var jsonData = <?php echo json_encode($data) ?>
-              </script>
+                    
+              
 						</div>
 						<div class="col-6">
 							<div id="map" class="mt-4 map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
@@ -308,9 +305,12 @@ $activate = "index";
 								<div class="leaflet-bottom leaflet-left"></div>
 								<div class="leaflet-bottom leaflet-right"></div>
 							</div>
-              <script src="js/map_index.js"></script>
 						</div> 
-						
+            
+            <script>
+              var jsonData = <?php echo $jsonData; ?>
+            </script>
+            <script src="js/map_index.js"></script>
 					</div>
     			</div>
     		</div>
