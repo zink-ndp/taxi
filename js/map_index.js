@@ -34,10 +34,24 @@ getLocation()
         console.log(jsonData)
 
         var route = null;
+        var popup = null;
         jsonData.forEach(function(item) {
             const marker = L.marker([item.tt_toadox, item.tt_toadoy],{icon: carMaker}).addTo(map);
 
             marker.on('click', function(){
+
+                if(popup){
+                    popup.remove()
+                }
+                popup = L.popup()
+                .setLatLng([item.tt_toadox, item.tt_toadoy])
+                .setContent(`<b>Tài xế:</b> ${item.tx_ten}</br>
+                             <b>Xe:</b> ${item.x_mota}</br>
+                             <form class="mt-2 float-end" action="#datxe" method="post">
+                                <input type="hidden" name="tx_ma" value="${item.tx_ma}">
+                                <button type="submit" class="btn btn-success">Đặt ngay</button>
+                            </form>`).openOn(map)
+
                 if (route) {
                     route.remove()
                 }
@@ -45,7 +59,14 @@ getLocation()
                     waypoints: [
                         L.latLng(latitude, longitude),
                         L.latLng(item.tt_toadox, item.tt_toadoy)
-                    ]
+                    ],
+                    draggableWaypoints: false,
+                    routeWhileDragging: false,
+                    fitSelectedRoutes: false,
+                    lineOptions: {
+                        styles: [{ color: '#19d600', opacity: 0.6, weight: 6 }]
+                    },
+                    createMarker: function () {return null}
                 }).addTo(map)
             })
         });
