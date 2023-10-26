@@ -1,6 +1,10 @@
 <?php
 $activate = "index";
 @include('header.php');
+// @include('chon_diemdi.php');
+// @include('luudiemdi.php');
+// @include('chon_diemden.php');
+// @include('luudiemden');
 ?>
 
 
@@ -77,53 +81,41 @@ $activate = "index";
             const confirmLocationButton = document.getElementById('confirmLocationButton');
             confirmLocationButton.addEventListener('click', function () {
                 // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemdi hay không
-                const lat = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
-                const lng = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
+                const latDi = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
+                const lngDi = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
                 
                 // Nếu có tọa độ, hiển thị nó trong ô input
                 if (lat !== null && lng !== null) {
-                    document.querySelector('input[name="diemdi"]').value = `Lat: ${lat}, Lng: ${lng}`;
+                    document.querySelector('input[name="diemdi"]').value = `Lat: ${latDi}, Lng: ${lngDi}`;
                 }
             });
         </script>
 
                                   
 
+             
+            <div class="form-group">
+                <label for="" class="label">Vị trí muốn đến</label>
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                    <input name="diemden" type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                    <a href="chon_diemden.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
+                </div>
+            </div>
+            <script>
+            // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ
+            const confirmLocationButton2 = document.getElementById('confirmLocationButton2');
+            confirmLocationButton.addEventListener('click', function () {
+                // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemden hay không
+                const latDen = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
+                const lngDen = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
+                
+                // Nếu có tọa độ, hiển thị nó trong ô input
+                if (latDen !== null && lngDen !== null) {
+                    document.querySelector('input[name="diemden"]').value = `Lat: ${latDen}, Lng: ${lngDen}`;
+                }
+            });
+        </script>
 
-<div class="form-group">
-    <label for="" class="label">Vị trí muốn đến</label>
-    <div class="d-flex flex-row justify-content-center align-items-center">
-        <input name="diemden" type="text" class="form-control" placeholder="City, Airport, Station, etc">
-        <a href="chon_diemden.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
-    </div>
-</div>
-
-<script>
-    <?php
-    session_start();
-    $latDen = null;
-    $lngDen = null;
-    if (isset($_SESSION['pinned_location_den'])) {
-        $pinnedLocationDen = $_SESSION['pinned_location_den'];
-        $latDen = $pinnedLocationDen['lat'];
-        $lngDen = $pinnedLocationDen['lng'];
-    }
-    ?>
-
-    const lat = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
-    const lng = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
-    
-    // Kiểm tra nếu có tọa độ từ trang chon_diemden
-    if (lat !== null && lng !== null) {
-        // Gán giá trị tọa độ từ `GET` vào ô input
-        const inputDiemDen = document.querySelector('input[name="diemden"]');
-        inputDiemDen.value = `Lat: ${lat}, Lng: ${lng}`;
-    } else if (latDen !== null && lngDen !== null) {
-        // Gán giá trị tọa độ từ `session` vào ô input
-        const inputDiemDen = document.querySelector('input[name="diemden"]');
-        inputDiemDen.value = `Lat: ${latDen}, Lng: ${lngDen}`;
-    }
-</script>
 
 <!-- <script>
                 // Mã JavaScript hiển thị bản đồ

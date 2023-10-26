@@ -11,7 +11,7 @@ if (isset($_POST['tx_ma'])) {
   $form_action = "chon_taixe.php";
   $matx = '';
 }
-?>  
+?>
 
 <div class="showmap"> 
     <div id="map" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
@@ -26,8 +26,8 @@ if (isset($_POST['tx_ma'])) {
 
 <button id="confirmLocationButton">CHẤP NHẬN</button>
 <script>
-// Tạo biến lưu trữ tọa độ đã pin
-let pinnedLocation = null;
+    // Tạo biến lưu trữ tọa độ đã pin
+    let pinnedLocation = null;
 
     const map = L.map('map').setView([10.03, 105.77], 15);
 
@@ -54,11 +54,9 @@ let pinnedLocation = null;
             window.location.href = `index.php?lat=${pinnedLocation.lat}&lng=${pinnedLocation.lng}`;
         }
     });
-// });
 </script>
 
-<div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5"></div>  
-
+<div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5"></div>
 <style> 
     .showmap{
         padding: 10px;
@@ -73,43 +71,20 @@ let pinnedLocation = null;
     }
 </style>
 
-<!-- Thêm mã JavaScript sau cùng để xử lý pin tọa độ -->
-<!-- <script>
-// Đợi cho đến khi trang đã tải xong
-window.addEventListener('load', function () {
-    // Tạo bản đồ sau khi trang đã tải
-    const map = L.map('map').setView([10.03, 105.77], 15);
-    
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    // Lắng nghe sự kiện click để pin tọa độ
-    const pinLocationButton = document.getElementById('pinLocationButton');
-    pinLocationButton.addEventListener('click', function () {
-        // Tạo một marker tại vị trí hiện tại của người dùng
-        const marker = L.marker(map.getCenter()).addTo(map);
+<<script>
+    // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ cho điểm đi
+    const confirmLocationButton = document.getElementById('confirmLocationButton');
+    confirmLocationButton.addEventListener('click', function () {
+        // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemdi hay không
+        const latDi = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
+        const lngDi = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>
+        
+        // Nếu có tọa độ, hiển thị nó trong ô input cho điểm đi
+        if (latDi !== 'null' && lngDi !== 'null') {
+            document.querySelector('input[name="diemdi"]').value = `Lat: ${latDi}, Lng: ${lngDi}`;
+        }
     });
-});
-</script> -->
-
-<!-- Thêm mã JavaScript sau cùng để xử lý pin tọa độ khi click chuột -->
-<!-- <script>
-// Đợi cho đến khi trang đã tải xong
-window.addEventListener('load', function () {
-    // Tạo bản đồ sau khi trang đã tải
-    const map = L.map('map').setView([10.03, 105.77], 15);
     
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+   
+</script>
 
-    // Lắng nghe sự kiện click để pin tọa độ khi người dùng click chuột
-    map.on('click', function (e) {
-        // Tạo một marker tại vị trí người dùng đã click
-        const marker = L.marker(e.latlng).addTo(map);
-    });
-});
-</script> -->
