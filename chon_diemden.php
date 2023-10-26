@@ -1,7 +1,10 @@
 <?php
 $activate = "index";
 @include('header.php');
+unset($_SESSION['latden']);
+unset($_SESSION['lngden']);
 ?>
+
 
 <?php 
 if (isset($_POST['tx_ma'])) {
@@ -14,6 +17,9 @@ if (isset($_POST['tx_ma'])) {
 ?>
 
 <div class="showmap">
+=======
+<div class="showmap"> 
+
     <div id="map" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
         <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>
     </div>
@@ -24,8 +30,18 @@ if (isset($_POST['tx_ma'])) {
     </div>
 </div>
 
-<button id="confirmLocationButton2">CHẤP NHẬN</button>
-<script>
+<button
+    class="btn btn-success"
+    style="
+        position: fixed;
+        bottom: 10%;
+        right: 10%;
+        z-index: 999;
+    "
+    id="confirmLocationButtonDen">
+    CHẤP NHẬN
+</button>
+    <script>
     // Tạo biến lưu trữ tọa độ đã pin
     let pinnedLocation2 = null;
 
@@ -37,21 +53,27 @@ if (isset($_POST['tx_ma'])) {
     }).addTo(map);
 
     // Lắng nghe sự kiện click để pin tọa độ khi người dùng click chuột
+    var marker = null
     map.on('click', function (e) {
+
+        if (marker){
+            marker.remove()
+        }
         // Tạo một marker tại vị trí người dùng đã click
-        const marker2 = L.marker(e.latlng).addTo(map);
+        marker = L.marker(e.latlng).addTo(map);
         
-        // Lưu tọa độ vào biến pinnedLocation2
+        // Lưu tọa độ vào biến pinnedLocation
         pinnedLocation2 = e.latlng;
     });
 
+
     // Lắng nghe sự kiện click trên nút OK
-    const confirmLocationButton2 = document.getElementById('confirmLocationButton2');
-    confirmLocationButton2.addEventListener('click', function () {
+    const confirmLocationButtonDen = document.getElementById('confirmLocationButtonDen');
+    confirmLocationButtonDen.addEventListener('click', function () {
         // Kiểm tra xem đã có tọa độ đã pin
         if (pinnedLocation2) {
             // Chuyển hướng về trang index và truyền tọa độ làm tham số URL
-            window.location.href = `index.php?lat=${pinnedLocation2.lat}&lng=${pinnedLocation2.lng}`;
+            window.location.href = `index.php?latden=${pinnedLocation2.lat}&lngden=${pinnedLocation2.lng}`;
         }
     });
 </script>
@@ -61,12 +83,12 @@ if (isset($_POST['tx_ma'])) {
     .showmap {
         padding: 10px;
         width: 80%;
-        height: 80%;
+        height: 55%;
         z-index: 999;
         background-color: white;
         position: fixed;
         left: 50%;
-        top: 60%;
+        top: 50%;
         transform: translate(-50%, -50%);
     }
 </style>

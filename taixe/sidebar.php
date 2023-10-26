@@ -20,14 +20,15 @@
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Quản lý chuyến xe</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="thongtintaixe.php">Thông tin chuyến đi</a></li>
-                <li><a class="nav-link" href="thongtinquanly.php">Thông tin đánh giá</a></li>
+              <li><a class="nav-link" href="xacnhanchuyendi.php">Xác nhận chuyến đi</a></li>
+                <li><a class="nav-link" href="thongtinchuyendi.php">Thông tin chuyến đi</a></li>
+                <li><a class="nav-link" href="thongtindanhgia.php">Thông tin đánh giá</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Cập nhật tài xế</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="capnhattaixe.php">Tài xế</a></li>
+                <!-- <li><a class="nav-link" href="capnhattaixe.php">Tài xế</a></li> -->
 
               </ul>
             </li>

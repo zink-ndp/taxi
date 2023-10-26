@@ -4,7 +4,7 @@ const carIconUrl = 'assets/img/iconxe.png';
 // Tạo biểu tượng xe ô tô bằng hình ảnh
 const carIcon = L.icon({
     iconUrl: carIconUrl,
-    iconSize: [30, 30], // Kích thước của biểu tượng
+    iconSize: [40, 50], // Kích thước của biểu tượng
     iconAnchor: [15, 15] // Điểm neo
 });
 
@@ -34,7 +34,6 @@ function mapTrangThai(trangThai) {
 }
 
 // ...
-
 // Ví dụ: Làm việc với dữ liệu JSON
 jsonData.forEach(function (item) {
     const marker = L.marker([item.TT_TOADOX, item.TT_TOADOY], {

@@ -53,7 +53,7 @@ include('head.php');
                                         $jsonData = json_encode($data);
                                          ?>
                                         <script>
-                                            var jsonData = <?php echo json_encode($data); ?>;
+                                            var jsonData = <?php echo $jsonData; ?>
                                         </script>
 
                                     <div class="card-body" >

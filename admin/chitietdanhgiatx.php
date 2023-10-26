@@ -176,60 +176,76 @@
             <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4>Danh sách tài xế</h4>
+                <h4>Đánh giá tài xế</h4>
             </div>
             <div class="card-body">
     <div class="table-responsive">
-        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
-            <thead>
-                <tr><th>ID</th>
-                    <th>Tên</th>
-                    <th>Chuyến xe</th>
-                    <th>Thời gian</th>
-                    <th>Tiêu chí</th>
-                    <th>Số sao</th>
-                    <th>Nội dung đánh giá</th>
-                    <th>Điểm đánh giá</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if(isset($_GET['txid'])){
-                    $mataixe = $_GET['txid'];
-                // Thực hiện truy vấn SQL để lấy thông tin từ 5 bảng 
-                    $sql = "SELECT taixe.TX_MA, taixe.TX_TEN, chuyenxe.CX_MA, chuyenxe.TD_DATE, tieuchi.TC_TEN, danhgia.DG_SAO, danhgia.DG_NOIDUNG, dgtieuchi.DGTC_DIEM
+    <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Chuyến xe</th>
+            <th>Thời gian</th>
+            <th>Tiêu chí</th>
+            <th>Số sao</th>
+            <th>Nội dung đánh giá</th>
+            <th>Điểm đánh giá</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if (isset($_GET['txid'])) {
+            $mataixe = $_GET['txid'];
+
+            // Truy vấn SQL để lấy thông tin tài xế và chuyến xe
+            $sql = "SELECT taixe.*, chuyenxe.*
                     FROM taixe
-                    JOIN chuyenxe ON taixe.TX_MA = chuyenxe.TX_MA
-                    JOIN dgtieuchi ON taixe.TX_MA = dgtieuchi.TX_MA
-                    JOIN tieuchi ON dgtieuchi.TC_MA = tieuchi.TC_MA
-                    JOIN danhgia ON tieuchi.TC_MA = danhgia.TC_MA AND chuyenxe.CX_MA = danhgia.CX_MA
-                    WHERE dgtieuchi.TX_MA = '$mataixe'";
-                    $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . $mataixe . "</td>";
-                                echo "<td>" . $row["TX_TEN"] . "</td>";
-                                echo "<td>" . $row["CX_MA"] . "</td>";
-                                echo "<td>" . $row["TD_DATE"] . "</td>"; 
-                                echo "<td>" . $row["TC_TEN"] . "</td>";
-                                echo "<td>" . $row["DG_SAO"] . "</td>";                        
-                                echo "<td>" . $row["DG_NOIDUNG"] . "</td>"; 
-                                echo "<td>" . $row["DGTC_DIEM"] . "</td>";                                                                                             
-                        echo "</tr>";
-                    
+                    INNER JOIN chuyenxe ON taixe.TX_MA = chuyenxe.TX_MA
+                    WHERE taixe.TX_MA = '$mataixe'";
+
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $maChuyenXe = $row["CX_MA"];
+                    echo "<tr>";
+                    echo "<td>" . $mataixe . "</td>";
+                    echo "<td>" . $row["TX_TEN"] . "</td>";
+                    echo "<td>" . $maChuyenXe . "</td>";
+                    echo "<td>" . $row["TD_DATE"] . "</td>";
+
+                    // Truy vấn tiêu chí đánh giá
+                    $sql_laytieuchi = "SELECT tieuchi.TC_TEN, dgtieuchi.DGTC_DIEM, danhgia.DG_NOIDUNG, danhgia.DG_SAO
+                                      FROM dgtieuchi
+                                      JOIN tieuchi ON dgtieuchi.TC_MA = tieuchi.TC_MA
+                                      JOIN danhgia ON dgtieuchi.DG_MA = danhgia.DG_MA
+                                      WHERE dgtieuchi.TX_MA = '$mataixe' AND danhgia.CX_MA = '$maChuyenXe'";
+
+                    $result_laytieuchi = $conn->query($sql_laytieuchi);
+
+                    if ($result_laytieuchi->num_rows > 0) {
+                        while ($row = $result_laytieuchi->fetch_assoc()) {
+                            echo "<td>" . $row["TC_TEN"] . "</td>";
+                            echo "<td>" . $row["DG_SAO"] . "</td>";
+                            echo "<td>" . $row["DG_NOIDUNG"] . "</td>";
+                            echo "<td>" . $row["DGTC_DIEM"] . "</td>";
+                        }
+                    } else {
+                        echo "<td colspan='4'>Chưa có đánh giá</td>";
                     }
-                    $totalEmployees = $result->num_rows; // Đếm tổng số khách hàng
-                    echo "<h5>Tổng số tài xế: $totalEmployees</h5>"; // Hiển thị tổng số khách hàng
-                } else {
-                    echo "Không có dữ liệu nhân viên.";
-                    }
-            }else{
-                echo "Chưa có đánh giá";
+                    echo "</tr>";
+                }
+            } else {
+                echo "Không có dữ liệu tài xế.";
             }
-                ?>
-            </tbody>
-        </table>
+        } else {
+            echo "Thiếu thông tin tài xế.";
+        }
+        ?>
+    </tbody>
+</table>
+
     </div>
 </div>
         </div>

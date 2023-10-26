@@ -130,7 +130,7 @@
                               <div class="form-group col-md-6 col-12">
                                 <label>Vai trò</label>
                                 <input  type="text" disabled class="form-control" value="<?php 
-                                    $sql = "select VT_TEN from vaitro where VT_MA = {$_SESSION["vaitro"]}";
+                                    $sql = "SELECT VT_TEN from vaitro where VT_MA = {$_SESSION["vaitro"]}";
                                     $rs = $conn->query($sql);
                                     $vt = $rs->fetch_assoc();
                                     echo $vt['VT_TEN'];

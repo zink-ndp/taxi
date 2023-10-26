@@ -1,7 +1,10 @@
 <?php
 $activate = "index";
 @include('header.php');
+unset($_SESSION['latdi']);
+unset($_SESSION['lngdi']);
 ?>
+
 
 <?php 
 if (isset($_POST['tx_ma'])) {
@@ -24,7 +27,17 @@ if (isset($_POST['tx_ma'])) {
     </div>
 </div>
 
-<button id="confirmLocationButton">CHẤP NHẬN</button>
+<button
+    class="btn btn-success"
+    style="
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+        z-index: 999;
+    "
+    id="confirmLocationButtonDi">
+    CHẤP NHẬN
+</button>
 <script>
     // Tạo biến lưu trữ tọa độ đã pin
     let pinnedLocation = null;
@@ -37,17 +50,22 @@ if (isset($_POST['tx_ma'])) {
     }).addTo(map);
 
     // Lắng nghe sự kiện click để pin tọa độ khi người dùng click chuột
+    var marker = null
     map.on('click', function (e) {
+
+        if (marker){
+            marker.remove()
+        }
         // Tạo một marker tại vị trí người dùng đã click
-        const marker = L.marker(e.latlng).addTo(map);
+        marker = L.marker(e.latlng).addTo(map);
         
         // Lưu tọa độ vào biến pinnedLocation
         pinnedLocation = e.latlng;
     });
 
     // Lắng nghe sự kiện click trên nút OK
-    const confirmLocationButton = document.getElementById('confirmLocationButton');
-    confirmLocationButton.addEventListener('click', function () {
+    const confirmLocationButtonDi = document.getElementById('confirmLocationButtonDi');
+    confirmLocationButtonDi.addEventListener('click', function () {
         // Kiểm tra xem đã có tọa độ đã pin
         if (pinnedLocation) {
             // Chuyển hướng về trang index và truyền tọa độ làm tham số URL
@@ -61,12 +79,12 @@ if (isset($_POST['tx_ma'])) {
     .showmap{
         padding: 10px;
         width: 80%;
-        height: 80%;
-        z-index: 999;
+        height: 55%;
+        z-index: 99;
         background-color: white;
         position: fixed;
         left: 50%;
-        top: 60%;
+        top: 50%;
         transform: translate(-50%, -50%);
     }
 </style>
