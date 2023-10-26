@@ -71,7 +71,11 @@ $activate = "index";
                   <div class="form-group">
                   <label for="" class="label">Vị trí của bạn</label>
                   <div class="d-flex flex-row justify-content-center align-items-center">
-                      <input name="diemdi" type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                  <?php
+                  $defaultLat = 10.031231553362591;
+                  $defaultLng = 105.76916077529324;
+                  ?>
+                  <input name="diemdi" type="text" class="form-control"value="<?php echo $defaultLat; ?>, <?php echo $defaultLng; ?>" readonly>
                       <a href="chon_diemdi.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
                   </div>
                   </div>
@@ -82,21 +86,17 @@ $activate = "index";
                     }
                   ?>
               <script>
-<<<<<<< HEAD
             // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ
-            const confirmLocationButton = document.getElementById('confirmLocationButton');
-            confirmLocationButton.addEventListener('click', function () {
-                // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemdi hay không
-                const latDi = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
-                const lngDi = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
-                
-                // Nếu có tọa độ, hiển thị nó trong ô input
-                if (lat !== null && lng !== null) {
-                    document.querySelector('input[name="diemdi"]').value = `Lat: ${latDi}, Lng: ${lngDi}`;
-                }
-            });
-        </script>
-=======
+            // const confirmLocationButton = document.getElementById('confirmLocationButton');
+            // confirmLocationButton.addEventListener('click', function () {
+            //     // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemdi hay không
+            //   
+            //     // Nếu có tọa độ, hiển thị nó trong ô input
+            //     if (lat !== null && lng !== null) {
+            //         document.querySelector('input[name="diemdi"]').value = `Lat: ${latDi}, Lng: ${lngDi}`;
+            //     }
+            
+        
                   const lat = <?php echo $_SESSION['latdi']?>;
                   const lng = <?php echo $_SESSION['lngdi'] ?>;
                   
@@ -105,10 +105,9 @@ $activate = "index";
                       document.querySelector('input[name="diemdi"]').value = `${lat}, ${lng}`;
                   }
               </script>
->>>>>>> ba30f165683dfcbdc6b29a34dc8c73d416f139b6
 
                                   
-
+<!-- 
              
             <div class="form-group">
                 <label for="" class="label">Vị trí muốn đến</label>
@@ -122,18 +121,16 @@ $activate = "index";
             const confirmLocationButton2 = document.getElementById('confirmLocationButton2');
             confirmLocationButton.addEventListener('click', function () {
                 // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemden hay không
-                const latDen = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
-                const lngDen = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>;
+              
                 
                 // Nếu có tọa độ, hiển thị nó trong ô input
                 if (latDen !== null && lngDen !== null) {
                     document.querySelector('input[name="diemden"]').value = `Lat: ${latDen}, Lng: ${lngDen}`;
                 }
             });
-        </script>
+        </script> -->
 
-<<<<<<< HEAD
-=======
+
               <div class="form-group">
                   <label for="" class="label">Vị trí muốn đến</label>
                   <div class="d-flex flex-row justify-content-center align-items-center">
@@ -156,7 +153,7 @@ $activate = "index";
                 if (latden !== null && lngden !== null) {
                     document.querySelector('input[name="diemden"]').value = `${latden}, ${lngden}`;
                 }
->>>>>>> ba30f165683dfcbdc6b29a34dc8c73d416f139b6
+
 
               </script>
 
