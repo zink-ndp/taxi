@@ -58,7 +58,7 @@ $activate = "index";
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form id="myForm" action="xulydatxe.php" class="request-form ftco-animate bg-primary" method="post">
+	  						<form id="myForm" action="<?php echo $form_action ?>" class="request-form ftco-animate bg-primary" method="post">
 		          		<h2>Chuyến đi của bạn</h2>
 
                   <div class="form-group">
@@ -83,7 +83,7 @@ $activate = "index";
                   
                   // Nếu có tọa độ, hiển thị nó trong ô input
                   if (lat !== null && lng !== null) {
-                      document.querySelector('input[name="diemdi"]').value = `${lat}, ${lng}`;
+                      document.querySelector('input[name="diemdi"]').value = `${lat},${lng}`;
                   }
               </script>
 
@@ -110,7 +110,7 @@ $activate = "index";
                 const lngden = <?php echo $_SESSION['lngden']?>;
                 // Nếu có tọa độ, hiển thị nó trong ô input
                 if (latden !== null && lngden !== null) {
-                    document.querySelector('input[name="diemden"]').value = `${latden}, ${lngden}`;
+                    document.querySelector('input[name="diemden"]').value = `${latden},${lngden}`;
                 }
 
               </script>
