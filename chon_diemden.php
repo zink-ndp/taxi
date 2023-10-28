@@ -16,8 +16,6 @@ if (isset($_POST['tx_ma'])) {
 }
 ?>
 
-<div class="showmap">
-=======
 <div class="showmap"> 
 
     <div id="map" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
@@ -41,7 +39,13 @@ if (isset($_POST['tx_ma'])) {
     id="confirmLocationButtonDen">
     CHẤP NHẬN
 </button>
+    <link rel="stylesheet" href="map_data/leaflet-search/src/leaflet-search.css">
+    <!-- <script src="map_data/leaflet-search/Gruntfile.js"></script> -->
+    <script src="map_data/leaflet-search/src/leaflet-search.js"></script>
+    <script src="map_data/locations.js"></script>
     <script>
+    console.log(locationsJSON)
+
     // Tạo biến lưu trữ tọa độ đã pin
     let pinnedLocation2 = null;
 
@@ -76,6 +80,20 @@ if (isset($_POST['tx_ma'])) {
             window.location.href = `index.php?latden=${pinnedLocation2.lat}&lngden=${pinnedLocation2.lng}`;
         }
     });
+
+    const searchLayer = L.geoJSON(locationsJSON, {
+        onEachFeature:function(feature, layer){
+            layer.bindPopup(feature.properties.name)
+        }
+    }).addTo(map)
+    
+    const searchControl = new L.Control.Search({
+        layer: searchLayer,
+        propertyName: "name" 
+    });
+
+    map.addControl(searchControl)
+
 </script>
 
 <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5"></div>
