@@ -1,6 +1,10 @@
 <?php
 $activate = "index";
 @include('header.php');
+// @include('chon_diemdi.php');
+// @include('luudiemdi.php');
+// @include('chon_diemden.php');
+// @include('luudiemden');
 ?>
 
 
@@ -67,7 +71,11 @@ $activate = "index";
                   <div class="form-group">
                   <label for="" class="label">Vị trí của bạn</label>
                   <div class="d-flex flex-row justify-content-center align-items-center">
-                      <input name="diemdi" type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                  <?php
+                  $defaultLat = 10.031231553362591;
+                  $defaultLng = 105.76916077529324;
+                  ?>
+                  <input name="diemdi" type="text" class="form-control"value="<?php echo $defaultLat; ?>, <?php echo $defaultLng; ?>" readonly>
                       <a href="chon_diemdi.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
                   </div>
                   </div>
@@ -78,6 +86,17 @@ $activate = "index";
                     }
                   ?>
               <script>
+            // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ
+            // const confirmLocationButton = document.getElementById('confirmLocationButton');
+            // confirmLocationButton.addEventListener('click', function () {
+            //     // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemdi hay không
+            //   
+            //     // Nếu có tọa độ, hiển thị nó trong ô input
+            //     if (lat !== null && lng !== null) {
+            //         document.querySelector('input[name="diemdi"]').value = `Lat: ${latDi}, Lng: ${lngDi}`;
+            //     }
+            
+        
                   const lat = <?php echo $_SESSION['latdi']?>;
                   const lng = <?php echo $_SESSION['lngdi'] ?>;
                   
@@ -88,6 +107,28 @@ $activate = "index";
               </script>
 
                                   
+<!-- 
+             
+            <div class="form-group">
+                <label for="" class="label">Vị trí muốn đến</label>
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                    <input name="diemden" type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                    <a href="chon_diemden.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
+                </div>
+            </div>
+            <script>
+            // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ
+            const confirmLocationButton2 = document.getElementById('confirmLocationButton2');
+            confirmLocationButton.addEventListener('click', function () {
+                // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemden hay không
+              
+                
+                // Nếu có tọa độ, hiển thị nó trong ô input
+                if (latDen !== null && lngDen !== null) {
+                    document.querySelector('input[name="diemden"]').value = `Lat: ${latDen}, Lng: ${lngDen}`;
+                }
+            });
+        </script> -->
 
 
               <div class="form-group">
@@ -112,6 +153,7 @@ $activate = "index";
                 if (latden !== null && lngden !== null) {
                     document.querySelector('input[name="diemden"]').value = `${latden},${lngden}`;
                 }
+
 
               </script>
 
