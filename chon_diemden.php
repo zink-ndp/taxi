@@ -48,6 +48,9 @@ if (isset($_POST['tx_ma'])) {
 
     // Tạo biến lưu trữ tọa độ đã pin
     let pinnedLocation2 = null;
+    var lng=""
+    var lat=""
+    var name=""
 
     const map = L.map('map').setView([10.03, 105.77], 15);
 
@@ -68,31 +71,56 @@ if (isset($_POST['tx_ma'])) {
         
         // Lưu tọa độ vào biến pinnedLocation
         pinnedLocation2 = e.latlng;
+        lat =pinnedLocation2.lat
+        lng =pinnedLocation2.lng
+        name = "Vị trí được chọn"
     });
 
 
-    // Lắng nghe sự kiện click trên nút OK
-    const confirmLocationButtonDen = document.getElementById('confirmLocationButtonDen');
-    confirmLocationButtonDen.addEventListener('click', function () {
-        // Kiểm tra xem đã có tọa độ đã pin
-        if (pinnedLocation2) {
-            // Chuyển hướng về trang index và truyền tọa độ làm tham số URL
-            window.location.href = `index.php?latden=${pinnedLocation2.lat}&lngden=${pinnedLocation2.lng}`;
-        }
+    var dotIcon = L.icon({
+        iconUrl: 'images/dot.png',
+        iconSize: [15, 15], 
+        iconAnchor: [7 , 0]
     });
 
     const searchLayer = L.geoJSON(locationsJSON, {
+        pointToLayer: function(feature, latlng) {
+            return L.marker(latlng, {
+                icon: dotIcon
+            });
+        },
         onEachFeature:function(feature, layer){
-            layer.bindPopup(feature.properties.name)
+            layer.bindPopup('Bạn đang chọn: '+feature.properties.name)
         }
     }).addTo(map)
     
     const searchControl = new L.Control.Search({
         layer: searchLayer,
-        propertyName: "name" 
+        propertyName: "name",
+        position: 'topright',
+        hideMarkerOnCollapse: true
     });
 
     map.addControl(searchControl)
+
+    searchLayer.on('click', function(e) {
+        var clickedFeature = e.layer.feature;
+        var coordinates = clickedFeature.geometry.coordinates;
+        lng = coordinates[0]; 
+        lat = coordinates[1]; 
+        name = clickedFeature.properties.name;
+        if (marker) {
+            marker.remove();
+        }
+        marker = L.marker(coordinates).addTo(map);
+    });
+
+
+
+    const confirmLocationButtonDen = document.getElementById('confirmLocationButtonDen');
+    confirmLocationButtonDen.addEventListener('click', function () {
+        window.location.href = `index.php?locate='${name}'&latden=${lat}&lngden=${lng}`;
+    });
 
 </script>
 
@@ -112,10 +140,10 @@ if (isset($_POST['tx_ma'])) {
 </style>
 
 
-<?php
+<!-- <?php
 // Kiểm tra xem có tọa độ từ URL không
-$latDen = isset($_GET['lat']) ? $_GET['lat'] : 'null';
-$lngDen = isset($_GET['lng']) ? $_GET['lng'] : 'null';
+// $latDen = isset($_GET['lat']) ? $_GET['lat'] : 'null';
+// $lngDen = isset($_GET['lng']) ? $_GET['lng'] : 'null';
 ?>
 <script>
     // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ
@@ -129,6 +157,6 @@ $lngDen = isset($_GET['lng']) ? $_GET['lng'] : 'null';
             document.querySelector('input[name="diemden"]').value = `Lat: ${latDen}, Lng: ${lngDen}`;
         }
     });
-</script>
+</script> -->
 
 </php>

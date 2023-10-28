@@ -143,15 +143,22 @@ $activate = "index";
                 if (isset($_GET['latden'])) {
                   $_SESSION['latden'] = $_GET['latden'];
                   $_SESSION['lngden'] = $_GET['lngden'];
+                  $_SESSION['locate'] = $_GET['locate'];
                 }
               ?>
               <script>
 
                 const latden = <?php echo $_SESSION['latden']?>;
                 const lngden = <?php echo $_SESSION['lngden']?>;
+                const locate = <?php echo $_SESSION['locate']?>;
+                console.log(locate)
                 // Nếu có tọa độ, hiển thị nó trong ô input
-                if (latden !== null && lngden !== null) {
-                    document.querySelector('input[name="diemden"]').value = `${latden},${lngden}`;
+                if(locate!==null){
+                  document.querySelector('input[name="diemden"]').value = `${locate}`;
+                } else {
+                  if (latden !== null && lngden !== null) {
+                      document.querySelector('input[name="diemden"]').value = `${latden},${lngden}`;
+                  }
                 }
 
 
