@@ -104,15 +104,28 @@ if (isset($_POST['tx_ma'])) {
     map.addControl(searchControl)
 
     searchLayer.on('click', function(e) {
+        var latlng = e.latlng
         var clickedFeature = e.layer.feature;
         var coordinates = clickedFeature.geometry.coordinates;
         lng = coordinates[0]; 
         lat = coordinates[1]; 
         name = clickedFeature.properties.name;
         if (marker) {
-            marker.remove();
+            marker.setLatLng(latlng);
+        } else {
+            marker = L.marker(latlng).addTo(map);
         }
-        marker = L.marker(coordinates).addTo(map);
+    });
+
+    searchControl.on('search:locationfound', function(e) {
+        var latlng = e.latlng; 
+        lng = latlng.lng; 
+        lat = latlng.lat; 
+        if (marker) {
+            marker.setLatLng(latlng);
+        } else {
+            marker = L.marker(latlng).addTo(map);
+        }
     });
 
 
