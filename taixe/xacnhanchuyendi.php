@@ -60,7 +60,7 @@
                           FROM chuyenxe
                           INNER JOIN khachhang ON chuyenxe.KH_MA = khachhang.KH_MA
                           INNER JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
-                          WHERE TX_USERNAME = '".$_SESSION["username"]."'";
+                          WHERE CX_TRANGTHAI = '0' AND TX_USERNAME = '".$_SESSION["username"]."'";
                   $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {

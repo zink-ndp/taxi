@@ -30,58 +30,67 @@ $activate = "xulydatxe";
                     <div class="icon d-flex align-items-center justify-content-center"><span class="far fa-check-circle fa-lg"></span></div>
                     <div class="text w-100">
                         <h3 class="heading mb-2">Đã đặt xe</h3>
-                        <!-- Nội dung PHP của bạn -->
         <?php 
-        // $servername = "localhost";
-        // $username = "root";
-        // $password = "";
-        // $dbname = "taxi";
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "taxi";
 
-        // // Tạo kết nối
-        // $conn = new mysqli($servername, $username, $password, $dbname);
+        // Tạo kết nối
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // // Kiểm tra kết nối
-        // if ($conn->connect_error) {
-        //     die("Kết nối thất bại: " . $conn->connect_error);
-        // }
-        $sql = "insert into chuyenxe value()";
-         // ID của chuyến đi bạn muốn xem thông tin chi tiết
-        $matx = $_POST['TX_MA'];
-        $sql = "SELECT chuyenxe.*, taixe.*, thoidiem.* FROM chuyenxe
-        JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
-        JOIN thoidiem ON thoidiem.TD_DATE = chuyenxe.TD_DATE
-        WHERE taixe.TX_MA = ?";
-                
-
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-
-            $chuyenxeID = $_POST['CX_MA'];
-            // Lấy thông tin chuyến đi
-            $thongTinChuyenDi = $row['CX_MA'];
-              //So KM
-              $soKM =$row['CX_SOKM'];
-            // Lấy thông tin tài xế
-            $thongTinTaiXe = $row['TX_TEN'];
-            //Thoi điểm
-            $thoidiem = $row['TD_DATE'];
-          
-
-            // In thông tin chuyến đi và tài xế
-            echo "Thông tin chuyến đi: $thongTinChuyenDi<br>";
-            echo "Số KM chuyến đi: $soKM<br>";  
-            echo "Thông tin tài xế: $thongTinTaiXe<br>";
-            echo "Thời điểm: $thoidiem<br>";
-         
-        } 
-        else 
-        {
-            echo "Không tìm thấy chuyến đi có ID $chuyenxeID";
+        // Kiểm tra kết nối
+        if ($conn->connect_error) {
+            die("Kết nối thất bại: " . $conn->connect_error);
         }
+        $matx = $_POST['TX_MA'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['CX_MA'])) {
+                $chuyenxeID = $_POST['CX_MA'];
+                $sql = "SELECT chuyenxe.*, taixe.*, thoidiem.* FROM chuyenxe
+                    JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
+                    JOIN thoidiem ON thoidiem.TD_DATE = chuyenxe.TD_DATE
+                    WHERE taixe.TX_MA = '$matx' AND chuyenxe.CX_MA = '$chuyenxeID'";
+        
+                $result = $conn->query($sql);
+        
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    // Lấy thông tin chuyến đi
+                    $soKM = $row['CX_SOKM'];
+                    // Lấy thông tin tài xế
+                    $thongTinTaiXe = $row['TX_TEN'];
+                    $thoidiem = $row['TD_DATE'];
+                    // In thông tin chuyến đi và tài xế
+                    echo "Thông tin chuyến đi: $chuyenxeID<br>";
+                    echo "Số KM chuyến đi: $soKM<br>";
+                    echo "Thông tin tài xế: $thongTinTaiXe<br>";
+                    echo "Thời điểm: $thoidiem<br>";
 
+                } elseif(isset($_POST['datxe'])) {
+                    $khid = $_SESSION['kh_ma'];
+                    $sql = "SELECT MAX(CX_MA) AS macxid FROM chuyenxe";
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc();
+                    $nextid = $row['macxid'] + 1;
+                    echo $matx .'aaaa'      ; 
+                    $sql_themcx = "INSERT INTO chuyenxe (CX_MA, KH_MA, TX_MA, TD_DATE, CX_TDDIEMDI_X, 
+                        CX_TDDIEMDI_Y, CX_TDDIEMDEN_X, CX_TDDIEMDEN_Y, CX_TRANGTHAI )
+                        VALUES ('$nextid','$khid', '$matx', '".$_POST['TD_DATE']."' ,'".$_SESSION['latdi']."',
+                        '".$_SESSION['lngdi']."','".$_SESSION['latden']."','".$_SESSION['lngden']."', '0') ";
+                    $result = $conn->query($sql_themcx);
+                    echo "Đã đặt thành công";
+                }else
+                {
+                    echo "Không tìm thấy chuyến đi có ID $chuyenxeID";
+                }
+            } else {
+                echo "Vui lòng cung cấp ID chuyến đi (CX_MA)";
+            }
+        }
+        
         $conn->close();
+
     ?>
                     </div>
                 </div>
