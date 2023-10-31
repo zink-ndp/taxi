@@ -1050,6 +1050,245 @@
         "type": "Point"
       },
       "id": 74
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cây xăng Ngọc Yến"
+      },
+      "geometry": {
+        "coordinates": [
+          105.74247975202957,
+          10.000007680682856
+        ],
+        "type": "Point"
+      },
+      "id": 75
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chợ An Bình"
+      },
+      "geometry": {
+        "coordinates": [
+          105.74895847198553,
+          10.00777398081101
+        ],
+        "type": "Point"
+      },
+      "id": 76
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bệnh viện Da liễu Cần Thơ"
+      },
+      "geometry": {
+        "coordinates": [
+          105.75129180749718,
+          10.011032447512605
+        ],
+        "type": "Point"
+      },
+      "id": 77
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "UBND Phường An Bình"
+      },
+      "geometry": {
+        "coordinates": [
+          105.75219758694055,
+          10.010970008324634
+        ],
+        "type": "Point"
+      },
+      "id": 78
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trường Mầm non An Bình"
+      },
+      "geometry": {
+        "coordinates": [
+          105.75254178312815,
+          10.010666732097974
+        ],
+        "type": "Point"
+      },
+      "id": 79
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "THCS Trần Ngọc Quế"
+      },
+      "geometry": {
+        "coordinates": [
+          105.7528044591661,
+          10.010234116988997
+        ],
+        "type": "Point"
+      },
+      "id": 80
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SATRAFOOD"
+      },
+      "geometry": {
+        "coordinates": [
+          105.75159524361004,
+          10.01074701112671
+        ],
+        "type": "Point"
+      },
+      "id": 81
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trường THPT Nguyễn Việt Hồng"
+      },
+      "geometry": {
+        "coordinates": [
+          105.75254948486338,
+          10.011855196286476
+        ],
+        "type": "Point"
+      },
+      "id": 82
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bệnh viện da liễu"
+      },
+      "geometry": {
+        "coordinates": [
+          105.75514028053755,
+          10.013382754142924
+        ],
+        "type": "Point"
+      },
+      "id": 83
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "chợ da liễu"
+      },
+      "geometry": {
+        "coordinates": [
+          105.75562611543802,
+          10.012965920594326
+        ],
+        "type": "Point"
+      },
+      "id": 84
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trường tiểu học An Bình 1"
+      },
+      "geometry": {
+        "coordinates": [
+          105.74764742876437,
+          10.010814739654563
+        ],
+        "type": "Point"
+      },
+      "id": 85
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bánh xào Bảy Tới"
+      },
+      "geometry": {
+        "coordinates": [
+          105.74735462666087,
+          10.009612178159685
+        ],
+        "type": "Point"
+      },
+      "id": 86
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chợ nổi Cái Răng"
+      },
+      "geometry": {
+        "coordinates": [
+          105.74506753807668,
+          10.003420903928799
+        ],
+        "type": "Point"
+      },
+      "id": 87
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nhà thờ An Hòa"
+      },
+      "geometry": {
+        "coordinates": [
+          105.7560518448451,
+          10.013196884039175
+        ],
+        "type": "Point"
+      },
+      "id": 88
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chân cầu Cái Răng"
+      },
+      "geometry": {
+        "coordinates": [
+          105.75080639697751,
+          10.009863078314467
+        ],
+        "type": "Point"
+      },
+      "id": 89
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chân cầu Đầu Sấu"
+      },
+      "geometry": {
+        "coordinates": [
+          105.75509228003489,
+          10.012624723996893
+        ],
+        "type": "Point"
+      },
+      "id": 90
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chân cầu Cái Sơn"
+      },
+      "geometry": {
+        "coordinates": [
+          105.74779508119639,
+          10.007963087050896
+        ],
+        "type": "Point"
+      },
+      "id": 91
     }
+    
   ]
 }
