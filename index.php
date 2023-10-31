@@ -41,6 +41,59 @@ if (isset($_POST['tx_ma'])) {
   </div>
 </div>
 
+<<<<<<< HEAD
+     <section class="ftco-section ftco-no-pt bg-light" >
+    	<div class="container">
+    		<div class="row no-gutters">
+    			<div class="col-md-12	featured-top">
+    				<div class="row no-gutters">
+	  					<div class="col-md-4 d-flex align-items-center">
+	  						<form id="myForm" action="xulydatxe.php" class="request-form ftco-animate bg-primary" method="post">
+		          		<h2>Chuyến đi của bạn</h2>
+
+                  <div class="form-group">
+			    					<input name="TX_MA" type="hidden" class="form-control" value="$" placeholder="">
+			    				</div>
+                  <div class="form-group">
+			    					<input name="CX_MA" type="hidden" class="form-control" value="$" placeholder="">
+			    				</div>
+                  <div class="form-group">
+                  <label for="" class="label">Vị trí của bạn</label>
+                  <div class="d-flex flex-row justify-content-center align-items-center">
+                      <input name="diemdi" type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                      <a href="chon_diemdi.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
+                  </div>
+                  </div>
+                  <?php
+                    if (isset($_GET['lat'])) {
+                      $_SESSION['latdi'] = $_GET['lat'];
+                      $_SESSION['lngdi'] = $_GET['lng'];
+                    }
+                  ?>
+              <script>
+                  const lat = <?php echo $_SESSION['latdi']?>;
+                  const lng = <?php echo $_SESSION['lngdi'] ?>;
+                  
+                  // Nếu có tọa độ, hiển thị nó trong ô input
+                  if (lat !== null && lng !== null) {
+                      document.querySelector('input[name="diemdi"]').value = `${lat}, ${lng}`;
+                  }
+              </script>
+
+                                  
+
+
+              <div class="form-group">
+                  <label for="" class="label">Vị trí muốn đến</label>
+                  <div class="d-flex flex-row justify-content-center align-items-center">
+                      <input name="diemden" type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                      <a href="chon_diemden.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;" class="fas fa-map-marker-alt"></i></a>
+                  </div>
+              </div>
+
+              <?php
+                if (isset($_GET['latden'])) {
+=======
 <section class="ftco-section ftco-no-pt bg-light">
   <div class="container">
     <div class="row no-gutters">
@@ -54,6 +107,7 @@ if (isset($_POST['tx_ma'])) {
                   $_SESSION['lngdi'] = $_GET['lngdi'];
                   $_SESSION['locatedi'] = $_GET['locatedi'];
                 } elseif (($_GET['dr']=='to') && (isset($_GET['latden']))) {
+>>>>>>> c849e69863fd44b91454cea1f62a7939af0d8a9f
                   $_SESSION['latden'] = $_GET['latden'];
                   $_SESSION['lngden'] = $_GET['lngden'];
                   $_SESSION['locateden'] = $_GET['locateden'];
@@ -98,6 +152,64 @@ if (isset($_POST['tx_ma'])) {
           if (!isset($_POST['tx_ma'])) {
             ?>
 
+<<<<<<< HEAD
+                      <div class="form-group">
+                          <label for="" class="label">Chọn ngày đón</label>
+                          <input type="date" class="form-control" id="ngay" name="ngay" required>
+                          <label for="" class="label">Chọn thời gian đón</label>
+                          <input type="time" class="form-control" id="gio" name="gio" required>
+                      <input type="hidden" id="datetime" name="TD_DATE">
+                      </div>
+                      <script>
+                      // Lắng nghe sự kiện thay đổi ngày hoặc thời gian
+                      document.getElementById("ngay").addEventListener("change", updateDatetime);
+                      document.getElementById("gio").addEventListener("change", updateDatetime);
+                      function updateDatetime() {
+                          var ngay = document.getElementById("ngay").value;
+                          var gio = document.getElementById("gio").value;
+                          var formattedGio = "00:00:00";
+                          // Kết hợp ngày và thời gian và gán vào phần tử ẩn
+                          document.getElementById("datetime").value = ngay + " " + formattedGio;
+                      }
+                      </script>
+			            <div class="form-group">
+			              <input type="submit" name ="datxe" value="Thuê xe ngay" class="btn btn-secondary py-3 px-4">
+			            </div>
+			    			</form>
+	  					</div>
+              <?php
+              
+                if (!isset($_POST['tx_ma'])){
+              ?>
+              
+                <div class="col-md-8 d-flex align-items-center">
+                  <div class="services-wrap rounded-right w-100">
+                    <h3 class="heading-section mb-4">Cách để thuê một chiếc taxi tốt</h3>
+                    <div class="row d-flex mb-4">
+                      <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                        <div class="services w-100 text-center">
+                          <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+                          <div class="text w-100">
+                            <h3 class="heading mb-2">Chọn địa điểm đón của bạn</h3>
+                          </div>
+                        </div>      
+                      </div>
+                      <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                        <div class="services w-100 text-center">
+                          <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
+                          <div class="text w-100">
+                            <h3 class="heading mb-2">Chọn giao dịch tốt nhất</h3>
+                          </div>
+                        </div>      
+                      </div>
+                      <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                        <div class="services w-100 text-center">
+                          <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
+                          <div class="text w-100">
+                            <h3 class="heading mb-2">Đặt thuê xe bạn chọn</h3>
+                          </div>
+                        </div>      
+=======
             <div class="col-md-8 d-flex align-items-center">
               <div class="services-wrap rounded-right w-100">
                 <h3 class="heading-section mb-4">Cách để thuê một chiếc taxi tốt</h3>
@@ -108,6 +220,7 @@ if (isset($_POST['tx_ma'])) {
                           class="flaticon-route"></span></div>
                       <div class="text w-100">
                         <h3 class="heading mb-2">Chọn địa điểm đón của bạn</h3>
+>>>>>>> c849e69863fd44b91454cea1f62a7939af0d8a9f
                       </div>
                     </div>
                   </div>
