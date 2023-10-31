@@ -40,7 +40,6 @@ if (isset($_POST['tx_ma'])) {
     CHẤP NHẬN
 </button>
     <link rel="stylesheet" href="map_data/leaflet-search/src/leaflet-search.css">
-    <!-- <script src="map_data/leaflet-search/Gruntfile.js"></script> -->
     <script src="map_data/leaflet-search/src/leaflet-search.js"></script>
     <script src="map_data/locations.js"></script>
     <script>
@@ -79,7 +78,7 @@ if (isset($_POST['tx_ma'])) {
 
     var dotIcon = L.icon({
         iconUrl: 'images/dot.png',
-        iconSize: [15, 15], 
+        iconSize: [13, 13], 
         iconAnchor: [7 , 0]
     });
 
@@ -132,7 +131,7 @@ if (isset($_POST['tx_ma'])) {
 
     const confirmLocationButtonDen = document.getElementById('confirmLocationButtonDen');
     confirmLocationButtonDen.addEventListener('click', function () {
-        window.location.href = `index.php?locate='${name}'&latden=${lat}&lngden=${lng}`;
+        window.location.href = `index.php?dr=to&locateden=${name}&latden=${lat}&lngden=${lng}`;
     });
 
 </script>

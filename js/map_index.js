@@ -30,9 +30,7 @@ getLocation()
         var marker = L.marker([latitude, longitude],{icon: userMaker}).addTo(map); //đặt vị trí hiện tại của khách hàng
 
         var popup = L.popup()
-
-        console.log(jsonData)
-
+        
         var route = null;
         var popup = null;
         jsonData.forEach(function(item) {
