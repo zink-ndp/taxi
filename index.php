@@ -47,18 +47,48 @@ if (isset($_POST['tx_ma'])) {
       <div class="col-md-12 featured-top">
         <div class="row no-gutters">
           <div class="col-md-4 d-flex align-items-center">
+            <script>
+              var latitude = ""
+              var longitude = ""
+              function getLocation() {
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                  document.getElementById("location").innerHTML = "Trình duyệt của bạn không hỗ trợ định vị.";
+                }
+              }
+              function showPosition(position) {
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+
+                const apiUrl = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+
+                fetch(apiUrl)
+                  .then(response => response.json())
+                  .then(data => {
+                    console.log(data)
+                    showCurrentLocation(data)
+                  })
+                  .catch(error => {
+                    console.error('Lỗi khi gửi yêu cầu API:', error);
+                  });
+
+                  function showCurrentLocation(data){
+                      $("#crLocation").val("Gần: "+data.address.amenity)
+                      $("#diemdix").val(latitude)
+                      $("#diemdiy").val(longitude)
+                  }
+
+              }
+
+              getLocation()
+            </script>
              <?php
-              if (isset($_GET['dr'])) {
-                if (($_GET['dr']=='from') && (isset($_GET['latdi']))) {
-                  $_SESSION['latdi'] = $_GET['latdi'];
-                  $_SESSION['lngdi'] = $_GET['lngdi'];
-                  $_SESSION['locatedi'] = $_GET['locatedi'];
-                } elseif (($_GET['dr']=='to') && (isset($_GET['latden']))) {
+              if (isset($_GET['latden'])) {
                   $_SESSION['latden'] = $_GET['latden'];
                   $_SESSION['lngden'] = $_GET['lngden'];
                   $_SESSION['locateden'] = $_GET['locateden'];
                 }
-              }
             ?>
             <form id="myForm" action="<?php echo $form_action ?>" class="request-form ftco-animate bg-primary"
               method="post">
@@ -68,12 +98,10 @@ if (isset($_POST['tx_ma'])) {
                 <input name="TX_MA" type="hidden" class="form-control" value="$" placeholder="">
               </div>
               <div class="form-group">
-                <label for="" class="label">Vị trí của bạn</label>
-                <div class="d-flex flex-row justify-content-center align-items-center">
-                  <input name="diemdi" type="text" class="form-control" value="<?php echo $_SESSION['locatedi'] ?>" readonly>
-                  <a href="chon_diemdi.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;"
-                      class="fas fa-map-marker-alt"></i></a>
-                </div>
+                <label for="" class="label">Vị trí của bạn</label><br>
+                <input class="form-control" type="text" name="current" id="crLocation" readonly value="">
+                <input type="hidden" name="diemdix" id="diemdix">
+                <input type="hidden" name="diemdiy" id="diemdiy">
               </div>
 
               <div class="form-group">
@@ -98,8 +126,9 @@ if (isset($_POST['tx_ma'])) {
           if (!isset($_POST['tx_ma'])) {
             ?>
 
-            <div class="col-md-8 d-flex align-items-center">
-              <div class="services-wrap rounded-right w-100">
+            <div class="col-1"></div>
+            <div class="col-md-7 d-flex align-items-center">
+              <div class="services-wrap rounded w-100">
                 <h3 class="heading-section mb-4">Cách để thuê một chiếc taxi tốt</h3>
                 <div class="row d-flex mb-4">
                   <div class="col-md-4 d-flex align-self-stretch ftco-animate">
@@ -131,27 +160,6 @@ if (isset($_POST['tx_ma'])) {
                   </div>
                 </div>
                 <button onclick="getLocation()" class="btn btn-primary py-3 px-4">Đặt một chiếc xe hoàn hảo</button>
-                <script>
-                  function getLocation() {
-                    if (navigator.geolocation) {
-                      navigator.geolocation.getCurrentPosition(showPosition);
-                    } else {
-                      document.getElementById("location").innerHTML = "Trình duyệt của bạn không hỗ trợ định vị.";
-                    }
-                  }
-                  function showPosition(position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    // document.getElementById("location").innerHTML = "Vĩ độ: " + latitude + "<br> Kinh độ: " + longitude;
-                    // alert("Vĩ độ: " + latitude + "<br> Kinh độ: " + longitude)
-                    // Gửi vị trí đến máy chủ PHP
-                    // var xhr = new XMLHttpRequest();
-                    // xhr.open("POST", "chon_taixe.php", true);
-                    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    // xhr.send("latitude=" + latitude + "&longitude=" + longitude);
-                  }
-
-                </script>
               </div>
             </div>
 
@@ -287,7 +295,7 @@ if (isset($_POST['tx_ma'])) {
 
           <script>
             var jsonData = <?php echo $jsonData; ?>
-          </script>
+          </scrip>
           <script src="js/map_index.js"></script>
         </div>
       </div>
