@@ -73,23 +73,20 @@ if (isset($_POST['tx_ma'])) {
                     console.error('Lỗi khi gửi yêu cầu API:', error);
                   });
 
-                  function showCurrentLocation(data){
-                      $("#crLocation").val("Gần: "+data.address.amenity)
-                      $("#diemdix").val(latitude)
-                      $("#diemdiy").val(longitude)
+                function showCurrentLocation(data){
+                  if (data.address.amenity!=undefined){
+                    $("#crLocation").val(data.address.amenity)
+                  } else {
+                    $("#crLocation").val(data.address.road)
                   }
-
+                  $("#diemdix").val(latitude)
+                  $("#diemdiy").val(longitude)
+                  showMapIndex()
+                }
               }
 
               getLocation()
             </script>
-             <?php
-              if (isset($_GET['latden'])) {
-                  $_SESSION['latden'] = $_GET['latden'];
-                  $_SESSION['lngden'] = $_GET['lngden'];
-                  $_SESSION['locateden'] = $_GET['locateden'];
-                }
-            ?>
             <form id="myForm" action="<?php echo $form_action ?>" class="request-form ftco-animate bg-primary"
               method="post">
               <h2>Chuyến đi của bạn</h2>
@@ -99,7 +96,7 @@ if (isset($_POST['tx_ma'])) {
               </div>
               <div class="form-group">
                 <label for="" class="label">Vị trí của bạn</label><br>
-                <input class="form-control" type="text" name="current" id="crLocation" readonly value="">
+                <input class="form-control" style="font-size: 15px;" type="text" name="current" id="crLocation" readonly value="">
                 <input type="hidden" name="diemdix" id="diemdix">
                 <input type="hidden" name="diemdiy" id="diemdiy">
               </div>
@@ -295,7 +292,7 @@ if (isset($_POST['tx_ma'])) {
 
           <script>
             var jsonData = <?php echo $jsonData; ?>
-          </scrip>
+          </script>
           <script src="js/map_index.js"></script>
         </div>
       </div>
