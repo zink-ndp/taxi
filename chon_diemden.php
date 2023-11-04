@@ -1,25 +1,23 @@
 <?php
 $activate = "index";
 @include('header.php');
-unset($_SESSION['latden']);
-unset($_SESSION['lngden']);
 ?>
 
-
-<?php 
-if (isset($_POST['tx_ma'])) {
-    $form_action = "xulydatxe.php";
-    $matx = $_POST['tx_ma'];
-} else {
-    $form_action = "chon_taixe.php";
-    $matx = '';
-}
-?>
-
-<div class="showmap"> 
-
-    <div id="map" class="map leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+<div class="showmap rounded">
+    <div id="map"
+        class="map rounded leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"
+        tabindex="0">
         <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>
+        <div class="form-group search-group">
+            <div class="d-flex">
+                <input type="text" style="font-size: 14px" name="search-box" id="search-box" placeholder="Nhập địa điểm muốn đến (hoặc chọn trên bản đồ)" class="form-control">
+                <input type="button" value="Tìm" class="btn btn-primary px-3 ml-3">
+            </div>
+            <div class="result rounded mt-2 p-2 text-center" id="result">
+                <span id="dfResult">Chưa có dữ liệu</span>
+                <ul id="result-list" style="display: none"></ul>
+            </div>
+        </div>
     </div>
     <div class="leaflet-control-container">
         <div class="leaflet-top leaflet-right"></div>
@@ -28,147 +26,134 @@ if (isset($_POST['tx_ma'])) {
     </div>
 </div>
 
-<button
-    class="btn btn-success"
-    style="
+<button class="btn btn-primary" style="
         position: fixed;
-        bottom: 10%;
+        bottom: 7%;
         right: 10%;
         z-index: 999;
-    "
-    id="confirmLocationButtonDen">
+    " id="confirmLocationButtonDen">
     CHẤP NHẬN
 </button>
-    <link rel="stylesheet" href="map_data/leaflet-search/src/leaflet-search.css">
-    <script src="map_data/leaflet-search/src/leaflet-search.js"></script>
-    <script src="map_data/locations.js"></script>
-    <script>
-    console.log(locationsJSON)
+<!-- <link rel="stylesheet" href="map_data/leaflet-search/src/leaflet-search.css">
+<script src="map_data/leaflet-search/src/leaflet-search.js"></script>
+<script src="map_data/locations.js"></script> -->
+<script>
 
-    // Tạo biến lưu trữ tọa độ đã pin
-    let pinnedLocation2 = null;
-    var lng=""
-    var lat=""
-    var name=""
+    const userMakerUrl = 'images/user-maker.png'
+    const userMakerIC = L.icon({
+        iconUrl: userMakerUrl,
+        iconSize: [40, 50],
+        iconAnchor: [15, 15]
+    })
 
-    const map = L.map('map').setView([10.03, 105.77], 15);
-
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    // Lắng nghe sự kiện click để pin tọa độ khi người dùng click chuột
-    var marker = null
-    map.on('click', function (e) {
-
-        if (marker){
-            marker.remove()
-        }
-        // Tạo một marker tại vị trí người dùng đã click
-        marker = L.marker(e.latlng).addTo(map);
-        
-        // Lưu tọa độ vào biến pinnedLocation
-        pinnedLocation2 = e.latlng;
-        lat =pinnedLocation2.lat
-        lng =pinnedLocation2.lng
-        name = "Vị trí được chọn"
-    });
-
-
-    var dotIcon = L.icon({
-        iconUrl: 'images/dot.png',
-        iconSize: [13, 13], 
-        iconAnchor: [7 , 0]
-    });
-
-    const searchLayer = L.geoJSON(locationsJSON, {
-        pointToLayer: function(feature, latlng) {
-            return L.marker(latlng, {
-                icon: dotIcon
-            });
-        },
-        onEachFeature:function(feature, layer){
-            layer.bindPopup('Bạn đang chọn: '+feature.properties.name)
-        }
-    }).addTo(map)
-    
-    const searchControl = new L.Control.Search({
-        layer: searchLayer,
-        propertyName: "name",
-        position: 'topright',
-        hideMarkerOnCollapse: true
-    });
-
-    map.addControl(searchControl)
-
-    searchLayer.on('click', function(e) {
-        var latlng = e.latlng
-        var clickedFeature = e.layer.feature;
-        var coordinates = clickedFeature.geometry.coordinates;
-        lng = coordinates[0]; 
-        lat = coordinates[1]; 
-        name = clickedFeature.properties.name;
-        if (marker) {
-            marker.setLatLng(latlng);
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
         } else {
-            marker = L.marker(latlng).addTo(map);
+            document.getElementById("location").innerHTML = "Trình duyệt của bạn không hỗ trợ định vị.";
         }
-    });
-
-    searchControl.on('search:locationfound', function(e) {
-        var latlng = e.latlng; 
-        lng = latlng.lng; 
-        lat = latlng.lat; 
-        if (marker) {
-            marker.setLatLng(latlng);
-        } else {
-            marker = L.marker(latlng).addTo(map);
-        }
-    });
+    }
+    function showPosition(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
 
 
+        let pinnedLocation2 = null;
+        var lng = ""
+        var lat = ""
+        var location = ""
 
-    const confirmLocationButtonDen = document.getElementById('confirmLocationButtonDen');
-    confirmLocationButtonDen.addEventListener('click', function () {
-        window.location.href = `index.php?dr=to&locateden=${name}&latden=${lat}&lngden=${lng}`;
-    });
+        const map = L.map('map').setView([latitude, longitude], 15);
+
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const userMarker = L.marker([latitude, longitude], { icon: userMakerIC }).addTo(map);
+        const userPopup = L.popup()
+            .setLatLng([latitude, longitude])
+            .setContent("Bạn đang ở đây!").openOn(map)
+
+        var popup = null
+        var marker = null
+        var apiUrl = ""
+        map.on('click', function (e) {
+
+            if (marker) {
+                marker.remove()
+            }
+            if (popup) {
+                popup.remove()
+            }
+
+            pinnedLocation2 = e.latlng;
+            lat = pinnedLocation2.lat
+            lng = pinnedLocation2.lng
+
+            apiUrl = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
+
+            async function fetchData(){
+                try {
+                    const res = await fetch(apiUrl)
+                    if (!res.ok) throw new Error("Loi")
+                    const data = await res.json()
+
+                    console.log(data)
+                        location = data.display_name
+
+                    marker = L.marker(pinnedLocation2).addTo(map);
+                    popup = L.popup().setLatLng(pinnedLocation2).setContent(location).openOn(map)
+
+                } catch(e){
+                    console.error(e)
+                }
+            }
+            fetchData()
+        });
+
+
+        const confirmLocationButtonDen = document.getElementById('confirmLocationButtonDen');
+        confirmLocationButtonDen.addEventListener('click', function () {
+            window.location.href = `index.php?locateden=${location}&latden=${lat}&lngden=${lng}`;
+        });
+
+
+    }
+
+    getLocation()
 
 </script>
 
-<div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5"></div>
-<style> 
+<div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');"
+    data-stellar-background-ratio="0.5"></div>
+<style>
     .showmap {
         padding: 10px;
         width: 80%;
-        height: 55%;
-        z-index: 999;
+        height: 75%;
+        z-index: 99;
         background-color: white;
         position: fixed;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
     }
+
+    .map {
+        height: 100% !important;
+    }
+
+    .search-group {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 20px;
+        width: 30%;
+        z-index: 999;
+    }
+
+    .result{
+        background-color: white;
+    }
 </style>
-
-
-<!-- <?php
-// Kiểm tra xem có tọa độ từ URL không
-// $latDen = isset($_GET['lat']) ? $_GET['lat'] : 'null';
-// $lngDen = isset($_GET['lng']) ? $_GET['lng'] : 'null';
-?>
-<script>
-    // Lắng nghe sự kiện click trên nút "OK" để hiển thị tọa độ
-    const confirmLocationButton = document.getElementById('confirmLocationButton2');
-    confirmLocationButton.addEventListener('click', function () {
-        // Kiểm tra xem đã có giá trị tọa độ truyền từ trang chon_diemden hay không
-        const latDi = <?php echo isset($_GET['lat']) ? $_GET['lat'] : 'null'; ?>;
-        const lngDi = <?php echo isset($_GET['lng']) ? $_GET['lng'] : 'null'; ?>
-        // Nếu có tọa độ, hiển thị nó trong ô input
-        if (latDen !== 'null' && lngDen !== 'null') {
-            document.querySelector('input[name="diemden"]').value = `Lat: ${latDen}, Lng: ${lngDen}`;
-        }
-    });
-</script> -->
-
-</php>

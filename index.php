@@ -46,7 +46,7 @@ if (isset($_POST['tx_ma'])) {
     <div class="row no-gutters">
       <div class="col-md-12 featured-top">
         <div class="row no-gutters">
-          <div class="col-md-4 d-flex align-items-center">
+          <div class="col-md-12 col-lg-4 d-flex align-items-center">
             <script>
               var latitude = ""
               var longitude = ""
@@ -73,8 +73,8 @@ if (isset($_POST['tx_ma'])) {
                     console.error('Lỗi khi gửi yêu cầu API:', error);
                   });
 
-                function showCurrentLocation(data){
-                  if (data.address.amenity!=undefined){
+                function showCurrentLocation(data) {
+                  if (data.address.amenity != undefined) {
                     $("#crLocation").val(data.address.amenity)
                   } else {
                     $("#crLocation").val(data.address.road)
@@ -92,21 +92,38 @@ if (isset($_POST['tx_ma'])) {
               <h2>Chuyến đi của bạn</h2>
 
               <div class="form-group">
-                <input name="TX_MA" type="hidden" class="form-control" value="$" placeholder="">
+                <input name="TX_MA" type="hidden" class="form-control" value="$" >
               </div>
               <div class="form-group">
                 <label for="" class="label">Vị trí của bạn</label><br>
-                <input class="form-control" style="font-size: 15px;" type="text" name="current" id="crLocation" readonly value="">
+                <input class="form-control" style="font-size: 14px;" type="text" name="diemdi" id="crLocation" readonly
+                  value="">
                 <input type="hidden" name="diemdix" id="diemdix">
                 <input type="hidden" name="diemdiy" id="diemdiy">
               </div>
 
               <div class="form-group">
+                <?php
+                  if (isset($_GET['locateden'])){
+                    $location = $_GET['locateden'];
+                    $latden = $_GET['latden'];
+                    $lngden = $_GET['lngden'];
+                  } else {
+                    $location = null;
+                    $latden = '';
+                    $lngden = '';
+                  }
+                ?>
                 <label for="" class="label">Vị trí muốn đến</label>
                 <div class="d-flex flex-row justify-content-center align-items-center">
-                  <input name="diemden" type="text" class="form-control" placeholder="City, Airport, Station, etc" value="<?php echo $_SESSION['locateden'] ?>">
-                  <a href="chon_diemden.php" style="margin-left: 10px; font-size: 15px;"><i style="color: white;"
-                      class="fas fa-map-marker-alt"></i></a>
+                  <input type="hidden" name="diemdenx" id="diemdenx" value="<?php echo $latden ?>">
+                  <input type="hidden" name="diemdeny" id="diemdeny" value="<?php echo $lngden ?>">
+                  <input name="diemden" id="diemden" value="<?php echo $location ?>" style="font-size: 14px;" type="text" readonly class="form-control"
+                    placeholder="Vui lòng chọn điểm đến" required>
+                  <a href="chon_diemden.php" style="margin-left: 10px; font-size: 20px;">
+                    <i style="color: white;"
+                        class="fas fa-map-marker-alt"></i>
+                  </a>
                 </div>
               </div>
               <div class="form-group">
@@ -120,11 +137,10 @@ if (isset($_POST['tx_ma'])) {
           </div>
           <?php
 
-          if (!isset($_POST['tx_ma'])) {
-            ?>
+            if (!isset($_POST['tx_ma'])) {
+          ?>
 
-            <div class="col-1"></div>
-            <div class="col-md-7 d-flex align-items-center">
+            <div class="col-lg-8 col-md-12 d-flex align-items-center">
               <div class="services-wrap rounded w-100">
                 <h3 class="heading-section mb-4">Cách để thuê một chiếc taxi tốt</h3>
                 <div class="row d-flex mb-4">
