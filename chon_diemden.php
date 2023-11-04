@@ -8,35 +8,34 @@ $activate = "index";
         class="map rounded leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"
         tabindex="0">
         <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>
-        <div class="form-group search-group">
-            <div class="d-flex">
-                <input type="text" style="font-size: 14px" name="search-box" id="search-box" placeholder="Nhập địa điểm muốn đến (hoặc chọn trên bản đồ)" class="form-control">
-                <input type="button" value="Tìm" class="btn btn-primary px-3 ml-3">
-            </div>
-            <div class="result rounded mt-2 p-2 text-center" id="result">
-                <span id="dfResult">Chưa có dữ liệu</span>
-                <ul id="result-list" style="display: none"></ul>
-            </div>
-        </div>
     </div>
     <div class="leaflet-control-container">
         <div class="leaflet-top leaflet-right"></div>
         <div class="leaflet-bottom leaflet-left"></div>
         <div class="leaflet-bottom leaflet-right"></div>
     </div>
+    <div class="form-group search-group">
+        <div class="d-flex">
+            <input type="text" style="font-size: 14px" name="search-box" id="search-box" placeholder="Nhập địa điểm muốn đến (hoặc chọn trên bản đồ)" class="form-control">
+            <input type="button" value="Tìm" id="search-button" class="btn btn-primary px-3 ml-3">
+        </div>
+        <div class="result rounded mt-2 p-2 text-center" id="result">
+            <span id="dfText">Chưa có dữ liệu</span>
+            <ul id="result-list"></ul>
+        </div>
+    </div>
+    <button class="btn btn-danger" style="
+        position: absolute;
+        display: none;
+        bottom: 7%;
+        right: 11%;
+        padding: 10px 40px;
+        z-index: 999;
+    " id="btnXoa">
+    Xoá
+</button>
 </div>
 
-<button class="btn btn-primary" style="
-        position: fixed;
-        bottom: 7%;
-        right: 10%;
-        z-index: 999;
-    " id="confirmLocationButtonDen">
-    CHẤP NHẬN
-</button>
-<!-- <link rel="stylesheet" href="map_data/leaflet-search/src/leaflet-search.css">
-<script src="map_data/leaflet-search/src/leaflet-search.js"></script>
-<script src="map_data/locations.js"></script> -->
 <script>
 
     const userMakerUrl = 'images/user-maker.png'
@@ -45,6 +44,10 @@ $activate = "index";
         iconSize: [40, 50],
         iconAnchor: [15, 15]
     })
+
+    function createMap(){
+        
+    }
 
     function getLocation() {
         if (navigator.geolocation) {
@@ -75,6 +78,105 @@ $activate = "index";
             .setLatLng([latitude, longitude])
             .setContent("Bạn đang ở đây!").openOn(map)
 
+        //Tim kiem
+
+        function getBoundingBox(latitude, longitude, radius) {
+            // Earth's radius in kilometers
+            const earthRadius = 6371;
+
+            // Convert radius from kilometers to radians
+            const radiusInRadians = radius / earthRadius;
+
+            // Convert latitude and longitude from degrees to radians
+            const latInRadians = (latitude * Math.PI) / 180;
+            const lonInRadians = (longitude * Math.PI) / 180;
+
+            // Calculate the north, south, east, and west points of the bounding box
+            const north = latInRadians + radiusInRadians;
+            const south = latInRadians - radiusInRadians;
+            const east = lonInRadians + radiusInRadians;
+            const west = lonInRadians - radiusInRadians;
+
+            // Convert the results from radians back to degrees
+            const northInDegrees = (north * 180) / Math.PI;
+            const southInDegrees = (south * 180) / Math.PI;
+            const eastInDegrees = (east * 180) / Math.PI;
+            const westInDegrees = (west * 180) / Math.PI;
+
+            // Return the bounding box coordinates
+            return [westInDegrees, southInDegrees, eastInDegrees, northInDegrees];
+        }
+
+        function getBoundingBoxString(latitude, longitude, radius) {
+            const boundingBox = getBoundingBox(latitude, longitude, radius);
+            return boundingBox.join(',');
+        }
+
+        const boundingBox =getBoundingBoxString(latitude,longitude,20)
+
+        const dfText =document.getElementById("dfText")
+        const ipSearch =document.getElementById("search-box")
+        const btnSearch =document.getElementById("search-button")
+        const btnXoa = document.getElementById("btnXoa")
+        const ulList =document.getElementById("result-list")
+        var crMarker = []
+        
+        btnXoa.addEventListener('click',()=>{
+            ulList.innerHTML = ""
+            if (popup) popup.remove()
+            crMarker.forEach(mk => {
+                mk.remove()
+            });
+            crMarker = []
+        })
+
+        btnSearch.addEventListener('click',()=>{
+            dfText.style.display="none"
+            btnXoa.style.display="block"
+            var query = ipSearch.value
+            var apiUrl = "https://nominatim.openstreetmap.org/search?format=json&limit=6&viewbox="+boundingBox+"&bounded=1&q="+query;
+            fetch(apiUrl)
+                .then(result => result.json())
+                .then(parsedResult => {
+                    setResultList(parsedResult)
+                })
+        })
+
+        function setResultList(parsedResult){
+            ulList.innerHTML = ""
+            for (const foundMarker of crMarker){
+                map.remove(marker)
+            }
+            map.flyTo(new L.LatLng(latitude,longitude),12)
+            for (const rs of parsedResult){
+                console.log(rs)
+                const li =document.createElement("li")
+                li.classList.add('list-group-item','list-group-item-action')
+                li.innerHTML = JSON.stringify({
+                    name: rs.display_name,
+                    lat: rs.lat,
+                    lon: rs.lon
+                },undefined,2)
+                li.addEventListener('click', (e)=>{
+                    for (const child of ulList.children){
+                        child.classList.remove('active')
+                    }
+                    e.target.classList.add('active')
+                    const clickedData = JSON.parse(e.target.innerHTML)
+                    const position = new L.LatLng(clickedData.lat, clickedData.lon)
+                    const popup = L.popup().setLatLng(position)
+                                    .setContent(clickedData.name+'<br><a class="justify-content-center" href="index.php?locateden='+clickedData.name+'&latden='+clickedData.lat+'&lngden='+clickedData.lon+'"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
+                                    .openOn(map)
+                    map.flyTo(position,16)
+                })
+                const position = new L.LatLng(rs.lat, rs.lon)
+                crMarker.push(new L.marker(position).addTo(map))
+                ulList.appendChild(li)
+            }
+        }
+
+        //Cham diem tren map
+
         var popup = null
         var marker = null
         var apiUrl = ""
@@ -103,7 +205,9 @@ $activate = "index";
                         location = data.display_name
 
                     marker = L.marker(pinnedLocation2).addTo(map);
-                    popup = L.popup().setLatLng(pinnedLocation2).setContent(location).openOn(map)
+                    popup = L.popup().setLatLng(pinnedLocation2)
+                            .setContent(location+'<br><a class="justify-content-center" href="index.php?locateden='+location+'&latden='+lat+'&lngden='+lng+'"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
+                            .openOn(map)
 
                 } catch(e){
                     console.error(e)
@@ -111,14 +215,6 @@ $activate = "index";
             }
             fetchData()
         });
-
-
-        const confirmLocationButtonDen = document.getElementById('confirmLocationButtonDen');
-        confirmLocationButtonDen.addEventListener('click', function () {
-            window.location.href = `index.php?locateden=${location}&latden=${lat}&lngden=${lng}`;
-        });
-
-
     }
 
     getLocation()
@@ -142,6 +238,7 @@ $activate = "index";
 
     .map {
         height: 100% !important;
+        width: 70% !important;
     }
 
     .search-group {
@@ -149,7 +246,7 @@ $activate = "index";
         top: 0;
         right: 0;
         margin: 20px;
-        width: 30%;
+        width: 27%;
         z-index: 999;
     }
 

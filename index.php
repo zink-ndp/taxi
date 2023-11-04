@@ -74,11 +74,7 @@ if (isset($_POST['tx_ma'])) {
                   });
 
                 function showCurrentLocation(data) {
-                  if (data.address.amenity != undefined) {
-                    $("#crLocation").val(data.address.amenity)
-                  } else {
-                    $("#crLocation").val(data.address.road)
-                  }
+                  $("#crLocation").val(data.name)
                   $("#diemdix").val(latitude)
                   $("#diemdiy").val(longitude)
                   showMapIndex()
