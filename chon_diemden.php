@@ -16,26 +16,31 @@ $activate = "index";
     </div>
     <div class="form-group search-group">
         <div class="d-flex">
-            <input type="text" style="font-size: 14px" name="search-box" id="search-box" placeholder="Nhập địa điểm muốn đến (hoặc chọn trên bản đồ)" class="form-control">
+            <input type="text" style="font-size: 14px" name="search-box" id="search-box"
+                placeholder="Nhập địa điểm muốn đến (hoặc chọn trên bản đồ)" class="form-control">
             <input type="button" value="Tìm" id="search-button" class="btn btn-primary px-3 ml-3">
         </div>
         <div class="result rounded mt-2 p-2 text-center" id="result">
             <span id="dfText">Chưa có dữ liệu</span>
-            <ul id="result-list"></ul>
+            <ul class="w-100" id="result-list"></ul>
+        </div>
+        <div class="progress-container" id="pgrBar">
+            <div class="progress-bar" id="myProgressBar"></div>
         </div>
     </div>
-    <button class="btn btn-danger" style="
-        position: absolute;
+
+</div>
+
+<button class="btn btn-danger" style="
+        position: fixed;
         display: none;
-        bottom: 7%;
-        right: 11%;
+        bottom: 5%;
+        right: 19%;
         padding: 10px 40px;
-        z-index: 999;
+        z-index: 9999;
     " id="btnXoa">
     Xoá
 </button>
-</div>
-
 <script>
 
     const userMakerUrl = 'images/user-maker.png'
@@ -45,8 +50,8 @@ $activate = "index";
         iconAnchor: [15, 15]
     })
 
-    function createMap(){
-        
+    function createMap() {
+
     }
 
     function getLocation() {
@@ -80,6 +85,41 @@ $activate = "index";
 
         //Tim kiem
 
+        function updateProgressBar() {
+            var width = 0;
+            var interval = setInterval(function () {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                    progressBar.innerHTML = width + '%';
+                }
+            }, 10);
+        }
+
+        function findMidpoint(userX, userY, toX, toY) {
+            // Chuyển đổi chuỗi thành số
+            const usX = parseFloat(userX);
+            const usY = parseFloat(userY);
+            const tX = parseFloat(toX);
+            const tY = parseFloat(toY);
+            // Tính toán toạ độ ở giữa
+            const midLat = (usX + tX) / 2;
+            const midLng = (usY + tY) / 2;
+
+            return [midLat, midLng];
+        }
+
+        // Ví dụ sử dụng
+        const coordStrA = "10.0,20.0"; // Toạ độ A dạng chuỗi
+        const coordStrB = "15.0,25.0"; // Toạ độ B dạng chuỗi
+
+        const midpoint = findMidpoint(coordStrA, coordStrB);
+        console.log(midpoint); // Kết quả: [12.5, 22.5]
+
+
+
         function getBoundingBox(latitude, longitude, radius) {
             // Earth's radius in kilometers
             const earthRadius = 6371;
@@ -112,62 +152,101 @@ $activate = "index";
             return boundingBox.join(',');
         }
 
-        const boundingBox =getBoundingBoxString(latitude,longitude,20)
+        const boundingBox = getBoundingBoxString(latitude, longitude, 20)
 
-        const dfText =document.getElementById("dfText")
-        const ipSearch =document.getElementById("search-box")
-        const btnSearch =document.getElementById("search-button")
+        const dfText = document.getElementById("dfText")
+        const ipSearch = document.getElementById("search-box")
+        const btnSearch = document.getElementById("search-button")
         const btnXoa = document.getElementById("btnXoa")
-        const ulList =document.getElementById("result-list")
+        const ulList = document.getElementById("result-list")
+        const progressBar = document.getElementById('myProgressBar');
+        const pgrBar = document.getElementById('pgrBar');
+
         var crMarker = []
-        
-        btnXoa.addEventListener('click',()=>{
+        var popup = null
+        var route = null
+
+        btnXoa.addEventListener('click', () => {
             ulList.innerHTML = ""
-            if (popup) popup.remove()
+            ipSearch.value = ""
             crMarker.forEach(mk => {
                 mk.remove()
             });
             crMarker = []
+            route.remove()
+            popup.remove()
+            map.flyTo([latitude, longitude], 15)
+            btnXoa.style.display = "none"
         })
 
-        btnSearch.addEventListener('click',()=>{
-            dfText.style.display="none"
-            btnXoa.style.display="block"
+        btnSearch.addEventListener('click', () => {
+            pgrBar.style.display = "block"
+            updateProgressBar();
+            if (marker) {
+                marker.remove()
+            }
+            if (popup) {
+                popup.remove()
+            }
+            if (route) {
+                route.remove()
+            }
             var query = ipSearch.value
-            var apiUrl = "https://nominatim.openstreetmap.org/search?format=json&limit=6&viewbox="+boundingBox+"&bounded=1&q="+query;
+            var apiUrl = "https://nominatim.openstreetmap.org/search?format=json&limit=5&viewbox=" + boundingBox + "&bounded=1&q=" + query;
             fetch(apiUrl)
                 .then(result => result.json())
                 .then(parsedResult => {
-                    setResultList(parsedResult)
+                    pgrBar.style.display = "none"
+                    if (parsedResult.length == 0) {
+                        dfText.innerHTML = "Không tìm thấy địa điểm phù hợp"
+                    } else {
+                        dfText.style.display = "none"
+                        btnXoa.style.display = "block"
+                        setResultList(parsedResult)
+                    }
                 })
         })
 
-        function setResultList(parsedResult){
+        function setResultList(parsedResult) {
             ulList.innerHTML = ""
-            for (const foundMarker of crMarker){
+            for (const foundMarker of crMarker) {
                 map.remove(marker)
             }
-            map.flyTo(new L.LatLng(latitude,longitude),12)
-            for (const rs of parsedResult){
+            map.flyTo(new L.LatLng(latitude, longitude), 12)
+            for (const rs of parsedResult) {
                 console.log(rs)
-                const li =document.createElement("li")
-                li.classList.add('list-group-item','list-group-item-action')
+                const li = document.createElement("li")
+                li.classList.add('list-group-item', 'list-group-item-action')
                 li.innerHTML = JSON.stringify({
                     name: rs.display_name,
                     lat: rs.lat,
                     lon: rs.lon
-                },undefined,2)
-                li.addEventListener('click', (e)=>{
-                    for (const child of ulList.children){
+                }, undefined, 2)
+                li.addEventListener('click', (e) => {
+                    for (const child of ulList.children) {
                         child.classList.remove('active')
                     }
                     e.target.classList.add('active')
                     const clickedData = JSON.parse(e.target.innerHTML)
                     const position = new L.LatLng(clickedData.lat, clickedData.lon)
-                    const popup = L.popup().setLatLng(position)
-                                    .setContent(clickedData.name+'<br><a class="justify-content-center" href="index.php?locateden='+clickedData.name+'&latden='+clickedData.lat+'&lngden='+clickedData.lon+'"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
-                                    .openOn(map)
-                    map.flyTo(position,16)
+                    popup = L.popup().setLatLng(position)
+                        .setContent(clickedData.name + '<br><a class="justify-content-center" href="index.php?locateden=' + clickedData.name + '&latden=' + clickedData.lat + '&lngden=' + clickedData.lon + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
+                        .openOn(map)
+                    if (route) route.remove()
+                    route = L.Routing.control({
+                        waypoints: [
+                            L.latLng(latitude, longitude),
+                            L.latLng(clickedData.lat, clickedData.lon)
+                        ],
+                        draggableWaypoints: false,
+                        routeWhileDragging: false,
+                        fitSelectedRoutes: false,
+                        lineOptions: {
+                            styles: [{ color: '#19d600', opacity: 0.6, weight: 6 }]
+                        },
+                        createMarker: function () { return null }
+                    }).addTo(map)
+                    map.flyTo(findMidpoint(latitude, longitude, clickedData.lat, clickedData.lon), 11)
                 })
                 const position = new L.LatLng(rs.lat, rs.lon)
                 crMarker.push(new L.marker(position).addTo(map))
@@ -188,6 +267,9 @@ $activate = "index";
             if (popup) {
                 popup.remove()
             }
+            if (route) {
+                route.remove()
+            }
 
             pinnedLocation2 = e.latlng;
             lat = pinnedLocation2.lat
@@ -195,24 +277,41 @@ $activate = "index";
 
             apiUrl = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
 
-            async function fetchData(){
+            async function fetchData() {
                 try {
                     const res = await fetch(apiUrl)
                     if (!res.ok) throw new Error("Loi")
                     const data = await res.json()
 
                     console.log(data)
-                        location = data.display_name
-
+                    location = data.display_name
+                    
                     marker = L.marker(pinnedLocation2).addTo(map);
                     popup = L.popup().setLatLng(pinnedLocation2)
-                            .setContent(location+'<br><a class="justify-content-center" href="index.php?locateden='+location+'&latden='+lat+'&lngden='+lng+'"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
-                            .openOn(map)
+                    .setContent(location + '<br><a class="justify-content-center" href="index.php?locateden=' + location + '&latden=' + lat + '&lngden=' + lng + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
+                    .openOn(map)
 
-                } catch(e){
+                    route = L.Routing.control({
+                        waypoints: [
+                            L.latLng(latitude, longitude),
+                            L.latLng(pinnedLocation2)
+                        ],
+                        draggableWaypoints: false,
+                        routeWhileDragging: false,
+                        fitSelectedRoutes: false,
+                        lineOptions: {
+                            styles: [{ color: '#19d600', opacity: 0.6, weight: 6 }]
+                        },
+                        createMarker: function () { return null }
+                    }).addTo(map)
+
+                    map.flyTo(findMidpoint(latitude, longitude, lat, lon), 11)
+
+                } catch (e) {
                     console.error(e)
                 }
             }
+            btnXoa.style.display = "block"
             fetchData()
         });
     }
@@ -250,7 +349,22 @@ $activate = "index";
         z-index: 999;
     }
 
-    .result{
+    .result {
         background-color: white;
+    }
+
+    .progress-container {
+        width: 100%;
+        background-color: #ccc;
+        display: none;
+    }
+
+    .progress-bar {
+        width: 0;
+        height: 10px;
+        background-color: #4CAF50;
+        text-align: center;
+        line-height: 30px;
+        color: white;
     }
 </style>
