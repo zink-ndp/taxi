@@ -212,7 +212,7 @@ $activate = "index";
             for (const foundMarker of crMarker) {
                 map.remove(marker)
             }
-            map.flyTo(new L.LatLng(latitude, longitude), 12)
+            map.flyTo(new L.LatLng(latitude, longitude), 14)
             for (const rs of parsedResult) {
                 console.log(rs)
                 const li = document.createElement("li")
@@ -246,7 +246,7 @@ $activate = "index";
                         },
                         createMarker: function () { return null }
                     }).addTo(map)
-                    map.flyTo(findMidpoint(latitude, longitude, clickedData.lat, clickedData.lon), 11)
+                    map.flyTo(findMidpoint(latitude, longitude, clickedData.lat, clickedData.lon), 15)
                 })
                 const position = new L.LatLng(rs.lat, rs.lon)
                 crMarker.push(new L.marker(position).addTo(map))
@@ -305,7 +305,7 @@ $activate = "index";
                         createMarker: function () { return null }
                     }).addTo(map)
 
-                    map.flyTo(findMidpoint(latitude, longitude, lat, lon), 11)
+                    map.flyTo(findMidpoint(latitude, longitude, lat, lon), 17)
 
                 } catch (e) {
                     console.error(e)
