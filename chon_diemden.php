@@ -3,320 +3,189 @@ $activate = "index";
 @include('header.php');
 ?>
 
+<script>
+  (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+    key: "AIzaSyCOOW03_8zw3SqGt7LSLKNgvIgKZte-U98",
+    v: "weekly",
+  });
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOOW03_8zw3SqGt7LSLKNgvIgKZte-U98&libraries=places&callback=initMap">
+</script>
+
 <div class="showmap rounded">
-    <div id="map"
-        class="map rounded leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"
-        tabindex="0">
-        <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"></div>
-    </div>
-    <div class="leaflet-control-container">
-        <div class="leaflet-top leaflet-right"></div>
-        <div class="leaflet-bottom leaflet-left"></div>
-        <div class="leaflet-bottom leaflet-right"></div>
-    </div>
+    <div id="map" class="map rounded"></div>
     <div class="form-group search-group">
         <div class="d-flex">
             <input type="text" style="font-size: 14px" name="search-box" id="search-box"
                 placeholder="Nhập địa điểm muốn đến (hoặc chọn trên bản đồ)" class="form-control">
-            <input type="button" value="Tìm" id="search-button" class="btn btn-primary px-3 ml-3">
-        </div>
-        <div class="result rounded mt-2 p-2 text-center" id="result">
-            <span id="dfText">Chưa có dữ liệu</span>
-            <ul class="w-100" id="result-list"></ul>
-        </div>
-        <div class="progress-container" id="pgrBar">
-            <div class="progress-bar" id="myProgressBar"></div>
+            <input type="button" value="Xác nhận" id="search-button" class="btn btn-primary px-3 ml-3">
         </div>
     </div>
 
 </div>
 
-<button class="btn btn-danger" style="
-        position: fixed;
-        display: none;
-        bottom: 5%;
-        right: 19%;
-        padding: 10px 40px;
-        z-index: 9999;
-    " id="btnXoa">
-    Xoá
-</button>
 <script>
 
-    const userMakerUrl = 'images/user-maker.png'
-    const userMakerIC = L.icon({
-        iconUrl: userMakerUrl,
-        iconSize: [40, 50],
-        iconAnchor: [15, 15]
-    })
+const okBtn =document.getElementById('search-button')
 
-    function createMap() {
+const userMakerUrl = 'images/user-maker.png'
+const userMakerIC = L.icon({
+    iconUrl: userMakerUrl,
+    iconSize: [40, 50],
+    iconAnchor: [15, 15]
+})
 
+var latitude=0;
+var longitude=0;
+var locateden="";
+var latden=0;
+var lngden=0;
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        document.getElementById("location").innerHTML = "Trình duyệt của bạn không hỗ trợ định vị.";
     }
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            document.getElementById("location").innerHTML = "Trình duyệt của bạn không hỗ trợ định vị.";
-        }
-    }
-    function showPosition(position) {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
+}
+function showPosition(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
 
 
-        let pinnedLocation2 = null;
-        var lng = ""
-        var lat = ""
-        var location = ""
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: latitude, lng: longitude},
+          zoom: 13
+        });
 
-        const map = L.map('map').setView([latitude, longitude], 15);
+        var userLatLng = new google.maps.LatLng(latitude, longitude);
+        const userMarker = new google.maps.Marker({
+            position: userLatLng,
+            map,
+            title: "Bạn đang ở đây",
+        });
+        userMarker.setMap(map)
 
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+        var input = document.getElementById('search-box');
+    
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+    
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+        });
+        
+        var directionsRenderer
+        var oldDirectionsDisplay
+        autocomplete.addListener('place_changed', function() {
 
-        const userMarker = L.marker([latitude, longitude], { icon: userMakerIC }).addTo(map);
-        const userPopup = L.popup()
-            .setLatLng([latitude, longitude])
-            .setContent("Bạn đang ở đây!").openOn(map)
+            if(oldDirectionsDisplay) {oldDirectionsDisplay.setMap(null)}
+            marker.setMap(null)
 
-        //Tim kiem
-
-        function updateProgressBar() {
-            var width = 0;
-            var interval = setInterval(function () {
-                if (width >= 100) {
-                    clearInterval(interval);
-                } else {
-                    width++;
-                    progressBar.style.width = width + '%';
-                    progressBar.innerHTML = width + '%';
-                }
-            }, 10);
-        }
-
-        function findMidpoint(userX, userY, toX, toY) {
-            // Chuyển đổi chuỗi thành số
-            const usX = parseFloat(userX);
-            const usY = parseFloat(userY);
-            const tX = parseFloat(toX);
-            const tY = parseFloat(toY);
-            // Tính toán toạ độ ở giữa
-            const midLat = (usX + tX) / 2;
-            const midLng = (usY + tY) / 2;
-
-            return [midLat, midLng];
-        }
-
-        // Ví dụ sử dụng
-        const coordStrA = "10.0,20.0"; // Toạ độ A dạng chuỗi
-        const coordStrB = "15.0,25.0"; // Toạ độ B dạng chuỗi
-
-        const midpoint = findMidpoint(coordStrA, coordStrB);
-        console.log(midpoint); // Kết quả: [12.5, 22.5]
-
-
-
-        function getBoundingBox(latitude, longitude, radius) {
-            // Earth's radius in kilometers
-            const earthRadius = 6371;
-
-            // Convert radius from kilometers to radians
-            const radiusInRadians = radius / earthRadius;
-
-            // Convert latitude and longitude from degrees to radians
-            const latInRadians = (latitude * Math.PI) / 180;
-            const lonInRadians = (longitude * Math.PI) / 180;
-
-            // Calculate the north, south, east, and west points of the bounding box
-            const north = latInRadians + radiusInRadians;
-            const south = latInRadians - radiusInRadians;
-            const east = lonInRadians + radiusInRadians;
-            const west = lonInRadians - radiusInRadians;
-
-            // Convert the results from radians back to degrees
-            const northInDegrees = (north * 180) / Math.PI;
-            const southInDegrees = (south * 180) / Math.PI;
-            const eastInDegrees = (east * 180) / Math.PI;
-            const westInDegrees = (west * 180) / Math.PI;
-
-            // Return the bounding box coordinates
-            return [westInDegrees, southInDegrees, eastInDegrees, northInDegrees];
-        }
-
-        function getBoundingBoxString(latitude, longitude, radius) {
-            const boundingBox = getBoundingBox(latitude, longitude, radius);
-            return boundingBox.join(',');
-        }
-
-        const boundingBox = getBoundingBoxString(latitude, longitude, 20)
-
-        const dfText = document.getElementById("dfText")
-        const ipSearch = document.getElementById("search-box")
-        const btnSearch = document.getElementById("search-button")
-        const btnXoa = document.getElementById("btnXoa")
-        const ulList = document.getElementById("result-list")
-        const progressBar = document.getElementById('myProgressBar');
-        const pgrBar = document.getElementById('pgrBar');
-
-        var crMarker = []
-        var popup = null
-        var route = null
-
-        btnXoa.addEventListener('click', () => {
-            ulList.innerHTML = ""
-            ipSearch.value = ""
-            crMarker.forEach(mk => {
-                mk.remove()
+            infowindow.close();
+            if (marker) marker.setMap(null)
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                window.alert("Autocomplete's returned place contains no geometry");
+                return;
+            }
+      
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(13);
+            }
+            marker.setIcon(({
+                url: place.icon,
+                size: new google.maps.Size(50, 50),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(35, 35)
+            }));
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+            oldMarker = marker;
+        
+            if (directionsRenderer) directionsRenderer.setMap(null)
+            const directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({
+                draggable: true,
+                map,
+                panel: document.getElementById("panel"),
             });
-            crMarker = []
-            route.remove()
-            popup.remove()
-            map.flyTo([latitude, longitude], 15)
-            btnXoa.style.display = "none"
-        })
 
-        btnSearch.addEventListener('click', () => {
-            pgrBar.style.display = "block"
-            updateProgressBar();
-            if (marker) {
-                marker.remove()
-            }
-            if (popup) {
-                popup.remove()
-            }
-            if (route) {
-                route.remove()
-            }
-            var query = ipSearch.value
-            var apiUrl = "https://nominatim.openstreetmap.org/search?format=json&limit=5&viewbox=" + boundingBox + "&bounded=1&q=" + query;
-            fetch(apiUrl)
-                .then(result => result.json())
-                .then(parsedResult => {
-                    pgrBar.style.display = "none"
-                    if (parsedResult.length == 0) {
-                        dfText.innerHTML = "Không tìm thấy địa điểm phù hợp"
-                    } else {
-                        dfText.style.display = "none"
-                        btnXoa.style.display = "block"
-                        setResultList(parsedResult)
-                    }
-                })
-        })
+            origin = new google.maps.LatLng(latitude, longitude);
+            destination = new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng());
 
-        function setResultList(parsedResult) {
-            ulList.innerHTML = ""
-            for (const foundMarker of crMarker) {
-                map.remove(marker)
-            }
-            map.flyTo(new L.LatLng(latitude, longitude), 14)
-            for (const rs of parsedResult) {
-                console.log(rs)
-                const li = document.createElement("li")
-                li.classList.add('list-group-item', 'list-group-item-action')
-                li.innerHTML = JSON.stringify({
-                    name: rs.display_name,
-                    lat: rs.lat,
-                    lon: rs.lon
-                }, undefined, 2)
-                li.addEventListener('click', (e) => {
-                    for (const child of ulList.children) {
-                        child.classList.remove('active')
-                    }
-                    e.target.classList.add('active')
-                    const clickedData = JSON.parse(e.target.innerHTML)
-                    const position = new L.LatLng(clickedData.lat, clickedData.lon)
-                    popup = L.popup().setLatLng(position)
-                        .setContent(clickedData.name + '<br><a class="justify-content-center" href="index.php?locateden=' + clickedData.name + '&latden=' + clickedData.lat + '&lngden=' + clickedData.lon + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
-                        .openOn(map)
-                    if (route) route.remove()
-                    route = L.Routing.control({
-                        waypoints: [
-                            L.latLng(latitude, longitude),
-                            L.latLng(clickedData.lat, clickedData.lon)
-                        ],
-                        draggableWaypoints: false,
-                        routeWhileDragging: false,
-                        fitSelectedRoutes: false,
-                        lineOptions: {
-                            styles: [{ color: '#19d600', opacity: 0.6, weight: 6 }]
-                        },
-                        createMarker: function () { return null }
-                    }).addTo(map)
-                    map.flyTo(findMidpoint(latitude, longitude, clickedData.lat, clickedData.lon), 15)
-                })
-                const position = new L.LatLng(rs.lat, rs.lon)
-                crMarker.push(new L.marker(position).addTo(map))
-                ulList.appendChild(li)
-            }
-        }
+            console.log(origin)
+            console.log(destination)
 
-        //Cham diem tren map
-
-        var popup = null
-        var marker = null
-        var apiUrl = ""
-        map.on('click', function (e) {
-
-            if (marker) {
-                marker.remove()
-            }
-            if (popup) {
-                popup.remove()
-            }
-            if (route) {
-                route.remove()
+            var request = {
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.TravelMode.DRIVING
             }
 
-            pinnedLocation2 = e.latlng;
-            lat = pinnedLocation2.lat
-            lng = pinnedLocation2.lng
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    var route = response.routes[0];
+                    console.log("Khoảng cách: " + route.legs[0].distance.text);
+                    console.log("Thời gian: " + route.legs[0].duration.text);
 
-            apiUrl = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
-
-            async function fetchData() {
-                try {
-                    const res = await fetch(apiUrl)
-                    if (!res.ok) throw new Error("Loi")
-                    const data = await res.json()
-
-                    console.log(data)
-                    location = data.display_name
-                    
-                    marker = L.marker(pinnedLocation2).addTo(map);
-                    popup = L.popup().setLatLng(pinnedLocation2)
-                    .setContent(location + '<br><a class="justify-content-center" href="index.php?locateden=' + location + '&latden=' + lat + '&lngden=' + lng + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
-                    .openOn(map)
-
-                    route = L.Routing.control({
-                        waypoints: [
-                            L.latLng(latitude, longitude),
-                            L.latLng(pinnedLocation2)
-                        ],
-                        draggableWaypoints: false,
-                        routeWhileDragging: false,
-                        fitSelectedRoutes: false,
-                        lineOptions: {
-                            styles: [{ color: '#19d600', opacity: 0.6, weight: 6 }]
-                        },
-                        createMarker: function () { return null }
-                    }).addTo(map)
-
-                    map.flyTo(findMidpoint(latitude, longitude, lat, lon), 17)
-
-                } catch (e) {
-                    console.error(e)
+                    directionsDisplay = new google.maps.DirectionsRenderer();
+                    directionsDisplay.setMap(map); 
+                    directionsDisplay.setDirections(response);
+                    oldDirectionsDisplay = directionsDisplay;
+                } else {
+                    // Xử lý lỗi nếu có
+                    console.error("Lỗi: " + status);
                 }
+            })
+
+            var address = '';
+            if (place.address_components) {
+                address = [
+                  (place.address_components[0] && place.address_components[0].short_name || ''),
+                  (place.address_components[1] && place.address_components[1].short_name || ''),
+                  (place.address_components[2] && place.address_components[2].short_name || '')
+                ].join(' ');
             }
-            btnXoa.style.display = "block"
-            fetchData()
+        
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address + '</div>');
+            infowindow.open(map, marker);
+            
+            locateden = encodeURIComponent(place.name)
+            latden =place.geometry.location.lat()
+            lngden =place.geometry.location.lng()
+
+            console.log("index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden)
+
+            okBtn.addEventListener('click', () => {
+                window.location.href ="index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden;
+            })
+
         });
     }
 
-    getLocation()
+    initMap()
+
+
+}
+
+
+getLocation()
+
+
+
 
 </script>
 
@@ -337,13 +206,13 @@ $activate = "index";
 
     .map {
         height: 100% !important;
-        width: 70% !important;
+        width: 100% !important;
     }
 
     .search-group {
         position: absolute;
         top: 0;
-        right: 0;
+        right: 0 !important;
         margin: 20px;
         width: 27%;
         z-index: 999;

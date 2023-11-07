@@ -192,9 +192,7 @@ $activate = "index";
                 route.remove()
             }
             var query = ipSearch.value
-            var public_key= "pk.eyJ1Ijoiemlua2N0dSIsImEiOiJjbG5rMGcybDUxbGZjMm5tc2RzanRrMHU4In0.zo3P-KBn48z6gTU67b6X7g"
-            var apiUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?proximity=ip&access_token="+public_key
-            // var apiUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/lotte.json?proximity=ip&access_token=sk.eyJ1Ijoiemlua2N0dSIsImEiOiJjbG9tajFoMTIya2YyMnJvMmNnMzEzamJkIn0.sr9BkpsVwSQyH4d50GjIQw";
+            var apiUrl = "https://nominatim.openstreetmap.org/search?format=json&limit=5&viewbox=" + boundingBox + "&bounded=1&q=" + query;
             fetch(apiUrl)
                 .then(result => result.json())
                 .then(parsedResult => {
@@ -204,8 +202,7 @@ $activate = "index";
                     } else {
                         dfText.style.display = "none"
                         btnXoa.style.display = "block"
-                        console.log(parsedResult)
-                        // setResultList(parsedResult)
+                        setResultList(parsedResult)
                     }
                 })
         })
