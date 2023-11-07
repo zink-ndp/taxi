@@ -50,5 +50,20 @@ jsonData.forEach(function (item) {
     
     marker.on('click', function() {
         popup.openOn(map);
+        route = L.Routing.control({
+        waypoints: [
+            L.latLng(item.TT_TOADOX, item.TT_TOADOY),
+            L.latLng(10.02914,105.77167)
+            
+        ],
+        draggableWaypoints: false,
+        routeWhileDragging: false,
+        fitSelectedRoutes: false,
+        lineOptions: {
+            styles: [{ color: '#19d600', opacity: 0.6, weight: 6 }]
+        },
+        createMarker: function () {return null}
+    }).addTo(map)
     });
+    
 });
