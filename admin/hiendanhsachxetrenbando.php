@@ -9,7 +9,7 @@ include('head.php');
 ?>
 
 <body>
-    <div class="loader"></div>
+    <!-- <div class="loader"></div> -->
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
@@ -33,7 +33,8 @@ include('head.php');
                                     <?php
 
                                         // Truy vấn SQL để lấy dữ liệu từ cơ sở dữ liệu
-                                        $query = "SELECT tx.TX_MA, tx.TX_TEN, tx.TX_BANGLAI, tx.TX_SDT, tx.TX_USERNAME, tx.TX_PASSWORD, tx.TX_GIOITINH, tx.TX_HINHANH, tt.TD_DATE, tt.TT_TOADOX, tt.TT_TOADOY, TT_TRANGTHAI
+                                        $query = "SELECT tx.TX_MA, tx.TX_TEN, tx.TX_BANGLAI, tx.TX_SDT, tx.TX_USERNAME, tx.TX_PASSWORD, tx.
+                                        TX_GIOITINH, tx.TX_HINHANH, tt.TD_DATE, tt.TT_TOADOX, tt.TT_TOADOY, TT_TRANGTHAI
                                         FROM taixe tx
                                         JOIN trangthai tt ON tx.TX_MA = tt.TX_MA
                                         WHERE (tt.TX_MA, tt.TD_DATE) IN (
@@ -53,7 +54,7 @@ include('head.php');
                                         $jsonData = json_encode($data);
                                          ?>
                                         <script>
-                                            var jsonData = <?php echo $jsonData; ?>
+                                            let jsonData = <?php echo $jsonData; ?>
                                         </script>
 
                                     <div class="card-body" >
