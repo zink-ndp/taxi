@@ -25,7 +25,14 @@ $activate = "index";
             <input type="button" value="Xác nhận" id="search-button" class="btn btn-primary px-3 ml-3">
         </div>
     </div>
-
+    <div id="if-gr" class="card rounded p-3 info-group">
+        <span class="fw-bolder">Quãng đường: <span id="spanQuangduong" class="text-dark fw-bold"></span> - (khoảng <span id="spanThoigian" class="text-dark fw-bold"></span>) </span>
+    </div>  
+    <div id="wp-gr" class="card waypoint-group">
+        <ul id="listwp" class="mt-3">
+            <!-- append here -->
+        </ul>
+    </div> 
 </div>
 
 <script>
@@ -84,6 +91,9 @@ function showPosition(position) {
         
         var directionsRenderer
         var oldDirectionsDisplay
+        var stepDisplay;
+        var markerArray = [];
+
         autocomplete.addListener('place_changed', function() {
 
             if(oldDirectionsDisplay) {oldDirectionsDisplay.setMap(null)}
@@ -123,6 +133,8 @@ function showPosition(position) {
                 panel: document.getElementById("panel"),
             });
 
+            stepDisplay = new google.maps.InfoWindow();
+
             origin = new google.maps.LatLng(latitude, longitude);
             destination = new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng());
 
@@ -135,16 +147,38 @@ function showPosition(position) {
                 travelMode: google.maps.TravelMode.DRIVING
             }
 
+            const if_gr =document.getElementById('if-gr')
+            const wp_gr =document.getElementById('wp-gr')
+            const listWp =document.getElementById('listwp')
+            const sQuangduong =document.getElementById('spanQuangduong')
+            const sThoigian =document.getElementById('spanThoigian')
             directionsService.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
                     var route = response.routes[0];
                     console.log("Khoảng cách: " + route.legs[0].distance.text);
                     console.log("Thời gian: " + route.legs[0].duration.text);
 
+                    if_gr.style.display = "block"
+                    wp_gr.style.display = "block"
+                    sQuangduong.innerHTML = route.legs[0].distance.text
+                    sThoigian.innerHTML = route.legs[0].duration.text
+                    
+                    var ways = response.routes[0].legs[0]
+                    for (var i = 0; i < ways.steps.length; i++) {
+                        const li = document.createElement('li')
+                        li.classList.add('fs-6')
+                        li.innerHTML = ways.steps[i].instructions
+                        listWp.appendChild(li)
+                        console.log(ways.steps[i].instructions)
+                    }
+
                     directionsDisplay = new google.maps.DirectionsRenderer();
                     directionsDisplay.setMap(map); 
                     directionsDisplay.setDirections(response);
                     oldDirectionsDisplay = directionsDisplay;
+
+                    showSteps(response)
+
                 } else {
                     // Xử lý lỗi nếu có
                     console.error("Lỗi: " + status);
@@ -162,7 +196,8 @@ function showPosition(position) {
         
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address + '</div>');
             infowindow.open(map, marker);
-            
+        
+
             locateden = encodeURIComponent(place.name)
             latden =place.geometry.location.lat()
             lngden =place.geometry.location.lng()
@@ -174,6 +209,32 @@ function showPosition(position) {
             })
 
         });
+
+        function showSteps(directionResult) {
+        var myRoute = directionResult.routes[0].legs[0];
+
+        for (var i = 0; i < myRoute.steps.length; i++) {
+            var marker = new google.maps.Marker({
+                position: myRoute.steps[i].start_point,
+                map: map,
+                icon: {
+                    url: 'images/dot.png',
+                    scaledSize: new google.maps.Size(18, 18)
+                }
+            });
+            attachInstructionText(marker, myRoute.steps[i].instructions);
+            markerArray[i] = marker;
+            console.log(myRoute.steps[i].instructions)
+        }
+        }
+
+        function attachInstructionText(marker, text) {
+            google.maps.event.addListener(marker, 'click', function() {
+                stepDisplay.setContent(text);
+                stepDisplay.open(map, marker);
+            });
+        }
+
     }
 
     initMap()
@@ -212,6 +273,26 @@ getLocation()
     .search-group {
         position: absolute;
         top: 0;
+        right: 0 !important;
+        margin: 20px;
+        width: 27%;
+        z-index: 999;
+    }
+
+    .info-group {
+        display: none;
+        position: absolute;
+        top: 4rem;
+        right: 0 !important;
+        margin: 20px;
+        width: 27%;
+        z-index: 999;
+    }
+
+    .waypoint-group {
+        display: none;
+        position: absolute;
+        top: 8rem;
         right: 0 !important;
         margin: 20px;
         width: 27%;
