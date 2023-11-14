@@ -48,44 +48,52 @@ jsonData.forEach(function (item) {
     .setContent(
       `<b>Tên tài xế:</b> ${item.TX_TEN}<br><b>Trạng thái:</b> ${trangThai}<br><b>Tọa độ:</b> ${item.TT_TOADOX},<b></b> ${item.TT_TOADOY}`
     );
-    var x = ""
-    var y = ""
-  marker.on("click", function () {
-      popup.openOn(map);
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "../admin/timdiemden.php", true);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-            console.log(xhr.responseText)
-            var response = JSON.parse(xhr.responseText);
-            console.log("Value 1: " + response.x);
-            console.log("Value 2: " + response.y);
-            x=response.x
-            y=response.y
-        } else {
-            console.error('Lỗi yêu cầu:', xhr.status, xhr.statusText);
-        }
+  
+    // Tạo một hàm callback để xử lý khi tọa độ đã sẵn sàng
+  var route = null;
+  function handleCoordinates(x, y) {
+    // Tạo routing khi tọa độ đã sẵn sàng
+    route = L.Routing.control({
+      waypoints: [L.latLng(item.TT_TOADOX, item.TT_TOADOY), L.latLng(x, y)],
+      draggableWaypoints: false,
+      routeWhileDragging: false,
+      fitSelectedRoutes: false,
+      lineOptions: {
+        styles: [{ color: "#19d600", opacity: 0.6, weight: 6 }],
+      },
+      createMarker: function () {
+        return null;
+      },
+    }).addTo(map);
+  }
+
+  // Gắn sự kiện click cho marker
+  marker.on("click", function () {
+    if (route) {
+      route.remove()
+    }
+    popup.openOn(map);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../admin/timdiemden.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        var response = JSON.parse(xhr.responseText);
+        var x = response.x;
+        var y = response.y;
+
+        console.log(x, y);
+
+        // Gọi hàm callback với tọa độ đã sẵn sàng
+        handleCoordinates(x, y);
+      } else {
+        console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
+      }
     };
 
-      var data = "matx="+ item.TX_MA; // Thay thế bằng dữ liệu bạn muốn gửi
-      xhr.send(data);
-      route = L.Routing.control({
-        waypoints: [
-          L.latLng(item.TT_TOADOX, item.TT_TOADOY),
-          L.latLng(item.x, item.y), // Sử dụng tọa độ điểm đến từ dữ liệu
-        ],
-        draggableWaypoints: false,
-        routeWhileDragging: false,
-        fitSelectedRoutes: false,
-        lineOptions: {
-          styles: [{ color: "#19d600", opacity: 0.6, weight: 6 }],
-        },
-        createMarker: function () {
-          return null;
-        },
-      }).addTo(map);
-    })
-    .addTo(map);
+    var data = "matx=" + item.TX_MA;
+    xhr.send(data);
+  });
 });

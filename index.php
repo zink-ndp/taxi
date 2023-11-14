@@ -123,7 +123,7 @@ if (isset($_POST['tx_ma'])) {
                   <input type="hidden" name="diemdeny" id="diemdeny" value="<?php echo $lngden ?>">
                   <input name="diemden" id="diemden" value="<?php echo $location ?>" style="font-size: 14px;" type="text" readonly class="form-control"
                     placeholder="Vui lòng chọn điểm đến" required>
-                  <a href="chon_diemden.php?matx=<?php echo $matx ?>" style="margin-left: 10px; font-size: 20px;">
+                  <a href="chon_diemden.php" style="margin-left: 10px; font-size: 20px;">
                     <i style="color: white;"
                         class="fas fa-map-marker-alt"></i>
                   </a>

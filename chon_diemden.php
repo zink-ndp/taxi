@@ -35,14 +35,6 @@ $activate = "index";
     </div> 
 </div>
 
-<?php  
-    if (!isset($_GET['matx'])) {
-        $matx = $_GET['matx'];
-    } else {
-        $matx = "";
-    }
-?>
-
 <script>
 
 const okBtn =document.getElementById('search-button')
@@ -88,7 +80,10 @@ function showPosition(position) {
 
         var input = document.getElementById('search-box');
     
-        var autocomplete = new google.maps.places.Autocomplete(input);
+        var autocomplete = new google.maps.places.Autocomplete(input,{
+            types: ['establishment'],
+            fields: ['place_id', 'geometry', 'name']
+        });
         autocomplete.bindTo('bounds', map);
     
         var infowindow = new google.maps.InfoWindow();
@@ -111,9 +106,13 @@ function showPosition(position) {
             if (marker) marker.setMap(null)
             marker.setVisible(false);
             var place = autocomplete.getPlace();
+
             if (!place.geometry) {
-                window.alert("Autocomplete's returned place contains no geometry");
-                return;
+                // window.alert("Autocomplete's returned place contains no geometry");
+                // return;
+                input.placeholder = "Nhập dịa điểm muốn đến"
+            } else {
+                console.log(place.name)
             }
       
             if (place.geometry.viewport) {
@@ -213,8 +212,7 @@ function showPosition(position) {
             console.log("index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden)
 
             okBtn.addEventListener('click', () => {
-                var matx = <?php echo $matx ?>
-                window.location.href ="index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden+"&matx="+matx;
+                window.location.href ="index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden;
             })
 
         });

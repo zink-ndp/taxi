@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     FROM trangthai
                     WHERE TX_MA = ".$matx."
                 ) tt ON cx.TX_MA = tt.TX_MA
-                WHERE cx.CX_TRANGTHAI = 1
+                WHERE cx.CX_TRANGTHAI = 0
                 ORDER BY tt.max_date DESC";
 
                 $result = $conn->query($sql_cx);
