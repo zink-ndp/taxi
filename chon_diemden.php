@@ -35,6 +35,14 @@ $activate = "index";
     </div> 
 </div>
 
+<?php  
+    if (!isset($_GET['matx'])) {
+        $matx = $_GET['matx'];
+    } else {
+        $matx = "";
+    }
+?>
+
 <script>
 
 const okBtn =document.getElementById('search-button')
@@ -205,7 +213,8 @@ function showPosition(position) {
             console.log("index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden)
 
             okBtn.addEventListener('click', () => {
-                window.location.href ="index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden;
+                var matx = <?php echo $matx ?>
+                window.location.href ="index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden+"&matx="+matx;
             })
 
         });

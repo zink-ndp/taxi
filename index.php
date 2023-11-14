@@ -41,12 +41,12 @@ if (isset($_POST['tx_ma'])) {
   </div>
 </div>
 
-<section class="ftco-section ftco-no-pt bg-light">
+<section style="padding: 0 !important"  class="ftco-section ftco-no-pt bg-light">
   <div class="container">
     <div class="row no-gutters">
       <div class="col-md-12 featured-top">
         <div class="row no-gutters">
-          <div class="col-md-12 col-lg-4 d-flex align-items-center">
+          <div class="col-md-12 col-lg-5 d-flex align-items-center">
             <script>
               var latitude = ""
               var longitude = ""
@@ -83,10 +83,17 @@ if (isset($_POST['tx_ma'])) {
 
               getLocation()
             </script>
-            <form id="myForm" action="<?php echo $form_action ?>" class="request-form ftco-animate bg-primary"
+            <form id="myForm" action="<?php echo $form_action ?>" class="request-form ftco-animate bg-primary w-100"
               method="post">
               <h2>Chuyến đi của bạn</h2>
-
+              <?php
+                if (isset($_POST['tx_ma'])) {
+                  $matx = $_POST['tx_ma'];
+                  echo '<input type="hidden" name="matx" value="'.$matx.'"/>';
+                } else {
+                  $matx = "";
+                }
+              ?>
               <div class="form-group">
                 <input name="TX_MA" type="hidden" class="form-control" value="$" >
               </div>
@@ -116,17 +123,13 @@ if (isset($_POST['tx_ma'])) {
                   <input type="hidden" name="diemdeny" id="diemdeny" value="<?php echo $lngden ?>">
                   <input name="diemden" id="diemden" value="<?php echo $location ?>" style="font-size: 14px;" type="text" readonly class="form-control"
                     placeholder="Vui lòng chọn điểm đến" required>
-                  <a href="chon_diemden.php" style="margin-left: 10px; font-size: 20px;">
+                  <a href="chon_diemden.php?matx=<?php echo $matx ?>" style="margin-left: 10px; font-size: 20px;">
                     <i style="color: white;"
                         class="fas fa-map-marker-alt"></i>
                   </a>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="" class="label">Thời gian đón</label> </label>
-                <input type="text" class="form-control" id="time_pick" placeholder="Time">
-              </div>
-              <div class="form-group">
+              <div class="form-group mt-3">
                 <input type="submit" name="datxe" value="Thuê xe ngay" class="btn btn-secondary py-3 px-4">
               </div>
             </form>
@@ -136,7 +139,7 @@ if (isset($_POST['tx_ma'])) {
             if (!isset($_POST['tx_ma'])) {
           ?>
 
-            <div class="col-lg-8 col-md-12 d-flex align-items-center">
+            <div class="col-lg-6 col-md-12 d-flex align-items-center ml-4">
               <div class="services-wrap rounded w-100">
                 <h3 class="heading-section mb-4">Cách để thuê một chiếc taxi tốt</h3>
                 <div class="row d-flex mb-4">
@@ -168,7 +171,7 @@ if (isset($_POST['tx_ma'])) {
                     </div>
                   </div>
                 </div>
-                <button onclick="getLocation()" class="btn btn-primary py-3 px-4">Đặt một chiếc xe hoàn hảo</button>
+                <!-- <button onclick="getLocation()" class="btn btn-primary py-3 px-4">Đặt một chiếc xe hoàn hảo</button> -->
               </div>
             </div>
 
@@ -188,7 +191,7 @@ if (isset($_POST['tx_ma'])) {
             else
               $anhtx = $tt['TX_HINHANH'];
             ?>
-            <div class="col-md-8 d-flex align-items-center">
+            <div class="col-lg-6 col-md-12 d-flex align-items-center ml-4">
               <div class="services-wrap rounded-right w-100">
                 <h3 class="heading-section mb-4">Thông tin tài xế đang chọn</h3>
                 <div class="row d-flex mb-4">
