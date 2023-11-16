@@ -54,6 +54,8 @@ if (isset($_POST["guidanhgia"])) {
 </head>
 <style>
   .col-md-6 {
+  margin-left: 500px;
+
     -webkit-box-flex: inherit;
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
@@ -79,7 +81,7 @@ if (isset($_POST["guidanhgia"])) {
   </section>
 
 
-  <form method="POST" class="col-md-12" action="">
+  <form method="POST" class="col-md-6" action="">
     <h2>Đánh Giá Chuyến Xe</h2>
     <div class="form-group">
       <label for="maChuyenXe">Mã Chuyến Xe</label>

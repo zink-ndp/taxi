@@ -117,11 +117,6 @@ $activate = "xulydatxe";
     </div>
 </section>
 
-
- 
-
-
-
 <?php
 @include('footer.php');
 ?>
