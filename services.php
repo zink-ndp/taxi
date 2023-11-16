@@ -29,7 +29,7 @@ $activate = "services";
             	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
             	<div class="text w-100">
                 <h3 class="heading mb-2">Dịch vụ Taxi</h3>
-                <p>Cuộc sống hiện tại yêu cầu những lúc chúng ta phải sử dụng đến taxi để phục vụ nhu cầu đi sân bay, đi bệnh viện, đi đến các tỉnh. Bạn có thể lựa chọn hình thức phương tiện như xe khách, xe buyt, nhưng với những khung giờ đón trả khách cố định, phải đón trả khách tại tại điểm chết ở các bến xe, tuy có rẻ nhưng sẽ tốn thêm 1 lần sử dụng dịch vụ di chuyển khác thì mới đến được điểm yêu cầu. Như thế nó làm chuyến đi của bạn không đủ thời gian, với việc không thể đưa đón tận nơi khiến bạn có chịu thì ngày nay dịch vụ taxi, thuê xe du lịch đi tỉnh là một sự lựa chọn sáng suốt, đảm bảo tiến độ lộ trình nhanh chóng, có thể đưa đón những nơi xa với quốc lộ mà không cần đi nhiều tuyến như xe buyt và xe khách. </p>
+                <p> Dịch vụ taxi, thuê xe du lịch đi tỉnh là một sự lựa chọn sáng suốt, đảm bảo tiến độ lộ trình nhanh chóng, có thể đưa đón những nơi xa với quốc lộ mà không cần đi nhiều tuyến như xe buyt và xe khách. </p>
               </div>
             </div>
 					</div>
@@ -38,7 +38,7 @@ $activate = "services";
             	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
             	<div class="text w-100">
                 <h3 class="heading mb-2">Dịch vụ xe đi tỉnh</h3>
-                <p>Hình thức thuê xe đi tỉnh 1 chiều hoặc 2 chiều đã trở thành lựa chọn phổ biến và mang lại sự thoải mái cùng tiện lợi tối đa. Thay vì phải chịu đựng những gò bó căng thẳng khi đi trên xe khách với thời gian dài di chuyển, tiếng ồn ập đến và những vấn đề khác khiến bạn không thể hài lòng, việc thuê xe riêng đi tỉnh hoàn toàn có thể giải quyết các vấn đề nan giải, giúp bạn thoát khỏi những trở ngại đó và mang đến sự thoải mái và tốc độ nhanh chóng.</p>
+                <p>Hình thức thuê xe đi tỉnh 1 chiều hoặc 2 chiều đã trở thành lựa chọn phổ biến và mang lại sự thoải mái cùng tiện lợi tối đa. Việc thuê xe riêng đi tỉnh hoàn toàn có thể giải quyết các vấn đề nan giải, giúp bạn thoát khỏi những trở ngại đó và mang đến sự thoải mái và tốc độ nhanh chóng.</p>
               </div>
             </div>
 					</div>
@@ -55,8 +55,8 @@ $activate = "services";
 						<div class="services services-2 w-100 text-center">
             	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
             	<div class="text w-100">
-                <h3 class="heading mb-2">Tour tham quan toàn thành phố</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <h3 class="heading mb-2">Tour tham quan toàn thành phố </h3>
+                <p>Tham quan thành phố theo tour sẵn có với các mức giá ưu đã cho cá nhân hoặc theo nhóm bạn. Hoàn toàn có thể trải nghiệm theo ý muốn của riêng bạn  </p>
               </div>
             </div>
 					</div>

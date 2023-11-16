@@ -41,7 +41,7 @@ $activate = "contact";
 			          	<div class="icon mr-3">
 			          		<span class="icon-envelope-o"></span>
 			          	</div>
-			            <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+			            <p><span>Email:</span> <a href="foxtaxi@gmail.com ">foxtaxi@gmail.com</a></p>
 			          </div>
 		          </div>
 		        </div>
