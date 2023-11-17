@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     FROM trangthai
                     WHERE TX_MA = ".$matx."
                 ) tt ON cx.TX_MA = tt.TX_MA
-                WHERE cx.CX_TRANGTHAI = 2
+                WHERE cx.CX_TRANGTHAI = 2 or cx.CX_TRANGTHAI = 1
                 ORDER BY tt.max_date DESC";
 
                 $result = $conn->query($sql_cx);
@@ -29,5 +29,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Xử lý nếu yêu cầu không phải là POST
     echo "Invalid request method";
 }
-  
 ?>

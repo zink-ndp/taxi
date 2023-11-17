@@ -49,7 +49,129 @@ function mapTrangThai(trangThai) {
   return tt;
 }
 
-// ...
+// CHO NAY KIEM TRA DS CAC XE
+
+
+function findPath(response){
+  response.forEach(function (item) {
+    if (item.TT_TRANGTHAI == 0) {
+      // TÀI XẾ ĐANG ĐÓN KHÁCH
+      txDonKhach(item);
+    } else if (item.TT_TRANGTHAI == 2) {
+      // TÀI XẾ ĐANG CHỞ KHÁCH
+      txChoKhach(item);
+    }
+  })
+}
+
+var routeRunning;
+function moveCar(tt, matx, fromx, fromy, tox, toy) {
+  if (routeRunning) {
+    routeRunning.remove();
+  }
+  routeRunning = L.Routing.control({
+    waypoints: [L.latLng(fromx, fromy), L.latLng(tox, toy)],
+    routeWhileDragging: true,
+    draggableWaypoints: false,
+    fitSelectedRoutes: false,
+    lineOptions: {
+      styles: [{ color: "#000000", opacity: 0, weight: 0 }],
+    },
+    createMarker: function () {
+      return null;
+    },
+  });
+  routeRunning
+    .on("routesfound", function (e) {
+      e.routes[0].coordinates.forEach(function (coord, index) {
+        setTimeout(() => {
+          console.log(index)
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "../admin/xhrMethod/capnhatvitri.php", true);
+          xhr.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+          );
+          xhr.onload = function () {
+            if (xhr.status === 200) {
+              console.log(xhr.response);
+            } else {
+              console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
+            }
+          };
+          var data = [
+            "matx=" + matx,
+            "lat=" + coord.lat,
+            "lng=" + coord.lng,
+            "tt=" + tt,
+          ];
+          xhr.send(data.join("&"));
+        }, 2500*index);
+      });
+      // console.log(e.routes[0])
+      // console.log(e.routes[0].waypoints)
+    })
+    .addTo(map);
+
+  routeRunning._container.style.display = "None";
+}
+
+function txDonKhach(item) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "../admin/xhrMethod/timkhachhang.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      var response = JSON.parse(xhr.responseText);
+      var x = response.x;
+      var y = response.y;
+      moveCar(0, item.TX_MA, item.TT_TOADOX, item.TT_TOADOY, x, y);
+    } else {
+      console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
+    }
+  };
+  var data = "matx=" + item.TX_MA;
+  xhr.send(data);
+}
+
+function txChoKhach(item) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "../admin/xhrMethod/timdiemden.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      var response = JSON.parse(xhr.responseText);
+      var x = response.x;
+      var y = response.y;
+      moveCar(2, item.TX_MA, item.TT_TOADOX, item.TT_TOADOY, x, y);
+    } else {
+      console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
+    }
+  };
+  var data = "matx=" + matx;
+  xhr.send(data);
+}
+
+function loadtrangthai(){
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "../admin/loadtrangthaixe.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      var response = JSON.parse(xhr.responseText);
+      findPath(response);
+    } else {
+      console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
+    }
+  };
+  xhr.send();
+}
+
+loadtrangthai()
+setInterval(loadtrangthai, 30000)
+
+
+// ... CHO NAY CHI LOAD LAI MAP
 var markersList = [];
 var marker = null;
 
@@ -71,95 +193,7 @@ function reloadMap() {
   };
   xhr.send();
 }
-setInterval(reloadMap, 3000);
-
-var routeRunning;
-function moveCar(tt, matx, startx, starty, tox, toy) {
-  if (routeRunning) {
-    routeRunning.remove();
-  }
-  routeRunning = L.Routing.control({
-    waypoints: [L.latLng(startx, starty), L.latLng(tox, toy)],
-    routeWhileDragging: true,
-    draggableWaypoints: false,
-    fitSelectedRoutes: false,
-    lineOptions: {
-      styles: [{ color: "#000000", opacity: 0, weight: 0 }],
-    },
-    createMarker: function () {
-      return null;
-    },
-  });
-  routeRunning
-    .on("routesfound", function (e) {
-      e.routes[0].coordinates.forEach(function (coord, index) {
-        setInterval(() => {
-          
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", "../admin/xhrMethod/capnhatvitri.php", true);
-          xhr.setRequestHeader(
-            "Content-Type",
-            "application/x-www-form-urlencoded"
-          );
-          xhr.onload = function () {
-            if (xhr.status === 200) {
-              console.log(xhr.response);
-            } else {
-              console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
-            }
-          };
-          var data = [
-            "matx=" + matx,
-            "lat=" + coord.lat,
-            "lng=" + coord.lng,
-            "tt=" + tt,
-          ];
-          xhr.send(data.join("&"));
-        }, 100*index);
-      });
-    })
-    .addTo(map);
-
-  routeRunning._container.style.display = "None";
-}
-
-function txDonKhach(marker, item) {
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "../admin/xhrMethod/timkhachhang.php", true);
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      var response = JSON.parse(xhr.responseText);
-      var x = response.x;
-      var y = response.y;
-      console.log(x, y);
-      moveCar(0, item.TX_MA, item.TT_TOADOX, item.TT_TOADOY, x, y);
-    } else {
-      console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
-    }
-  };
-  var data = "matx=" + item.TX_MA;
-  xhr.send(data);
-}
-
-function txChoKhach(marker, item) {
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "../admin/xhrMethod/timdiemden.php", true);
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      var response = JSON.parse(xhr.responseText);
-      var x = response.x;
-      var y = response.y;
-
-      moveCar(2, item.TX_MA, item.TT_TOADOX, item.TT_TOADOY, x, y);
-    } else {
-      console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
-    }
-  };
-  var data = "matx=" + matx;
-  xhr.send(data);
-}
+setInterval(reloadMap, 1000);
 
 var marker = null;
 function showMap(response) {
@@ -175,14 +209,14 @@ function showMap(response) {
         icon: carIconBusy,
       }).addTo(map);
       markersList.push(marker);
-      txDonKhach(marker, item);
+      // txDonKhach(item);
     } else {
       // TÀI XẾ ĐANG CHỞ KHÁCH
       marker = L.marker([item.TT_TOADOX, item.TT_TOADOY], {
         icon: carIconBusy,
       }).addTo(map);
       markersList.push(marker);
-      txChoKhach(marker, item);
+      // txChoKhach(item);
     }
 
     const trangThai = mapTrangThai(item.TT_TRANGTHAI);
@@ -218,7 +252,7 @@ function showMap(response) {
       }
       popup.openOn(map);
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "../admin/timdiemden.php", true);
+      xhr.open("POST", "../admin/xhrMethod/timdiemden.php", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
       xhr.onload = function () {

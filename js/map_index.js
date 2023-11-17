@@ -55,21 +55,21 @@ function showMapIndex() {
         lineOptions: {
           styles: [{ color: "#19d600", opacity: 0.6, weight: 6 }],
         },
-        // createMarker: function () {
-        //   return null;
-        // },
+        createMarker: function () {
+          return null;
+        },
       });
       route
         // .on("routesfound", function (e) {
-        //   console.log(e)
-        //   e.routes[0].coordinates.forEach(function(coord, idx){
-        //     setTimeout(()=>{
-        //       if ((idx+1) === e.routes[0].coordinates.length){
-        //         alert((idx+1) + " - toi ")
-        //       }
-        //       marker.setLatLng([coord.lat, coord.lng])
-        //     }, 100*idx)
-        //   })
+          // console.log(e.routes[0].waypoints)
+          // e.routes[0].coordinates.forEach(function(coord, idx){
+          //   setTimeout(()=>{
+          //     if ((idx+1) === e.routes[0].coordinates.length){
+          //       alert((idx+1) + " - toi ")
+          //     }
+          //     marker.setLatLng([coord.lat, coord.lng])
+          //   }, 100*idx)
+          // })
         // })
         .addTo(map);
     });
