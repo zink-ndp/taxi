@@ -94,8 +94,9 @@ if (isset($_POST['tx_ma'])) {
                   $matx = "";
                 }
               ?>
+              <!-- CHƯA LẤY ĐƯỢC MÃ TÀI XẾ QUA XỬ LÍ ĐẶT XE -->
               <div class="form-group">
-                <input name="TX_MA" type="hidden" class="form-control" value="$" >
+                <input name="TX_MA" type="hidden" class="form-control" value="" >
               </div>
               <div class="form-group">
                 <label for="" class="label">Vị trí của bạn</label><br>
