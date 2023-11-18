@@ -19,40 +19,54 @@ $activate = "car";
 		<section class="ftco-section bg-light">
     	<div class="container">
     		<div class="row">
-				<?php
-					$sql="SELECT tx.tx_ma, tx.tx_ten, tx.tx_hinhanh, x.x_ma, x.x_mota, x.x_hinhanh, t.tt_toadox, t.tt_toadoy
-							FROM trangthai t 
-							JOIN phutrach pt on pt.TX_MA = t.TX_MA
-							JOIN xe x on x.X_MA = pt.X_MA
-							JOIN taixe tx on tx.TX_MA = pt.TX_MA
-							WHERE t.TT_TRANGTHAI = 1 
-								AND(t.TX_MA, t.TD_date) IN (
-									SELECT t.TX_MA, MAX(t.TD_date)
-									FROM trangthai t
-									GROUP BY t.TX_MA
-								) LIMIT 6;";
-					$rs = querySqlwithResult($conn, $sql);
+			<?php
+if (isset($_POST['diemdix']) && isset($_POST['diemdiy'])) {
+    $diemdix = $_POST['diemdix'];
+    $diemdiy = $_POST['diemdiy'];
 
-					$data = array();
-					while ($x = mysqli_fetch_assoc($rs)) {
-						if ($x['tx_hinhanh']==NULL) $anhtx = "default.png"; else $anhtx = $x['tx_hinhanh'];
-				?>
-					<div class="col-4">
-						<div class="car-wrap rounded ftco-animate">
-							<div class="img rounded d-flex align-items-end" style="background-image: url(images/xe/<?php echo $x['x_hinhanh'] ?>);">
-								<img src="images/taixe/<?php echo $anhtx ?>" style="height: 6rem; margin-left: 10px; margin-bottom: -1.3rem;" alt="">
-							</div>
-							<div class="text">
-								<h2 class="mb-0"><?php echo $x['tx_ten'] ?></h2>
-								<div class="d-flex mb-3">
-									<span class="cat"><?php echo $x['x_mota'] ?></span>
-									<p class="price ml-auto">5<i style="color: #f7d219;" class="fas fa-star"></i> </p>
-								</div>
-							</div>
-							<a href="#" class="btn btn-primary py-2 mr-1">Đặt ngay</a>
-						</div>
-					</div>
-				<?php } ?>
+    $sql = "SELECT tx.tx_ma, tx.tx_ten, tx.tx_hinhanh, x.x_ma, x.x_mota, x.x_hinhanh, t.tt_toadox, t.tt_toadoy
+            FROM trangthai t 
+            JOIN phutrach pt on pt.TX_MA = t.TX_MA
+            JOIN xe x on x.X_MA = pt.X_MA
+            JOIN taixe tx on tx.TX_MA = pt.TX_MA
+            WHERE t.TT_TRANGTHAI = 1 
+                AND (t.TX_MA, t.TD_date) IN (
+                    SELECT t.TX_MA, MAX(t.TD_date)
+                    FROM trangthai t
+                    GROUP BY t.TX_MA
+                )
+                ORDER BY SQRT(POW(tt_toadox - $diemdix, 2) + POW(tt_toadoy - $diemdiy, 2)) ASC
+            LIMIT 6;";
+    $rs = querySqlwithResult($conn, $sql);
+
+    // Kiểm tra xem có dữ liệu trả về không
+    if ($rs) {
+        while ($x = mysqli_fetch_assoc($rs)) {
+            if ($x['tx_hinhanh'] == NULL) $anhtx = "default.png"; else $anhtx = $x['tx_hinhanh'];
+            ?>
+            <div class="col-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(images/xe/<?php echo $x['x_hinhanh'] ?>);">
+                        <img src="images/taixe/<?php echo $anhtx ?>" style="height: 6rem; margin-left: 10px; margin-bottom: -1.3rem;" alt="">
+                    </div>
+                    <div class="text">
+                        <h2 class="mb-0"><?php echo $x['tx_ten'] ?></h2>
+                        <div class="d-flex mb-3">
+                            <span class="cat"><?php echo $x['x_mota'] ?></span>
+                            <p class="price ml-auto">5<i style="color: #f7d219;" class="fas fa-star"></i> </p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary py-2 mr-1">Đặt ngay</a>
+                </div>
+            </div>
+<?php
+        }
+    } else {
+        echo "Không có dữ liệu phù hợp.";
+    }
+}
+?>
+
 				
     		</div>
     		<div class="row mt-5">
