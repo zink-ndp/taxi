@@ -230,7 +230,7 @@
             
         }
         $totalEmployees = $result->num_rows; // Đếm tổng số khách hàng
-        echo "<h5>Tổng số khách hàng: $totalEmployees</h5>"; // Hiển thị tổng số khách hàng
+        echo "<h5>Tổng số quản lý: $totalEmployees</h5>"; // Hiển thị tổng số khách hàng
     } else {
         echo "Không có dữ liệu nhân viên.";
     }

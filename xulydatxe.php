@@ -104,7 +104,7 @@ $activate = "xulydatxe";
                             INNER JOIN khachhang ON chuyenxe.KH_MA = khachhang.KH_MA
                             INNER JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
                             WHERE (CX_TRANGTHAI = '0' OR CX_TRANGTHAI = '1' OR CX_TRANGTHAI = '4')
-                             AND KH_USERNAME = '".$_SESSION["username"]."'";
+                            AND KH_USERNAME = '".$_SESSION["username"]."'";
                             $result = $conn->query($sql);
     
                         if ($result->num_rows > 0) {
@@ -152,7 +152,7 @@ $activate = "xulydatxe";
                             INNER JOIN khachhang ON chuyenxe.KH_MA = khachhang.KH_MA
                             INNER JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
                             WHERE CX_TRANGTHAI = '2'
-                             AND KH_USERNAME = '".$_SESSION["username"]."'";
+                             AND KH_USERNAME = '".$_SESSION['username']."'";
                             $result = $conn->query($sql);
     
                         if ($result->num_rows > 0) {

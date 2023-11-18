@@ -80,7 +80,7 @@ if (isset($_POST["guidanhgia"])) {
     </div>
   </section>
 
-
+  <section class="ftco-section">
   <form method="POST" class="col-md-6" action="">
     <h2>Đánh Giá Chuyến Xe</h2>
     <div class="form-group">
@@ -129,12 +129,12 @@ if (isset($_POST["guidanhgia"])) {
       <label for="noiDungDanhGia">Nội Dung Đánh Giá</label>
       <textarea class="form-control" placeholder="Nhập nội dung đánh giá của bạn" name="noiDungDanhGia" rows="4" required></textarea>
     </div>
-    <button type="submit" class="btn btn-primary" name="guidanhgia">Gửi Đánh Giá</button>
+    <button type="submit" class="btn btn-primary py-3 px-5" name="guidanhgia">Gửi Đánh Giá</button>
     <!-- <div id="success-message" style="display: none;">
     Đánh giá đã được thêm thành công.
 </div> -->
   </form>
-
+  </section>
 </body>
 
 </html>
