@@ -274,31 +274,31 @@ function showMap(response) {
     }
 
     // Gắn sự kiện click cho marker
-    // marker.on("click", function () {
-    //   if (route) {
-    //     route.remove();
-    //   }
-    //   popup.openOn(map);
-    //   var xhr = new XMLHttpRequest();
-    //   xhr.open("POST", "../admin/xhrMethod/timdiemden.php", true);
-    //   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    marker.on("click", function () {
+      if (route) {
+        route.remove();
+      }
+      popup.openOn(map);
+      // var xhr = new XMLHttpRequest();
+      // xhr.open("POST", "../admin/xhrMethod/timdiemden.php", true);
+      // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    //   xhr.onload = function () {
-    //     if (xhr.status === 200) {
-    //       var response = JSON.parse(xhr.responseText);
-    //       var x = response.x;
-    //       var y = response.y;
+      // xhr.onload = function () {
+      //   if (xhr.status === 200) {
+      //     var response = JSON.parse(xhr.responseText);
+      //     var x = response.x;
+      //     var y = response.y;
 
-    //       // Gọi hàm callback với tọa độ đã sẵn sàng
-    //       handleCoordinates(x, y);
-    //     } else {
-    //       console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
-    //     }
-    //   };
+      //     // Gọi hàm callback với tọa độ đã sẵn sàng
+      //     handleCoordinates(x, y);
+      //   } else {
+      //     console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
+      //   }
+      // };
 
-    //   var data = "matx=" + item.TX_MA;
-    //   xhr.send(data);
-    // });
+      // var data = "matx=" + item.TX_MA;
+      // xhr.send(data);
+    });
   });
 }
 // Ví dụ: Làm việc với dữ liệu JSON
