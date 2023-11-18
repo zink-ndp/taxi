@@ -54,11 +54,11 @@ if ($result->num_rows > 0) {
     echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
     echo '<thead>';
     echo '<tr>';
+    echo '<th>Hình ảnh</th>';
     echo '<th>Mã xe</th>';
     echo '<th>Loại xe</th>';
     echo '<th>Biển số</th>';
     echo '<th>Mô tả</th>';
-    echo '<th>Hình ảnh</th>';
     echo '<th></th>';
     echo '<th></th>';
     echo '</tr>';
@@ -69,11 +69,11 @@ if ($result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
+                <td> <img class='user-img-radious-style' src='../images/xe/".$row["x_hinhanh"]."' style='width: 60px' alt=''></td>
                 <td>" . $row["x_ma"] . "</td>
                 <td>" . $row["lx_model"] . "</td>
                 <td>" . $row["x_bienso"] . "</td>
                 <td>" . $row["x_mota"] . "</td>
-                <td>" . $row["x_hinhanh"] . "</td>
                 <td>";
         ?>
         <form action="xe_sua.php" method="get">

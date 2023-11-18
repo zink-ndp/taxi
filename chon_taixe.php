@@ -48,8 +48,8 @@ $activate = "car";
 									<span class="cat"><?php echo $x['x_mota'] ?></span>
 									<p class="price ml-auto">5<i style="color: #f7d219;" class="fas fa-star"></i> </p>
 								</div>
-								<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Đặt ngay</a>
 							</div>
+							<a href="#" class="btn btn-primary py-2 mr-1">Đặt ngay</a>
 						</div>
 					</div>
 				<?php } ?>
