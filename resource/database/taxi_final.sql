@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 07, 2023 lúc 08:24 AM
+-- Thời gian đã tạo: Th10 16, 2023 lúc 01:44 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.2.4
+-- Phiên bản PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -22,6 +22,24 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+
+DROP TABLE IF EXISTS `chuyenxe`;
+DROP TABLE IF EXISTS `danhgia`;
+DROP TABLE IF EXISTS `dgtieuchi`;
+DROP TABLE IF EXISTS `gia`;
+DROP TABLE IF EXISTS `giacuoc`;
+DROP TABLE IF EXISTS `khachhang`;
+DROP TABLE IF EXISTS `loaixe`;
+DROP TABLE IF EXISTS `nhanvien`;
+DROP TABLE IF EXISTS `phutrach`;
+DROP TABLE IF EXISTS `quanhuyen`;
+DROP TABLE IF EXISTS `taixe`;
+DROP TABLE IF EXISTS `thanhpho`;
+DROP TABLE IF EXISTS `thoidiem`;
+DROP TABLE IF EXISTS `tieuchi`;
+DROP TABLE IF EXISTS `trangthai`;
+DROP TABLE IF EXISTS `vaitro`;
+DROP TABLE IF EXISTS `xe`;
 
 --
 -- Cấu trúc bảng cho bảng `chuyenxe`
@@ -46,7 +64,9 @@ CREATE TABLE `chuyenxe` (
 --
 
 INSERT INTO `chuyenxe` (`CX_MA`, `KH_MA`, `TX_MA`, `TD_DATE`, `CX_SOKM`, `CX_THANHTIEN`, `CX_TDDIEMDI_X`, `CX_TDDIEMDI_Y`, `CX_TDDIEMDEN_X`, `CX_TDDIEMDEN_Y`, `CX_TRANGTHAI`) VALUES
-(1, 3, 6, '2023-09-28 00:00:00', 4, 150000.00, '10.03002', '105.77202', '10.02914', '105.77167', 1);
+(1, 3, 6, '2023-09-28 00:00:00', 4, 150000.00, '10.03002', '105.77202', '10.02914', '105.77167', 0),
+(2, 2, 15, '2023-11-16 13:40:53', 0.9, 100000.00, '10.02848788543585', '105.77213205137001', '10.03420675741391', '105.77332877622', 0),
+(3, 5, 10, '2023-11-16 13:40:53', 1.5, 150000.00, '10.026363936333512', '105.76865640087246', '10.031736000532572', '105.77503555330044', 1);
 
 -- --------------------------------------------------------
 
@@ -406,7 +426,8 @@ CREATE TABLE `thoidiem` (
 INSERT INTO `thoidiem` (`TD_DATE`) VALUES
 ('2023-09-22 08:00:00'),
 ('2023-09-28 00:00:00'),
-('2023-10-02 00:00:00');
+('2023-10-02 00:00:00'),
+('2023-11-16 13:40:53');
 
 -- --------------------------------------------------------
 
@@ -452,11 +473,11 @@ INSERT INTO `trangthai` (`TX_MA`, `TD_DATE`, `TT_TRANGTHAI`, `TT_TOADOX`, `TT_TO
 (3, '2023-10-02 00:00:00', 1, '10.02780', '105.77006'),
 (4, '2023-10-02 00:00:00', 1, '10.030492', '105.76904'),
 (5, '2023-10-02 00:00:00', 1, '10.035384', '105.780897'),
-(6, '2023-10-02 00:00:00', 0, '10.056775', '105.778673'),
+(6, '2023-10-02 00:00:00', 1, '10.056775', '105.778673'),
 (7, '2023-10-02 00:00:00', 1, '10.0314', '105.775036'),
 (8, '2023-10-02 00:00:00', 1, '10.024951', '105.768342'),
 (9, '2023-10-02 00:00:00', 1, '10.024362', '105.760993'),
-(10, '2023-10-02 00:00:00', 1, '10.043413', '105.765896'),
+(10, '2023-10-02 00:00:00', 0, '10.042812', '105.76551'),
 (11, '2023-10-02 00:00:00', 1, '10.035765', '105.775423'),
 (12, '2023-10-02 00:00:00', 1, '10.038729', '105.760639'),
 (13, '2023-10-02 00:00:00', 1, '10.032002', '105.762538'),

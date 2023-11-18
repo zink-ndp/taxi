@@ -9,6 +9,11 @@ const carIconBusy = L.icon({
   iconSize: [40, 50],
   iconAnchor: [20, 50],
 });
+const carIconRunning = L.icon({
+  iconUrl: "assets/img/iconxerunning.png",
+  iconSize: [40, 50],
+  iconAnchor: [20, 50],
+});
 
 // mapdsx.js
 const map = L.map("mapds").setView([10.03, 105.77], 15);
@@ -64,6 +69,26 @@ function findPath(response){
   })
 }
 
+function changeState(tt, matx, lat, lng){
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "../admin/xhrMethod/capnhattrangthai.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log(xhr.response)
+    } else {
+      console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
+    }
+  };
+  var data = [
+    "matx=" + matx,
+    "lat=" + lat,
+    "lng=" + lng,
+    "tt=" + tt,
+  ];
+  xhr.send(data.join("&"));
+}
+
 var routeRunning;
 function moveCar(tt, matx, fromx, fromy, tox, toy) {
   if (routeRunning) {
@@ -86,6 +111,9 @@ function moveCar(tt, matx, fromx, fromy, tox, toy) {
       e.routes[0].coordinates.forEach(function (coord, index) {
         setTimeout(() => {
           console.log(index)
+          if (e.routes[0].coordinates.length - 1 == index) {
+            changeState(tt, matx, coord.lat, coord.lng)
+          }
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "../admin/xhrMethod/capnhatvitri.php", true);
           xhr.setRequestHeader(
@@ -106,10 +134,8 @@ function moveCar(tt, matx, fromx, fromy, tox, toy) {
             "tt=" + tt,
           ];
           xhr.send(data.join("&"));
-        }, 2500*index);
+        }, 1000*index);
       });
-      // console.log(e.routes[0])
-      // console.log(e.routes[0].waypoints)
     })
     .addTo(map);
 
@@ -148,7 +174,7 @@ function txChoKhach(item) {
       console.error("Lỗi yêu cầu:", xhr.status, xhr.statusText);
     }
   };
-  var data = "matx=" + matx;
+  var data = "matx=" + item.TX_MA;
   xhr.send(data);
 }
 
@@ -168,7 +194,7 @@ function loadtrangthai(){
 }
 
 loadtrangthai()
-setInterval(loadtrangthai, 30000)
+setInterval(loadtrangthai, 10000)
 
 
 // ... CHO NAY CHI LOAD LAI MAP
@@ -213,7 +239,7 @@ function showMap(response) {
     } else {
       // TÀI XẾ ĐANG CHỞ KHÁCH
       marker = L.marker([item.TT_TOADOX, item.TT_TOADOY], {
-        icon: carIconBusy,
+        icon: carIconRunning,
       }).addTo(map);
       markersList.push(marker);
       // txChoKhach(item);
