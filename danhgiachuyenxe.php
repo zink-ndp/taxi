@@ -2,45 +2,45 @@
 include("connect.php");
 // include("header.php");
 // Lấy dữ liệu từ biểu mẫu gửi lên
-if (isset($_POST["guidanhgia"])) {
-  $maChuyenXe = $_POST["maChuyenXe"];
-  $maTieuChi = $_POST["maTieuChi"];
-  $saoDanhGia = $_POST["saoDanhGia"];
-  $noiDungDanhGia = $_POST["noiDungDanhGia"];
+// if (isset($_POST["guidanhgia"])) {
+//   $maChuyenXe = $_POST["maChuyenXe"];
+//   $maTieuChi = $_POST["maTieuChi"];
+//   $saoDanhGia = $_POST["saoDanhGia"];
+//   $noiDungDanhGia = $_POST["noiDungDanhGia"];
 
-  $checkChuyenXeSql = "SELECT COUNT(*) FROM chuyenxe WHERE CX_MA = ?";
-  $checkChuyenXeStmt = $conn->prepare($checkChuyenXeSql);
-  $checkChuyenXeStmt->bind_param("i", $maChuyenXe);
-  $checkChuyenXeStmt->execute();
-  $checkChuyenXeStmt->bind_result($count);
-  $checkChuyenXeStmt->fetch();
-  $checkChuyenXeStmt->close();
+//   $checkChuyenXeSql = "SELECT COUNT(*) FROM chuyenxe WHERE CX_MA = ?";
+//   $checkChuyenXeStmt = $conn->prepare($checkChuyenXeSql);
+//   $checkChuyenXeStmt->bind_param("i", $maChuyenXe);
+//   $checkChuyenXeStmt->execute();
+//   $checkChuyenXeStmt->bind_result($count);
+//   $checkChuyenXeStmt->fetch();
+//   $checkChuyenXeStmt->close();
 
-  // Truy vấn SQL để kiểm tra xem đánh giá đã tồn tại chưa
-  $checkSql = "SELECT COUNT(*) FROM danhgia WHERE CX_MA = ? AND TC_MA = ?";
-  $checkStmt = $conn->prepare($checkSql);
-  $checkStmt->bind_param("ii", $maChuyenXe, $maTieuChi);
-  $checkStmt->execute();
-  $checkStmt->bind_result($count);
-  $checkStmt->fetch();
-  $checkStmt->close();
+//   // Truy vấn SQL để kiểm tra xem đánh giá đã tồn tại chưa
+//   $checkSql = "SELECT COUNT(*) FROM danhgia WHERE CX_MA = ? AND TC_MA = ?";
+//   $checkStmt = $conn->prepare($checkSql);
+//   $checkStmt->bind_param("ii", $maChuyenXe, $maTieuChi);
+//   $checkStmt->execute();
+//   $checkStmt->bind_result($count);
+//   $checkStmt->fetch();
+//   $checkStmt->close();
 
-  if ($count > 0) {
-    // Đánh giá đã tồn tại, bạn có thể cập nhật nó thay vì thêm mới
-    $updateSql = "UPDATE danhgia SET DG_SAO = ?, DG_NOIDUNG = ? WHERE CX_MA = ? AND TC_MA = ?";
-    // Tiếp theo, thực hiện cập nhật đánh giá theo truy vấn $updateSql
-  } else {
-    // Đánh giá chưa tồn tại, thêm nó vào bảng danhgia
-    $insertSql = "INSERT INTO danhgia (CX_MA, TC_MA, DG_SAO, DG_NOIDUNG) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($insertSql);
-    $stmt->bind_param("iiis", $maChuyenXe, $maTieuChi, $saoDanhGia, $noiDungDanhGia);
-    if ($stmt->execute()) {
-      echo "Đánh giá đã được gửi đi.";
-    } else {
-      echo "Lỗi khi thêm đánh giá: " . $conn->error;
-    }
-  }
-}
+//   if ($count > 0) {
+//     // Đánh giá đã tồn tại, bạn có thể cập nhật nó thay vì thêm mới
+//     $updateSql = "UPDATE danhgia SET DG_SAO = ?, DG_NOIDUNG = ? WHERE CX_MA = ? AND TC_MA = ?";
+//     // Tiếp theo, thực hiện cập nhật đánh giá theo truy vấn $updateSql
+//   } else {
+//     // Đánh giá chưa tồn tại, thêm nó vào bảng danhgia
+//     $insertSql = "INSERT INTO danhgia (CX_MA, TC_MA, DG_SAO, DG_NOIDUNG) VALUES (?, ?, ?, ?)";
+//     $stmt = $conn->prepare($insertSql);
+//     $stmt->bind_param("iiis", $maChuyenXe, $maTieuChi, $saoDanhGia, $noiDungDanhGia);
+//     if ($stmt->execute()) {
+//       echo "Đánh giá đã được gửi đi.";
+//     } else {
+//       echo "Lỗi khi thêm đánh giá: " . $conn->error;
+//     }
+//   }
+// }
 
 ?>
 
@@ -85,45 +85,29 @@ if (isset($_POST["guidanhgia"])) {
     <h2>Đánh Giá Chuyến Xe</h2>
     <div class="form-group">
       <label for="maChuyenXe">Mã Chuyến Xe</label>
-      <select class="form-select form-control" id="maChuyenXe" name="maChuyenXe">
-        <option value="" selected>Chọn chuyến xe</option>
+      
+        <!-- <option value="" selected>Chọn chuyến xe</option> -->
 
         <?php
-        // Truy vấn để lấy danh sách quận/huyện
-        $sql = "SELECT CX_MA , TD_DATE FROM chuyenxe";
+        $sql = "SELECT chuyenxe.CX_MA , chuyenxe.TD_DATE FROM chuyenxe 
+        JOIN danhgia on danhgia.CX_MA = chuyenxe.CX_MA
+        where chuyenxe.CX_TRANGTHAI = 3";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
-            echo '<option value="' . $row["CX_MA"] . '">' . $row["TD_DATE"] . '</option>';
+            echo '<input type="text" class="form-control" id="maChuyenXe" name="maChuyenXe" value = "Mã chuyến xe: '.$row["CX_MA"].''. ' Có thời điểm: '.''.$row["TD_DATE"].'">';
           }
         }
 
         ?>
-      </select>
+      <!-- </select> -->
 
     </div>
-    <div class="form-group">
-      <label for="maTieuChi">Mã Tiêu Chí</label>
-      <select class="form-select form-control" id="maTieuChi" name="maTieuChi">
-        <option value="" selected>Chọn tiêu chí</option>
-
-        <?php
-        // Truy vấn để lấy danh sách quận/huyện
-        $sql = "SELECT TC_MA,TC_TEN FROM tieuchi";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-            echo '<option value="' . $row["TC_MA"] . '">' . $row["TC_TEN"] . '</option>';
-          }
-        }
-        ?>
-      </select>
-    </div>
+   
     <div class="form-group">
       <label for="saoDanhGia">Sao Đánh Giá</label>
-      <input type="number" placeholder="Nhập số sao cho Tài Xế" class="form-control" name="saoDanhGia" required>
+      <input type="number" placeholder="Nhập số sao cho chuyến xe" class="form-control" name="saoDanhGia" min="0" max="5z" required>
     </div>
     <div class="form-group">
       <label for="noiDungDanhGia">Nội Dung Đánh Giá</label>
