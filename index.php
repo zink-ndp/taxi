@@ -282,7 +282,6 @@ if (isset($_POST['tx_ma'])) {
                     </span>
                   </div>
                   <form action="#datxe" method="post">
-                    <input type="hidden" name="tx_ma" value="<?php echo $x['tx_ma'] ?>">
                     <button type="submit" class="btn btn-success">Đặt ngay</button>
                   </form>
                 </div>
