@@ -3,73 +3,73 @@
 include("connect.php");
 
 
-if (isset($_POST["guidanhgia"])) {
-    $mataixe = $_POST["mataixe"];
-    $maTieuChi = $_POST["maTieuChi"];
-    $diemDanhGia = $_POST["diemDanhGia"];
-    $noiDungDanhGia = $_POST["noiDungDanhGia"];
+// if (isset($_POST["guidanhgia"])) {
+//     $mataixe = $_POST["mataixe"];
+//     $maTieuChi = $_POST["maTieuChi"];
+//     $diemDanhGia = $_POST["diemDanhGia"];
+//     $noiDungDanhGia = $_POST["noiDungDanhGia"];
 
-    // Lưu điểm và nội dung đánh giá vào cơ sở dữ liệu (sử dụng câu lệnh SQL thích hợp)
+//     // Lưu điểm và nội dung đánh giá vào cơ sở dữ liệu (sử dụng câu lệnh SQL thích hợp)
 
-    // Cập nhật trường điểm trung bình trong cơ sở dữ liệu (sử dụng câu lệnh SQL thích hợp)
+//     // Cập nhật trường điểm trung bình trong cơ sở dữ liệu (sử dụng câu lệnh SQL thích hợp)
 
 
-    // Truy vấn SQL để kiểm tra xem đánh giá đã tồn tại chưa
-    $checkSql = "SELECT COUNT(*) FROM dgtieuchi WHERE TX_MA = ? AND TC_MA = ?";
-    $checkStmt = $conn->prepare($checkSql);
-    $checkStmt->bind_param("ii", $mataixe, $maTieuChi);
-    $checkStmt->execute();
-    $checkStmt->bind_result($count);
-    $checkStmt->fetch();
-    $checkStmt->close();
+//     // Truy vấn SQL để kiểm tra xem đánh giá đã tồn tại chưa
+//     $checkSql = "SELECT COUNT(*) FROM dgtieuchi WHERE TX_MA = ? AND TC_MA = ?";
+//     $checkStmt = $conn->prepare($checkSql);
+//     $checkStmt->bind_param("ii", $mataixe, $maTieuChi);
+//     $checkStmt->execute();
+//     $checkStmt->bind_result($count);
+//     $checkStmt->fetch();
+//     $checkStmt->close();
 
-    // Truy vấn SQL để lấy điểm trung bình
-    $selectDiemTrungBinhSql = "SELECT DGTC_DIEM FROM dgtieuchi WHERE TX_MA = ? AND TC_MA = ?";
-    $selectDiemTrungBinhStmt = $conn->prepare($selectDiemTrungBinhSql);
-    $selectDiemTrungBinhStmt->bind_param("ii", $mataixe, $maTieuChi);
-    $selectDiemTrungBinhStmt->execute();
-    $selectDiemTrungBinhStmt->bind_result($diemTrungBinh);
-    $selectDiemTrungBinhStmt->fetch();
-    $selectDiemTrungBinhStmt->close();
+//     // Truy vấn SQL để lấy điểm trung bình
+//     $selectDiemTrungBinhSql = "SELECT DGTC_DIEM FROM dgtieuchi WHERE TX_MA = ? AND TC_MA = ?";
+//     $selectDiemTrungBinhStmt = $conn->prepare($selectDiemTrungBinhSql);
+//     $selectDiemTrungBinhStmt->bind_param("ii", $mataixe, $maTieuChi);
+//     $selectDiemTrungBinhStmt->execute();
+//     $selectDiemTrungBinhStmt->bind_result($diemTrungBinh);
+//     $selectDiemTrungBinhStmt->fetch();
+//     $selectDiemTrungBinhStmt->close();
 
     // Tính tổng điểm
-    $totalPoints = 0;
-    $totalCriteria = count($maTieuChi);
+    // $totalPoints = 0;
+    // $totalCriteria = count($maTieuChi);
 
-    for ($i = 0; $i < $totalCriteria; $i++) {
-        $totalPoints += $diemDanhGia[$i];
-    }
+    // for ($i = 0; $i < $totalCriteria; $i++) {
+    //     $totalPoints += $diemDanhGia[$i];
+    // }
 
-    // Tính điểm trung bình
-    $diemTrungBinh = $totalPoints / $totalCriteria;
+    // // Tính điểm trung bình
+    // $diemTrungBinh = $totalPoints / $totalCriteria;
 
-    // Cập nhật trường nhập điểm trung bình trong giao diện người dùng
-    echo '<script>document.getElementById("diemTrungBinh").value = "' . $diemTrungBinh . '";</script>';
+//     // Cập nhật trường nhập điểm trung bình trong giao diện người dùng
+//     echo '<script>document.getElementById("diemTrungBinh").value = "' . $diemTrungBinh . '";</script>';
 
-    if ($count > 0) {
-        // Đánh giá đã tồn tại, bạn có thể cập nhật nó thay vì thêm mới
-        $updateSql = "UPDATE dgtieuchi SET DGTC_DIEM = ?, DGTC_NOIDUNG = ? WHERE TX_MA = ? AND TC_MA = ?";
-        $updateStmt = $conn->prepare($updateSql);
-        $updateStmt->bind_param("issi", $diemTrungBinh, $noiDungDanhGia, $mataixe, $maTieuChi);
-        if ($updateStmt->execute()) {
-            echo "Đánh giá đã được cập nhật.";
-        } else {
-            echo "Lỗi khi cập nhật đánh giá: " . $conn->error;
-        }
-        $updateStmt->close();
-    } else {
-        // Đánh giá chưa tồn tại, thêm nó vào bảng tieuchi
-        $insertSql = "INSERT INTO dgtieuchi (TX_MA, TC_MA, DGTC_DIEM, DGTC_NOIDUNG) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($insertSql);
-        $stmt->bind_param("iiis", $mataixe, $maTieuChi, $diemTrungBinh, $noiDungDanhGia);
-        if ($stmt->execute()) {
-            echo "Đánh giá đã được gửi đi.";
-        } else {
-            echo "Lỗi khi thêm đánh giá: " . $conn->error;
-        }
-        $stmt->close();
-    }
-  }
+//     if ($count > 0) {
+//         // Đánh giá đã tồn tại, bạn có thể cập nhật nó thay vì thêm mới
+//         $updateSql = "UPDATE dgtieuchi SET DGTC_DIEM = ?, DGTC_NOIDUNG = ? WHERE TX_MA = ? AND TC_MA = ?";
+//         $updateStmt = $conn->prepare($updateSql);
+//         $updateStmt->bind_param("issi", $diemTrungBinh, $noiDungDanhGia, $mataixe, $maTieuChi);
+//         if ($updateStmt->execute()) {
+//             echo "Đánh giá đã được cập nhật.";
+//         } else {
+//             echo "Lỗi khi cập nhật đánh giá: " . $conn->error;
+//         }
+//         $updateStmt->close();
+//     } else {
+//         // Đánh giá chưa tồn tại, thêm nó vào bảng tieuchi
+//         $insertSql = "INSERT INTO dgtieuchi (TX_MA, TC_MA, DGTC_DIEM, DGTC_NOIDUNG) VALUES (?, ?, ?, ?)";
+//         $stmt = $conn->prepare($insertSql);
+//         $stmt->bind_param("iiis", $mataixe, $maTieuChi, $diemTrungBinh, $noiDungDanhGia);
+//         if ($stmt->execute()) {
+//             echo "Đánh giá đã được gửi đi.";
+//         } else {
+//             echo "Lỗi khi thêm đánh giá: " . $conn->error;
+//         }
+//         $stmt->close();
+//     }
+//   }
 
 ?>
 <!DOCTYPE html>
@@ -139,11 +139,14 @@ if (isset($_POST["guidanhgia"])) {
    <h1 class="mb-3 bread">Đánh giá tài xế</h1>
     <div class="form-group">
       <label for="mataixe">Mã Tài Xế</label>
-      <select class="form-select form-control" id="mataixe" name="mataixe">
-        <option value="" selected>Chọn Tài Xế</option>
+      <!-- <select class="form-select form-control" id="mataixe" name="mataixe"> -->
+        <!-- <option value="" selected>Chọn Tài Xế</option> -->
         <?php
         // Truy vấn để lấy danh sách tài xế
-        $sql = "SELECT TX_MA, TX_TEN FROM taixe";
+        
+        $sql = "SELECT taixe.TX_TEN FROM taixe 
+        join chuyenxe on chuyenxe.TX_MA = taixe.TX_MA
+        where chuyenxe.TX_MA= '$matx' and chuyenxe.CX_TRANGTHAI='3'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
@@ -151,8 +154,8 @@ if (isset($_POST["guidanhgia"])) {
           }
         }
         ?>
-      </select>
-    </div>
+      <!-- </select>
+    </div> -->
     <div class="form-group">
   <label for="maTieuChi">Chọn Tiêu Chí Đánh Giá</label>
   <?php
