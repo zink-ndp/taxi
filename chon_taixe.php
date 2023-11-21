@@ -3,12 +3,15 @@ $activate = "car";
 @include('header.php');
 ?>
 
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');"
+    data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
             <div class="col-md-9 ftco-animate pb-5">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.php">Trang chủ<i class="ion-ios-arrow-forward"></i></a></span> <span>Xe<i class="ion-ios-arrow-forward"></i></span></p>
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.php">Trang chủ<i
+                                class="ion-ios-arrow-forward"></i></a></span> <span>Xe<i
+                            class="ion-ios-arrow-forward"></i></span></p>
                 <h1 class="mb-3 bread">Chọn tài xế ở gần bạn</h1>
             </div>
         </div>
@@ -58,7 +61,7 @@ $activate = "car";
                             $anhtx = "default.png";
                         else
                             $anhtx = $x['tx_hinhanh'];
-            ?>
+                        ?>
                         <script>
                             if (route) route.remove(); // Remove existing route before adding a new one
                             route = L.Routing.control({
@@ -76,12 +79,12 @@ $activate = "car";
                                         weight: 6
                                     }],
                                 },
-                                createMarker: function() {
+                                createMarker: function () {
                                     return null;
                                 },
                             }).addTo(map);
 
-                            route.on('routesfound', function(event) {
+                            route.on('routesfound', function (event) {
                                 var routes = event.routes;
                                 var summary = routes[0].summary;
                                 console.log(routes[0])
@@ -92,28 +95,31 @@ $activate = "car";
 
                         <div class="col-4">
                             <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end" style="background-image: url(images/xe/<?php echo $x['x_hinhanh'] ?>);">
-                                    <img src="images/taixe/<?php echo $anhtx ?>" style="height: 6rem; margin-left: 10px; margin-bottom: -1.3rem;" alt="">
+                                <div class="img rounded d-flex align-items-end"
+                                    style="background-image: url(images/xe/<?php echo $x['x_hinhanh'] ?>);">
+                                    <img class="fit-image fit-image-tx" src="images/taixe/<?php echo $anhtx ?>"
+                                        style="height: 6rem; width: 6rem; margin-left: 10px; margin-bottom: -1.3rem;" alt="">
                                 </div>
 
                                 <div class="text">
                                     <h2 class="mb-0">
                                         <?php echo $x['tx_ten'] ?>
                                     </h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">
+                                    <div class="d-flex mb-1 mt-2">
+                                        <p>
                                             <?php echo $x['x_mota'] ?>
-                                        </span>
+                                        </p>
                                         <p class="price ml-auto">5<i style="color: #f7d219;" class="fas fa-star"></i>
                                         </p>
                                     </div>
                                     <p id="distance-<?php echo $x['tx_ma']; ?>">Khoảng cách : <span></span></p>
                                 </div>
 
-                                <a href="luuchuyenxe.php?txma=<?php echo $x['tx_ma']?>" class="btn btn-primary py-2 mr-1">Đặt ngay</a>
+                                <a href="luuchuyenxe.php?txma=<?php echo $x['tx_ma'] ?>" class="btn btn-primary py-2 mr-1">Đặt
+                                    ngay</a>
                             </div>
                         </div>
-            <?php
+                        <?php
                     }
                 } else {
                     echo "Không có dữ liệu phù hợp.";
