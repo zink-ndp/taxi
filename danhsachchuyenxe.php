@@ -7,25 +7,22 @@ $activate = "danhsachchuyenxe";
 ?>
 
 <style>
-  ul{
+  ul {
     margin-top: 50px;
     margin-bottom: 50px;
     text-align: center;
   }
 </style>
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');"
-    data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-            <div class="col-md-9 ftco-animate pb-5">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.hphp">Trang chủ<i
-                                class="ion-ios-arrow-forward"></i></a></span> <span>Xe đã đặt<i
-                            class="ion-ios-arrow-forward"></i></span></p>
-                <h1 class="mb-3 bread">Danh sách các chuyến xe</h1>
-            </div>
-        </div>
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+      <div class="col-md-9 ftco-animate pb-5">
+        <p class="breadcrumbs"><span class="mr-2"><a href="index.hphp">Trang chủ<i class="ion-ios-arrow-forward"></i></a></span> <span>Xe đã đặt<i class="ion-ios-arrow-forward"></i></span></p>
+        <h1 class="mb-3 bread">Danh sách các chuyến xe</h1>
+      </div>
     </div>
+  </div>
 </section>
 
 <?php
@@ -60,7 +57,7 @@ if ($result->num_rows > 0) {
   echo "<h2>Thông tin chuyến xe đã đặt</h2>";
   echo "<ul>";
   while ($row = $result->fetch_assoc()) {
-    echo  "Mã chuyến xe: ". $row['CX_MA'] . " - Tên khách hàng: " . $row['KH_TEN'] . " - Số km " . $row['CX_SOKM'] . " - Ngày đặt: " . $row['TD_DATE'] . " - Thành tiền " . $row['CX_THANHTIEN'] . "";
+    echo  "Mã chuyến xe: " . $row['CX_MA'] . " - Tên khách hàng: " . $row['KH_TEN'] . " - Số km " . $row['CX_SOKM'] . " - Ngày đặt: " . $row['TD_DATE'] . " - Thành tiền " . $row['CX_THANHTIEN'] . "<br>";
   }
   echo "</ul>";
 } else {
