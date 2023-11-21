@@ -8,12 +8,10 @@ $activate = "index";
 ?>
 
 <?php
-if (isset($_POST['tx_ma'])) {
-  $form_action = "xulydatxe.php";
-  $matx = $_POST['tx_ma'];
-} else {
+if (isset($_SESSION['kh_ma'])) {
   $form_action = "chon_taixe.php";
-  $matx = '';
+} else {
+  $form_action = "login.php?rl=1";
 }
 ?>
 <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');"
