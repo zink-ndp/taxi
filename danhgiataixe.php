@@ -72,7 +72,7 @@ if (isset($_GET['macx'])) {
 
   <section class="ftco-section">
 
-    <form method="POST" class="col-md-6" action="danhgiachuyenxe.php?macx=<?php echo $macx?>">
+    <form method="POST" class="col-md-6" action="luudanhgia.php">
       <h1 class="mb-3 bread">Đánh giá tài xế</h1>
       <div class="form-group">
         <?php
@@ -138,26 +138,16 @@ if (isset($_GET['macx'])) {
 </section>
 =======
       <div class="form-group">
-        <label for="noiDungDanhGia">Nội Dung Đánh Giá</label>
-        <textarea class="form-control" placeholder="Nhập nội dung đánh giá của bạn" name="noiDungDanhGia" rows="4"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="diemTrungBinh" name="diemTrungBinh">Điểm Trung Bình</label>
+        <label for="diemTrungBinh">Điểm Trung Bình</label>
         <?php
         // echo '<label class="form-check-label">' . $row["DGTC_DIEM"] . '</label>';
         ?>
-        <input type="text" class="form-control" id="diemTrungBinh" name="diemTrungBinh" disabled>
+        <input type="text" class="form-control" id="diemTrungBinh" name="diemtb" disabled>
       </div>
-      <button type="submit" onclick="redirectPage()" class="btn btn-primary py-3 px-5" name="guidanhgia">Đánh Giá Chuyến Xe</button>
-      
+      <button type="submit" onclick="redirectPage()" class="btn btn-primary py-3 px-5" name="submit">Đánh Giá Chuyến Xe</button>
     </form>
   </section>
 >>>>>>> ecd6622169e1235c2245d0029e8dd5b2fb20a80a
 </body>
 
 </html>
-<?php
-mysqli_close($conn);
-
-?>
