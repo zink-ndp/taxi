@@ -32,12 +32,8 @@ include('header.php');
                                     <div class="col-md-12">
                                         <label for="inputNumberl4" class="form-label">Tên đăng nhập<span class="error"></span></label>
                                         <input type="text" class="form-control" id="username" name="username">
-                                    </div>
-                                    <div class="col-md-12">
                                         <label for="inputPassword4" class="form-label">Mật khẩu<span class="error">*</span></label>
                                         <input type="password" class="form-control" id="password" name="psw">
-                                    </div>
-                                    <div class="col-md-12 mt-3" >
                                         <button type="submit" class="mt-2 btn btn-success "  name="dangnhap">Đăng nhập </button>
                                     </div>
                                 </form>
