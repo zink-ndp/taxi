@@ -277,6 +277,8 @@ button:not(:disabled),
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
 [type="submit"]:not(:disabled) {
+  margin-left: 860px;
+  color:#007bff;
   cursor: pointer; }
 
 button::-moz-focus-inner,

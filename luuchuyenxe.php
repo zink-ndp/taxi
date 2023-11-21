@@ -28,7 +28,7 @@ if (isset($_GET['txma'])) {
             if (!$result) {
                 die('Lỗi truy vấn: ' . mysqli_error($conn));
             } else {
-                echo "Đã đặt thành công!";
+                header('Location: xulydatxe.php?macx=CX_MA');
             }
         } else {
             echo "Thêm ngày thất bại";
