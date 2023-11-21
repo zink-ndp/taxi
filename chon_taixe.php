@@ -141,8 +141,10 @@ $kcach = $_POST['kcach'];
                                 <p id="distance-<?php echo $x['tx_ma']; ?>">Cách bạn: <span></span></p>
                             </div>
 
-                            <a href="luuchuyenxe.php?txma=<?php echo $x['tx_ma'] ?>" class="btn btn-primary py-2 mr-1">Đặt
-                                ngay</a>
+                            <div class="d-flex justify-content-end" style="margin-top: -2rem">
+                                <a href="luuchuyenxe.php?txma=<?php echo $x['tx_ma'] ?>" class="btn btn-primary py-2 mb-4 mr-4">Đặt
+                                    ngay</a>
+                            </div>
                         </div>
                     </div>
                     <?php
