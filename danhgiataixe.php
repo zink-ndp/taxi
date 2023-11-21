@@ -135,12 +135,13 @@ include("connect.php");
 </section>
 
 <section class="ftco-section">
+
   <form method="POST" class="col-md-6" action="">
-   <h1 class="mb-3 bread">Đánh giá tài xế</h1>
+  
+  <h1 class="mb-3 bread">Đánh giá tài xế</h1>
     <div class="form-group">
       <label for="mataixe">Mã Tài Xế</label>
-      <!-- <select class="form-select form-control" id="mataixe" name="mataixe"> -->
-        <!-- <option value="" selected>Chọn Tài Xế</option> -->
+      
         <?php
         // Truy vấn để lấy danh sách tài xế
         
@@ -154,8 +155,8 @@ include("connect.php");
           }
         }
         ?>
-      <!-- </select>
-    </div> -->
+   
+    </div>
     <div class="form-group">
   <label for="maTieuChi">Chọn Tiêu Chí Đánh Giá</label>
   <?php
@@ -168,13 +169,14 @@ include("connect.php");
       echo '<div class="form-check">';
       echo '<input type="checkbox" class="form-check-input" name="maTieuChi[]" value="' . $row["TC_MA"] . '" onclick="togglePointsInput(this, ' . $index . ');">';
       echo '<label class="form-check-label">' . $row["TC_TEN"] . '</label>';
-      echo '<input type="number" class="form-control points-input" style="display: none;" placeholder="Nhập điểm cho Tài Xế" name="diemDanhGia[]">';
+      echo '<input type="number" class="form-control points-input" style="display: none;" placeholder="Nhập điểm cho Tài Xế" min="0" max="10" name="diemDanhGia[]">';
       echo '</div>';
       $index++;
     }
   }
   ?>
 </div>
+
     <div class="form-group">
       <label for="noiDungDanhGia">Nội Dung Đánh Giá</label>
       <textarea class="form-control" placeholder="Nhập nội dung đánh giá của bạn" name="noiDungDanhGia" rows="4"></textarea>
@@ -189,7 +191,9 @@ include("connect.php");
     </div>
 
     <button type="submit" class="btn btn-primary py-3 px-5" name="guidanhgia">Gửi Đánh Giá</button>
+ 
   </form>
+
 </section>
 </body>
 </html>

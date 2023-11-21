@@ -6,94 +6,63 @@ include("header.php");
     <!-- <link rel="stylesheet" href="css/style.css"> -->
 
 </head>
+
 <style>
-.ftco-navbar-light {
-    background: brown;
-    position: absolute;
-    top: 20px;
-    left: 0;
-    right: 0;
-    z-index: 3;
-}
-.col-6 {
-    -webkit-box-flex: initial;
+  .col-md-6 {
+    margin-left: 500px;
+    -webkit-box-flex: inherit;
     -ms-flex: 0 0 50%;
-    flex: revert;
-    max-width: 100%;
-}
-  input, button, select, optgroup, textarea {
-    margin:inherit;
-    font-family: inherit;
-    background-color:lightblue;
-}
-
-.container-fluid {
-    width: max-content;
-    padding-right: 20px;
-    padding-left: 20px;
-    margin-right: revert;
-    margin-left: inherit;
-}
-
-body {
-    font-family: "Poppins", Arial, sans-serif;
-    background: #cccccc36;
-    font-size: 18px;
-    line-height: normal;
-    font-weight: 2000;
-    text-align: -webkit-right;
-    color:darkgray;
-}
-h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
-    line-height: 1;
-    color: rgba(0, 0, 0, 1);
-    font-weight: 300;
-}
-h1, .h1 {
-    font-size: 3;
-}
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    margin-bottom: 2rem;
-    font-weight: 500;
-    line-height: 1.2;
-}
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 5px;
-    margin-bottom: 0.5rem;
-}
+    flex: 0 0 50%;
+    max-width: 50%;
+    text-align: initial;
+  }
 </style>
+
 <body>
-<section class="ftco-section contact-section">
-    <div class="container">
-        <div class="container-fluid pt-1">
-            <div class="row px-xl-5">
-                <div class="col-lg-12 mb-5" style="margin-top: -40px;">
-                    <section class="text-again:center">
-                        <div class="row">
-                            <div class="col-6">
-                            <h1>Thay đổi thông tin người dùng</h1>
-                              <form action="sua.php" method="post">
-                                  <label for="username">Username:</label>
-                                  <input type="text" name="username" required><br>
 
-                                  <label for="full_name">Họ tên:</label>
-                                  <input type="text" name="full_name"><br>
-
-                                  <label for="phone">Số điện thoại:</label>
-                                  <input type="text" name="phone"><br>
-
-                                  <label for="email">Email:</label>
-                                  <input type="email" name="email"><br>
-
-                                  <input type="submit" value="Cập nhật">
-                              </form>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+          <div class="col-md-9 ftco-animate pb-5">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.php">Trang chủ<i class="ion-ios-arrow-forward"></i></a></span> <span>Đổi thông tin <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-3 bread">Đổi thông tin </h1>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
+
+<section class="ftco-section">
+   
+                    <form action="sua.php" class="col-md-6" method="post">
+                            <h1 class="mb-3 bread">Thay đổi thông tin người dùng</h1>
+                            <div class="form-group">
+                                  <label for="username">Username:</label>
+                                  <input class="form-control" type="text" name="username" required><br>
+                            </div>
+
+                            <div class="form-group">
+                                  <label for="full_name">Họ tên:</label>
+                                  <input class="form-control" type="text" name="full_name"><br>
+                            </div>
+
+                            <div class="form-group">
+                                  <label for="phone">Số điện thoại:</label>
+                                  <input class="form-control"  type="text" name="phone"><br>
+                            </div>
+
+                            <div class="form-group">
+                                  <label for="email">Email:</label>
+                                  <input class="form-control" type="email" name="email"><br>
+                            </div>
+
+                                  <button type="submit" class="btn btn-primary py-3 px-5">  Cập nhật </button>
+                            <!-- </div> -->
+                                
+                            </form>
+                            
+   
+ 
 </section>
    
 </body>
