@@ -22,10 +22,13 @@ $email = $_POST['email'];
 $sql = "UPDATE khachhang SET KH_TEN='$full_name',KH_SDT='$phone', KH_EMAIL='$email' WHERE kH_USERNAME='$username'";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Thông tin người dùng đã được cập nhật thành công.";
+    // echo "Thông tin người dùng đã được cập nhật thành công.";
+    echo '<script language="javascript">
+            alert("Đăng nhập thành công!");
+            window.location.href = "suathongtin.php"; // Chuyển hướng sau khi đăng ký thành công
+            </script>';
 } else {
     echo "Lỗi: " . $conn->error;
 }
 
 $conn->close();
-?>
