@@ -177,10 +177,10 @@ include("connect.php");
   ?>
 </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="noiDungDanhGia">Nội Dung Đánh Giá</label>
       <textarea class="form-control" placeholder="Nhập nội dung đánh giá của bạn" name="noiDungDanhGia" rows="4"></textarea>
-    </div>
+    </div> -->
     
     <div class="form-group">
       <label for="diemTrungBinh" name="diemTrungBinh">Điểm Trung Bình</label>
@@ -190,9 +190,15 @@ include("connect.php");
       <input type="text" class="form-control" id="diemTrungBinh" name="diemTrungBinh" disabled>
     </div>
 
-    <button type="submit" class="btn btn-primary py-3 px-5" name="guidanhgia">Gửi Đánh Giá</button>
+    <button type="submit"  onclick="redirectPage()"  class="btn" name="guidanhgia">Gửi Đánh Giá</button>
  
   </form>
+
+    <script>
+                function redirectPage() {
+                    window.location.href = "danhgiachuyenxe.php?macx=CX_MA";
+                }
+    </script>
 
 </section>
 </body>
