@@ -19,7 +19,7 @@ if (isset($_GET['macx'])) {
 </head>
 <style>
   .col-md-6 {
-  margin-left: 500px;
+    margin-left: 500px;
 
     -webkit-box-flex: inherit;
     -ms-flex: 0 0 50%;
@@ -38,7 +38,7 @@ if (isset($_GET['macx'])) {
     <div class="container">
       <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
         <div class="col-md-9 ftco-animate pb-5">
-          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Trang chủ<i class="ion-ios-arrow-forward"></i></a></span> <span>Đặt xe<i class="ion-ios-arrow-forward"></i></span></p>
+          <p class="breadcrumbs"><span class="mr-2"><a href="index.php">Trang chủ<i class="ion-ios-arrow-forward"></i></a></span> <span>Đặt xe<i class="ion-ios-arrow-forward"></i></span></p>
           <h1 class="mb-3 bread">Thông tin chuyến xe</h1>
         </div>
       </div>
@@ -46,42 +46,35 @@ if (isset($_GET['macx'])) {
   </section>
 
   <section class="ftco-section">
-  <form method="POST" class="col-md-6" action="">
-    <h2>Đánh Giá Chuyến Xe</h2>
-    <div class="form-group">
-      <label for="maChuyenXe">Mã Chuyến Xe</label>
-      
-        <!-- <option value="" selected>Chọn chuyến xe</option> -->
-
+    <form method="POST" class="col-md-6" action="luudanhgia.php?macx=<?php echo $macx?>">
+      <h2>Đánh Giá Chuyến Xe</h2>
+      <div class="form-group">
+        <label for="maChuyenXe">Mã Chuyến Xe</label>
         <?php
         $sql = "SELECT chuyenxe.CX_MA , chuyenxe.TD_DATE FROM chuyenxe 
         where chuyenxe.CX_TRANGTHAI = '3' AND chuyenxe.CX_MA = '$macx'";
         $result = $conn->query($sql);
-
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
-            echo '<input type="text" class="form-control" id="maChuyenXe" name="maChuyenXe" value = "Mã chuyến xe: '.$row["CX_MA"] .' - '. 'Có thời điểm: '.''.$row["TD_DATE"].'">';
+            echo '<input type="text" class="form-control" id="maChuyenXe" name="maChuyenXe" value = "Mã chuyến xe: ' . $row["CX_MA"] . ' - ' . 'Có thời điểm: ' . '' . $row["TD_DATE"] . '">';
           }
         }
-
         ?>
-      <!-- </select> -->
+      </div>
 
-    </div>
-   
-    <div class="form-group">
-      <label for="saoDanhGia">Sao Đánh Giá</label>
-      <input type="number" placeholder="Nhập số sao cho chuyến xe" class="form-control" name="saoDanhGia" min="0" max="5z" required>
-    </div>
-    <div class="form-group">
-      <label for="noiDungDanhGia">Nội Dung Đánh Giá</label>
-      <textarea class="form-control" placeholder="Nhập nội dung đánh giá của bạn" name="noiDungDanhGia" rows="4" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary py-3 px-5" name="guidanhgia">Gửi Đánh Giá</button>
-    <!-- <div id="success-message" style="display: none;">
+      <div class="form-group">
+        <label for="saoDanhGia">Sao Đánh Giá</label>
+        <input type="number" placeholder="Nhập số sao cho chuyến xe" class="form-control" name="saoDanhGia" min="0" max="5z" required>
+      </div>
+      <div class="form-group">
+        <label for="noiDungDanhGia">Nội Dung Đánh Giá</label>
+        <textarea class="form-control" placeholder="Nhập nội dung đánh giá của bạn" name="noiDungDanhGia" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary py-3 px-5" name="submit">Gửi Đánh Giá</button>
+      <!-- <div id="success-message" style="display: none;">
     Đánh giá đã được thêm thành công.
 </div> -->
-  </form>
+    </form>
   </section>
 </body>
 

@@ -72,7 +72,7 @@ if (isset($_GET['macx'])) {
 
   <section class="ftco-section">
 
-    <form method="POST" class="col-md-6" action="luudanhgia.php">
+    <form method="POST" class="col-md-6" action="">
       <h1 class="mb-3 bread">Đánh giá tài xế</h1>
       <div class="form-group">
         <?php
@@ -85,7 +85,7 @@ if (isset($_GET['macx'])) {
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
             echo '<label for="mataixe">Tên Tài Xế</label>
-            <input type = "hidden" class="form-control" value="' . $row["TX_MA"] . '"></input>
+            <input type = "hidden" name = "matx" class="form-control" value="' . $row["TX_MA"] . '"></input>
             <input type = "text" class="form-control" value="' . $row["TX_TEN"] . '"></input>';
           }
         }
@@ -118,7 +118,7 @@ if (isset($_GET['macx'])) {
         ?>
         <input type="text" class="form-control" id="diemTrungBinh" name="diemtb" disabled>
       </div>
-      <button type="submit" onclick="redirectPage()" class="btn btn-primary py-3 px-5" name="submit">Đánh Giá Chuyến Xe</button>
+      <button type="submit" onclick="redirectPage()" class="btn btn-primary py-3 px-5" name="submit">Gửi đánh giá</button>
     </form>
   </section>
 </body>

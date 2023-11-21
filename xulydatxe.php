@@ -108,7 +108,7 @@ $macx = $_GET['macx'];
 </section>
 <script>
     function redirectPage() {
-        window.location.href = "danhgiataixe.php?macx=<?php echo $_GET['macx'] ?>";
+        window.location.href = "danhgiachuyenxe.php?macx=<?php echo $_GET['macx'] ?>";
     }
 </script>
 <style>
