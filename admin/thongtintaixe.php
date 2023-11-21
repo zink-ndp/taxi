@@ -4,8 +4,8 @@
 
 <!-- chat.html  21 Nov 2019 03:50:11 GMT -->
 <?php
-  include("connect.php");
-  include('head.php');
+include("connect.php");
+include('head.php');
 ?>
 
 <body>
@@ -17,7 +17,7 @@
         <div class="form-inline mr-auto">
           <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
-									collapse-btn"> <i data-feather="align-justify"></i></a></li>
+                  collapse-btn"> <i data-feather="align-justify"></i></a></li>
             <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
                 <i data-feather="maximize"></i>
               </a></li>
@@ -47,7 +47,7 @@
               </div>
               <div class="dropdown-list-content dropdown-list-message">
                 <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar
-											text-white"> <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle">
+                      text-white"> <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle">
                   </span> <span class="dropdown-item-desc"> <span class="message-user">John
                       Deo</span>
                     <span class="time messege-text">Please check your mail !!</span>
@@ -108,20 +108,20 @@
               <div class="dropdown-list-content dropdown-list-icons">
                 <a href="#" class="dropdown-item dropdown-item-unread"> <span
                     class="dropdown-item-icon bg-primary text-white"> <i class="fas
-												fa-code"></i>
+                        fa-code"></i>
                   </span> <span class="dropdown-item-desc"> Template update is
                     available now! <span class="time">2 Min
                       Ago</span>
                   </span>
                 </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="far
-												fa-user"></i>
+                        fa-user"></i>
                   </span> <span class="dropdown-item-desc"> <b>You</b> and <b>Dedik
                       Sugiharto</b> are now friends <span class="time">10 Hours
                       Ago</span>
                   </span>
                 </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-success text-white"> <i
                       class="fas
-												fa-check"></i>
+                        fa-check"></i>
                   </span> <span class="dropdown-item-desc"> <b>Kusnaedi</b> has
                     moved task <b>Fix bug header</b> to <b>Done</b> <span class="time">12
                       Hours
@@ -133,7 +133,7 @@
                     clean it! <span class="time">17 Hours Ago</span>
                   </span>
                 </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="fas
-												fa-bell"></i>
+                        fa-bell"></i>
                   </span> <span class="dropdown-item-desc"> Welcome to Otika
                     template! <span class="time">Yesterday</span>
                   </span>
@@ -150,7 +150,7 @@
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">Hello Sarah Smith</div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
-										fa-user"></i> Profile
+                    fa-user"></i> Profile
               </a> <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
                 Activities
               </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
@@ -164,188 +164,96 @@
           </li>
         </ul>
       </nav>
-      <?php 
-        include('navbar.php');
-        include('sidebar.php');
+      <?php
+      include('navbar.php');
+      include('sidebar.php');
       ?>
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-body">
             <div class="row">
-            <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4>Danh sách tài xế</h4>
-            </div>
-            <div class="card-body">
-    <div class="table-responsive">
-        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
-            <thead>
-                <tr><th>ID</th>
-                    <th>Tên</th>
-                    <th>Bằng lái</th>
-                    <th>Số điện thoại</th>
-                    <th>Tên đăng nhập</th>
-                    <th>Thời điểm</th>
-                    <th>Mã xe</th>
-                    <th>Giới tính</th>
-                    <th>Hình ảnh</th>
-                    <th>Xem chi tiết đánh giá</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Thực hiện truy vấn SQL để lấy thông tin từ bảng nhanvien
-                $sql = "SELECT taixe.TX_MA, taixe.TX_TEN, taixe.TX_BANGLAI, taixe.TX_SDT, taixe.TX_USERNAME, phutrach.TD_DATE, phutrach.X_MA, taixe.TX_GIOITINH, taixe.TX_HINHANH
-                FROM taixe
-                JOIN phutrach ON taixe.TX_MA = phutrach.TX_MA
-                ORDER BY taixe.TX_MA";
-                $result = $conn->query($sql);
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Danh sách tài xế</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                        <thead>
+                          <tr>
+                            <th>Hình ảnh</th>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Bằng lái</th>
+                            <th>Số điện thoại</th>
+                            <th>Tên đăng nhập</th>
+                            <th>Mã xe</th>
+                            <th>Giới tính</th>
+                            <th>Xem chi tiết đánh giá</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php
+                          // Thực hiện truy vấn SQL để lấy thông tin từ bảng nhanvien
+                          $sql = "SELECT taixe.TX_MA, taixe.TX_TEN, taixe.TX_BANGLAI, taixe.TX_SDT, taixe.TX_USERNAME, phutrach.TD_DATE, phutrach.X_MA, taixe.TX_GIOITINH, taixe.TX_HINHANH
+                                  FROM taixe
+                                  LEFT JOIN phutrach ON taixe.TX_MA = phutrach.TX_MA
+                                  ORDER BY taixe.TX_MA";
+                          $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row["TX_MA"] . "</td>";
-                        echo "<td>" . $row["TX_TEN"] . "</td>";
-                        echo "<td>" . $row["TX_BANGLAI"] . "</td>";
-                        echo "<td>" . $row["TX_SDT"] . "</td>"; 
-                        echo "<td>" . $row["TX_USERNAME"] . "</td>";
-                        echo "<td>" . $row["TD_DATE"] . "</td>";                        
-                        echo "<td>" . $row["X_MA"] . "</td>";                                               
-                        // Hiển thị giới tính
-                        echo "<td>";
-                        if ($row["TX_GIOITINH"] == 1) {
-                            echo "Nam";
-                        } elseif ($row["TX_GIOITINH"] == 0) {
-                            echo "Nữ";
-                        } else {
-                            echo "Không xác định";
-                        }
-                        echo "</td>";
-                        echo '<td>';
-                        if (!empty($row["TX_HINHANH"])) {
-                            echo '<img src="' . $row["TX_HINHANH"] . '" alt="Hình ảnh tài xế" width="100">';
-                        } else {
-                            echo 'Chưa có hình bé ơi';
-                        }
-                        echo '</td>';
-                        echo '<td>
+                          if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                              echo '<tr style="margin-top: 1rem;">';
+                              echo '<td>';
+                              if (!empty($row["TX_HINHANH"])) {
+                                echo '<img class="fit-image-tx" style="width: 4rem; height: 4rem;" src="../images/taixe/' . $row["TX_HINHANH"] . '" alt="Hình ảnh tài xế" width="100">';
+                              } else {
+                                echo 'Chưa có hình bé ơi';
+                              }
+                              echo '</td>';
+                              echo "<td>" . $row["TX_MA"] . "</td>";
+                              echo "<td>" . $row["TX_TEN"] . "</td>";
+                              echo "<td>" . $row["TX_BANGLAI"] . "</td>";
+                              echo "<td>" . $row["TX_SDT"] . "</td>";
+                              echo "<td>" . $row["TX_USERNAME"] . "</td>";
+                              echo "<td>" . $row["X_MA"] . "</td>";
+                              // Hiển thị giới tính
+                              echo "<td>";
+                              if ($row["TX_GIOITINH"] == 1) {
+                                echo "Nam";
+                              } elseif ($row["TX_GIOITINH"] == 0) {
+                                echo "Nữ";
+                              } else {
+                                echo "Không xác định";
+                              }
+                              echo "</td>";
+                              echo '<td>
                           <form action="chitietdanhgiatx.php" method="get">
                               <input type="hidden" name="txid" value="' . $row["TX_MA"] . '">
                               <button class="btn btn-link" type="submit"><i class="fa-solid fa-table-list"></i></button>
                           </form>
                       </td>';
 
-                echo "</tr>";
-            
-        }
-        $totalEmployees = $result->num_rows; // Đếm tổng số khách hàng
-        echo "<h5>Tổng số tài xế: $totalEmployees</h5>"; // Hiển thị tổng số khách hàng
-    } else {
-        echo "Không có dữ liệu nhân viên.";
-    }
-                ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-        </div>
-    </div>
+                              echo "</tr>";
+
+                            }
+                            $totalEmployees = $result->num_rows; // Đếm tổng số khách hàng
+                            echo "<h5>Tổng số tài xế: $totalEmployees</h5>"; // Hiển thị tổng số khách hàng
+                          } else {
+                            echo "Không có dữ liệu nhân viên.";
+                          }
+                          ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
-        <div class="settingSidebar">
-          <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
-          </a>
-          <div class="settingSidebar-body ps-container ps-theme-default">
-            <div class=" fade show active">
-              <div class="setting-panel-header">Setting Panel
-              </div>
-              <div class="p-15 border-bottom">
-                <h6 class="font-medium m-b-10">Select Layout</h6>
-                <div class="selectgroup layout-color w-50">
-                  <label class="selectgroup-item">
-                    <input type="radio" name="value" value="1" class="selectgroup-input-radio select-layout" checked>
-                    <span class="selectgroup-button">Light</span>
-                  </label>
-                  <label class="selectgroup-item">
-                    <input type="radio" name="value" value="2" class="selectgroup-input-radio select-layout">
-                    <span class="selectgroup-button">Dark</span>
-                  </label>
-                </div>
-              </div>
-              <div class="p-15 border-bottom">
-                <h6 class="font-medium m-b-10">Sidebar Color</h6>
-                <div class="selectgroup selectgroup-pills sidebar-color">
-                  <label class="selectgroup-item">
-                    <input type="radio" name="icon-input" value="1" class="selectgroup-input select-sidebar">
-                    <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip"
-                      data-original-title="Light Sidebar"><i class="fas fa-sun"></i></span>
-                  </label>
-                  <label class="selectgroup-item">
-                    <input type="radio" name="icon-input" value="2" class="selectgroup-input select-sidebar" checked>
-                    <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip"
-                      data-original-title="Dark Sidebar"><i class="fas fa-moon"></i></span>
-                  </label>
-                </div>
-              </div>
-              <div class="p-15 border-bottom">
-                <h6 class="font-medium m-b-10">Color Theme</h6>
-                <div class="theme-setting-options">
-                  <ul class="choose-theme list-unstyled mb-0">
-                    <li title="white" class="active">
-                      <div class="white"></div>
-                    </li>
-                    <li title="cyan">
-                      <div class="cyan"></div>
-                    </li>
-                    <li title="black">
-                      <div class="black"></div>
-                    </li>
-                    <li title="purple">
-                      <div class="purple"></div>
-                    </li>
-                    <li title="orange">
-                      <div class="orange"></div>
-                    </li>
-                    <li title="green">
-                      <div class="green"></div>
-                    </li>
-                    <li title="red">
-                      <div class="red"></div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="p-15 border-bottom">
-                <div class="theme-setting-options">
-                  <label class="m-b-0">
-                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input"
-                      id="mini_sidebar_setting">
-                    <span class="custom-switch-indicator"></span>
-                    <span class="control-label p-l-10">Mini Sidebar</span>
-                  </label>
-                </div>
-              </div>
-              <div class="p-15 border-bottom">
-                <div class="theme-setting-options">
-                  <label class="m-b-0">
-                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input"
-                      id="sticky_header_setting">
-                    <span class="custom-switch-indicator"></span>
-                    <span class="control-label p-l-10">Sticky Header</span>
-                  </label>
-                </div>
-              </div>
-              <div class="mt-4 mb-4 p-3 align-center rt-sidebar-last-ele">
-                <a href="#" class="btn btn-icon icon-left btn-primary btn-restore-theme">
-                  <i class="fas fa-undo"></i> Restore Default
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <footer class="main-footer">
         <div class="footer-left">
@@ -369,4 +277,5 @@
 
 
 <!-- chat.html  21 Nov 2019 03:50:12 GMT -->
+
 </html>

@@ -6,7 +6,13 @@ $activate = "danhsachchuyenxe";
 // @include_once('helpers/format.php');
 ?>
 
-
+<style>
+  ul{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+</style>
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');"
     data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -16,7 +22,7 @@ $activate = "danhsachchuyenxe";
                 <p class="breadcrumbs"><span class="mr-2"><a href="index.hphp">Trang chủ<i
                                 class="ion-ios-arrow-forward"></i></a></span> <span>Xe đã đặt<i
                             class="ion-ios-arrow-forward"></i></span></p>
-                <h1 class="mb-3 bread">Danh sách chuyến xe</h1>
+                <h1 class="mb-3 bread">Danh sách các chuyến xe</h1>
             </div>
         </div>
     </div>
@@ -35,7 +41,7 @@ $password = "";
 $dbname = "taxi";
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
-  die("Kết nối thất bại1 " . $conn->connect_error);
+  die("Kết nối thất bại! " . $conn->connect_error);
 }
 
 
@@ -51,10 +57,10 @@ $result = $conn->query($sql);
 // Hiển thị danh sách chuyến xe đã đặt
 if ($result->num_rows > 0) {
 
-  echo "<h2>Danh sách chuyến xe đã đặt</h2>";
+  echo "<h2>Thông tin chuyến xe đã đặt</h2>";
   echo "<ul>";
   while ($row = $result->fetch_assoc()) {
-    echo "<li>" . $row['CX_MA'] . " - Tên khách hàng: " . $row['KH_TEN'] . " - Số km " . $row['CX_SOKM'] . " - Ngày đặt: " . $row['TD_DATE'] . " - Thành tiền " . $row['CX_THANHTIEN'] . "</li>";
+    echo  "Mã chuyến xe: ". $row['CX_MA'] . " - Tên khách hàng: " . $row['KH_TEN'] . " - Số km " . $row['CX_SOKM'] . " - Ngày đặt: " . $row['TD_DATE'] . " - Thành tiền " . $row['CX_THANHTIEN'] . "";
   }
   echo "</ul>";
 } else {

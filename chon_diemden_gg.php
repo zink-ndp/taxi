@@ -4,17 +4,17 @@ $activate = "index";
 ?>
 
 <script>
-  (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-    key: "AIzaSyCOOW03_8zw3SqGt7LSLKNgvIgKZte-U98",
-    v: "weekly",
-  });
+    (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
+        key: "AIzaSyCOOW03_8zw3SqGt7LSLKNgvIgKZte-U98",
+        v: "weekly",
+    });
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </script>
 <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOOW03_8zw3SqGt7LSLKNgvIgKZte-U98&libraries=places&callback=initMap">
-</script>
+    </script>
 
 <div class="showmap rounded">
     <div id="map" class="map rounded"></div>
@@ -26,13 +26,14 @@ $activate = "index";
         </div>
     </div>
     <div id="if-gr" class="card rounded p-3 info-group">
-        <span class="fw-bolder">Quãng đường: <span id="spanQuangduong" class="text-dark fw-bold"></span> - (khoảng <span id="spanThoigian" class="text-dark fw-bold"></span>) </span>
-    </div>  
+        <span class="fw-bolder">Quãng đường: <span id="spanQuangduong" class="text-dark fw-bold"></span> - (khoảng <span
+                id="spanThoigian" class="text-dark fw-bold"></span>) </span>
+    </div>
     <div id="wp-gr" class="card waypoint-group">
         <ul id="listwp" class="mt-3">
             <!-- append here -->
         </ul>
-    </div> 
+    </div>
 </div>
 
 <script>
@@ -154,6 +155,7 @@ function showPosition(position) {
                 travelMode: google.maps.TravelMode.DRIVING
             }
 
+            var kcach = 0
             const if_gr =document.getElementById('if-gr')
             const wp_gr =document.getElementById('wp-gr')
             const listWp =document.getElementById('listwp')
@@ -209,30 +211,33 @@ function showPosition(position) {
             latden =place.geometry.location.lat()
             lngden =place.geometry.location.lng()
 
-            console.log("index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden)
+            console.log(kcach)
 
             okBtn.addEventListener('click', () => {
-                window.location.href ="index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden;
+                window.location.href ="index.php?locateden="+locateden+"&latden="+latden+"&lngden="+lngden+"&kcach="+kcach;
             })
 
         });
 
         function showSteps(directionResult) {
-        var myRoute = directionResult.routes[0].legs[0];
+    
+            var myRoute = directionResult.routes[0].legs[0];
 
-        for (var i = 0; i < myRoute.steps.length; i++) {
-            var marker = new google.maps.Marker({
-                position: myRoute.steps[i].start_point,
-                map: map,
-                icon: {
-                    url: 'images/dot.png',
-                    scaledSize: new google.maps.Size(18, 18)
-                }
-            });
-            attachInstructionText(marker, myRoute.steps[i].instructions);
-            markerArray[i] = marker;
-            console.log(myRoute.steps[i].instructions)
-        }
+            kcach = (myRoute.distanceMeters/1000).toFixed(2)
+
+            for (var i = 0; i < myRoute.steps.length; i++) {
+                var marker = new google.maps.Marker({
+                    position: myRoute.steps[i].start_point,
+                    map: map,
+                    icon: {
+                        url: 'images/dot.png',
+                        scaledSize: new google.maps.Size(18, 18)
+                    }
+                });
+                attachInstructionText(marker, myRoute.steps[i].instructions);
+                markerArray[i] = marker;
+                console.log(myRoute.steps[i].instructions)
+            }
         }
 
         function attachInstructionText(marker, text) {
