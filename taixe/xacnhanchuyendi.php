@@ -18,6 +18,25 @@
         } else {
             echo "Lỗi khi cập nhật trạng thái: " . mysqli_error($conn);
         }
+
+        $sql = "select sysdate() as date from dual";
+        $rs = querySqlwithResult($conn, $sql);
+        $sysdate = $rs->fetch_assoc();
+        $date = $sysdate['date'];
+
+        $sql="insert into thoidiem value('$date')";
+        querySql($conn, $sql);
+
+        $sql = "select TT_TOADOX, TT_TOADOY from trangthai where TX_MA = {$_SESSION['TX_ma']} and TD_DATE = (select max(TD_DATE) from trangthai where TX_MA = {$_SESSION['TX_ma']})";
+        $rs = querySqlwithResult($conn, $sql);
+        $td = $rs->fetch_assoc();
+
+        $tdx = $td['TT_TOADOX'];
+        $tdy = $td['TT_TOADOY'];
+
+        $sql = "insert into trangthai values ({$_SESSION['TX_ma']},'$date', 0, $tdx, $tdy)";
+        querySql($conn, $sql);
+
     } elseif (isset($_POST['tuchoicxid'])) {
         $chuyenxeID = $_POST['tuchoicxid'];
         $sql = "UPDATE chuyenxe SET CX_TRANGTHAI = '2' WHERE CX_MA = '$chuyenxeID'";

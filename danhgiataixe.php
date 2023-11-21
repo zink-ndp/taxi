@@ -111,6 +111,32 @@ if (isset($_GET['macx'])) {
         ?>
       </div>
 
+<<<<<<< HEAD
+    <!-- <div class="form-group">
+      <label for="noiDungDanhGia">Nội Dung Đánh Giá</label>
+      <textarea class="form-control" placeholder="Nhập nội dung đánh giá của bạn" name="noiDungDanhGia" rows="4"></textarea>
+    </div> -->
+    
+    <div class="form-group">
+      <label for="diemTrungBinh" name="diemTrungBinh">Điểm Trung Bình</label>
+      <?php
+      // echo '<label class="form-check-label">' . $row["DGTC_DIEM"] . '</label>';
+      ?>
+      <input type="text" class="form-control" id="diemTrungBinh" name="diemTrungBinh" disabled>
+    </div>
+
+    <button type="submit"  onclick="redirectPage()"  class="btn" name="guidanhgia">Gửi Đánh Giá</button>
+ 
+  </form>
+
+    <script>
+                function redirectPage() {
+                    window.location.href = "danhgiachuyenxe.php?macx=CX_MA";
+                }
+    </script>
+
+</section>
+=======
       <div class="form-group">
         <label for="diemTrungBinh">Điểm Trung Bình</label>
         <?php
@@ -121,6 +147,7 @@ if (isset($_GET['macx'])) {
       <button type="submit" onclick="redirectPage()" class="btn btn-primary py-3 px-5" name="submit">Gửi đánh giá</button>
     </form>
   </section>
+>>>>>>> ecd6622169e1235c2245d0029e8dd5b2fb20a80a
 </body>
 
 </html>
