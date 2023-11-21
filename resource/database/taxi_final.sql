@@ -251,6 +251,20 @@ INSERT INTO `phutrach` (`TX_MA`, `TD_DATE`, `X_MA`) VALUES
 (8, '2023-09-22 00:00:00', 8),
 (9, '2023-09-22 08:00:00', 9),
 (10, '2023-09-22 08:00:00', 10),
+(11, '2023-09-22 08:00:00', 11),
+(12, '2023-09-22 00:00:00', 12),
+(13, '2023-09-22 08:00:00', 13),
+(14, '2023-09-22 08:00:00', 14),
+(15, '2023-09-22 08:00:00', 15),
+(16, '2023-09-22 08:00:00', 16),
+(17, '2023-09-22 00:00:00', 17),
+(18, '2023-09-22 08:00:00', 18),
+(19, '2023-09-22 08:00:00', 19),
+(20, '2023-09-22 08:00:00', 20),
+(21, '2023-09-22 00:00:00', 21),
+(22, '2023-09-22 08:00:00', 22),
+(23, '2023-09-22 08:00:00', 23),
+(24, '2023-09-22 08:00:00', 24),
 (25, '2023-10-20 00:00:00', 1);
 
 -- --------------------------------------------------------
@@ -529,7 +543,22 @@ INSERT INTO `xe` (`X_MA`, `LX_MA`, `X_BIENSO`, `X_MOTA`, `X_HINHANH`) VALUES
 (7, 3, '65A-13345', 'Toyota Corolla Cross màu đen', 'xe7.jpg'),
 (8, 3, '65A-13445', 'Honda CR-V màu xám', 'xe8.jpg'),
 (9, 4, '65A-13455', 'Mitsubishi Xpander màu đen', 'xe9.jpg'),
-(10, 4, '65A-12445', 'Toyota Avanza màu đen', 'xe10.jpg');
+(10, 4, '65A-12445', 'Toyota Avanza màu đen', 'xe10.jpg'),
+(11, 1, '65A-12347', 'Ford Fiesta màu trắng', 'xe11.jpg'),
+(12, 2, '65A-12312', 'Toyota Vios màu đen', 'xe12.jpg'),
+(13, 2, '65A-12313', 'Honda City màu trắng', 'xe13.jpg'),
+(14, 2, '65A-12314', 'Hyundai Accent màu đen', 'xe14.jpg'),
+(15, 3, '65A-13315', 'Toyota Corolla Cross màu đen', 'xe15.jpg'),
+(16, 3, '65A-13416', 'Honda CR-V màu đỏ', 'xe16.jpg'),
+(17, 4, '65A-13417', 'Mitsubishi Xpander màu đen', 'xe17.jpg'),
+(18, 4, '65A-12418', 'Toyota Avanza màu trắng', 'xe18.jpg'),
+(19, 1, '65A-12319', 'Ford Fiesta màu trắng', 'xe19.jpg'),
+(20, 2, '65A-12320', 'Toyota Vios màu đen', 'xe20.jpg'),
+(21, 2, '65A-12321', 'Honda City màu xám', 'xe21.jpg'),
+(22, 2, '65A-12322', 'Hyundai Accent màu trắng', 'xe22.jpg'),
+(23, 3, '65A-13323', 'Toyota Corolla Cross màu trắng', 'xe23.jpg'),
+(24, 3, '65A-13424', 'Honda CR-V màu xám', 'xe24.jpg'),
+(25, 4, '65A-13425', 'Mitsubishi Xpander màu trắng', 'xe25.jpg');
 
 --
 -- Indexes for dumped tables
