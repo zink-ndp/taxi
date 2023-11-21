@@ -2,6 +2,9 @@
 $activate = "login";
 // include('connect.php');
 include('header.php');
+if (isset($_GET['rl'])){
+  echo '<script>alert("Vui lòng đăng nhập để đặt xe!")</script>';
+}
 ?>
 
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">

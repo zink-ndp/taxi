@@ -253,7 +253,7 @@ $activate = "index";
                         console.log(distance)
 
                         popup = L.popup().setLatLng(position)
-                            .setContent(clickedData.name + '<br><a class="justify-content-center" href="index.php?locateden=' + clickedData.name + '&latden=' + clickedData.lat + '&lngden=' + clickedData.lon + '&kcach=' + distance + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
+                            .setContent(clickedData.name + '<br><a class="justify-content-center" href="index.php?locateden=' + clickedData.name + '&latden=' + clickedData.lat + '&lngden=' + clickedData.lon + '&kcach=' + distance + '"><button style="margin: 0 !important;" class="btn btn-primary mt-1">Xác nhận</button></a>')
                             .openOn(map)
                     });
 
@@ -322,7 +322,7 @@ $activate = "index";
                         distance = (summary.totalDistance / 1000).toFixed(2);
                         console.log(distance)
                         popup = L.popup().setLatLng(pinnedLocation2)
-                            .setContent(location + '<br><a class="justify-content-center" href="index.php?locateden=' + location + '&latden=' + lat + '&lngden=' + lng + '&kcach=' + distance + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
+                            .setContent(location + '<br><a class="justify-content-center" href="index.php?locateden=' + location + '&latden=' + lat + '&lngden=' + lng + '&kcach=' + distance + '"><button style="margin: 0 !important;"  class="btn btn-primary mt-1">Xác nhận</button></a>')
                             .openOn(map)
                     });
 

@@ -13,14 +13,16 @@ if (isset($_GET['cx_ma'])) {
         $nextid = $row['macxid'] + 1;
 
         $dg_ma = ""; 
-        $tc_ma = ""; 
-        $tx_ma = ""; 
-        $dgtc_diem = ""; 
-        $sql_themdg = "INSERT INTO dgtieuchi (DG_MA, TC_MA, TX_MA, DGTC_DIEM)
-        VALUES ('$dg_ma', '$tc_ma', '$tx_ma', '$dgtc_diem')";
+        $cx_ma = ""; 
+        $dg_sao = ""; 
+        $dg_noidung = ""; 
+        $sql_themdgcx = "INSERT INTO danhgia (DG_MA, CX_MA, DG_SAO, DG_NOIDUNG)
+        VALUES ('$dg_ma', '$cx_ma', '$dg_sao', '$dg_noidung')";
+
+        $result_themdg = mysqli_query($conn, $sql_themdgcx);
         if ($result_themdg) {
             // Xử lý khi truy vấn thành công
-            header('Location: danhgiachuyenxe.php?macx=' . $nextid);
+            header('Location: index.php');
         } else {
             // Xử lý khi truy vấn thất bại
             echo "Thêm đánh giá thất bại";
