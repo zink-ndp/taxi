@@ -229,9 +229,7 @@ $activate = "index";
                     e.target.classList.add('active')
                     const clickedData = JSON.parse(e.target.innerHTML)
                     const position = new L.LatLng(clickedData.lat, clickedData.lon)
-                    popup = L.popup().setLatLng(position)
-                        .setContent(clickedData.name + '<br><a class="justify-content-center" href="index.php?locateden=' + clickedData.name + '&latden=' + clickedData.lat + '&lngden=' + clickedData.lon + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
-                        .openOn(map)
+
                     if (route) route.remove()
                     route = L.Routing.control({
                         waypoints: [
@@ -246,6 +244,21 @@ $activate = "index";
                         },
                         createMarker: function () { return null }
                     }).addTo(map)
+
+                    route.on('routesfound', function (event) {
+                        var routes = event.routes;
+                        var summary = routes[0].summary;
+                        console.log(routes[0])
+                        distance = (summary.totalDistance / 1000).toFixed(2);
+                        console.log(distance)
+
+                        popup = L.popup().setLatLng(position)
+                            .setContent(clickedData.name + '<br><a class="justify-content-center" href="index.php?locateden=' + clickedData.name + '&latden=' + clickedData.lat + '&lngden=' + clickedData.lon + '&kcach=' + distance + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
+                            .openOn(map)
+                    });
+
+
+
                     map.flyTo(findMidpoint(latitude, longitude, clickedData.lat, clickedData.lon), 15)
                 })
                 const position = new L.LatLng(rs.lat, rs.lon)
@@ -285,11 +298,8 @@ $activate = "index";
 
                     console.log(data)
                     location = data.display_name
-                    
+
                     marker = L.marker(pinnedLocation2).addTo(map);
-                    popup = L.popup().setLatLng(pinnedLocation2)
-                    .setContent(location + '<br><a class="justify-content-center" href="index.php?locateden=' + location + '&latden=' + lat + '&lngden=' + lng + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
-                    .openOn(map)
 
                     route = L.Routing.control({
                         waypoints: [
@@ -304,6 +314,19 @@ $activate = "index";
                         },
                         createMarker: function () { return null }
                     }).addTo(map)
+
+                    route.on('routesfound', function (event) {
+                        var routes = event.routes;
+                        var summary = routes[0].summary;
+                        console.log(routes[0])
+                        distance = (summary.totalDistance / 1000).toFixed(2);
+                        console.log(distance)
+                        popup = L.popup().setLatLng(pinnedLocation2)
+                            .setContent(location + '<br><a class="justify-content-center" href="index.php?locateden=' + location + '&latden=' + lat + '&lngden=' + lng + '&kcach=' + distance + '"><button class="btn btn-primary mt-1">Xác nhận</button></a>')
+                            .openOn(map)
+                    });
+
+
 
                     map.flyTo(findMidpoint(latitude, longitude, lat, lon), 17)
 

@@ -77,6 +77,7 @@ if (isset($_POST['tx_ma'])) {
                   $("#crLocation").val(data.name)
                   $("#diemdix").val(latitude)
                   $("#diemdiy").val(longitude)
+                  $("#tendiemdi").val(data.name)
                   showMapIndex()
                 }
               }
@@ -104,6 +105,7 @@ if (isset($_POST['tx_ma'])) {
                   value="">
                 <input type="hidden" name="diemdix" id="diemdix">
                 <input type="hidden" name="diemdiy" id="diemdiy">
+                <input type="hidden" name="tendiemdi" id="tendiemdi">
               </div>
 
               <div class="form-group">
@@ -112,16 +114,21 @@ if (isset($_POST['tx_ma'])) {
                     $location = $_GET['locateden'];
                     $latden = $_GET['latden'];
                     $lngden = $_GET['lngden'];
+                    $distance = $_GET['kcach'];
                   } else {
                     $location = null;
                     $latden = '';
                     $lngden = '';
+                    $distance = 0;
                   }
                 ?>
                 <label for="" class="label">Vị trí muốn đến</label>
                 <div class="d-flex flex-row justify-content-center align-items-center">
                   <input type="hidden" name="diemdenx" id="diemdenx" value="<?php echo $latden ?>">
                   <input type="hidden" name="diemdeny" id="diemdeny" value="<?php echo $lngden ?>">
+                  <input type="hidden" name="kcach" id="kcach" value="<?php echo $distance ?>">
+                  <input type="hidden" name="tendiemden" id="tendiemden" value="<?php echo $location ?>">
+
                   <input name="diemden" id="diemden" value="<?php echo $location ?>" style="font-size: 14px;" type="text" readonly class="form-control"
                     placeholder="Vui lòng chọn điểm đến" required>
                   <a href="chon_diemden.php" style="margin-left: 10px; font-size: 20px;">
