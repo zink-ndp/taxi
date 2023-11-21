@@ -3,6 +3,13 @@
 if (isset($_GET['txma'])) {
     $khid = $_SESSION['kh_ma'];
     $matx = $_GET['txma'];
+    $kc = $_GET['kc'];
+    $gt = $_GET['gt'];
+    $tddix = $_GET['tddix'];
+    $tddiy = $_GET['tddiy'];
+    $tddenx = $_GET['tddenx'];
+    $tddeny = $_GET['tddeny'];
+
     $kiemtra_txma = "SELECT TX_MA FROM taixe WHERE TX_MA = '$matx'";
     $result_kiemtra = $conn->query($kiemtra_txma);
     if ($result_kiemtra->num_rows > 0) {
@@ -22,13 +29,13 @@ if (isset($_GET['txma'])) {
         if ($result_themngay) {
             $sql_themcx = "INSERT INTO chuyenxe (CX_MA, KH_MA, TX_MA, TD_DATE, CX_SOKM, CX_THANHTIEN, 
                                     CX_TDDIEMDI_X, CX_TDDIEMDI_Y, CX_TDDIEMDEN_X, CX_TDDIEMDEN_Y, CX_TRANGTHAI )
-                                    VALUES ('$nextid','$khid', '$TX_MA' ,'$date' ,'4',
-                                    '40000','12.46','12.45','12.88','12.98', '0')";
+                                    VALUES ('$nextid','$khid', '$TX_MA' ,'$date' ,'$kc',
+                                    '$gt','$tddix','$tddiy','$tddenx','$tddeny', '0')";
             $result = mysqli_query($conn, $sql_themcx);
             if (!$result) {
                 die('Lỗi truy vấn: ' . mysqli_error($conn));
             } else {
-                header('Location: xulydatxe.php?macx=CX_MA');
+                header('Location: xulydatxe.php?macx='.$nextid.'');
             }
         } else {
             echo "Thêm ngày thất bại";
@@ -40,8 +47,4 @@ if (isset($_GET['txma'])) {
     echo "Đặt xe thất bại!";
 }
 
-// ".$_POST['TD_DATE']."
-// ".$_SESSION['latdi']."
 
-// ".$_SESSION['latden']."
-// ".$_SESSION['lngden']."

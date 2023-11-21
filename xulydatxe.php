@@ -1,6 +1,7 @@
 <?php
 $activate = "xulydatxe";
 @include('header.php');
+    $macx = $_GET['macx'];
 ?>
 
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
@@ -25,16 +26,11 @@ $activate = "xulydatxe";
         </div>
         <div class="row">
             <?php
-            $sql = "SELECT chuyenxe.*, khachhang.*, taixe.*
-                            FROM chuyenxe
-                            INNER JOIN khachhang ON chuyenxe.KH_MA = khachhang.KH_MA
-                            INNER JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
-                            WHERE (CX_TRANGTHAI = '0' OR  CX_TRANGTHAI = '1' OR CX_TRANGTHAI = '4')
-                            AND KH_USERNAME = '" . $_SESSION['username'] . "'";
+            $sql = "SELECT * FROM chuyenxe  WHERE CX_MA = $macx";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
+                while($row = $result->fetch_assoc()){
                     if ($row["CX_TRANGTHAI"] == 0) {
                         echo '<div class="col-md-4 text-center">
                             <div class="services services-2 w-100">
@@ -63,33 +59,21 @@ $activate = "xulydatxe";
                             </div>
                         </div>
                     </div>';
+                    }else{
+                        echo '';
                     }
                 }
             }
             ?>
 
             <?php
-            $sql = "SELECT chuyenxe.*, khachhang.*, taixe.*
-                            FROM chuyenxe
-                            INNER JOIN khachhang ON chuyenxe.KH_MA = khachhang.KH_MA
-                            INNER JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
-                            WHERE CX_TRANGTHAI = '2'
-                            AND KH_USERNAME = '" . $_SESSION["username"] . "'";
+            $sql = "SELECT * FROM chuyenxe  WHERE CX_MA = $macx";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
+                while($row = $result->fetch_assoc()){
                 if ($row["CX_TRANGTHAI"] == 2) {
-                    echo '<div class="col-md-4 text-center">
-                        <div class="services services-2 w-100">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="far fa-check-circle fa-lg"></span></div>
-                            <div class="text w-100">
-                                <h3 class="heading mb-2">Đang chờ xác nhận</h3>
-                                <span> Đang đón khách </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center arrow">
+                    echo '<div class="col-md-4 text-center arrow">
                                 <div class="services services-2 w-100">
                                     <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
                                         <div class="text w-100">
@@ -97,32 +81,22 @@ $activate = "xulydatxe";
                                             </div>
                                             </div>
                                         </div>  ';
+                }else{
+                    echo '';
                 }
             }
+        }
+        
             ?>
 
             <?php
-            $sql = "SELECT chuyenxe.*, khachhang.*, taixe.*
-                            FROM chuyenxe
-                            INNER JOIN khachhang ON chuyenxe.KH_MA = khachhang.KH_MA
-                            INNER JOIN taixe ON chuyenxe.TX_MA = taixe.TX_MA
-                            WHERE CX_TRANGTHAI = '3'
-                            AND KH_USERNAME = '" . $_SESSION['username'] . "'";
+            $sql = "SELECT * FROM chuyenxe  WHERE CX_MA = $macx";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
+                while($row = $result->fetch_assoc()){
                 if ($row["CX_TRANGTHAI"] == 3) {
-                    echo '<div class="col-md-4 text-center">
-                <div class="services services-2 w-100">
-                    <div class="icon d-flex align-items-center justify-content-center"><span class="far fa-check-circle fa-lg"></span></div>
-                    <div class="text w-100">
-                        <h3 class="heading mb-2">Đang chờ xác nhận</h3>
-                        <span> Đang đón khách </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center arrow">
+                    echo '<div class="col-md-4 text-center arrow">
                         <div class="services services-2 w-100">
                             <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
                                 <div class="text w-100">
@@ -137,22 +111,23 @@ $activate = "xulydatxe";
                                     <h3 class="heading mb-2">Đã hoàn thành</h3>
                                     </div>
                                     </div> 
-                                </div>';
+                                </div>
+                                <button type="button" class="btn" onclick="redirectPage()" style="color:blueviolet;">Đánh giá chuyến xe</button>
+                                ';
                 }
             }
+        }else{
+            echo '';
+        }
             ?>
-            <button type="button" class="btn" onclick="redirectPage()" style="color:blueviolet;">Đánh giá chuyến xe</button>
-
-            <!-- Đoạn script để chuyển hướng trang -->
-            <script>
-                function redirectPage() {
-                    window.location.href = "danhgiataixe.php?macx=CX_MA";
-                }
-            </script>
         </div>
     </div>
 </section>
-
+<script>
+    function redirectPage() {
+        window.location.href = "danhgiataixe.php?macx=<?php echo $_GET['macx']?>";
+    }
+</script>
 <style>
     .arrow {
         position: relative;

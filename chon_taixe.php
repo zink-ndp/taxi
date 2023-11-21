@@ -45,6 +45,7 @@ $kcach = $_POST['kcach'];
                     $sql = "select G_TIEN as gia from gia where GC_MA = (select GC_MA from giacuoc where GC_CANTREN>".$kcach." and GC_CANDUOI<".$kcach.")";
                     $rs = querySqlwithResult($conn, $sql);
                     $r = $rs->fetch_assoc();
+                    $gtien = $r['gia']*$kcach;
                 ?>
                 <h5>Quãng đường: <strong><?php echo $kcach ?>km</strong> - Giá tiền/km: <strong><?php echo number_format($r['gia']); ?>đ</strong></h5>
                 <h4>Tạm tính: <strong><?php echo number_format($r['gia']*$kcach); ?>đ</strong></h4>
@@ -142,8 +143,8 @@ $kcach = $_POST['kcach'];
                             </div>
 
                             <div class="d-flex justify-content-end" style="margin-top: -2rem">
-                                <a href="luuchuyenxe.php?txma=<?php echo $x['tx_ma'] ?>" class="btn btn-primary py-2 mb-4 mr-4">Đặt
-                                    ngay</a>
+                                <a href="luuchuyenxe.php?txma=<?php echo $x['tx_ma'] ?>&kc=<?php echo $kcach?>&gt=<?php echo $gtien?>&tddix=<?php echo $diemdix?>&tddiy=<?php echo $diemdiy?>&tddenx=<?php echo $diemdenx?>&tddeny=<?php echo $diemdeny?>" 
+                                class="btn btn-primary py-2 mb-4 mr-4">Đặt ngay</a>
                             </div>
                         </div>
                     </div>
