@@ -32,11 +32,11 @@ $kcach = $_POST['kcach'];
     <div class="container">
         <div class="row d-flex justify-content-between align-items-center mt-5">
             <div class="form-group col-5">
-                <input class="form-control" type="text" name="" id="" value="<?php echo $tendiemdi ?>">
+                <input class="form-control" readonly type="text" name="" id="" value="<?php echo $tendiemdi ?>">
             </div>
             <img src="images/carrunning.gif" style="width: 8rem;" alt="">
             <div class="form-group col-5">
-                <input class="form-control" type="text" name="" id="" value="<?php echo $tendiemden ?>">
+                <input class="form-control" readonly type="text" name="" id="" value="<?php echo $tendiemden ?>">
             </div>
         </div>
         <div class="row justify-content-center mt-2">
