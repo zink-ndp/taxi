@@ -46,7 +46,7 @@ if (isset($_GET['macx'])) {
   </section>
 
   <section class="ftco-section">
-    <form method="POST" class="col-md-6" action="luudanhgia.php?macx=<?php echo $macx?>">
+    <form method="POST" class="col-md-6" action="luudanhgiacx.php?macx=<?php echo $macx?>">
       <h2>Đánh Giá Chuyến Xe</h2>
       <div class="form-group">
         <label for="maChuyenXe">Mã Chuyến Xe</label>

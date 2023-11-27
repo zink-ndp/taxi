@@ -72,7 +72,7 @@ if (isset($_GET['macx'])) {
 
   <section class="ftco-section">
 
-    <form method="POST" class="col-md-6" action="">
+    <form method="POST" class="col-md-6" action="luudanhgiatx.php?macx=<?php echo $macx?>">
       <h1 class="mb-3 bread">Đánh giá tài xế</h1>
       <div class="form-group">
         <?php
@@ -85,7 +85,7 @@ if (isset($_GET['macx'])) {
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
             echo '<label for="mataixe">Tên Tài Xế</label>
-            <input type = "hidden" name = "matx" class="form-control" value="' . $row["TX_MA"] . '"></input>
+            <input type = "hidden"  class="form-control" name ="matx" value="' . $row["TX_MA"] . '"></input>
             <input type = "text" class="form-control" value="' . $row["TX_TEN"] . '"></input>';
           }
         }
@@ -101,9 +101,9 @@ if (isset($_GET['macx'])) {
           $index = 0;
           while ($row = $result->fetch_assoc()) {
             echo '<div class="form-check">';
-            echo '<input type="checkbox" class="form-check-input" name="maTieuChi[]" value="' . $row["TC_MA"] . '" onclick="togglePointsInput(this, ' . $index . ');">';
+            echo '<input type="checkbox" class="form-check-input" name= "maTieuChi[]" value="' . $row["TC_MA"] . '" onclick="togglePointsInput(this, ' . $index . ');">';
             echo '<label class="form-check-label">' . $row["TC_TEN"] . '</label>';
-            echo '<input type="number" class="form-control points-input" style="display: none;" placeholder="Nhập điểm cho Tài Xế" min="0" max="10" name="diemDanhGia[]">';
+            echo '<input type="number" class="form-control points-input" name="diemDanhGia[]" style="display: none;" placeholder="Nhập điểm cho Tài Xế" min="0" max="10" >';
             echo '</div>';
             $index++;
           }
@@ -111,43 +111,20 @@ if (isset($_GET['macx'])) {
         ?>
       </div>
 
-<<<<<<< HEAD
-    <!-- <div class="form-group">
-      <label for="noiDungDanhGia">Nội Dung Đánh Giá</label>
-      <textarea class="form-control" placeholder="Nhập nội dung đánh giá của bạn" name="noiDungDanhGia" rows="4"></textarea>
-    </div> -->
-    
-    <div class="form-group">
-      <label for="diemTrungBinh" name="diemTrungBinh">Điểm Trung Bình</label>
-      <?php
-      // echo '<label class="form-check-label">' . $row["DGTC_DIEM"] . '</label>';
-      ?>
-      <input type="text" class="form-control" id="diemTrungBinh" name="diemTrungBinh" disabled>
-    </div>
 
-    <button type="submit"  onclick="redirectPage()"  class="btn" name="guidanhgia">Gửi Đánh Giá</button>
- 
-  </form>
-
-    <script>
-                function redirectPage() {
-                    window.location.href = "danhgiachuyenxe.php?macx=CX_MA";
-                }
-    </script>
-
-</section>
-=======
       <div class="form-group">
-        <label for="diemTrungBinh">Điểm Trung Bình</label>
+        <label for="diemTrungBinh" name="diemTrungBinh">Điểm Trung Bình</label>
         <?php
         // echo '<label class="form-check-label">' . $row["DGTC_DIEM"] . '</label>';
         ?>
-        <input type="text" class="form-control" id="diemTrungBinh" name="diemtb" disabled>
+        <input type="text" class="form-control" id="diemTrungBinh" name="diemTrungBinh" disabled>
       </div>
-      <button type="submit" onclick="redirectPage()" class="btn btn-primary py-3 px-5" name="submit">Gửi đánh giá</button>
+
+      <button type="submit" class="btn" name="guidanhgia">Gửi Đánh Giá</button>
+
     </form>
+
   </section>
->>>>>>> ecd6622169e1235c2245d0029e8dd5b2fb20a80a
 </body>
 
 </html>
